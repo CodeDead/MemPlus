@@ -21,9 +21,9 @@ namespace MemPlus.Windows
                 //Clear working set of all processes that the user has access to
                 Classes.MemPlus.EmptyWorkingSetFunction();
                 //Clear file system cache
-                Classes.MemPlus.ClearFileSystemCache(true);
+                Classes.MemPlus.ClearFileSystemCache(ChbFileSystemCache.IsChecked != null && ChbFileSystemCache.IsChecked.Value);
 
-                MessageBox.Show("Your memory is has now been cleared of any non-essential data.", "MemPlus",MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Your memory has now been cleared of any non-essential data.", "MemPlus",MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

@@ -8,9 +8,9 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Content="Clear memory" Click="BtnClearMemory_OnClick" Padding="5">
-
-        </Button>
+        <CheckBox x:Name="ChbFileSystemCache" Content="Clear FileSystem standby cache"></CheckBox>
+        <Button Grid.Row="1" Content="Clear memory" Click="BtnClearMemory_OnClick" Padding="5" />
     </Grid>
 </Window>
