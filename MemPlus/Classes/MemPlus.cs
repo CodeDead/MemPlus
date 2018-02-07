@@ -140,18 +140,18 @@ namespace MemPlus.Classes
 
             //Print the lists with successful and failed processes
             Console.WriteLine("Success (count): " + successes.Count);
-            Console.WriteLine("---");
             foreach (string success in successes)
             {
                 Console.WriteLine(success);
             }
+            Console.WriteLine("---");
 
             Console.WriteLine("Failed (count) " + failures.Count);
-            Console.WriteLine("---");
             foreach (string error in failures)
             {
                 Console.WriteLine(error);
             }
+            Console.WriteLine("---");
         }
 
         /// <summary>
