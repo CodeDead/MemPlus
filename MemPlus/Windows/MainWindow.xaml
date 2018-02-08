@@ -13,10 +13,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu>
-            <MenuItem Header="File">
+        
+        <Menu IsMainMenu="True">
+            <MenuItem Header="_File">
                 <MenuItem Header="Export">
                     <MenuItem Header="RAM usage" />
                     <MenuItem Header="Application logs" />
@@ -25,7 +25,7 @@
                 <MenuItem Header="Exit" />
             </MenuItem>
 
-            <MenuItem Header="Tools">
+            <MenuItem Header="_Tools">
                 <MenuItem Header="RAM Analyzer"></MenuItem>
                 <Separator />
                 <MenuItem Header="Logs">
@@ -35,7 +35,7 @@
                 <MenuItem Header="Settings" />
             </MenuItem>
 
-            <MenuItem Header="Help">
+            <MenuItem Header="_Help">
                 <MenuItem Header="Help" />
                 <Separator />
                 <MenuItem Header="Check for updates" />
@@ -49,26 +49,28 @@
 
         </Menu>
 
-        <syncfusion:SfCircularGauge Grid.Row="1" x:Name="CgRamUsage"
-                                    GaugeHeader="RAM usage (%)"
-                                    FontSize="14"  HeaderAlignment="Bottom"
-                                    Margin="5" MaxHeight="350" MaxWidth="350">
-            <syncfusion:SfCircularGauge.Scales>
-                <syncfusion:CircularScale >
-                    <syncfusion:CircularScale.Ranges>
-                        <syncfusion:CircularRange StartValue="80" EndValue="100" Stroke="Red" />
-                    </syncfusion:CircularScale.Ranges>
-                </syncfusion:CircularScale>
-            </syncfusion:SfCircularGauge.Scales>
-        </syncfusion:SfCircularGauge>
-
-        <Grid Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+        <Grid Grid.Row="1" Visibility="Visible">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <CheckBox x:Name="ChbFileSystemCache" Content="Clear FileSystem standby cache"></CheckBox>
-            <Button Grid.Row="1" Content="Clear memory" Click="BtnClearMemory_OnClick" MinHeight="25" />
+
+            <syncfusion:SfCircularGauge Grid.Row="0" x:Name="CgRamUsage"
+                                        GaugeHeader="RAM usage (%)"
+                                        FontSize="14"  HeaderAlignment="Bottom"
+                                        FontWeight="Bold"
+                                        Margin="5" MaxHeight="350" MaxWidth="350">
+                <syncfusion:SfCircularGauge.Scales>
+                    <syncfusion:CircularScale >
+                        <syncfusion:CircularScale.Ranges>
+                            <syncfusion:CircularRange StartValue="0" EndValue="80" Stroke="#666666" />
+                            <syncfusion:CircularRange StartValue="80" EndValue="100" Stroke="Red" />
+                        </syncfusion:CircularScale.Ranges>
+                    </syncfusion:CircularScale>
+                </syncfusion:SfCircularGauge.Scales>
+            </syncfusion:SfCircularGauge>
+
+            <Button x:Name="BtnClearMemory" Grid.Row="1" Content="Clear memory" Click="BtnClearMemory_OnClick" MinHeight="25" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

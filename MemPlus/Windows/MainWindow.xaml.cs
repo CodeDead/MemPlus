@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Media;
 using MemPlus.Classes;
 using MemPlus.Classes.RAM;
 
@@ -25,13 +26,16 @@ namespace MemPlus.Windows
         internal void ChangeVisualStyle()
         {
             StyleManager.ChangeStyle(this);
+            CgRamUsage.Scales[0].Ranges[0].Stroke = new SolidColorBrush(Properties.Settings.Default.MetroColor);
         }
 
         private async void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                await _ramController.ClearMemory(ChbFileSystemCache.IsChecked != null && ChbFileSystemCache.IsChecked.Value);
+                BtnClearMemory.IsEnabled = false;
+
+                await _ramController.ClearMemory(true);
                 double ramSavings = _ramController.RamSavings / 1024 / 1024;
                 if (ramSavings < 0)
                 {
@@ -39,8 +43,10 @@ namespace MemPlus.Windows
                 }
                 else
                 {
-                    MessageBox.Show("You saved " + ramSavings.ToString("F2") + "MB of RAM memory!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("You saved " + ramSavings.ToString("F2") + "MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+
+                BtnClearMemory.IsEnabled = true;
             }
             catch (Exception ex)
             {

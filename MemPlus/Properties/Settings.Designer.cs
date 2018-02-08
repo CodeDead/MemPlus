@@ -58,5 +58,17 @@ namespace MemPlus.Properties {
                 this["BorderThickness"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FileSystemCache {
+            get {
+                return ((bool)(this["FileSystemCache"]));
+            }
+            set {
+                this["FileSystemCache"] = value;
+            }
+        }
     }
 }

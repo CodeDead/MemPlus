@@ -37,7 +37,6 @@ namespace MemPlus.Classes.RAM
         internal void EnableMonitor()
         {
             if (_ramTimer.Enabled) return;
-
             _ramTimer.Enabled = true;
             OnTimedEvent(null, null);
         }
