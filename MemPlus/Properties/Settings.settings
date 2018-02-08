@@ -1,7 +1,15 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MemPlus.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="VisualStyle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Metro</Value>
+    </Setting>
+    <Setting Name="MetroColor" Type="System.Windows.Media.Color" Scope="User">
+      <Value Profile="(Default)">#FF07779C</Value>
+    </Setting>
+    <Setting Name="BorderThickness" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

@@ -5,6 +5,7 @@ This is a meme project, created simply to demonstrate how pointless and dangerou
 # Requirements
 * [Visual Studio](https://vistualstudio.com)
 * [.NET Framework 4.7.1](https://www.microsoft.com/en-us/download/details.aspx?id=56116)
+* [Syncfusion](https://syncfusion.com) (Community edition available)
 
 # Anything else?
 

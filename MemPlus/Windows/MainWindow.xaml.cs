@@ -1,17 +1,28 @@
 ﻿using System;
 using System.Windows;
+using MemPlus.Classes;
 
 namespace MemPlus.Windows
 {
-    /// <inheritdoc cref="Window" />
+    /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow
     {
+        private readonly RamMonitor _monitor;
+
         public MainWindow()
         {
             InitializeComponent();
+            ChangeVisualStyle();
+            _monitor = new RamMonitor(Dispatcher, CgRamUsage);
+            _monitor.Start();
+        }
+
+        internal void ChangeVisualStyle()
+        {
+            StyleManager.ChangeStyle(this);
         }
 
         private void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
