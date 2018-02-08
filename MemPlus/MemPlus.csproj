@@ -69,10 +69,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\RamController.cs" />
-    <Compile Include="Classes\MemPlus.cs" />
-    <Compile Include="Classes\RamMonitor.cs" />
-    <Compile Include="Classes\StyleManager.cs" />
+    <Compile Include="Classes\RAM\RamController.cs" />
+    <Compile Include="Classes\RAM\MemPlus.cs" />
+    <Compile Include="Classes\GUI\StyleManager.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

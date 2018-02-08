@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 
-namespace MemPlus.Classes
+namespace MemPlus.Classes.RAM
 {
     /// <summary>
     /// System Cache Information structure for x86 working set

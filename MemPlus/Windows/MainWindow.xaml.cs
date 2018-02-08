@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using MemPlus.Classes;
+using MemPlus.Classes.RAM;
 
 namespace MemPlus.Windows
 {
@@ -10,7 +11,6 @@ namespace MemPlus.Windows
     /// </summary>
     public partial class MainWindow
     {
-        private readonly RamMonitor _monitor;
         private readonly RamController _ramController;
 
         public MainWindow()
@@ -18,10 +18,8 @@ namespace MemPlus.Windows
             InitializeComponent();
             ChangeVisualStyle();
 
-            _monitor = new RamMonitor(Dispatcher, CgRamUsage);
-            _monitor.Start();
-
-            _ramController = new RamController(_monitor);
+            _ramController = new RamController(Dispatcher, CgRamUsage, 5000);
+            _ramController.EnableMonitor();
         }
 
         internal void ChangeVisualStyle()
@@ -33,7 +31,7 @@ namespace MemPlus.Windows
         {
             try
             {
-                await _ramController.Clear(ChbFileSystemCache.IsChecked != null && ChbFileSystemCache.IsChecked.Value);
+                await _ramController.ClearMemory(ChbFileSystemCache.IsChecked != null && ChbFileSystemCache.IsChecked.Value);
                 double ramSavings = _ramController.RamSavings / 1024 / 1024;
                 if (ramSavings < 0)
                 {
