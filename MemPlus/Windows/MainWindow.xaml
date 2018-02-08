@@ -17,15 +17,34 @@
         </Grid.RowDefinitions>
         <Menu>
             <MenuItem Header="File">
-
+                <MenuItem Header="Export">
+                    <MenuItem Header="RAM usage" />
+                    <MenuItem Header="Application logs" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" />
             </MenuItem>
-            
+
             <MenuItem Header="Tools">
-
+                <MenuItem Header="RAM Analyzer"></MenuItem>
+                <Separator />
+                <MenuItem Header="Logs">
+                    <MenuItem Header="Application logs" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Settings" />
             </MenuItem>
-            
-            <MenuItem Header="Help">
 
+            <MenuItem Header="Help">
+                <MenuItem Header="Help" />
+                <Separator />
+                <MenuItem Header="Check for updates" />
+                <Separator />
+                <MenuItem Header="Homepage" />
+                <MenuItem Header="License" />
+                <Separator />
+                <MenuItem Header="Donate" />
+                <MenuItem Header="About" />
             </MenuItem>
 
         </Menu>

@@ -11,13 +11,17 @@ namespace MemPlus.Windows
     public partial class MainWindow
     {
         private readonly RamMonitor _monitor;
+        private readonly RamController _ramController;
 
         public MainWindow()
         {
             InitializeComponent();
             ChangeVisualStyle();
+
             _monitor = new RamMonitor(Dispatcher, CgRamUsage);
             _monitor.Start();
+
+            _ramController = new RamController(_monitor);
         }
 
         internal void ChangeVisualStyle()
@@ -25,16 +29,20 @@ namespace MemPlus.Windows
             StyleManager.ChangeStyle(this);
         }
 
-        private void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Clear working set of all processes that the user has access to
-                Classes.MemPlus.EmptyWorkingSetFunction();
-                //Clear file system cache
-                Classes.MemPlus.ClearFileSystemCache(ChbFileSystemCache.IsChecked != null && ChbFileSystemCache.IsChecked.Value);
-
-                MessageBox.Show("Your memory has now been cleared of any non-essential data.", "MemPlus",MessageBoxButton.OK, MessageBoxImage.Information);
+                await _ramController.Clear(ChbFileSystemCache.IsChecked != null && ChbFileSystemCache.IsChecked.Value);
+                double ramSavings = _ramController.RamSavings / 1024 / 1024;
+                if (ramSavings < 0)
+                {
+                    MessageBox.Show("Looks like your RAM usage has increased with " + Math.Abs(ramSavings).ToString("F2") + "MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("You saved " + ramSavings.ToString("F2") + "MB of RAM memory!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             catch (Exception ex)
             {

@@ -12,8 +12,13 @@ namespace MemPlus.Classes
         private readonly ComputerInfo _info;
         private readonly SfCircularGauge _gauge;
         private readonly Dispatcher _dispatcher;
-
         private readonly Timer _ramTimer;
+
+        internal double RamUsage { get; private set; }
+        internal double RamUsagePercentage { get; private set; }
+        internal double RamTotal { get; private set; }
+
+        internal bool Enabled => _ramTimer.Enabled;
 
         internal RamMonitor(Dispatcher dispatcher, SfCircularGauge gauge)
         {
@@ -47,26 +52,26 @@ namespace MemPlus.Classes
 
         private async void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            double test = await GetRamUsage();
+            await UpdateRamUsage();
             _dispatcher.Invoke(() =>
             {
-                _gauge.Scales[0].Pointers[0].Value = test;
-                _gauge.GaugeHeader = "RAM usage (" + test.ToString("F2") + "%)";
+                _gauge.Scales[0].Pointers[0].Value = RamUsagePercentage;
+                _gauge.GaugeHeader = "RAM usage (" + RamUsagePercentage.ToString("F2") + "%)";
             });
         }
 
-        private async Task<double> GetRamUsage()
+        internal async Task UpdateRamUsage()
         {
-            double val = await Task.Run(() =>
+            await Task.Run(() =>
             {
                 double total = Convert.ToDouble(_info.TotalPhysicalMemory);
                 double usage = total - Convert.ToDouble(_info.AvailablePhysicalMemory);
-
                 double perc = usage / total * 100;
 
-                return perc;
+                RamUsage = usage;
+                RamUsagePercentage = perc;
+                RamTotal = total;
             });
-            return val;
         }
     }
 }

@@ -69,6 +69,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\RamController.cs" />
     <Compile Include="Classes\MemPlus.cs" />
     <Compile Include="Classes\RamMonitor.cs" />
     <Compile Include="Classes\StyleManager.cs" />
