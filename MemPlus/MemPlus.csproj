@@ -113,5 +113,8 @@
   <ItemGroup>
     <Resource Include="Resources\ram.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\paused.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

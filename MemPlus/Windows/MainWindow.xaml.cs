@@ -40,11 +40,13 @@ namespace MemPlus.Windows
         private void Active(object sender, EventArgs args)
         {
            _ramController.EnableMonitor();
+            Overlay.Visibility = Visibility.Collapsed;
         }
 
         private void Passive(object sender, EventArgs args)
         {
             _ramController.DisableMonitor();
+            Overlay.Visibility = Visibility.Visible;
         }
 
         private static void LogAddedEvent(Log log)
@@ -90,6 +92,11 @@ namespace MemPlus.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
+        }
+
+        private void ClearLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            _logController.ClearLogs();
         }
     }
 }
