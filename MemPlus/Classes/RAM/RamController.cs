@@ -63,7 +63,7 @@ namespace MemPlus.Classes.RAM
                 _gauge.GaugeHeader = "RAM usage (" + RamUsagePercentage.ToString("F2") + "%)";
 
                 _lblTotal.Content = (RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                _lblAvailable.Content = ((RamTotal - RamUsage) / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                _lblAvailable.Content = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
             });
         }
 
