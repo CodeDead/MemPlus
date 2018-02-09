@@ -19,7 +19,7 @@ namespace MemPlus.Windows
             InitializeComponent();
             ChangeVisualStyle();
 
-            _ramController = new RamController(Dispatcher, CgRamUsage, 5000);
+            _ramController = new RamController(Dispatcher, CgRamUsage,LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 5000);
             _ramController.EnableMonitor();
         }
 

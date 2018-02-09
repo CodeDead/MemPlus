@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
-    Title="MemPlus" Height="400" Width="450" WindowStartupLocation="CenterScreen" Icon="/MemPlus;component/Resources/ram.png">
+    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/MemPlus;component/Resources/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -50,10 +50,11 @@
         </Menu>
 
         <Grid Grid.Row="1" Visibility="Visible">
-            <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
             <syncfusion:SfCircularGauge Grid.Row="0" x:Name="CgRamUsage"
                                         GaugeHeader="RAM usage (%)"
@@ -69,8 +70,26 @@
                     </syncfusion:CircularScale>
                 </syncfusion:SfCircularGauge.Scales>
             </syncfusion:SfCircularGauge>
+            <Separator Margin="5,10" Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
 
-            <Button x:Name="BtnClearMemory" Grid.Row="1" Content="Clear memory" Click="BtnClearMemory_OnClick" MinHeight="25" />
+            <Grid Grid.Column="2" VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label Content="Total physical memory:" FontSize="14" Margin="10,5" />
+                <Label x:Name="LblTotalPhysicalMemory" Grid.Row="2" Content="" FontSize="14" Foreground="Green" Margin="10,5" />
+                <Label Grid.Row="3" Content="Available physical memory:" FontSize="14" Margin="10,5" />
+                <Label x:Name="LblAvailablePhysicalMemory" Grid.Row="4" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
+
+                <Button Grid.Row="5" x:Name="BtnClearMemory" Content="Clear memory" Click="BtnClearMemory_OnClick" Margin="10,5" FontSize="14"/>
+            </Grid>
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
