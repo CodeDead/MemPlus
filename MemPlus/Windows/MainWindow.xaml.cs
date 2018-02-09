@@ -27,8 +27,24 @@ namespace MemPlus.Windows
             InitializeComponent();
             ChangeVisualStyle();
 
-            _ramController = new RamController(Dispatcher, CgRamUsage,LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 5000, _logController);
+            _ramController = new RamController(Dispatcher, CgRamUsage,LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 1000, _logController);
             _ramController.EnableMonitor();
+
+            Application app = Application.Current;
+            app.Activated += Active;
+            app.Deactivated += Passive;
+
+            _logController.AddLog(new ApplicationLog("Done initializing MemPlus"));
+        }
+
+        private void Active(object sender, EventArgs args)
+        {
+           _ramController.EnableMonitor();
+        }
+
+        private void Passive(object sender, EventArgs args)
+        {
+            _ramController.DisableMonitor();
         }
 
         private static void LogAddedEvent(Log log)

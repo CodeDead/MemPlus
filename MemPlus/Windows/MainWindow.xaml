@@ -34,6 +34,9 @@
                     <MenuItem Header="Application logs" />
                 </MenuItem>
                 <Separator />
+                <MenuItem Header="GUI">
+                    <MenuItem Header="Always on top" IsCheckable="True" />
+                </MenuItem>
                 <MenuItem Header="Settings" />
             </MenuItem>
 
