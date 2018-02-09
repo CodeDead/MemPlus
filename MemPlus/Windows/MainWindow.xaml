@@ -23,7 +23,7 @@
                     <MenuItem Header="Application logs" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Exit" />
+                <MenuItem Header="Exit" Click="ExitMenuItem_OnClick" />
             </MenuItem>
 
             <MenuItem Header="_Tools">
@@ -31,7 +31,7 @@
                 <Separator />
                 <MenuItem Header="Logs">
                     <MenuItem Header="RAM Optimizer log" />
-                    <MenuItem Header="Application logs" />
+                    <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="Clear" Click="ClearLogsMenuItem_OnClick" />
                 </MenuItem>

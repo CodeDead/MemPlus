@@ -9,8 +9,8 @@ namespace MemPlus.Classes.LOG
         /// </summary>
         internal LogType LogType { get; set; }
 
-        protected DateTime Time;
-        protected string Data;
+        public DateTime Time { get; set; }
+        public string Data { get; set; }
 
         public DateTime GetDate()
         {

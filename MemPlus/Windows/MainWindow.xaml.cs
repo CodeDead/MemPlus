@@ -20,9 +20,7 @@ namespace MemPlus.Windows
         public MainWindow()
         {
             _logController = new LogController();
-            _logController.AddLog(new ApplicationLog("Initializing MemPlus"));
-
-            _logController.LogAddedEvent += LogAddedEvent;
+            _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
 
             InitializeComponent();
             ChangeVisualStyle();
@@ -34,7 +32,7 @@ namespace MemPlus.Windows
             app.Activated += Active;
             app.Deactivated += Passive;
 
-            _logController.AddLog(new ApplicationLog("Done initializing MemPlus"));
+            _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
         }
 
         private void Active(object sender, EventArgs args)
@@ -48,21 +46,16 @@ namespace MemPlus.Windows
             _ramController.DisableMonitor();
             Overlay.Visibility = Visibility.Visible;
         }
-
-        private static void LogAddedEvent(Log log)
-        {
-            if (log.LogType != LogType.Application) return;
-            Console.WriteLine("[" + log.GetDate() + "] " + log.GetData());
-        }
+    
 
         internal void ChangeVisualStyle()
         {
-            _logController.AddLog(new ApplicationLog("Changing MemPlus theme style"));
+            _logController.AddLog(new ApplicationLog("Changing MainWindow theme style"));
 
             StyleManager.ChangeStyle(this);
             CgRamUsage.Scales[0].Ranges[0].Stroke = new SolidColorBrush(Properties.Settings.Default.MetroColor);
 
-            _logController.AddLog(new ApplicationLog("Done changing MemPlus theme style"));
+            _logController.AddLog(new ApplicationLog("Done changing MainWindow theme style"));
         }
 
         private async void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
@@ -97,6 +90,16 @@ namespace MemPlus.Windows
         private void ClearLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             _logController.ClearLogs();
+        }
+
+        private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ApplicationLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new ApplicationLogWindow(_logController).ShowDialog();
         }
     }
 }

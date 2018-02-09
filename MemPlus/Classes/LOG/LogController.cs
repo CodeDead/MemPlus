@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MemPlus.Classes.LOG
 {
-    internal class LogController
+    public class LogController
     {
         private readonly List<Log> _logList;
         internal delegate void LogAdded(Log l);
