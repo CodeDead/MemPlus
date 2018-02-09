@@ -99,7 +99,24 @@ namespace MemPlus.Windows
 
         private void ApplicationLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            new ApplicationLogWindow(_logController).ShowDialog();
+            new ApplicationLogWindow(_logController).Show();
+        }
+
+        private void OnTopMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            Topmost = MniOnTop.IsChecked;
+        }
+
+        private void HomePageMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start("https://codedead.com/");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

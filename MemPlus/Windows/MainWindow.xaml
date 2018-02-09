@@ -37,7 +37,7 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="GUI">
-                    <MenuItem Header="Always on top" IsCheckable="True" />
+                    <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="OnTopMenuItem_OnCheckedChanged" Unchecked="OnTopMenuItem_OnCheckedChanged" />
                 </MenuItem>
                 <MenuItem Header="Settings" />
             </MenuItem>
@@ -47,7 +47,7 @@
                 <Separator />
                 <MenuItem Header="Check for updates" />
                 <Separator />
-                <MenuItem Header="Homepage" />
+                <MenuItem Header="Homepage" Click="HomePageMenuItem_OnClick" />
                 <MenuItem Header="License" />
                 <Separator />
                 <MenuItem Header="Donate" />

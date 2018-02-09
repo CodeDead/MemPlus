@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using MemPlus.Classes;
@@ -33,8 +35,17 @@ namespace MemPlus.Windows
             _logController.LogAddedEvent += LogAddedEvent;
             _logController.LogClearedEvent += LogClearedEvent;
             _logController.LogDeletedEvent += LogDeletedEvent;
+            _logController.LogTypeClearedEvent += LogTypeClearedEvent;
 
             _autoScroll = true;
+        }
+
+        private void LogTypeClearedEvent(List<Log> clearedList)
+        {
+            foreach (Log l in clearedList)
+            {
+                LsvLogs.Items.Remove(l);
+            }
         }
 
         private void FillLogView()
@@ -83,6 +94,11 @@ namespace MemPlus.Windows
             if (sb.Orientation == Orientation.Horizontal)
                 return;
             _autoScroll = Math.Abs(sb.Value - sb.Maximum) < 1;
+        }
+
+        private void BtnClear_OnClick(object sender, RoutedEventArgs e)
+        {
+            _logController.ClearLogs(LogType.Application);
         }
     }
 }

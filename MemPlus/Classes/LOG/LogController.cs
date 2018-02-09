@@ -9,10 +9,12 @@ namespace MemPlus.Classes.LOG
         internal delegate void LogAdded(Log l);
         internal delegate void LogDeleted(Log l);
         internal delegate void LogCleared();
+        internal delegate void LogTypeCleared(List<Log> clearedList);
 
         internal LogAdded LogAddedEvent;
         internal LogDeleted LogDeletedEvent;
         internal LogCleared LogClearedEvent;
+        internal LogTypeCleared LogTypeClearedEvent;
 
         internal LogController()
         {
@@ -36,6 +38,20 @@ namespace MemPlus.Classes.LOG
             {
                 throw new ArgumentException("Log could not be found!");
             }
+        }
+
+        internal void ClearLogs(LogType logType)
+        {
+            List<Log> deleted = new List<Log>();
+
+            for (int i = _logList.Count - 1; i >= 0; i--)
+            {
+                if (_logList[i].LogType != logType) continue;
+                deleted.Add(_logList[i]);
+                _logList.RemoveAt(i);
+            }
+
+            LogTypeClearedEvent?.Invoke(deleted);
         }
 
         internal void ClearLogs()
