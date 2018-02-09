@@ -33,7 +33,7 @@ namespace MemPlus.Windows
             FillLogView();
 
             _logController.LogAddedEvent += LogAddedEvent;
-            _logController.LogClearedEvent += LogClearedEvent;
+            _logController.LogsClearedEvent += LogsClearedEvent;
             _logController.LogDeletedEvent += LogDeletedEvent;
             _logController.LogTypeClearedEvent += LogTypeClearedEvent;
 
@@ -62,7 +62,7 @@ namespace MemPlus.Windows
             LsvLogs.Items.Remove(log);
         }
 
-        private void LogClearedEvent()
+        private void LogsClearedEvent()
         {
             LsvLogs.Items.Clear();
         }

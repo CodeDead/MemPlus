@@ -8,12 +8,12 @@ namespace MemPlus.Classes.LOG
         private readonly List<Log> _logList;
         internal delegate void LogAdded(Log l);
         internal delegate void LogDeleted(Log l);
-        internal delegate void LogCleared();
+        internal delegate void LogsCleared();
         internal delegate void LogTypeCleared(List<Log> clearedList);
 
         internal LogAdded LogAddedEvent;
         internal LogDeleted LogDeletedEvent;
-        internal LogCleared LogClearedEvent;
+        internal LogsCleared LogsClearedEvent;
         internal LogTypeCleared LogTypeClearedEvent;
 
         internal LogController()
