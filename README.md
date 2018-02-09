@@ -1,6 +1,6 @@
 # MemPlus
 
-![MemPlus](https://i.imgur.com/ZH9IG3T.gif)
+![MemPlus](https://i.imgur.com/WG2oNG9.gif)
 
 This project was created to mock all paid memory optimizers. MemPlus is an entirely free, completely functional 'memory optimizer' that will 'safely' free up non-essential memory in Windows.
 
