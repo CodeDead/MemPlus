@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using MemPlus.Classes;
@@ -66,8 +64,7 @@ namespace MemPlus.Windows
 
                 if (_autoScroll)
                 {
-                    LsvLogs.SelectedIndex = LsvLogs.Items.Count - 1;
-                    LsvLogs.ScrollIntoView(LsvLogs.SelectedItem);
+                    LsvLogs.ScrollIntoView(LsvLogs.Items[LsvLogs.Items.Count - 1]);
                 }
             });
         }
@@ -81,9 +78,9 @@ namespace MemPlus.Windows
 
         private void LsvLogs_OnScroll(object sender, ScrollEventArgs e)
         {
-            ScrollBar sb = e.OriginalSource as ScrollBar;
+            if (!(e.OriginalSource is ScrollBar sb)) return;
 
-            if (sb != null && sb.Orientation == Orientation.Horizontal)
+            if (sb.Orientation == Orientation.Horizontal)
                 return;
             _autoScroll = Math.Abs(sb.Value - sb.Maximum) < 1;
         }

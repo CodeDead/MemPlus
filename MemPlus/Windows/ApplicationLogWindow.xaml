@@ -10,7 +10,7 @@
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     TitleTextAlignment="Center"
-    Title="MemPlus - Application Logs" Height="300" Width="300">
+    Title="MemPlus - Application Logs" Height="300" Width="300" Icon="/MemPlus;component/Resources/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
