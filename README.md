@@ -4,7 +4,7 @@
 
 This project was created to mock all paid memory optimizers. MemPlus is an entirely free, completely functional 'memory optimizer' that will 'safely' free up non-essential memory in Windows.
 
-# Requirements
+# Requirements in order to build
 * [Visual Studio](https://vistualstudio.com)
 * [.NET Framework 4.7.1](https://www.microsoft.com/en-us/download/details.aspx?id=56116)
 * [Syncfusion](https://syncfusion.com) (Community edition available)
