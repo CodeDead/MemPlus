@@ -29,7 +29,7 @@ namespace MemPlus.Classes.RAM
         internal RamController(Dispatcher dispatcher, SfCircularGauge gauge, Label lblTotal, Label lblAvailable, int timerInterval, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
-            _logController.AddLog(new Log("Initializing RamController"));
+            _logController.AddLog(new ApplicationLog("Initializing RamController"));
 
             if (timerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
 
@@ -46,7 +46,7 @@ namespace MemPlus.Classes.RAM
             _ramTimer.Elapsed += OnTimedEvent;
             _ramTimer.Interval = timerInterval;
 
-            _logController.AddLog(new Log("Done initializing RamController"));
+            _logController.AddLog(new ApplicationLog("Done initializing RamController"));
         }
 
         internal void EnableMonitor()
@@ -54,18 +54,18 @@ namespace MemPlus.Classes.RAM
             if (_ramTimer.Enabled) return;
             _ramTimer.Enabled = true;
             OnTimedEvent(null, null);
-            _logController.AddLog(new Log("The RAM monitor has been enabled"));
+            _logController.AddLog(new ApplicationLog("The RAM monitor has been enabled"));
         }
 
         internal void DisableMonitor()
         {
             _ramTimer.Enabled = false;
-            _logController.AddLog(new Log("The RAM monitor has been disabled"));
+            _logController.AddLog(new ApplicationLog("The RAM monitor has been disabled"));
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            _logController.AddLog(new Log("RAM monitor timer has been called"));
+            _logController.AddLog(new ApplicationLog("RAM monitor timer has been called"));
 
             UpdateRamUsage();
 
@@ -77,12 +77,12 @@ namespace MemPlus.Classes.RAM
                 _lblAvailable.Content = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
             });
 
-            _logController.AddLog(new Log("Finished RAM monitor timer"));
+            _logController.AddLog(new ApplicationLog("Finished RAM monitor timer"));
         }
 
         internal async Task ClearMemory(bool filesystemcache)
         {
-            _logController.AddLog(new Log("Clearing RAM memory"));
+            _logController.AddLog(new ApplicationLog("Clearing RAM memory"));
 
             await Task.Run(async () =>
             {
@@ -103,12 +103,12 @@ namespace MemPlus.Classes.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
-            _logController.AddLog(new Log("Done clearing RAM memory"));
+            _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
 
         private void UpdateRamUsage()
         {
-            _logController.AddLog(new Log("Updating RAM usage"));
+            _logController.AddLog(new ApplicationLog("Updating RAM usage"));
 
             double total = Convert.ToDouble(_info.TotalPhysicalMemory);
             double usage = total - Convert.ToDouble(_info.AvailablePhysicalMemory);
@@ -118,7 +118,7 @@ namespace MemPlus.Classes.RAM
             RamUsagePercentage = perc;
             RamTotal = total;
 
-            _logController.AddLog(new Log("Finished updating RAM usage"));
+            _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
         }
     }
 }

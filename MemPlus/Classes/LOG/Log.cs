@@ -2,25 +2,39 @@
 
 namespace MemPlus.Classes.LOG
 {
-    internal class Log
+    public abstract class Log : ILogMethods
     {
-        private readonly DateTime _time;
-        private readonly string _value;
+        /// <summary>
+        /// The type of log
+        /// </summary>
+        internal LogType LogType { get; set; }
 
-        internal Log(string data)
+        protected DateTime Time;
+        protected string Data;
+
+        public DateTime GetDate()
         {
-            _time = DateTime.Now;
-            _value = data;
+            return Time;
         }
 
-        internal DateTime GetDate()
+        public void AddData(string data)
         {
-            return _time;
+            Time = DateTime.Now;
+            Data = data;
         }
 
-        internal string GetValue()
+        public string GetData()
         {
-            return _value;
+            return Data;
         }
+    }
+
+    /// <summary>
+    /// An enumeration of all available log types
+    /// </summary>
+    public enum LogType
+    {
+        Application,
+        Ram
     }
 }

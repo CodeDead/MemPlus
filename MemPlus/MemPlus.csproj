@@ -69,6 +69,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Classes\LOG\ApplicationLog.cs" />
+    <Compile Include="Classes\LOG\ILogMethods.cs" />
     <Compile Include="Classes\LOG\Log.cs" />
     <Compile Include="Classes\LOG\LogController.cs" />
     <Compile Include="Classes\RAM\RamController.cs" />

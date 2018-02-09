@@ -20,7 +20,7 @@ namespace MemPlus.Windows
         public MainWindow()
         {
             _logController = new LogController();
-            _logController.AddLog(new Log("Initializing MemPlus"));
+            _logController.AddLog(new ApplicationLog("Initializing MemPlus"));
 
             _logController.LogAddedEvent += LogAddedEvent;
 
@@ -33,22 +33,23 @@ namespace MemPlus.Windows
 
         private static void LogAddedEvent(Log log)
         {
-            Console.WriteLine("[" + log.GetDate() + "] " + log.GetValue());
+            if (log.LogType != LogType.Application) return;
+            Console.WriteLine("[" + log.GetDate() + "] " + log.GetData());
         }
 
         internal void ChangeVisualStyle()
         {
-            _logController.AddLog(new Log("Changing MemPlus theme style"));
+            _logController.AddLog(new ApplicationLog("Changing MemPlus theme style"));
 
             StyleManager.ChangeStyle(this);
             CgRamUsage.Scales[0].Ranges[0].Stroke = new SolidColorBrush(Properties.Settings.Default.MetroColor);
 
-            _logController.AddLog(new Log("Done changing MemPlus theme style"));
+            _logController.AddLog(new ApplicationLog("Done changing MemPlus theme style"));
         }
 
         private async void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
         {
-            _logController.AddLog(new Log("Clearing RAM Memory"));
+            _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
 
             try
             {
@@ -72,7 +73,7 @@ namespace MemPlus.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
-            _logController.AddLog(new Log("Done clearing RAM memory"));
+            _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
     }
 }
