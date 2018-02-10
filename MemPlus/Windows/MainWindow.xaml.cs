@@ -73,7 +73,6 @@ namespace MemPlus.Windows
             _ramController.DisableMonitor();
             Overlay.Visibility = Visibility.Visible;
         }
-    
 
         internal void ChangeVisualStyle()
         {
@@ -278,6 +277,44 @@ namespace MemPlus.Windows
             }
 
             Properties.Settings.Default.Save();
+        }
+
+        /// <summary>
+        /// Open the file containing the license for MemPlus
+        /// </summary>
+        /// <param name="sender">The object that has initialized the method</param>
+        /// <param name="e">The routed event arguments</param>
+        private void LicenseMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Open the file containing the help documentation for MemPlus
+        /// </summary>
+        /// <param name="sender">The object that has initialized the method</param>
+        /// <param name="e">The routed event arguments</param>
+        private void HelpMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _logController.AddLog(new ApplicationLog("Opening MemPlus help file"));
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\help.pdf");
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

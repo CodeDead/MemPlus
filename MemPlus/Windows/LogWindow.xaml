@@ -15,7 +15,7 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll">
+        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Delete" Click="DeleteMenuItem_OnClick">
