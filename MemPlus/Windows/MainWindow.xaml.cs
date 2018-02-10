@@ -97,9 +97,14 @@ namespace MemPlus.Windows
             Application.Current.Shutdown();
         }
 
+        private void RamLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new LogWindow(_logController, LogType.Ram).Show();
+        }
+
         private void ApplicationLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            new ApplicationLogWindow(_logController).Show();
+            new LogWindow(_logController, LogType.Application).Show();
         }
 
         private void OnTopMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)

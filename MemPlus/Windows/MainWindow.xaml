@@ -30,7 +30,7 @@
                 <MenuItem Header="RAM Analyzer"></MenuItem>
                 <Separator />
                 <MenuItem Header="Logs">
-                    <MenuItem Header="RAM Optimizer log" />
+                    <MenuItem Header="RAM Optimizer log" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="Clear" Click="ClearLogsMenuItem_OnClick" />

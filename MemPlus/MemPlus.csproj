@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,7 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Windows\ApplicationLogWindow.xaml">
+    <Page Include="Windows\LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -77,11 +78,12 @@
     <Compile Include="Classes\LOG\ILogMethods.cs" />
     <Compile Include="Classes\LOG\Log.cs" />
     <Compile Include="Classes\LOG\LogController.cs" />
+    <Compile Include="Classes\LOG\RamLog.cs" />
     <Compile Include="Classes\RAM\RamController.cs" />
-    <Compile Include="Classes\RAM\MemPlus.cs" />
+    <Compile Include="Classes\RAM\RamOptimizer.cs" />
     <Compile Include="Classes\GUI\StyleManager.cs" />
-    <Compile Include="Windows\ApplicationLogWindow.xaml.cs">
-      <DependentUpon>ApplicationLogWindow.xaml</DependentUpon>
+    <Compile Include="Windows\LogWindow.xaml.cs">
+      <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

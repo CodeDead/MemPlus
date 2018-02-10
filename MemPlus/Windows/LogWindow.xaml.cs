@@ -11,24 +11,23 @@ namespace MemPlus.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>
-    /// Interaction logic for ApplicationLogWindow.xaml
+    /// Interaction logic for LogWindow.xaml
     /// </summary>
-    public partial class ApplicationLogWindow
+    public partial class LogWindow
     {
-
         private readonly LogController _logController;
+        private readonly LogType _logType;
         private bool _autoScroll;
 
-        public ApplicationLogWindow(LogController logController)
+        public LogWindow(LogController logController, LogType logType)
         {
             _logController = logController;
+            _logController.AddLog(new ApplicationLog("Initializing LogWindow"));
 
-            _logController.AddLog(new ApplicationLog("Initializing Application Log Window"));
+            _logType = logType;
 
             InitializeComponent();
             ChangeVisualStyle();
-
-            _logController.AddLog(new ApplicationLog("Done initializing Application Log Window"));
 
             FillLogView();
 
@@ -38,6 +37,8 @@ namespace MemPlus.Windows
             _logController.LogTypeClearedEvent += LogTypeClearedEvent;
 
             _autoScroll = true;
+
+            _logController.AddLog(new ApplicationLog("Done initializing LogWindow"));
         }
 
         private void LogTypeClearedEvent(List<Log> clearedList)
@@ -50,7 +51,7 @@ namespace MemPlus.Windows
 
         private void FillLogView()
         {
-            foreach (Log l in _logController.GetLogs().Where(l => l.LogType == LogType.Application))
+            foreach (Log l in _logController.GetLogs().Where(l => l.LogType == _logType))
             {
                 LsvLogs.Items.Add(l);
             }
@@ -58,7 +59,7 @@ namespace MemPlus.Windows
 
         private void LogDeletedEvent(Log log)
         {
-            if (log.LogType != LogType.Application) return;
+            if (log.LogType != _logType) return;
             LsvLogs.Items.Remove(log);
         }
 
@@ -69,6 +70,7 @@ namespace MemPlus.Windows
 
         private void LogAddedEvent(Log log)
         {
+            if (log.LogType != _logType) return;
             Dispatcher.Invoke(() =>
             {
                 LsvLogs.Items.Add(log);
@@ -82,9 +84,9 @@ namespace MemPlus.Windows
 
         private void ChangeVisualStyle()
         {
-            _logController.AddLog(new ApplicationLog("Changing MainWindow theme style"));
+            _logController.AddLog(new ApplicationLog("Changing LogWindow theme style"));
             StyleManager.ChangeStyle(this);
-            _logController.AddLog(new ApplicationLog("Done changing MainWindow theme style"));
+            _logController.AddLog(new ApplicationLog("Done changing LogWindow theme style"));
         }
 
         private void LsvLogs_OnScroll(object sender, ScrollEventArgs e)
@@ -98,7 +100,7 @@ namespace MemPlus.Windows
 
         private void BtnClear_OnClick(object sender, RoutedEventArgs e)
         {
-            _logController.ClearLogs(LogType.Application);
+            _logController.ClearLogs(_logType);
         }
     }
 }

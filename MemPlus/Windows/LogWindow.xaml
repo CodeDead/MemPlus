@@ -1,5 +1,5 @@
 ﻿<syncfusion:ChromelessWindow
-    x:Class="MemPlus.Windows.ApplicationLogWindow"
+    x:Class="MemPlus.Windows.LogWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     TitleTextAlignment="Center"
-    Title="MemPlus - Application Logs" Height="300" Width="450" Icon="/MemPlus;component/Resources/ram.png">
+    Title="MemPlus - Logs" Height="300" Width="450" Icon="/MemPlus;component/Resources/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>

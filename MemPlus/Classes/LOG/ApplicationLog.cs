@@ -11,6 +11,7 @@ namespace MemPlus.Classes.LOG
         /// <summary>
         /// Initialize a new ApplicationLog object
         /// </summary>
+        /// <param name="data">The data that needs to be added to the Log</param>
         internal ApplicationLog(string data)
         {
             LogType = LogType.Application;

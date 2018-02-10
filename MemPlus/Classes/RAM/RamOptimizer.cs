@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
+using MemPlus.Classes.LOG;
 
 namespace MemPlus.Classes.RAM
 {
@@ -56,7 +56,7 @@ namespace MemPlus.Classes.RAM
     /// <summary>
     /// Sealed class containing methods to 'optimize' or clear memory usage in Windows
     /// </summary>
-    internal sealed class MemPlus
+    internal sealed class RamOptimizer
     {
         #region Variables
         /// <summary>
@@ -75,6 +75,10 @@ namespace MemPlus.Classes.RAM
         /// Memory purge standby list
         /// </summary>
         private const int MemoryPurgeStandbyList = 4;
+        /// <summary>
+        /// The LogController object that can be called to add logs
+        /// </summary>
+        private readonly LogController _logController;
         #endregion
 
         #region Imports
@@ -116,70 +120,77 @@ namespace MemPlus.Classes.RAM
         #endregion
 
         /// <summary>
+        /// Initialize a new RamOptimizer object
+        /// </summary>
+        /// <param name="logController">The LogController object that can be used to add new logs</param>
+        internal RamOptimizer(LogController logController)
+        {
+            _logController = logController ?? throw new ArgumentNullException(nameof(logController));
+        }
+
+        /// <summary>
         /// Clear the working sets of all processes that are available to the application
         /// </summary>
-        internal static void EmptyWorkingSetFunction()
+        internal void EmptyWorkingSetFunction()
         {
-            List<string> successes = new List<string>();
-            List<string> failures = new List<string>();
+            _logController.AddLog(new RamLog("Emptying working set"));
 
             foreach (Process process in Process.GetProcesses())
             {
                 try
                 {
+                    _logController.AddLog(new RamLog("Emptying working set for process: " + process.ProcessName));
                     // Empty the working set of the process
                     EmptyWorkingSet(process.Handle);
-                    // Add it to the list of successfully cleared processes
-                    successes.Add(process.ProcessName);
+                    _logController.AddLog(new RamLog("Successfully emptied working set for process " + process.ProcessName));
                 }
                 catch (Exception ex)
                 {
-                    failures.Add(process.ProcessName + ": " + ex.Message);
+                    _logController.AddLog(new RamLog("Could not empty working set for process " + process.ProcessName + ": " + ex.Message));
                 }
             }
 
-            //Print the lists with successful and failed processes
-            Console.WriteLine("Success (count): " + successes.Count);
-            foreach (string success in successes)
-            {
-                Console.WriteLine(success);
-            }
-            Console.WriteLine("---");
-
-            Console.WriteLine("Failed (count) " + failures.Count);
-            foreach (string error in failures)
-            {
-                Console.WriteLine(error);
-            }
-            Console.WriteLine("---");
+            _logController.AddLog(new RamLog("Done emptying working set"));
         }
 
         /// <summary>
         /// Check whether the system is running a x86 or x64 working set
         /// </summary>
         /// <returns>A boolean to indicate whether or not the system is 64 bit</returns>
-        private static bool Is64BitMode()
+        private bool Is64BitMode()
         {
-            return Marshal.SizeOf(typeof(IntPtr)) == 8;
+            _logController.AddLog(new RamLog("Checking if 64 bit mode is enabled"));
+
+            bool is64Bit = Marshal.SizeOf(typeof(IntPtr)) == 8;
+
+            _logController.AddLog(is64Bit ? new RamLog("64 bit mode is enabled") : new RamLog("64 bit mode is disabled"));
+
+            return is64Bit;
         }
 
         /// <summary>
         /// Clear the FileSystem cache
         /// </summary>
         /// <param name="clearStandbyCache">Set whether or not to clear cache that is in standby</param>
-        internal static void ClearFileSystemCache(bool clearStandbyCache)
+        internal void ClearFileSystemCache(bool clearStandbyCache)
         {
+            _logController.AddLog(new RamLog("Clearing FileSystem cache"));
+
             try
             {
                 //Check if privilege can be increased
                 if (SetIncreasePrivilege(SeIncreaseQuotaName))
                 {
+                    _logController.AddLog(new RamLog("Privileges have successfully been increased"));
+
                     uint ntSetSystemInformationRet;
                     int systemInfoLength;
                     GCHandle gcHandle;
                     //Depending on the working set, call the right external function using the right parameters
                     if (!Is64BitMode())
                     {
+                        _logController.AddLog(new RamLog("Clearing 32 bit FileSystem cache information"));
+
                         SystemCacheInformation cacheInformation =
                             new SystemCacheInformation
                             {
@@ -190,9 +201,13 @@ namespace MemPlus.Classes.RAM
                         gcHandle = GCHandle.Alloc(cacheInformation, GCHandleType.Pinned);
                         ntSetSystemInformationRet = NtSetSystemInformation((int)SystemInformationClass.SystemFileCacheInformation, gcHandle.AddrOfPinnedObject(), systemInfoLength);
                         gcHandle.Free();
+
+                        _logController.AddLog(new RamLog("Done clearing 32 bit FileSystem cache information"));
                     }
                     else
                     {
+                        _logController.AddLog(new RamLog("Clearing 64 bit FileSystem cache information"));
+
                         SystemCacheInformation64Bit information64Bit =
                             new SystemCacheInformation64Bit
                             {
@@ -203,6 +218,8 @@ namespace MemPlus.Classes.RAM
                         gcHandle = GCHandle.Alloc(information64Bit, GCHandleType.Pinned);
                         ntSetSystemInformationRet = NtSetSystemInformation((int)SystemInformationClass.SystemFileCacheInformation, gcHandle.AddrOfPinnedObject(), systemInfoLength);
                         gcHandle.Free();
+
+                        _logController.AddLog(new RamLog("Done clearing 64 bit FileSystem cache information"));
                     }
                     // If value is not equal to zero, things didn't go right :(
                     if (ntSetSystemInformationRet != 0) throw new Exception("NtSetSystemInformation: ", new Win32Exception(Marshal.GetLastWin32Error()));
@@ -211,26 +228,33 @@ namespace MemPlus.Classes.RAM
                 // If we don't have to clear the standby cache or cannot increase privileges, don't hesitate to clear the standby cache, otherwise we can clear the standby cache
                 if (!clearStandbyCache || !SetIncreasePrivilege(SeProfileSingleProcessName)) return;
                 {
+                    _logController.AddLog(new RamLog("Clearing standby cache"));
+
                     int systemInfoLength = Marshal.SizeOf(MemoryPurgeStandbyList);
                     GCHandle gcHandle = GCHandle.Alloc(MemoryPurgeStandbyList, GCHandleType.Pinned);
                     uint ntSetSystemInformationRet = NtSetSystemInformation((int)SystemInformationClass.SystemMemoryListInformation, gcHandle.AddrOfPinnedObject(), systemInfoLength);
                     gcHandle.Free();
+
+                    _logController.AddLog(new RamLog("Done clearing standby cache"));
+
                     if (ntSetSystemInformationRet != 0) throw new Exception("NtSetSystemInformation: ", new Win32Exception(Marshal.GetLastWin32Error()));
                 }
             }
             catch (Exception ex)
             {
-                Console.Write(ex.ToString());
+                _logController.AddLog(new RamLog(ex.ToString()));
             }
         }
         
         /// <summary>
-        /// Increase the Privilege
+        /// Increase the Privilege using a provilege name
         /// </summary>
         /// <param name="privilegeName">The name of the privilege that needs to be increased</param>
         /// <returns>A boolean value indicating whether or not the operation was successfull</returns>
-        private static bool SetIncreasePrivilege(string privilegeName)
+        private bool SetIncreasePrivilege(string privilegeName)
         {
+            _logController.AddLog(new RamLog("Increasing privilage: " + privilegeName));
+
             using (WindowsIdentity current = WindowsIdentity.GetCurrent(TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges))
             {
                 TokenPrivileges newst;
@@ -238,11 +262,16 @@ namespace MemPlus.Classes.RAM
                 newst.Luid = 0L;
                 newst.Attr = SePrivilegeEnabled;
 
+                _logController.AddLog(new RamLog("Looking up privilage value"));
                 // If we can't look up the privilege value, we can't function properly
                 if (!LookupPrivilegeValue(null, privilegeName, ref newst.Luid)) throw new Exception("LookupPrivilegeValue: ", new Win32Exception(Marshal.GetLastWin32Error()));
+                _logController.AddLog(new RamLog("Done looking up privilage value"));
 
+
+                _logController.AddLog(new RamLog("Adjusting token privilages"));
                 //Enables or disables privileges in a specified access token
                 int adjustTokenPrivilegesRet = AdjustTokenPrivileges(current.Token, false, ref newst, 0, IntPtr.Zero, IntPtr.Zero) ? 1 : 0;
+                _logController.AddLog(new RamLog("Done adjusting token privilages"));
                 // Return value of zero indicates an error
                 if (adjustTokenPrivilegesRet == 0) throw new Exception("AdjustTokenPrivileges: ", new Win32Exception(Marshal.GetLastWin32Error()));
                 return adjustTokenPrivilegesRet != 0;
