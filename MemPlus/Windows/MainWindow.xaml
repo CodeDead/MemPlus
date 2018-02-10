@@ -29,7 +29,7 @@
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram.png"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Settings">
+                    <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/settings.png"></Image>
                         </MenuItem.Icon>
@@ -70,6 +70,7 @@
             </MenuItem>
 
             <MenuItem Header="_Tools">
+                <MenuItem x:Name="MniRamMonitor" Header="RAM Monitor" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
                 <MenuItem Header="RAM Analyzer">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/ram.png"/>
@@ -93,7 +94,7 @@
                     <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniDisableInactive" Header="Disable when inactive" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
                 </MenuItem>
-                <MenuItem Header="Settings">
+                <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/settings.png"/>
                     </MenuItem.Icon>

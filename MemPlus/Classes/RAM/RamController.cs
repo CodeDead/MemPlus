@@ -10,11 +10,10 @@ using Syncfusion.UI.Xaml.Gauges;
 
 namespace MemPlus.Classes.RAM
 {
-    /// <inheritdoc />
     /// <summary>
     /// Sealed class containing methods and interaction logic in terms of RAM
     /// </summary>
-    internal sealed class RamController : IDisposable
+    internal sealed class RamController
     {
         #region Variables
         /// <summary>
@@ -104,13 +103,9 @@ namespace MemPlus.Classes.RAM
             _ramTimer = new Timer();
             _ramTimer.Elapsed += OnTimedEvent;
             _ramTimer.Interval = timerInterval;
+            _ramTimer.Enabled = false;
 
             _logController.AddLog(new ApplicationLog("Done initializing RamController"));
-        }
-
-        ~RamController()
-        {
-            _ramTimer?.Dispose();
         }
 
         /// <summary>
@@ -136,6 +131,7 @@ namespace MemPlus.Classes.RAM
         {
             _ramTimer.Enabled = false;
             RamMonitorEnabled = false;
+
             _logController.AddLog(new ApplicationLog("The RAM monitor has been disabled"));
         }
 
@@ -190,10 +186,13 @@ namespace MemPlus.Classes.RAM
                 await Task.Delay(10000);
 
                 UpdateRamUsage();
+                UpdateGuiControls();
+
                 double newUsage = RamUsage;
 
                 RamSavings = oldUsage - newUsage;
             });
+
 
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
@@ -214,11 +213,6 @@ namespace MemPlus.Classes.RAM
             RamTotal = total;
 
             _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
-        }
-
-        public void Dispose()
-        {
-            _ramTimer?.Dispose();
         }
     }
 }

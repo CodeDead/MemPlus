@@ -27,16 +27,14 @@ namespace MemPlus.Windows
 
             InitializeComponent();
             ChangeVisualStyle();
-            LoadProperties();
 
-            _ramController = new RamController(Dispatcher, CgRamUsage,LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 1000, _logController);
-            _rmEnabledBeforeInvisible = true;
-            _ramController.EnableMonitor();
+            _ramController = new RamController(Dispatcher, CgRamUsage, LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 1000, _logController);
 
             Application app = Application.Current;
             app.Activated += Active;
             app.Deactivated += Passive;
 
+            LoadProperties();
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
         }
 
@@ -45,13 +43,27 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Loading properties"));
             MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
             MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
+            MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
             _logController.AddLog(new ApplicationLog("Done loading properties"));
+
+            if (Properties.Settings.Default.RamMonitor)
+            {
+                _rmEnabledBeforeInvisible = true;
+                _ramController.EnableMonitor();
+            }
+            else
+            {
+                _rmEnabledBeforeInvisible = false;
+            }
         }
 
         private void Active(object sender, EventArgs args)
         {
             if (!Properties.Settings.Default.DisableOnInactive) return;
-            _ramController.EnableMonitor();
+            if (Properties.Settings.Default.RamMonitor)
+            {
+                _ramController.EnableMonitor();
+            }
             Overlay.Visibility = Visibility.Collapsed;
         }
 
@@ -243,6 +255,28 @@ namespace MemPlus.Windows
         private void DisableInactiveMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.DisableOnInactive = MniDisableInactive.IsChecked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SettingsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new SettingsWindow(this, _logController).ShowDialog();
+        }
+
+        private void RamMonitorMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (MniRamMonitor.IsChecked)
+            {
+                Properties.Settings.Default.RamMonitor = true;
+                _rmEnabledBeforeInvisible = false;
+                _ramController.EnableMonitor();
+            }
+            else
+            {
+                Properties.Settings.Default.RamMonitor = false;
+                _ramController.DisableMonitor();
+            }
+
             Properties.Settings.Default.Save();
         }
     }

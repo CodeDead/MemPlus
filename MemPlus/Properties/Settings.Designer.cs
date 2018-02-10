@@ -105,5 +105,17 @@ namespace MemPlus.Properties {
                 this["Topmost"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RamMonitor {
+            get {
+                return ((bool)(this["RamMonitor"]));
+            }
+            set {
+                this["RamMonitor"] = value;
+            }
+        }
     }
 }

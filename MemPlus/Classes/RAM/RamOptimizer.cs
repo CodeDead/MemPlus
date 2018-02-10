@@ -149,6 +149,10 @@ namespace MemPlus.Classes.RAM
                         EmptyWorkingSet(process.Handle);
                         _logController.AddLog(new RamLog("Successfully emptied working set for process " + process.ProcessName));
                     }
+                    else
+                    {
+                        _logController.AddLog(new RamLog("Excluded process: " + process.ProcessName));
+                    }
                 }
                 catch (Exception ex)
                 {
