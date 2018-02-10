@@ -9,10 +9,11 @@ using Syncfusion.UI.Xaml.Gauges;
 
 namespace MemPlus.Classes.RAM
 {
+    /// <inheritdoc />
     /// <summary>
     /// Sealed class containing methods and interaction logic in terms of RAM
     /// </summary>
-    internal sealed class RamController
+    internal sealed class RamController : IDisposable
     {
         #region Variables
         /// <summary>
@@ -100,6 +101,11 @@ namespace MemPlus.Classes.RAM
             _ramTimer.Interval = timerInterval;
 
             _logController.AddLog(new ApplicationLog("Done initializing RamController"));
+        }
+
+        ~RamController()
+        {
+            _ramTimer?.Dispose();
         }
 
         /// <summary>
@@ -199,6 +205,11 @@ namespace MemPlus.Classes.RAM
             RamTotal = total;
 
             _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
+        }
+
+        public void Dispose()
+        {
+            _ramTimer?.Dispose();
         }
     }
 }

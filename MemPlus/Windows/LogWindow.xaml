@@ -23,13 +23,14 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button MinHeight="25" Margin="5" Content="Export" Click="BtnExport_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Margin="5" Content="Export" Click="BtnExport_OnClick" />
             <Button Grid.Column="1" MinHeight="25" Margin="5" Content="Clear logs" Click="BtnClear_OnClick" />
         </Grid>
     </Grid>

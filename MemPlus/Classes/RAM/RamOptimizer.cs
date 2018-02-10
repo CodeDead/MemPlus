@@ -89,7 +89,7 @@ namespace MemPlus.Classes.RAM
         /// <param name="lpName">A pointer to a null-terminated string that specifies the name of the privilege, as defined in the Winnt.h header file. For example, this parameter could specify the constant, SE_SECURITY_NAME, or its corresponding string, "SeSecurityPrivilege"</param>
         /// <param name="pluid">A pointer to a variable that receives the LUID by which the privilege is known on the system specified by the lpSystemName parameter.</param>
         /// <returns>If the function succeeds, the function returns nonzero. Otherwise, return value will be zero</returns>
-        [DllImport("advapi32.dll", SetLastError = true)]
+        [DllImport("advapi32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         private static extern bool LookupPrivilegeValue(string lpSystemName, string lpName, ref long pluid);
         /// <summary>
         /// Enables or disables privileges in the specified access token. Enabling or disabling privileges in an access token requires TOKEN_ADJUST_PRIVILEGES access

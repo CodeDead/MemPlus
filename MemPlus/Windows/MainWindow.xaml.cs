@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
-using MemPlus.Classes;
+using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
 using MemPlus.Classes.RAM;
 
@@ -70,10 +70,13 @@ namespace MemPlus.Windows
                 double ramSavings = _ramController.RamSavings / 1024 / 1024;
                 if (ramSavings < 0)
                 {
-                    MessageBox.Show("Looks like your RAM usage has increased with " + Math.Abs(ramSavings).ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ramSavings = Math.Abs(ramSavings);
+                    _logController.AddLog(new ApplicationLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
+                    MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
+                    _logController.AddLog(new ApplicationLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
                     MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
@@ -81,6 +84,7 @@ namespace MemPlus.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -120,6 +124,7 @@ namespace MemPlus.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

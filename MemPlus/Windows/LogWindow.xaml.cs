@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using MemPlus.Classes;
+using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
 
 namespace MemPlus.Windows
