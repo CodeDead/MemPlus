@@ -14,7 +14,6 @@ namespace MemPlus.Windows
     /// </summary>
     public partial class MainWindow
     {
-
         private readonly RamController _ramController;
         private readonly LogController _logController;
 
@@ -22,7 +21,7 @@ namespace MemPlus.Windows
 
         public MainWindow()
         {
-            _logController = new LogController();
+            _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
 
             InitializeComponent();

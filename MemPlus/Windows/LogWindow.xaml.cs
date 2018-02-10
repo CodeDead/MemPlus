@@ -44,10 +44,13 @@ namespace MemPlus.Windows
 
         private void LogTypeClearedEvent(List<Log> clearedList)
         {
-            foreach (Log l in clearedList)
+            Dispatcher.Invoke(() =>
             {
-                LsvLogs.Items.Remove(l);
-            }
+                foreach (Log l in clearedList)
+                {
+                    LsvLogs.Items.Remove(l);
+                }
+            });
         }
 
         private void FillLogView()
@@ -61,12 +64,18 @@ namespace MemPlus.Windows
         private void LogDeletedEvent(Log log)
         {
             if (log.LogType != _logType) return;
-            LsvLogs.Items.Remove(log);
+            Dispatcher.Invoke(() =>
+            {
+                LsvLogs.Items.Remove(log);
+            });
         }
 
         private void LogsClearedEvent()
         {
-            LsvLogs.Items.Clear();
+            Dispatcher.Invoke(() =>
+            {
+                LsvLogs.Items.Clear();
+            });
         }
 
         private void LogAddedEvent(Log log)

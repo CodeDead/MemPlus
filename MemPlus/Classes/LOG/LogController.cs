@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Timers;
 
 namespace MemPlus.Classes.LOG
 {
@@ -57,9 +58,20 @@ namespace MemPlus.Classes.LOG
         /// <summary>
         /// Initialize a new LogController object
         /// </summary>
-        internal LogController()
+        /// <param name="clearInterval">The interval for when ApplicationLog objects should automatically be cleared</param>
+        internal LogController(int clearInterval)
         {
             _logList = new List<Log>();
+
+            Timer logTimer = new Timer();
+            logTimer.Elapsed += OnTimedEvent;
+            logTimer.Interval = clearInterval;
+            logTimer.Enabled = true;
+        }
+
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            ClearLogs(LogType.Application);
         }
 
         /// <summary>
