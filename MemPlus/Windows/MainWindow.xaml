@@ -19,7 +19,8 @@
 
         <tb:TaskbarIcon
             ToolTipText="DeviceLog"
-            IconSource="../ram.ico">
+            IconSource="../ram.ico"
+            TrayMouseDoubleClick="OpenTbItem_Click">
 
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>

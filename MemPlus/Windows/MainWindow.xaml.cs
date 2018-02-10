@@ -18,6 +18,8 @@ namespace MemPlus.Windows
         private readonly RamController _ramController;
         private readonly LogController _logController;
 
+        private bool _rmEnabledBeforeInvisible;
+
         public MainWindow()
         {
             _logController = new LogController();
@@ -28,6 +30,7 @@ namespace MemPlus.Windows
             LoadProperties();
 
             _ramController = new RamController(Dispatcher, CgRamUsage,LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 1000, _logController);
+            _rmEnabledBeforeInvisible = true;
             _ramController.EnableMonitor();
 
             Application app = Application.Current;
@@ -219,11 +222,21 @@ namespace MemPlus.Windows
             {
                 _logController.AddLog(new ApplicationLog("MainWindow is now hidden"));
                 Hide();
+
+                if (_rmEnabledBeforeInvisible)
+                {
+                    _ramController.DisableMonitor();
+                }
             }
             else
             {
                 _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
                 Show();
+
+                if (_rmEnabledBeforeInvisible)
+                {
+                    _ramController.EnableMonitor();
+                }
             }
         }
 

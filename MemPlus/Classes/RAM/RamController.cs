@@ -68,6 +68,10 @@ namespace MemPlus.Classes.RAM
         /// Property containing how much RAM was saved during the last optimisation
         /// </summary>
         internal double RamSavings { get; private set; }
+        /// <summary>
+        /// Property displaying whether the RAM monitor is enabled or not
+        /// </summary>
+        internal bool RamMonitorEnabled { get; private set; }
         #endregion
 
         /// <summary>
@@ -115,7 +119,9 @@ namespace MemPlus.Classes.RAM
         internal void EnableMonitor()
         {
             if (_ramTimer.Enabled) return;
+
             _ramTimer.Enabled = true;
+            RamMonitorEnabled = true;
             
             UpdateRamUsage();
             UpdateGuiControls();
@@ -129,6 +135,7 @@ namespace MemPlus.Classes.RAM
         internal void DisableMonitor()
         {
             _ramTimer.Enabled = false;
+            RamMonitorEnabled = false;
             _logController.AddLog(new ApplicationLog("The RAM monitor has been disabled"));
         }
 
