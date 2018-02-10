@@ -33,6 +33,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>MemPlus.App</StartupObject>
@@ -124,6 +125,39 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\paused.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\log.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\monitor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\about.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\donate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pdf.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\update.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

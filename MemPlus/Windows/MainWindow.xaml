@@ -15,21 +15,35 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <Menu IsMainMenu="True">
             <MenuItem Header="_File">
                 <MenuItem Header="Export">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/export.png"/>
+                    </MenuItem.Icon>
                     <MenuItem Header="RAM Optimizer log" />
                     <MenuItem Header="Application logs" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Exit" Click="ExitMenuItem_OnClick" />
+                <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/exit.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Tools">
-                <MenuItem Header="RAM Analyzer"></MenuItem>
+                <MenuItem Header="RAM Analyzer">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/ram.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
                 <MenuItem Header="Logs">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/log.png"/>
+                    </MenuItem.Icon>
                     <MenuItem Header="RAM Optimizer log" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
@@ -37,23 +51,53 @@
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="GUI">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/monitor.png"/>
+                    </MenuItem.Icon>
                     <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="OnTopMenuItem_OnCheckedChanged" Unchecked="OnTopMenuItem_OnCheckedChanged" />
                 </MenuItem>
-                <MenuItem Header="Settings" />
+                <MenuItem Header="Settings">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/settings.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="_Help">
-                <MenuItem Header="Help" />
+                <MenuItem Header="Help">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/help.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Check for updates" />
+                <MenuItem Header="Check for updates">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/update.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Homepage" Click="HomePageMenuItem_OnClick" />
-                <MenuItem Header="License" />
+                <MenuItem Header="Homepage" Click="HomePageMenuItem_OnClick">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/home.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="License">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/pdf.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
-                <MenuItem Header="Donate" />
-                <MenuItem Header="About" />
+                <MenuItem Header="Donate">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/donate.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="About">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/about.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
-
         </Menu>
 
         <Grid Grid.Row="1" x:Name="Overlay" Panel.ZIndex="1000" Visibility="Collapsed" Grid.RowSpan="2">
