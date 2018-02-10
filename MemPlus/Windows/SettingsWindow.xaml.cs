@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
 
@@ -27,11 +15,16 @@ namespace MemPlus.Windows
 
         public SettingsWindow(MainWindow mainWindow, LogController logController)
         {
+            _logController = logController;
+            _logController.AddLog(new ApplicationLog("Initializing SettingsWindow"));
+
             InitializeComponent();
             ChangeVisualStyle();
+            LoadSettings();
 
             _mainWindow = mainWindow;
-            _logController = logController;
+
+            _logController.AddLog(new ApplicationLog("Done initializing SettingsWindow"));
         }
 
         /// <summary>
@@ -55,7 +48,32 @@ namespace MemPlus.Windows
         {
             //TODO
             Properties.Settings.Default.Save();
+
+            _mainWindow.ChangeVisualStyle();
+            _mainWindow.LoadProperties();
+
             _logController.AddLog(new ApplicationLog("Settings have been saved"));
+
+            MessageBox.Show("All settings have been saved!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void ResetSettings()
+        {
+            Properties.Settings.Default.Reset();
+            Properties.Settings.Default.Save();
+
+            _mainWindow.ChangeVisualStyle();
+            _mainWindow.LoadProperties();
+        }
+
+        private void BtnReset_OnClick(object sender, RoutedEventArgs e)
+        {
+            ResetSettings();
+        }
+
+        private void BtnSave_OnClick(object sender, RoutedEventArgs e)
+        {
+            SaveSettings();
         }
     }
 }

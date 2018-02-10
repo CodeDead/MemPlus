@@ -38,7 +38,7 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
         }
 
-        private void LoadProperties()
+        internal void LoadProperties()
         {
             _logController.AddLog(new ApplicationLog("Loading properties"));
             MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
