@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:tb="http://www.hardcodet.net/taskbar"
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
@@ -16,7 +17,41 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Menu IsMainMenu="True">
+        <tb:TaskbarIcon
+            ToolTipText="DeviceLog"
+            IconSource="../ram.ico">
+
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="MemPlus" Click="OpenTbItem_Click">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Settings">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/settings.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
+
+        <Grid Grid.Row="0" x:Name="Overlay" Panel.ZIndex="1000" Visibility="Collapsed" Grid.RowSpan="3">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.5"/>
+            </Grid.Background>
+
+            <Image Source="/Resources/Images/paused.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="96" Width="96" />
+        </Grid>
+
+        <Menu Grid.Row="1" IsMainMenu="True">
             <MenuItem Header="_File">
                 <MenuItem Header="Export">
                     <MenuItem.Icon>
@@ -99,14 +134,6 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-
-        <Grid Grid.Row="1" x:Name="Overlay" Panel.ZIndex="1000" Visibility="Collapsed" Grid.RowSpan="2">
-            <Grid.Background>
-                <SolidColorBrush Color="Black" Opacity="0.5"/>
-            </Grid.Background>
-
-            <Image Source="/Resources/Images/paused.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="96" Width="96" />
-        </Grid>
 
         <Grid Grid.Row="2" Visibility="Visible">
             <Grid.ColumnDefinitions>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Controls;
@@ -164,8 +165,9 @@ namespace MemPlus.Classes.RAM
         /// Clear all non-essential RAM
         /// </summary>
         /// <param name="filesystemcache">A boolean to indicate whether or not to clear the FileSystem cache</param>
+        /// <param name="exceptionsList">A list of processes that should be excluded from memory optimisation</param>
         /// <returns></returns>
-        internal async Task ClearMemory(bool filesystemcache)
+        internal async Task ClearMemory(bool filesystemcache, List<string> exceptionsList)
         {
             _logController.AddLog(new ApplicationLog("Clearing RAM memory"));
 
@@ -175,7 +177,7 @@ namespace MemPlus.Classes.RAM
 
                 double oldUsage = RamUsage;
 
-                _ramOptimizer.EmptyWorkingSetFunction();
+                _ramOptimizer.EmptyWorkingSetFunction(exceptionsList);
                 _ramOptimizer.ClearFileSystemCache(filesystemcache);
 
                 await Task.Delay(10000);

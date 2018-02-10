@@ -67,7 +67,7 @@ namespace MemPlus.Windows
             {
                 BtnClearMemory.IsEnabled = false;
 
-                await _ramController.ClearMemory(true);
+                await _ramController.ClearMemory(Properties.Settings.Default.FileSystemCache, Properties.Settings.Default.ProcessExceptions);
                 double ramSavings = _ramController.RamSavings / 1024 / 1024;
                 if (ramSavings < 0)
                 {
@@ -198,6 +198,20 @@ namespace MemPlus.Windows
         private void ApplicationExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ExportLogs(LogType.Application);
+        }
+
+        private void OpenTbItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsVisible)
+            {
+                _logController.AddLog(new ApplicationLog("MainWindow is now hidden"));
+                Hide();
+            }
+            else
+            {
+                _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
+                Show();
+            }
         }
     }
 }

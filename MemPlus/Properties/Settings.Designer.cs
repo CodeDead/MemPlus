@@ -70,5 +70,16 @@ namespace MemPlus.Properties {
                 this["FileSystemCache"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<System.String> ProcessExceptions {
+            get {
+                return ((global::System.Collections.Generic.List<System.String>)(this["ProcessExceptions"]));
+            }
+            set {
+                this["ProcessExceptions"] = value;
+            }
+        }
     }
 }

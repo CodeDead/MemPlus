@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -81,7 +82,7 @@ namespace MemPlus.Classes.RAM
         private readonly LogController _logController;
         #endregion
 
-        #region Imports
+        #region NativeMethods
         /// <summary>
         ///  Retrieves the locally unique identifier (LUID) used on a specified system to locally represent the specified privilege name.
         /// </summary>
@@ -128,10 +129,12 @@ namespace MemPlus.Classes.RAM
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
         }
 
+
         /// <summary>
         /// Clear the working sets of all processes that are available to the application
         /// </summary>
-        internal void EmptyWorkingSetFunction()
+        /// <param name="processExceptions">A list of processes that should be excluded from memory optimisation</param>
+        internal void EmptyWorkingSetFunction(List<string> processExceptions)
         {
             _logController.AddLog(new RamLog("Emptying working set"));
 
@@ -139,10 +142,13 @@ namespace MemPlus.Classes.RAM
             {
                 try
                 {
-                    _logController.AddLog(new RamLog("Emptying working set for process: " + process.ProcessName));
-                    // Empty the working set of the process
-                    EmptyWorkingSet(process.Handle);
-                    _logController.AddLog(new RamLog("Successfully emptied working set for process " + process.ProcessName));
+                    if (processExceptions == null || processExceptions.Count == 0 || !processExceptions.Contains(process.MainModule.FileName.ToLower()))
+                    {
+                        _logController.AddLog(new RamLog("Emptying working set for process: " + process.ProcessName));
+                        // Empty the working set of the process
+                        EmptyWorkingSet(process.Handle);
+                        _logController.AddLog(new RamLog("Successfully emptied working set for process " + process.ProcessName));
+                    }
                 }
                 catch (Exception ex)
                 {
