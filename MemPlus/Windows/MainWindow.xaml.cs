@@ -25,6 +25,7 @@ namespace MemPlus.Windows
 
             InitializeComponent();
             ChangeVisualStyle();
+            LoadProperties();
 
             _ramController = new RamController(Dispatcher, CgRamUsage,LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 1000, _logController);
             _ramController.EnableMonitor();
@@ -36,14 +37,24 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
         }
 
+        private void LoadProperties()
+        {
+            _logController.AddLog(new ApplicationLog("Loading properties"));
+            MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
+            MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
+            _logController.AddLog(new ApplicationLog("Done loading properties"));
+        }
+
         private void Active(object sender, EventArgs args)
         {
-           _ramController.EnableMonitor();
+            if (!Properties.Settings.Default.DisableOnInactive) return;
+            _ramController.EnableMonitor();
             Overlay.Visibility = Visibility.Collapsed;
         }
 
         private void Passive(object sender, EventArgs args)
         {
+            if (!Properties.Settings.Default.DisableOnInactive) return;
             _ramController.DisableMonitor();
             Overlay.Visibility = Visibility.Visible;
         }
@@ -112,9 +123,11 @@ namespace MemPlus.Windows
             new LogWindow(_logController, LogType.Application).Show();
         }
 
-        private void OnTopMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        private void TopMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
             Topmost = MniOnTop.IsChecked;
+            Properties.Settings.Default.Topmost = Topmost;
+            Properties.Settings.Default.Save();
         }
 
         private void HomePageMenuItem_OnClick(object sender, RoutedEventArgs e)
@@ -212,6 +225,12 @@ namespace MemPlus.Windows
                 _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
                 Show();
             }
+        }
+
+        private void DisableInactiveMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.DisableOnInactive = MniDisableInactive.IsChecked;
+            Properties.Settings.Default.Save();
         }
     }
 }

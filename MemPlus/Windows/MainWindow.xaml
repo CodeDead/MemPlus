@@ -89,7 +89,8 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/monitor.png"/>
                     </MenuItem.Icon>
-                    <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="OnTopMenuItem_OnCheckedChanged" Unchecked="OnTopMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniDisableInactive" Header="Disable when inactive" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
                 </MenuItem>
                 <MenuItem Header="Settings">
                     <MenuItem.Icon>
