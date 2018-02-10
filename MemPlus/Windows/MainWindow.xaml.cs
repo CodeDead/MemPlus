@@ -120,6 +120,7 @@ namespace MemPlus.Windows
         {
             try
             {
+                _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
                 System.Diagnostics.Process.Start("https://codedead.com/");
             }
             catch (Exception ex)
@@ -127,6 +128,25 @@ namespace MemPlus.Windows
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void DonateMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                _logController.AddLog(new ApplicationLog("Opening donation website"));
+                System.Diagnostics.Process.Start("https://codedead.com/?page_id=302");
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void MenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new AboutWindow(_logController).ShowDialog();
         }
     }
 }

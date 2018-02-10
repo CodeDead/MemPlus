@@ -87,12 +87,12 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Donate">
+                <MenuItem Header="Donate" Click="DonateMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/donate.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="About">
+                <MenuItem Header="About" Click="MenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/about.png"/>
                     </MenuItem.Icon>
