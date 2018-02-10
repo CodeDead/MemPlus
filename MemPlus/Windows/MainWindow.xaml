@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
-    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/MemPlus;component/Resources/ram.png">
+    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -20,7 +20,7 @@
             <MenuItem Header="_File">
                 <MenuItem Header="Export">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/export.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/export.png"/>
                     </MenuItem.Icon>
                     <MenuItem Header="RAM Optimizer log" />
                     <MenuItem Header="Application logs" />
@@ -28,7 +28,7 @@
                 <Separator />
                 <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/exit.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/exit.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -36,13 +36,13 @@
             <MenuItem Header="_Tools">
                 <MenuItem Header="RAM Analyzer">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/ram.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/ram.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Logs">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/log.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/log.png"/>
                     </MenuItem.Icon>
                     <MenuItem Header="RAM Optimizer log" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
@@ -52,13 +52,13 @@
                 <Separator />
                 <MenuItem Header="GUI">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/monitor.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/monitor.png"/>
                     </MenuItem.Icon>
                     <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="OnTopMenuItem_OnCheckedChanged" Unchecked="OnTopMenuItem_OnCheckedChanged" />
                 </MenuItem>
                 <MenuItem Header="Settings">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/settings.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/settings.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -66,35 +66,35 @@
             <MenuItem Header="_Help">
                 <MenuItem Header="Help">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/help.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/help.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Check for updates">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/update.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/update.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Homepage" Click="HomePageMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/home.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/home.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="License">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/pdf.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/pdf.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Donate">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/donate.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/donate.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="About">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/about.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/about.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -105,7 +105,7 @@
                 <SolidColorBrush Color="Black" Opacity="0.5"/>
             </Grid.Background>
 
-            <Image Source="/MemPlus;component/Resources/paused.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="96" Width="96" />
+            <Image Source="/Resources/Images/paused.png" HorizontalAlignment="Center" VerticalAlignment="Center" Height="96" Width="96" />
         </Grid>
 
         <Grid Grid.Row="2" Visibility="Visible">

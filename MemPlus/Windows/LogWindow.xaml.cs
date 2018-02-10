@@ -102,5 +102,10 @@ namespace MemPlus.Windows
         {
             _logController.ClearLogs(_logType);
         }
+
+        private void BtnExport_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

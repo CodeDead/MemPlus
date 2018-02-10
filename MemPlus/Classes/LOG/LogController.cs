@@ -8,10 +8,14 @@ namespace MemPlus.Classes.LOG
     /// </summary>
     public class LogController
     {
+        #region Variables
         /// <summary>
         /// The list of available Log objects
         /// </summary>
         private readonly List<Log> _logList;
+        #endregion
+
+        #region Delegates
         /// <summary>
         /// Delegate that will be called when a Log object was added
         /// </summary>
@@ -48,6 +52,7 @@ namespace MemPlus.Classes.LOG
         /// Method that will be called when a list of Log objects with a specific LogType were removed
         /// </summary>
         internal LogTypeCleared LogTypeClearedEvent;
+        #endregion
 
         /// <summary>
         /// Initialize a new LogController object
@@ -118,6 +123,50 @@ namespace MemPlus.Classes.LOG
         internal List<Log> GetLogs()
         {
             return _logList;
+        }
+
+        /// <summary>
+        /// Export logs to the disk
+        /// </summary>
+        /// <param name="path">The path where logs should be stored</param>
+        /// <param name="logType">The type of logs that should be saved. Can be null if all logs should be saved</param>
+        /// <param name="exportType">The type of export that should be performed</param>
+        internal void Export(string path, LogType? logType, ExportType exportType)
+        {
+            List<Log> exportList;
+
+            if (logType != null)
+            {
+                exportList = new List<Log>();
+                foreach (Log l in _logList)
+                {
+                    if (l.LogType == logType)
+                    {
+                        exportList.Add(l);
+                    }
+                }
+            }
+            else
+            {
+                exportList = _logList;
+            }
+
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (exportType)
+            {
+                case ExportType.Html:
+                    LogExporter.ExportHtml(path, exportList);
+                    break;
+                default:
+                    LogExporter.ExportTxt(path, exportList);
+                    break;
+                case ExportType.Csv:
+                    LogExporter.ExportCsv(path, exportList);
+                    break;
+                case ExportType.Excel:
+                    LogExporter.ExportExcel(path, exportList);
+                    break;
+            }
         }
     }
 }

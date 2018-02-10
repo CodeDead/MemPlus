@@ -79,6 +79,7 @@
     <Compile Include="Classes\LOG\ILogMethods.cs" />
     <Compile Include="Classes\LOG\Log.cs" />
     <Compile Include="Classes\LOG\LogController.cs" />
+    <Compile Include="Classes\LOG\LogExporter.cs" />
     <Compile Include="Classes\LOG\RamLog.cs" />
     <Compile Include="Classes\RAM\RamController.cs" />
     <Compile Include="Classes\RAM\RamOptimizer.cs" />
@@ -121,43 +122,43 @@
     <Resource Include="ram.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ram.png" />
+    <Resource Include="Resources\Images\ram.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\paused.png" />
+    <Resource Include="Resources\Images\paused.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\exit.png" />
+    <Resource Include="Resources\Images\exit.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\export.png" />
+    <Resource Include="Resources\Images\export.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\log.png" />
+    <Resource Include="Resources\Images\log.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\settings.png" />
+    <Resource Include="Resources\Images\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\monitor.png" />
+    <Resource Include="Resources\Images\monitor.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\about.png" />
+    <Resource Include="Resources\Images\about.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\donate.png" />
+    <Resource Include="Resources\Images\donate.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\help.png" />
+    <Resource Include="Resources\Images\help.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\home.png" />
+    <Resource Include="Resources\Images\home.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\pdf.png" />
+    <Resource Include="Resources\Images\pdf.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\update.png" />
+    <Resource Include="Resources\Images\update.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
