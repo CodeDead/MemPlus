@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
+using Microsoft.Win32;
 
 namespace MemPlus.Windows
 {
@@ -105,7 +106,48 @@ namespace MemPlus.Windows
 
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+            };
+
+            if (sfd.ShowDialog() != true) return;
+            _logController.AddLog(new ApplicationLog("Exporting logs"));
+            ExportType type;
+            switch (sfd.FilterIndex)
+            {
+                default:
+                    type = ExportType.Text;
+                    break;
+                case 2:
+                    type = ExportType.Html;
+                    break;
+                case 3:
+                    type = ExportType.Csv;
+                    break;
+                case 4:
+                    type = ExportType.Excel;
+                    break;
+            }
+
+            try
+            {
+                _logController.Export(sfd.FileName, _logType, type);
+
+                MessageBox.Show("All logs have been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                _logController.AddLog(new ApplicationLog("Done exporting logs"));
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvLogs.SelectedItems.Count == 0) return;
+            _logController.RemoveLog(LsvLogs.SelectedItem as Log);
         }
     }
 }

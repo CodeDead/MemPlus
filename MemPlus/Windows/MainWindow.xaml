@@ -22,8 +22,8 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/export.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="RAM Optimizer log" />
-                    <MenuItem Header="Application logs" />
+                    <MenuItem Header="RAM Optimizer logs" Click="RamExportMenuItem_OnClick" />
+                    <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
@@ -44,7 +44,7 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/log.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="RAM Optimizer log" Click="RamLogsMenuItem_OnClick" />
+                    <MenuItem Header="RAM Optimizer logs" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="Clear" Click="ClearLogsMenuItem_OnClick" />
@@ -92,7 +92,7 @@
                         <Image Width="16" Height="16" Source="/Resources/Images/donate.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="About" Click="MenuItem_OnClick">
+                <MenuItem Header="About" Click="AboutMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/about.png"/>
                     </MenuItem.Icon>
@@ -115,10 +115,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <syncfusion:SfCircularGauge Grid.Row="0" x:Name="CgRamUsage"
-                                        GaugeHeader="RAM usage (%)"
-                                        FontSize="14"  HeaderAlignment="Bottom"
-                                        FontWeight="Bold"
+            <syncfusion:SfCircularGauge Grid.Row="0" x:Name="CgRamUsage" GaugeHeader="RAM usage (%)"
+                                        FontSize="14"  HeaderAlignment="Bottom" FontWeight="Bold"
                                         Margin="5" MaxHeight="350" MaxWidth="350">
                 <syncfusion:SfCircularGauge.Scales>
                     <syncfusion:CircularScale >
