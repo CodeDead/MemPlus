@@ -41,7 +41,7 @@ namespace MemPlus.Windows
 
         private void LoadProperties()
         {
-            _logController.AddLog(new ApplicationLog("Loading properties"));
+            _logController.AddLog(new ApplicationLog("Loading SettingsWindow properties"));
 
             //TODO
             //General
@@ -60,7 +60,7 @@ namespace MemPlus.Windows
             ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
             ItbRamMonitorTimeout.Value = Properties.Settings.Default.RamMonitorInterval;
 
-            _logController.AddLog(new ApplicationLog("Properties have been loaded"));
+            _logController.AddLog(new ApplicationLog("Done loading SettingsWindow properties"));
         }
 
         private void SaveProperties()
@@ -82,7 +82,7 @@ namespace MemPlus.Windows
 
             _logController.AddLog(new ApplicationLog("Properties have been saved"));
 
-            MessageBox.Show("All properties have been saved!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("All settings have been saved!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ResetSettings()
@@ -96,9 +96,9 @@ namespace MemPlus.Windows
             _mainWindow.LoadProperties();
             LoadProperties();
 
-            MessageBox.Show("All settings have been reset!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-
             _logController.AddLog(new ApplicationLog("Properties have been reset"));
+
+            MessageBox.Show("All settings have been reset!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void BtnReset_OnClick(object sender, RoutedEventArgs e)

@@ -35,7 +35,9 @@ namespace MemPlus.Windows
         /// </summary>
         private void LoadProperties()
         {
+            _logController.AddLog(new ApplicationLog("Loading AboutWindow properties"));
             Topmost = Properties.Settings.Default.Topmost;
+            _logController.AddLog(new ApplicationLog("Done loading AboutWindow properties"));
         }
 
         /// <summary>

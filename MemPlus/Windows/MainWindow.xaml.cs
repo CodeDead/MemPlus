@@ -39,7 +39,8 @@ namespace MemPlus.Windows
 
         internal void LoadProperties()
         {
-            _logController.AddLog(new ApplicationLog("Loading properties"));
+            _logController.AddLog(new ApplicationLog("Loading MainWindow properties"));
+
             MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
             MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
             MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
@@ -55,7 +56,7 @@ namespace MemPlus.Windows
                 _rmEnabledBeforeInvisible = false;
             }
 
-            _logController.AddLog(new ApplicationLog("Done loading properties"));
+            _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
         }
 
         private void Active(object sender, EventArgs args)

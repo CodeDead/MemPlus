@@ -45,7 +45,9 @@ namespace MemPlus.Windows
 
         private void LoadProperties()
         {
+            _logController.AddLog(new ApplicationLog("Loading LogWindow properties"));
             Topmost = Properties.Settings.Default.Topmost;
+            _logController.AddLog(new ApplicationLog("Done loading LogWindow properties"));
         }
 
         private void LogTypeClearedEvent(List<Log> clearedList)
