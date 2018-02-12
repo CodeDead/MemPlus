@@ -20,7 +20,7 @@ namespace MemPlus.Windows
 
             InitializeComponent();
             ChangeVisualStyle();
-            LoadSettings();
+            LoadProperties();
 
             _mainWindow = mainWindow;
 
@@ -39,31 +39,66 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done changing SettingsWindow theme style"));
         }
 
-        private void LoadSettings()
+        private void LoadProperties()
         {
+            _logController.AddLog(new ApplicationLog("Loading properties"));
+
             //TODO
+            //General
+            ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
+            if (Properties.Settings.Default.Topmost)
+            {
+                ChbTopmost.IsChecked = Properties.Settings.Default.Topmost;
+                Topmost = true;
+            }
+            else
+            {
+                Topmost = false;
+            }
+
+            ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
+            ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
+            ItbRamMonitorTimeout.Value = Properties.Settings.Default.RamMonitorInterval;
+
+            _logController.AddLog(new ApplicationLog("Properties have been loaded"));
         }
 
-        private void SaveSettings()
+        private void SaveProperties()
         {
+            _logController.AddLog(new ApplicationLog("Saving properties"));
+
             //TODO
+            //General
+            if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
+            if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
+            if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
+            if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
+            if (ItbRamMonitorTimeout.Value != null) Properties.Settings.Default.RamMonitorInterval = (int) ItbRamMonitorTimeout.Value;
+
             Properties.Settings.Default.Save();
 
             _mainWindow.ChangeVisualStyle();
             _mainWindow.LoadProperties();
 
-            _logController.AddLog(new ApplicationLog("Settings have been saved"));
+            _logController.AddLog(new ApplicationLog("Properties have been saved"));
 
-            MessageBox.Show("All settings have been saved!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("All properties have been saved!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void ResetSettings()
         {
+            _logController.AddLog(new ApplicationLog("Resetting properties"));
+
             Properties.Settings.Default.Reset();
             Properties.Settings.Default.Save();
 
             _mainWindow.ChangeVisualStyle();
             _mainWindow.LoadProperties();
+            LoadProperties();
+
+            MessageBox.Show("All settings have been reset!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            _logController.AddLog(new ApplicationLog("Properties have been reset"));
         }
 
         private void BtnReset_OnClick(object sender, RoutedEventArgs e)
@@ -73,7 +108,7 @@ namespace MemPlus.Windows
 
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
-            SaveSettings();
+            SaveProperties();
         }
     }
 }

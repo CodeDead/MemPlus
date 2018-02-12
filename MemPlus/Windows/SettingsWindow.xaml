@@ -21,6 +21,52 @@
                                    Image="../Resources/Images/settings.png"
                                    ImageWidth="16" ImageHeight="16">
 
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Grid.Row="0" Header="General" MinWidth="250" Margin="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox Grid.Row="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
+                            <CheckBox Grid.Row="1" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
+
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Row="1" Header="RAM Monitor" Margin="3">
+                        <Grid MinWidth="250">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <CheckBox x:Name="ChbRamMonitor" Content="RAM Monitor" Margin="3" />
+                            <CheckBox x:Name="ChbDisableInactive" Grid.Row="1" Content="Disable when inactive" Margin="3" />
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content="Update interval:"  Margin="3" />
+                                <syncfusion:IntegerTextBox Grid.Column="1" x:Name="ItbRamMonitorTimeout" MinValue="100" MaxValue="60000" Margin="3" />
+                                <Label Grid.Column="2" Content="ms" Margin="3"></Label>
+
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+
             </syncfusion:TabItemExt>
 
             <syncfusion:TabItemExt Header="Memory Optimizer"

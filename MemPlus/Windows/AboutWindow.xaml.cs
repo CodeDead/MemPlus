@@ -25,8 +25,17 @@ namespace MemPlus.Windows
 
             InitializeComponent();
             ChangeVisualStyle();
+            LoadProperties();
 
             _logController.AddLog(new ApplicationLog("Done initializing AboutWindow"));
+        }
+
+        /// <summary>
+        /// Load the properties of the application
+        /// </summary>
+        private void LoadProperties()
+        {
+            Topmost = Properties.Settings.Default.Topmost;
         }
 
         /// <summary>

@@ -129,5 +129,17 @@ namespace MemPlus.Properties {
                 this["AutoUpdate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int RamMonitorInterval {
+            get {
+                return ((int)(this["RamMonitorInterval"]));
+            }
+            set {
+                this["RamMonitorInterval"] = value;
+            }
+        }
     }
 }

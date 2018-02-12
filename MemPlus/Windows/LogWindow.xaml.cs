@@ -29,6 +29,7 @@ namespace MemPlus.Windows
 
             InitializeComponent();
             ChangeVisualStyle();
+            LoadProperties();
 
             FillLogView();
 
@@ -40,6 +41,11 @@ namespace MemPlus.Windows
             _autoScroll = true;
 
             _logController.AddLog(new ApplicationLog("Done initializing LogWindow"));
+        }
+
+        private void LoadProperties()
+        {
+            Topmost = Properties.Settings.Default.Topmost;
         }
 
         private void LogTypeClearedEvent(List<Log> clearedList)

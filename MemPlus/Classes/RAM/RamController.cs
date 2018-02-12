@@ -109,6 +109,15 @@ namespace MemPlus.Classes.RAM
         }
 
         /// <summary>
+        /// Set the interval for the RAM Monitor updates
+        /// </summary>
+        /// <param name="interval">The amount of miliseconds before an update should occur</param>
+        internal void SetTimerInterval(int interval)
+        {
+            _ramTimer.Interval = interval;
+        }
+
+        /// <summary>
         /// Enable RAM usage monitoring
         /// </summary>
         internal void EnableMonitor()

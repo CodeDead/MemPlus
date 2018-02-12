@@ -27,7 +27,7 @@ namespace MemPlus.Windows
             InitializeComponent();
             ChangeVisualStyle();
 
-            _ramController = new RamController(Dispatcher, CgRamUsage, LblTotalPhysicalMemory, LblAvailablePhysicalMemory, 1000, _logController);
+            _ramController = new RamController(Dispatcher, CgRamUsage, LblTotalPhysicalMemory, LblAvailablePhysicalMemory, Properties.Settings.Default.RamMonitorInterval, _logController);
 
             Application app = Application.Current;
             app.Activated += Active;
@@ -43,7 +43,7 @@ namespace MemPlus.Windows
             MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
             MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
             MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
-            _logController.AddLog(new ApplicationLog("Done loading properties"));
+            _ramController.SetTimerInterval(Properties.Settings.Default.RamMonitorInterval);
 
             if (Properties.Settings.Default.RamMonitor)
             {
@@ -54,6 +54,8 @@ namespace MemPlus.Windows
             {
                 _rmEnabledBeforeInvisible = false;
             }
+
+            _logController.AddLog(new ApplicationLog("Done loading properties"));
         }
 
         private void Active(object sender, EventArgs args)
@@ -69,6 +71,8 @@ namespace MemPlus.Windows
         private void Passive(object sender, EventArgs args)
         {
             if (!Properties.Settings.Default.DisableOnInactive) return;
+            if (!_ramController.RamMonitorEnabled) return;
+
             _ramController.DisableMonitor();
             Overlay.Visibility = Visibility.Visible;
         }
