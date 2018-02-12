@@ -166,5 +166,12 @@ namespace MemPlus.Windows
             if (LsvLogs.SelectedItems.Count == 0) return;
             _logController.RemoveLog(LsvLogs.SelectedItem as Log);
         }
+
+        private void CopyMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvLogs.SelectedItems.Count == 0) return;
+            if (!(LsvLogs.SelectedItem is Log selectedLog)) return;
+            Clipboard.SetText(selectedLog.Time + "\t" + selectedLog.Data);
+        }
     }
 }

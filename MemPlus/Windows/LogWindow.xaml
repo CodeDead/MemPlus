@@ -18,12 +18,17 @@
         <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single">
             <ListView.ContextMenu>
                 <ContextMenu>
+                    <MenuItem Header="Copy" Click="CopyMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator></Separator>
                     <MenuItem Header="Delete" Click="DeleteMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator></Separator>
                     <MenuItem Header="Clear" Click="BtnClear_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />

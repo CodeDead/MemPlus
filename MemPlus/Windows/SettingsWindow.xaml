@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="300" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="MemPlus - Settings" Height="350" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -72,6 +72,50 @@
             <syncfusion:TabItemExt Header="Memory Optimizer"
                                    Image="../Resources/Images/ram_tab.png"
                                    ImageWidth="16" ImageHeight="16">
+
+                <Grid x:Name="ChbStandByCache" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <CheckBox Content="Clear standby cache" Margin="3" />
+                    <GroupBox Grid.Row="1" Header="Exclusions" MinWidth="250" Margin="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ListView Margin="3" Height="100">
+                                <ListView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Delete">
+                                            <MenuItem.Icon>
+                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" ></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <MenuItem Header="Clear">
+                                            <MenuItem.Icon>
+                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" ></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+                            </ListView>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Margin="3"></TextBox>
+                                <Button Grid.Column="1" Content="..." Margin="3" MinWidth="35" />
+                                <Button Grid.Column="2" Content="Add" Margin="3" MinWidth="35" />
+                            </Grid>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
 
             </syncfusion:TabItemExt>
 
