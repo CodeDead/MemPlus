@@ -60,6 +60,9 @@ namespace MemPlus.Windows
             ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
             ItbRamMonitorTimeout.Value = Properties.Settings.Default.RamMonitorInterval;
 
+            ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
+            ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
+
             _logController.AddLog(new ApplicationLog("Done loading SettingsWindow properties"));
         }
 
@@ -74,6 +77,10 @@ namespace MemPlus.Windows
             if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
             if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
             if (ItbRamMonitorTimeout.Value != null) Properties.Settings.Default.RamMonitorInterval = (int) ItbRamMonitorTimeout.Value;
+
+            //RAM Optimizer
+            if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
+            if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
 
             Properties.Settings.Default.Save();
 

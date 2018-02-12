@@ -28,7 +28,7 @@
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <GroupBox Grid.Row="0" Header="General" MinWidth="250" Margin="3">
+                    <GroupBox Grid.Row="0" Header="MemPlus" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"></RowDefinition>
@@ -73,14 +73,16 @@
                                    Image="../Resources/Images/ram_tab.png"
                                    ImageWidth="16" ImageHeight="16">
 
-                <Grid x:Name="ChbStandByCache" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <CheckBox Content="Clear standby cache" Margin="3" />
-                    <GroupBox Grid.Row="1" Header="Exclusions" MinWidth="250" Margin="3">
+                    <CheckBox Grid.Row="0" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
+                    <CheckBox Grid.Row="1" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
+                    <GroupBox Grid.Row="2" Header="Exclusions" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -89,6 +91,12 @@
                             <ListView Margin="3" Height="100">
                                 <ListView.ContextMenu>
                                     <ContextMenu>
+                                        <MenuItem Header="Copy">
+                                            <MenuItem.Icon>
+                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" ></Image>
+                                            </MenuItem.Icon>
+                                        </MenuItem>
+                                        <Separator />
                                         <MenuItem Header="Delete">
                                             <MenuItem.Icon>
                                                 <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" ></Image>

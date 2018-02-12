@@ -11,7 +11,7 @@
     <Setting Name="BorderThickness" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
-    <Setting Name="FileSystemCache" Type="System.Boolean" Scope="User">
+    <Setting Name="StandByCache" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ProcessExceptions" Type="System.Collections.Generic.List&lt;System.String&gt;" Scope="User">
@@ -31,6 +31,9 @@
     </Setting>
     <Setting Name="RamMonitorInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="FileSystemCache" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

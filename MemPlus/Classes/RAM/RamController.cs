@@ -71,6 +71,15 @@ namespace MemPlus.Classes.RAM
         /// Property displaying whether the RAM monitor is enabled or not
         /// </summary>
         internal bool RamMonitorEnabled { get; private set; }
+        /// <summary>
+        /// Property displaying whether the FileSystem cache should be cleared or not during memory optimisation
+        /// </summary>
+        internal bool ClearFileSystemCache { get; set; }
+        /// <summary>
+        /// Property displaying whether the standby cache should be cleared or not during memory optimisation
+        /// </summary>
+        internal bool ClearStandbyCache { get; set; }
+
         #endregion
 
         /// <summary>
@@ -99,6 +108,8 @@ namespace MemPlus.Classes.RAM
             _lblAvailable = lblAvailable ?? throw new ArgumentNullException(nameof(lblAvailable));
 
             _ramOptimizer = new RamOptimizer(_logController);
+            ClearStandbyCache = true;
+            ClearFileSystemCache = true;
 
             _ramTimer = new Timer();
             _ramTimer.Elapsed += OnTimedEvent;
@@ -176,10 +187,9 @@ namespace MemPlus.Classes.RAM
         /// <summary>
         /// Clear all non-essential RAM
         /// </summary>
-        /// <param name="filesystemcache">A boolean to indicate whether or not to clear the FileSystem cache</param>
         /// <param name="exceptionsList">A list of processes that should be excluded from memory optimisation</param>
         /// <returns></returns>
-        internal async Task ClearMemory(bool filesystemcache, List<string> exceptionsList)
+        internal async Task ClearMemory(List<string> exceptionsList)
         {
             _logController.AddLog(new ApplicationLog("Clearing RAM memory"));
 
@@ -190,7 +200,11 @@ namespace MemPlus.Classes.RAM
                 double oldUsage = RamUsage;
 
                 _ramOptimizer.EmptyWorkingSetFunction(exceptionsList);
-                _ramOptimizer.ClearFileSystemCache(filesystemcache);
+
+                if (ClearFileSystemCache)
+                {
+                    _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
+                }
 
                 await Task.Delay(10000);
 

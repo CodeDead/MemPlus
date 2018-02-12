@@ -44,6 +44,9 @@ namespace MemPlus.Windows
             MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
             MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
             MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
+
+            _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
+            _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
             _ramController.SetTimerInterval(Properties.Settings.Default.RamMonitorInterval);
 
             if (Properties.Settings.Default.RamMonitor)
@@ -96,7 +99,7 @@ namespace MemPlus.Windows
             {
                 BtnClearMemory.IsEnabled = false;
 
-                await _ramController.ClearMemory(Properties.Settings.Default.FileSystemCache, Properties.Settings.Default.ProcessExceptions);
+                await _ramController.ClearMemory(Properties.Settings.Default.ProcessExceptions);
                 double ramSavings = _ramController.RamSavings / 1024 / 1024;
                 if (ramSavings < 0)
                 {

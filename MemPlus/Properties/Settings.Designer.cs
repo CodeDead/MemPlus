@@ -62,12 +62,12 @@ namespace MemPlus.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool FileSystemCache {
+        public bool StandByCache {
             get {
-                return ((bool)(this["FileSystemCache"]));
+                return ((bool)(this["StandByCache"]));
             }
             set {
-                this["FileSystemCache"] = value;
+                this["StandByCache"] = value;
             }
         }
         
@@ -139,6 +139,18 @@ namespace MemPlus.Properties {
             }
             set {
                 this["RamMonitorInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool FileSystemCache {
+            get {
+                return ((bool)(this["FileSystemCache"]));
+            }
+            set {
+                this["FileSystemCache"] = value;
             }
         }
     }
