@@ -130,6 +130,38 @@
             <syncfusion:TabItemExt Header="Theme"
                                    Image="../Resources/Images/home.png"
                                    ImageWidth="16" ImageHeight="16">
+                <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="3" Content="Style:"></Label>
+                    <ComboBox Margin="3" x:Name="CboStyle" SelectedValuePath="Content" Grid.Row="0" Grid.Column="1" IsReadOnly="True">
+                        <ComboBoxItem>Metro</ComboBoxItem>
+                        <ComboBoxItem>Blend</ComboBoxItem>
+                        <ComboBoxItem>VS2010</ComboBoxItem>
+                        <ComboBoxItem>Office2003</ComboBoxItem>
+                        <ComboBoxItem>Office2007Blue</ComboBoxItem>
+                        <ComboBoxItem>Office2007Black</ComboBoxItem>
+                        <ComboBoxItem>Office2007Silver</ComboBoxItem>
+                        <ComboBoxItem>Office2010Blue</ComboBoxItem>
+                        <ComboBoxItem>Office2010Black</ComboBoxItem>
+                        <ComboBoxItem>Office2010Silver</ComboBoxItem>
+                        <ComboBoxItem>ShinyRed</ComboBoxItem>
+                        <ComboBoxItem>ShinyBlue</ComboBoxItem>
+                        <ComboBoxItem>SyncOrange</ComboBoxItem>
+                        <ComboBoxItem>Transparent</ComboBoxItem>
+                    </ComboBox>
+                    <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:"></Label>
+                    <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" />
+                    <Label Margin="3"  Grid.Row="2" Grid.Column="0" Content="Border thickness:"></Label>
+                    <syncfusion:IntegerTextBox Margin="3" x:Name="IntBorderThickness" Grid.Row="2" Grid.Column="1" MinValue="0"></syncfusion:IntegerTextBox>
+                </Grid>
 
             </syncfusion:TabItemExt>
         </syncfusion:TabControlExt>

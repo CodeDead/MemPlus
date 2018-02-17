@@ -63,6 +63,11 @@ namespace MemPlus.Windows
             ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
             ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
 
+            //Theme
+            CboStyle.Text = Properties.Settings.Default.VisualStyle;
+            CpMetroBrush.Color = Properties.Settings.Default.MetroColor;
+            IntBorderThickness.Value = Properties.Settings.Default.BorderThickness;
+
             _logController.AddLog(new ApplicationLog("Done loading SettingsWindow properties"));
         }
 
@@ -82,10 +87,17 @@ namespace MemPlus.Windows
             if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
             if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
 
+            //Theme
+            Properties.Settings.Default.VisualStyle = CboStyle.Text;
+
+            Properties.Settings.Default.MetroColor = CpMetroBrush.Color;
+            if (IntBorderThickness.Value != null) Properties.Settings.Default.BorderThickness = (int)IntBorderThickness.Value;
+
             Properties.Settings.Default.Save();
 
             _mainWindow.ChangeVisualStyle();
             _mainWindow.LoadProperties();
+            ChangeVisualStyle();
 
             _logController.AddLog(new ApplicationLog("Properties have been saved"));
 
