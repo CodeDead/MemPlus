@@ -16,10 +16,27 @@ namespace MemPlus.Windows
     /// </summary>
     public partial class LogWindow
     {
+        #region Variables
+        /// <summary>
+        /// The LogController object that can be used to add logs
+        /// </summary>
         private readonly LogController _logController;
+        /// <summary>
+        /// The LogType that is currently being monitored
+        /// </summary>
         private readonly LogType _logType;
+        /// <summary>
+        /// A boolean to indicate whether automatic scrolling is enabled or not
+        /// </summary>
         private bool _autoScroll;
+        #endregion
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Initialize a new LogWindow object
+        /// </summary>
+        /// <param name="logController">The LogController object that can be used to add and view logs</param>
+        /// <param name="logType">The LogType that is currently being monitored</param>
         public LogWindow(LogController logController, LogType logType)
         {
             _logController = logController;
@@ -43,13 +60,28 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done initializing LogWindow"));
         }
 
+        /// <summary>
+        /// Load the current properties into the GUI
+        /// </summary>
         private void LoadProperties()
         {
             _logController.AddLog(new ApplicationLog("Loading LogWindow properties"));
-            Topmost = Properties.Settings.Default.Topmost;
+            try
+            {
+                Topmost = Properties.Settings.Default.Topmost;
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             _logController.AddLog(new ApplicationLog("Done loading LogWindow properties"));
         }
 
+        /// <summary>
+        /// Method that will be called when all logs of a certain type have been cleared
+        /// </summary>
+        /// <param name="clearedList">The list of Log objects that were removed</param>
         private void LogTypeClearedEvent(List<Log> clearedList)
         {
             Dispatcher.Invoke(() =>
@@ -61,6 +93,9 @@ namespace MemPlus.Windows
             });
         }
 
+        /// <summary>
+        /// Fill the ListView will all current Log objects
+        /// </summary>
         private void FillLogView()
         {
             foreach (Log l in _logController.GetLogs().Where(l => l.LogType == _logType))
@@ -69,6 +104,10 @@ namespace MemPlus.Windows
             }
         }
 
+        /// <summary>
+        /// Method that will be called when a Log object was removed
+        /// </summary>
+        /// <param name="log">The Log object that was removed</param>
         private void LogDeletedEvent(Log log)
         {
             if (log.LogType != _logType) return;
@@ -78,6 +117,9 @@ namespace MemPlus.Windows
             });
         }
 
+        /// <summary>
+        /// Method that will be called when all logs were removed
+        /// </summary>
         private void LogsClearedEvent()
         {
             Dispatcher.Invoke(() =>
@@ -86,6 +128,10 @@ namespace MemPlus.Windows
             });
         }
 
+        /// <summary>
+        /// Method that will be called when a Log object was added
+        /// </summary>
+        /// <param name="log">The Log object that was added</param>
         private void LogAddedEvent(Log log)
         {
             if (log.LogType != _logType) return;
@@ -100,6 +146,9 @@ namespace MemPlus.Windows
             });
         }
 
+        /// <summary>
+        /// Change the visual style of the controls, depending on the settings.
+        /// </summary>
         private void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing LogWindow theme style"));
@@ -107,6 +156,11 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done changing LogWindow theme style"));
         }
 
+        /// <summary>
+        /// Method that is called when a scoll action happened in the ListView
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The ScrollEventArgs</param>
         private void LsvLogs_OnScroll(object sender, ScrollEventArgs e)
         {
             if (!(e.OriginalSource is ScrollBar sb)) return;
@@ -116,11 +170,21 @@ namespace MemPlus.Windows
             _autoScroll = Math.Abs(sb.Value - sb.Maximum) < 1;
         }
 
+        /// <summary>
+        /// Method that will be called when all logs of a certain type should be cleared
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void BtnClear_OnClick(object sender, RoutedEventArgs e)
         {
             _logController.ClearLogs(_logType);
         }
 
+        /// <summary>
+        /// Method that will be called when all Logs of a certain type should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog
@@ -161,17 +225,35 @@ namespace MemPlus.Windows
             }
         }
 
+        /// <summary>
+        /// Method that will be called when a Log object should be removed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void DeleteMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             if (LsvLogs.SelectedItems.Count == 0) return;
             _logController.RemoveLog(LsvLogs.SelectedItem as Log);
         }
 
+        /// <summary>
+        /// Method that will be called when a Log object should be copied to the clipboard
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void CopyMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             if (LsvLogs.SelectedItems.Count == 0) return;
             if (!(LsvLogs.SelectedItem is Log selectedLog)) return;
-            Clipboard.SetText(selectedLog.Time + "\t" + selectedLog.Data);
+            try
+            {
+                Clipboard.SetText(selectedLog.Time + "\t" + selectedLog.Data);
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

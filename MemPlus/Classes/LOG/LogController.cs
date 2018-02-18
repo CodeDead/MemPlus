@@ -69,6 +69,11 @@ namespace MemPlus.Classes.LOG
             logTimer.Enabled = true;
         }
 
+        /// <summary>
+        /// Event that will be called by a timer object
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The ElapsedEventArgs</param>
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
             ClearLogs(LogType.Application);

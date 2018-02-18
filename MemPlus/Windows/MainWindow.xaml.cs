@@ -14,11 +14,25 @@ namespace MemPlus.Windows
     /// </summary>
     public partial class MainWindow
     {
+        #region Variables
+        /// <summary>
+        /// The RamController object that can be used to clear the memory and view memory statistics
+        /// </summary>
         private readonly RamController _ramController;
+        /// <summary>
+        /// The LogController object that can be used to add new logs
+        /// </summary>
         private readonly LogController _logController;
-
+        /// <summary>
+        /// A boolean to indicate whether the RAM Monitor was enabled or not before an operation
+        /// </summary>
         private bool _rmEnabledBeforeInvisible;
+        #endregion
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Initialize a new MainWindow object
+        /// </summary>
         public MainWindow()
         {
             _logController = new LogController(600000);
@@ -27,7 +41,15 @@ namespace MemPlus.Windows
             InitializeComponent();
             ChangeVisualStyle();
 
-            _ramController = new RamController(Dispatcher, CgRamUsage, LblTotalPhysicalMemory, LblAvailablePhysicalMemory, Properties.Settings.Default.RamMonitorInterval, _logController);
+            try
+            {
+                _ramController = new RamController(Dispatcher, CgRamUsage, LblTotalPhysicalMemory, LblAvailablePhysicalMemory, Properties.Settings.Default.RamMonitorInterval, _logController);
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+            }
+            
 
             Application app = Application.Current;
             app.Activated += Active;
@@ -37,50 +59,90 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
         }
 
+        /// <summary>
+        /// Load the properties into the GUI
+        /// </summary>
         internal void LoadProperties()
         {
             _logController.AddLog(new ApplicationLog("Loading MainWindow properties"));
 
-            MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
-            MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
-            MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
-
-            _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
-            _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
-            _ramController.SetTimerInterval(Properties.Settings.Default.RamMonitorInterval);
-
-            if (Properties.Settings.Default.RamMonitor)
+            try
             {
-                _rmEnabledBeforeInvisible = true;
-                _ramController.EnableMonitor();
+                MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
+                MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
+                MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
+
+                _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
+                _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
+                _ramController.SetTimerInterval(Properties.Settings.Default.RamMonitorInterval);
+
+                if (Properties.Settings.Default.RamMonitor)
+                {
+                    _rmEnabledBeforeInvisible = true;
+                    _ramController.EnableMonitor();
+                }
+                else
+                {
+                    _rmEnabledBeforeInvisible = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _rmEnabledBeforeInvisible = false;
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
             _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
         }
 
+        /// <summary>
+        /// Method that is called when the Application is active
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="args">The EventArgs</param>
         private void Active(object sender, EventArgs args)
         {
-            if (!Properties.Settings.Default.DisableOnInactive) return;
-            if (Properties.Settings.Default.RamMonitor)
+            try
             {
-                _ramController.EnableMonitor();
+                if (!Properties.Settings.Default.DisableOnInactive) return;
+                if (Properties.Settings.Default.RamMonitor)
+                {
+                    _ramController.EnableMonitor();
+                }
+                Overlay.Visibility = Visibility.Collapsed;
             }
-            Overlay.Visibility = Visibility.Collapsed;
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        /// <summary>
+        /// Method that is called when the Application is passive
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="args">The EventArgs</param>
         private void Passive(object sender, EventArgs args)
         {
-            if (!Properties.Settings.Default.DisableOnInactive) return;
-            if (!_ramController.RamMonitorEnabled) return;
+            try
+            {
+                if (!Properties.Settings.Default.DisableOnInactive) return;
+                if (!_ramController.RamMonitorEnabled) return;
 
-            _ramController.DisableMonitor();
-            Overlay.Visibility = Visibility.Visible;
+                _ramController.DisableMonitor();
+                Overlay.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        /// <summary>
+        /// Change the visual style of the controls, depending on the settings.
+        /// </summary>
         internal void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing MainWindow theme style"));
@@ -91,6 +153,11 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done changing MainWindow theme style"));
         }
 
+        /// <summary>
+        /// Method that is called when the memory should be optimized
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private async void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
         {
             _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
@@ -124,33 +191,71 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
 
+        /// <summary>
+        /// Method that is called when all logs should be cleared
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void ClearLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             _logController.ClearLogs();
         }
 
+        /// <summary>
+        /// Method that is called when the application should exit
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
+        /// <summary>
+        /// Method that is called when the RAM Optimizer logs should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void RamLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             new LogWindow(_logController, LogType.Ram).Show();
         }
 
+        /// <summary>
+        /// Method that is called when the Application logs should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             new LogWindow(_logController, LogType.Application).Show();
         }
 
+        /// <summary>
+        /// Method that is called when the Topmost property should be changed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void TopMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
-            Topmost = MniOnTop.IsChecked;
-            Properties.Settings.Default.Topmost = Topmost;
-            Properties.Settings.Default.Save();
+            try
+            {
+                Topmost = MniOnTop.IsChecked;
+                Properties.Settings.Default.Topmost = Topmost;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        /// <summary>
+        /// Method that is called when the CodeDead homepage should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void HomePageMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -165,6 +270,11 @@ namespace MemPlus.Windows
             }
         }
 
+        /// <summary>
+        /// Method that is called when the CodeDead donation page should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void DonateMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -179,11 +289,20 @@ namespace MemPlus.Windows
             }
         }
 
+        /// <summary>
+        /// Method that is called when the about information should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void AboutMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             new AboutWindow(_logController).ShowDialog();
         }
 
+        /// <summary>
+        /// Method that is called when Log objects from a specific type should be exported
+        /// </summary>
+        /// <param name="logType">The LogType that should be exported</param>
         private void ExportLogs(LogType logType)
         {
             SaveFileDialog sfd = new SaveFileDialog
@@ -224,66 +343,112 @@ namespace MemPlus.Windows
             }
         }
 
+        /// <summary>
+        /// Method that is called when all RAM Optimizer logs should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void RamExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ExportLogs(LogType.Ram);
         }
 
+        /// <summary>
+        /// Method that is called when all Application logs should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ExportLogs(LogType.Application);
         }
 
+        /// <summary>
+        /// Method that is called when the notifyicon option is clicked to show or hide the Application
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void OpenTbItem_Click(object sender, RoutedEventArgs e)
         {
             if (IsVisible)
             {
-                _logController.AddLog(new ApplicationLog("MainWindow is now hidden"));
                 Hide();
 
                 if (_rmEnabledBeforeInvisible)
                 {
                     _ramController.DisableMonitor();
                 }
+                _logController.AddLog(new ApplicationLog("MainWindow is now hidden"));
             }
             else
             {
-                _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
                 Show();
 
                 if (_rmEnabledBeforeInvisible)
                 {
                     _ramController.EnableMonitor();
                 }
+                _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
             }
         }
 
+        /// <summary>
+        /// Method that is called when the RAM Monitor should be disabled or not when the Application is inactive
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void DisableInactiveMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
-            Properties.Settings.Default.DisableOnInactive = MniDisableInactive.IsChecked;
-            Properties.Settings.Default.Save();
+            try
+            {
+                Properties.Settings.Default.DisableOnInactive = MniDisableInactive.IsChecked;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
+        /// <summary>
+        /// Method that is called when the SettingsWindow should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void SettingsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             new SettingsWindow(this, _logController).ShowDialog();
         }
 
+        /// <summary>
+        /// Method that is called when the RAM Monitor should be enabled or disabled
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void RamMonitorMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
         {
-            if (MniRamMonitor.IsChecked)
+            try
             {
-                Properties.Settings.Default.RamMonitor = true;
-                _rmEnabledBeforeInvisible = false;
-                _ramController.EnableMonitor();
-            }
-            else
-            {
-                Properties.Settings.Default.RamMonitor = false;
-                _ramController.DisableMonitor();
-            }
+                if (MniRamMonitor.IsChecked)
+                {
+                    Properties.Settings.Default.RamMonitor = true;
+                    _rmEnabledBeforeInvisible = false;
+                    _ramController.EnableMonitor();
+                }
+                else
+                {
+                    Properties.Settings.Default.RamMonitor = false;
+                    _ramController.DisableMonitor();
+                }
 
-            Properties.Settings.Default.Save();
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>

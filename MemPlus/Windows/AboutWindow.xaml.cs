@@ -12,12 +12,18 @@ namespace MemPlus.Windows
     /// </summary>
     public partial class AboutWindow
     {
+        #region Variables
+        /// <summary>
+        /// The LogController object that can be used to add logs
+        /// </summary>
         private readonly LogController _logController;
+        #endregion
 
         /// <inheritdoc />
         /// <summary>
         /// Initialize a new AboutWindow
         /// </summary>
+        /// <param name="logController">The LogController that can be used to add logs</param>
         public AboutWindow(LogController logController)
         {
             _logController = logController;
@@ -36,7 +42,15 @@ namespace MemPlus.Windows
         private void LoadProperties()
         {
             _logController.AddLog(new ApplicationLog("Loading AboutWindow properties"));
-            Topmost = Properties.Settings.Default.Topmost;
+            try
+            {
+                Topmost = Properties.Settings.Default.Topmost;
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
             _logController.AddLog(new ApplicationLog("Done loading AboutWindow properties"));
         }
 
