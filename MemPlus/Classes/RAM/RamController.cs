@@ -95,6 +95,10 @@ namespace MemPlus.Classes.RAM
         /// Property displaying whether automatic RAM optimisation should occur after a certain RAM usage percentage was reached
         /// </summary>
         internal bool AutoOptimizePercentage { get; set; }
+        /// <summary>
+        /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
+        /// </summary>
+        private DateTime _lastAutoOptimizeTime;
         #endregion
 
         /// <summary>
@@ -251,6 +255,7 @@ namespace MemPlus.Classes.RAM
         /// <returns>Nothing</returns>
         internal async Task ClearMemory()
         {
+            _lastAutoOptimizeTime = DateTime.Now;
             _logController.AddLog(new ApplicationLog("Clearing RAM memory"));
 
             await Task.Run(async () =>
@@ -297,8 +302,13 @@ namespace MemPlus.Classes.RAM
 
             if (RamUsagePercentage >= _autoOptimizeRamThreshold && AutoOptimizePercentage)
             {
-                // This is dangerous. Needs to be fixed by checking last call time
-                ClearMemory();
+                double diff = (DateTime.Now - _lastAutoOptimizeTime).TotalSeconds;
+                if (diff > 10)
+                {
+#pragma warning disable 4014
+                    ClearMemory();
+#pragma warning restore 4014
+                }
             }
 
             _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
