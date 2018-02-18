@@ -84,7 +84,7 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool DisableOnInactive {
             get {
                 return ((bool)(this["DisableOnInactive"]));
@@ -132,7 +132,7 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
         public int RamMonitorInterval {
             get {
                 return ((int)(this["RamMonitorInterval"]));
@@ -151,6 +151,54 @@ namespace MemPlus.Properties {
             }
             set {
                 this["FileSystemCache"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoOptimizePercentage {
+            get {
+                return ((bool)(this["AutoOptimizePercentage"]));
+            }
+            set {
+                this["AutoOptimizePercentage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AutoOptimizePercentageThreshold {
+            get {
+                return ((string)(this["AutoOptimizePercentageThreshold"]));
+            }
+            set {
+                this["AutoOptimizePercentageThreshold"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoOptimizeTimed {
+            get {
+                return ((bool)(this["AutoOptimizeTimed"]));
+            }
+            set {
+                this["AutoOptimizeTimed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("600000")]
+        public int AutoOptimizeTimedInterval {
+            get {
+                return ((int)(this["AutoOptimizeTimedInterval"]));
+            }
+            set {
+                this["AutoOptimizeTimedInterval"] = value;
             }
         }
     }

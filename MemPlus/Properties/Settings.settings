@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DisableOnInactive" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Topmost" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -30,10 +30,22 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="RamMonitorInterval" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1000</Value>
+      <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="FileSystemCache" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutoOptimizePercentage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoOptimizePercentageThreshold" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AutoOptimizeTimed" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoOptimizeTimedInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">600000</Value>
     </Setting>
   </Settings>
 </SettingsFile>
