@@ -291,5 +291,18 @@ namespace MemPlus.Windows
         {
             LsvExclusions.Items.Clear();
         }
+
+        /// <summary>
+        /// Method that is called when ChbAutoOptimizePercentage is checked
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ChbAutoOptimizePercentage_OnChecked(object sender, RoutedEventArgs e)
+        {
+            if (ChbRamMonitor.IsChecked != null && !ChbRamMonitor.IsChecked.Value)
+            {
+                MessageBox.Show("This option will only work if the RAM Monitor is enabled!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
     }
 }

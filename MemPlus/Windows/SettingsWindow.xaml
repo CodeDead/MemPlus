@@ -89,7 +89,7 @@
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             
-                            <CheckBox x:Name="ChbAutoOptimizePercentage" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Automatically optimize when RAM usage exceeds" Margin="3"/>
+                            <CheckBox x:Name="ChbAutoOptimizePercentage" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Automatically optimize when RAM usage exceeds" Margin="3" Checked="ChbAutoOptimizePercentage_OnChecked"/>
                             <syncfusion:IntegerTextBox x:Name="ItbAutoOptimizePercentage" Grid.Row="0" Grid.Column="1" Margin="3" MinValue="25" MaxValue="100"/>
                             <Label Grid.Row="0" Grid.Column="2" Content="%" Margin="3" />
 
