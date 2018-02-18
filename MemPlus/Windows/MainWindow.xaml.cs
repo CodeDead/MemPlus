@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using MemPlus.Classes.GUI;
@@ -15,6 +16,10 @@ namespace MemPlus.Windows
     public partial class MainWindow
     {
         #region Variables
+        /// <summary>
+        /// The UpdateManager object that checks for application updates
+        /// </summary>
+        private readonly UpdateManager.UpdateManager _updateManager;
         /// <summary>
         /// The RamController object that can be used to clear the memory and view memory statistics
         /// </summary>
@@ -36,6 +41,7 @@ namespace MemPlus.Windows
         public MainWindow()
         {
             _logController = new LogController(600000);
+            _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus");
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
 
             InitializeComponent();
@@ -56,7 +62,30 @@ namespace MemPlus.Windows
             app.Deactivated += Passive;
 
             LoadProperties();
+            AutoUpdate();
+
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
+        }
+
+        /// <summary>
+        /// Automatically check for updates
+        /// </summary>
+        private void AutoUpdate()
+        {
+            _logController.AddLog(new ApplicationLog("Checking for application updates"));
+            try
+            {
+                if (Properties.Settings.Default.AutoUpdate)
+                {
+                    _updateManager.CheckForUpdate(false, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            _logController.AddLog(new ApplicationLog("Done checking for application updates"));
         }
 
         /// <summary>
@@ -487,6 +516,13 @@ namespace MemPlus.Windows
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void UpdateMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            _logController.AddLog(new ApplicationLog("Checking for application updates"));
+            _updateManager.CheckForUpdate(true, true);
+            _logController.AddLog(new ApplicationLog("Done checking for application updates"));
         }
     }
 }

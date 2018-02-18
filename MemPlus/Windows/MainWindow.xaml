@@ -108,7 +108,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Check for updates">
+                <MenuItem Header="Check for updates" Click="UpdateMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/update.png"/>
                     </MenuItem.Icon>
