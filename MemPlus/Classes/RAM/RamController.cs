@@ -25,6 +25,10 @@ namespace MemPlus.Classes.RAM
         /// </summary>
         private readonly Timer _ramTimer;
         /// <summary>
+        /// The Timer object that will automatically Optimize the RAM after a certain interval has passed
+        /// </summary>
+        private Timer _ramAutoOptimizeTimer;
+        /// <summary>
         /// The LogController object that can be used to add logs
         /// </summary>
         private readonly LogController _logController;
@@ -48,6 +52,10 @@ namespace MemPlus.Classes.RAM
         /// The ComputerInfo object that can be used to retrieve RAM usage statistics
         /// </summary>
         private readonly ComputerInfo _info;
+        /// <summary>
+        /// The list of processes that should be excluded from memory optimisation
+        /// </summary>
+        private List<string> _processExceptionList;
         #endregion
 
         #region Properties
@@ -89,14 +97,14 @@ namespace MemPlus.Classes.RAM
         /// <param name="gauge">The SfCircularGauge control that can be used to present RAM usage statistics</param>
         /// <param name="lblTotal">The Label control that can be used to display the total available memory statistics</param>
         /// <param name="lblAvailable">The Label control that can be used to display the available memory statistics</param>
-        /// <param name="timerInterval">The interval for which RAM usage statistics should be updated</param>
+        /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(Dispatcher dispatcher, SfCircularGauge gauge, Label lblTotal, Label lblAvailable, int timerInterval, LogController logController)
+        internal RamController(Dispatcher dispatcher, SfCircularGauge gauge, Label lblTotal, Label lblAvailable, int ramUpdateTimerInterval, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
 
-            if (timerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
+            if (ramUpdateTimerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
 
             RamSavings = 0;
 
@@ -113,17 +121,53 @@ namespace MemPlus.Classes.RAM
 
             _ramTimer = new Timer();
             _ramTimer.Elapsed += OnTimedEvent;
-            _ramTimer.Interval = timerInterval;
+            _ramTimer.Interval = ramUpdateTimerInterval;
             _ramTimer.Enabled = false;
 
             _logController.AddLog(new ApplicationLog("Done initializing RamController"));
         }
 
         /// <summary>
+        /// Enable or disable automatic timed RAM optimisation
+        /// </summary>
+        /// <param name="enabled">A boolean to indicate whether automatic RAM optimisation should occur or not</param>
+        /// <param name="interval">The interval for automatic RAM optimisation</param>
+        internal void AutoOptimizeTimed(bool enabled, int interval)
+        {
+            if (_ramAutoOptimizeTimer == null)
+            {
+                _ramAutoOptimizeTimer = new Timer();
+                _ramAutoOptimizeTimer.Elapsed += RamAutoOptimizeTimerOnElapsed;
+            }
+
+            _ramAutoOptimizeTimer.Interval = interval;
+            _ramAutoOptimizeTimer.Enabled = enabled;
+        }
+
+        /// <summary>
+        /// Event that will be called when the timer interval was reached
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="elapsedEventArgs">The ElapsedEventArgs</param>
+        private async void RamAutoOptimizeTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        {
+            await ClearMemory();
+        }
+
+        /// <summary>
+        /// Set the list of processes that should excluded from RAM optimisation
+        /// </summary>
+        /// <param name="processExceptionList">The list of processes that should be excluded from RAM optimisation</param>
+        internal void SetProcessExceptionList(List<string> processExceptionList)
+        {
+            _processExceptionList = processExceptionList;
+        }
+
+        /// <summary>
         /// Set the interval for the RAM Monitor updates
         /// </summary>
         /// <param name="interval">The amount of miliseconds before an update should occur</param>
-        internal void SetTimerInterval(int interval)
+        internal void SetRamUpdateTimerInterval(int interval)
         {
             _ramTimer.Interval = interval;
         }
@@ -187,9 +231,8 @@ namespace MemPlus.Classes.RAM
         /// <summary>
         /// Clear all non-essential RAM
         /// </summary>
-        /// <param name="exceptionsList">A list of processes that should be excluded from memory optimisation</param>
-        /// <returns></returns>
-        internal async Task ClearMemory(List<string> exceptionsList)
+        /// <returns>Nothing</returns>
+        internal async Task ClearMemory()
         {
             _logController.AddLog(new ApplicationLog("Clearing RAM memory"));
 
@@ -199,7 +242,7 @@ namespace MemPlus.Classes.RAM
 
                 double oldUsage = RamUsage;
 
-                _ramOptimizer.EmptyWorkingSetFunction(exceptionsList);
+                _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
 
                 if (ClearFileSystemCache)
                 {
