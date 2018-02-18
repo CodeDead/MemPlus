@@ -56,6 +56,10 @@ namespace MemPlus.Classes.RAM
         /// The list of processes that should be excluded from memory optimisation
         /// </summary>
         private List<string> _processExceptionList;
+        /// <summary>
+        /// An integer value representative of the percentage of RAM usage that should be reached before RAM optimisation should be called
+        /// </summary>
+        private double _autoOptimizeRamThreshold;
         #endregion
 
         #region Properties
@@ -87,7 +91,10 @@ namespace MemPlus.Classes.RAM
         /// Property displaying whether the standby cache should be cleared or not during memory optimisation
         /// </summary>
         internal bool ClearStandbyCache { get; set; }
-
+        /// <summary>
+        /// Property displaying whether automatic RAM optimisation should occur after a certain RAM usage percentage was reached
+        /// </summary>
+        internal bool AutoOptimizePercentage { get; set; }
         #endregion
 
         /// <summary>
@@ -125,6 +132,12 @@ namespace MemPlus.Classes.RAM
             _ramTimer.Enabled = false;
 
             _logController.AddLog(new ApplicationLog("Done initializing RamController"));
+        }
+
+        internal void SetAutoOptimizeThreshold(double threshold)
+        {
+            if (threshold < 25) throw new ArgumentException("Threshold is dangerously low!");
+            _autoOptimizeRamThreshold = threshold;
         }
 
         /// <summary>
@@ -277,6 +290,12 @@ namespace MemPlus.Classes.RAM
             RamUsage = usage;
             RamUsagePercentage = perc;
             RamTotal = total;
+
+            if (RamUsagePercentage >= _autoOptimizeRamThreshold && AutoOptimizePercentage)
+            {
+                // This is dangerous. Needs to be fixed by checking last call time
+                ClearMemory();
+            }
 
             _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
         }

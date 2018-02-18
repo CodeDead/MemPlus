@@ -107,6 +107,9 @@ namespace MemPlus.Windows
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
 
+                _ramController.AutoOptimizePercentage = Properties.Settings.Default.AutoOptimizePercentage;
+                _ramController.SetAutoOptimizeThreshold(Properties.Settings.Default.AutoOptimizePercentageThreshold);
+
                 if (Properties.Settings.Default.RamMonitor)
                 {
                     _rmEnabledBeforeInvisible = true;
