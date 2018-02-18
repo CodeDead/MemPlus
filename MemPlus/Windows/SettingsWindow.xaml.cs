@@ -67,6 +67,7 @@ namespace MemPlus.Windows
             try
             {
                 //General
+                ChbAutoStart.IsChecked = AutoStartUp();
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
                 ChbStartMinimized.IsChecked = Properties.Settings.Default.HideOnStart;
                 if (Properties.Settings.Default.Topmost)
@@ -120,6 +121,15 @@ namespace MemPlus.Windows
         }
 
         /// <summary>
+        /// Check if the program starts automatically.
+        /// </summary>
+        /// <returns>A boolean to represent whether the program starts automatically or not.</returns>
+        private static bool AutoStartUp()
+        {
+            return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == AppDomain.CurrentDomain.BaseDirectory;
+        }
+
+        /// <summary>
         /// Save all properties
         /// </summary>
         private void SaveProperties()
@@ -128,6 +138,17 @@ namespace MemPlus.Windows
             try
             {
                 //General
+                if (ChbAutoStart.IsChecked != null && ChbAutoStart.IsChecked.Value)
+                {
+                    Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", AppDomain.CurrentDomain.BaseDirectory);
+                } else if (ChbAutoStart.IsChecked != null && !ChbAutoStart.IsChecked.Value)
+                {
+                    if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == "") return;
+                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                    {
+                        key?.DeleteValue("MemPlus");
+                    }
+                }
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
                 if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartMinimized.IsChecked.Value;
