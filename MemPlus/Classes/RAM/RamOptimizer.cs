@@ -138,6 +138,11 @@ namespace MemPlus.Classes.RAM
         {
             _logController.AddLog(new RamLog("Emptying working set"));
 
+            if (processExceptions != null && processExceptions.Count > 0)
+            {
+                processExceptions = processExceptions.ConvertAll(d => d.ToLower());
+            }
+
             foreach (Process process in Process.GetProcesses())
             {
                 try

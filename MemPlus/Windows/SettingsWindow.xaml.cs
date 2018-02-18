@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
+using Microsoft.Win32;
 
 namespace MemPlus.Windows
 {
@@ -62,6 +65,17 @@ namespace MemPlus.Windows
 
             ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
             ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
+            if (Properties.Settings.Default.ProcessExceptions != null)
+            {
+                foreach (string s in Properties.Settings.Default.ProcessExceptions)
+                {
+                    LsvExclusions.Items.Add(s);
+                }
+            }
+            else
+            {
+                LsvExclusions.Items.Clear();
+            }
 
             //Theme
             CboStyle.Text = Properties.Settings.Default.VisualStyle;
@@ -81,11 +95,13 @@ namespace MemPlus.Windows
             if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
             if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
             if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
-            if (ItbRamMonitorTimeout.Value != null) Properties.Settings.Default.RamMonitorInterval = (int) ItbRamMonitorTimeout.Value;
+            if (ItbRamMonitorTimeout.Value != null) Properties.Settings.Default.RamMonitorInterval = (int)ItbRamMonitorTimeout.Value;
 
             //RAM Optimizer
             if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
             if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
+            List<string> exclusionList = LsvExclusions.Items.Cast<string>().ToList();
+            Properties.Settings.Default.ProcessExceptions = exclusionList;
 
             //Theme
             Properties.Settings.Default.VisualStyle = CboStyle.Text;
@@ -128,6 +144,48 @@ namespace MemPlus.Windows
         private void BtnSave_OnClick(object sender, RoutedEventArgs e)
         {
             SaveProperties();
+        }
+
+        private void BtnFileView_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog { Filter = "All files (*.*)|*.*" };
+
+            if (ofd.ShowDialog() == true)
+            {
+                TxtExclusion.Text = ofd.FileName;
+            }
+        }
+
+        private void BtnAddExclusion_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (TxtExclusion.Text.Length == 0) return;
+
+            if (System.IO.File.Exists(TxtExclusion.Text))
+            {
+                LsvExclusions.Items.Add(TxtExclusion.Text);
+                TxtExclusion.Text = "";
+            }
+            else
+            {
+                MessageBox.Show("The selected file does not exist!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CopyExclusionMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvExclusions.SelectedItems.Count == 0) return;
+            Clipboard.SetText(LsvExclusions.SelectedItem.ToString());
+        }
+
+        private void DeleteExclusionMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvExclusions.SelectedItems.Count == 0) return;
+            LsvExclusions.Items.Remove(LsvExclusions.SelectedItem);
+        }
+
+        private void ClearExclusionsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            LsvExclusions.Items.Clear();
         }
     }
 }
