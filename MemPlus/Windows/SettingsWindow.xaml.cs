@@ -68,6 +68,7 @@ namespace MemPlus.Windows
             {
                 //General
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
+                ChbStartMinimized.IsChecked = Properties.Settings.Default.HideOnStart;
                 if (Properties.Settings.Default.Topmost)
                 {
                     ChbTopmost.IsChecked = Properties.Settings.Default.Topmost;
@@ -129,6 +130,7 @@ namespace MemPlus.Windows
                 //General
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
                 if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
+                if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartMinimized.IsChecked.Value;
 
                 //RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;

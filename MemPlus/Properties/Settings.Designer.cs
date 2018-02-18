@@ -201,5 +201,17 @@ namespace MemPlus.Properties {
                 this["AutoOptimizeTimedInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideOnStart {
+            get {
+                return ((bool)(this["HideOnStart"]));
+            }
+            set {
+                this["HideOnStart"] = value;
+            }
+        }
     }
 }

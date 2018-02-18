@@ -28,10 +28,6 @@ namespace MemPlus.Windows
         /// The LogController object that can be used to add new logs
         /// </summary>
         private readonly LogController _logController;
-        /// <summary>
-        /// A boolean to indicate whether the RAM Monitor was enabled or not before an operation
-        /// </summary>
-        private bool _rmEnabledBeforeInvisible;
         #endregion
 
         /// <inheritdoc />
@@ -63,6 +59,17 @@ namespace MemPlus.Windows
 
             LoadProperties();
             AutoUpdate();
+
+            try
+            {
+                if (!Properties.Settings.Default.HideOnStart) return;
+                Hide();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
         }
@@ -112,12 +119,7 @@ namespace MemPlus.Windows
 
                 if (Properties.Settings.Default.RamMonitor)
                 {
-                    _rmEnabledBeforeInvisible = true;
                     _ramController.EnableMonitor();
-                }
-                else
-                {
-                    _rmEnabledBeforeInvisible = false;
                 }
             }
             catch (Exception ex)
@@ -404,25 +406,31 @@ namespace MemPlus.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void OpenTbItem_Click(object sender, RoutedEventArgs e)
         {
-            if (IsVisible)
+            try
             {
-                Hide();
-
-                if (_rmEnabledBeforeInvisible)
+                if (IsVisible)
                 {
-                    _ramController.DisableMonitor();
+                    Hide();
+                    if (Properties.Settings.Default.DisableOnInactive)
+                    {
+                        _ramController.DisableMonitor();
+                    }
+                    _logController.AddLog(new ApplicationLog("MainWindow is now hidden"));
                 }
-                _logController.AddLog(new ApplicationLog("MainWindow is now hidden"));
+                else
+                {
+                    Show();
+                    if (Properties.Settings.Default.RamMonitor)
+                    {
+                        _ramController.EnableMonitor();
+                    }
+                    _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Show();
-
-                if (_rmEnabledBeforeInvisible)
-                {
-                    _ramController.EnableMonitor();
-                }
-                _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+                _logController.AddLog(new ApplicationLog(ex.Message));
             }
         }
 
@@ -467,7 +475,6 @@ namespace MemPlus.Windows
                 if (MniRamMonitor.IsChecked)
                 {
                     Properties.Settings.Default.RamMonitor = true;
-                    _rmEnabledBeforeInvisible = false;
                     _ramController.EnableMonitor();
                 }
                 else

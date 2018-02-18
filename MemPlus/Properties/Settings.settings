@@ -47,5 +47,8 @@
     <Setting Name="AutoOptimizeTimedInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">600000</Value>
     </Setting>
+    <Setting Name="HideOnStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
