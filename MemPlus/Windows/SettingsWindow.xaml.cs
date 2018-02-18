@@ -78,9 +78,17 @@ namespace MemPlus.Windows
                     Topmost = false;
                 }
 
+                //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
                 ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
                 ItbRamMonitorTimeout.Value = Properties.Settings.Default.RamMonitorInterval;
+
+                ChbAutoOptimizePercentage.IsChecked = Properties.Settings.Default.AutoOptimizePercentage;
+                ItbAutoOptimizePercentage.Value = Properties.Settings.Default.AutoOptimizePercentageThreshold;
+
+                ChbAutoOptimizeTimed.IsChecked = Properties.Settings.Default.AutoOptimizeTimed;
+                ItbAutoOptimizeTimed.Value = Properties.Settings.Default.AutoOptimizeTimedInterval / 1000 / 60;
+
 
                 ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
                 ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
@@ -121,9 +129,17 @@ namespace MemPlus.Windows
                 //General
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
                 if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
+
+                //RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
                 if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
                 if (ItbRamMonitorTimeout.Value != null) Properties.Settings.Default.RamMonitorInterval = (int)ItbRamMonitorTimeout.Value;
+
+                if (ChbAutoOptimizePercentage.IsChecked != null) Properties.Settings.Default.AutoOptimizePercentage = ChbAutoOptimizePercentage.IsChecked.Value;
+                if (ItbAutoOptimizePercentage.Value != null) Properties.Settings.Default.AutoOptimizePercentageThreshold = (int)ItbAutoOptimizePercentage.Value;
+
+                if (ChbAutoOptimizeTimed.IsChecked != null) Properties.Settings.Default.AutoOptimizeTimed = ChbAutoOptimizeTimed.IsChecked.Value;
+                if (ItbAutoOptimizeTimed.Value != null) Properties.Settings.Default.AutoOptimizeTimedInterval = (int)ItbAutoOptimizeTimed.Value * 1000 * 60;
 
                 //RAM Optimizer
                 if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;

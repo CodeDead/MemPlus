@@ -168,10 +168,10 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AutoOptimizePercentageThreshold {
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int AutoOptimizePercentageThreshold {
             get {
-                return ((string)(this["AutoOptimizePercentageThreshold"]));
+                return ((int)(this["AutoOptimizePercentageThreshold"]));
             }
             set {
                 this["AutoOptimizePercentageThreshold"] = value;
