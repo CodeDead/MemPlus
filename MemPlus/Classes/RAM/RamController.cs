@@ -134,6 +134,10 @@ namespace MemPlus.Classes.RAM
             _logController.AddLog(new ApplicationLog("Done initializing RamController"));
         }
 
+        /// <summary>
+        /// Set the threshold percentage for automatic RAM optimisation
+        /// </summary>
+        /// <param name="threshold">The percentage threshold</param>
         internal void SetAutoOptimizeThreshold(double threshold)
         {
             if (threshold < 25) throw new ArgumentException("Threshold is dangerously low!");
