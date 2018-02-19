@@ -2,6 +2,8 @@
 using System.Windows;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
+using MemPlus.Classes.RAM;
+using MemPlus.Classes.RAM.ViewModels;
 
 namespace MemPlus.Windows
 {
@@ -22,11 +24,30 @@ namespace MemPlus.Windows
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing AnalyzerWindow"));
+
             InitializeComponent();
             ChangeVisualStyle();
             LoadProperties();
 
+            new RamAnalyzer(5000, ProcessListUpdatedEvent, ProcessRemovedEvent);
+
             _logController.AddLog(new ApplicationLog("Done initializing AnalyzerWindow"));
+        }
+
+        private void ProcessRemovedEvent(ProcessData processData)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                LsvProcesses.Items.Remove(processData);
+            });
+        }
+
+        private void ProcessListUpdatedEvent(ProcessData processData)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                LsvProcesses.Items.Add(processData);
+            });
         }
 
         /// <summary>

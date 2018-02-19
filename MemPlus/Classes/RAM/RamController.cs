@@ -281,7 +281,6 @@ namespace MemPlus.Classes.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
-
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
 

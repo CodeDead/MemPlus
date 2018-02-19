@@ -20,8 +20,8 @@
             <ListView.View>
                 <GridView x:Name="DynGrid">
                     <GridViewColumn Header="Process" DisplayMemberBinding="{Binding ProcessName}" />
-                    <GridViewColumn Header="PID" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="RAM usage" DisplayMemberBinding="{Binding WorkingSet64}" />
+                    <GridViewColumn Header="PID" DisplayMemberBinding="{Binding Pid}" />
+                    <GridViewColumn Header="RAM usage" DisplayMemberBinding="{Binding WorkingSet}" />
                 </GridView>
             </ListView.View>
         </ListView>
