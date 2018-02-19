@@ -536,5 +536,10 @@ namespace MemPlus.Windows
             _updateManager.CheckForUpdate(true, true);
             _logController.AddLog(new ApplicationLog("Done checking for application updates"));
         }
+
+        private void RamAnalyzerMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new AnalyzerWindow(_logController).Show();
+        }
     }
 }
