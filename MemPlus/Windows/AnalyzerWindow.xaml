@@ -11,6 +11,23 @@
     TitleTextAlignment="Center"
     Title="MemPlus - RAM Analyzer" Height="350" Width="500" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="LsvProcesses" Grid.Column="0">
+            <ListView.View>
+                <GridView x:Name="DynGrid">
+                    <GridViewColumn Header="Process" DisplayMemberBinding="{Binding ProcessName}" />
+                    <GridViewColumn Header="PID" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="RAM usage" DisplayMemberBinding="{Binding WorkingSet64}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+        <Grid Grid.Column="2">
+
+        </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
