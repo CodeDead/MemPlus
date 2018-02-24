@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using MemPlus.Classes.GUI;
@@ -143,10 +144,12 @@ namespace MemPlus.Windows
                     Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", AppDomain.CurrentDomain.BaseDirectory);
                 } else if (ChbAutoStart.IsChecked != null && !ChbAutoStart.IsChecked.Value)
                 {
-                    if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == "") return;
-                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                    if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus","").ToString() != "")
                     {
-                        key?.DeleteValue("MemPlus");
+                        using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                        {
+                            key?.DeleteValue("MemPlus");
+                        }
                     }
                 }
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
@@ -202,11 +205,21 @@ namespace MemPlus.Windows
 
             try
             {
+                if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() != "")
+                {
+                    using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                    {
+                        key?.DeleteValue("MemPlus");
+                    }
+                }
+
                 Properties.Settings.Default.Reset();
                 Properties.Settings.Default.Save();
 
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
+
+                ChangeVisualStyle();
                 LoadProperties();
 
                 _logController.AddLog(new ApplicationLog("Properties have been reset"));
@@ -325,6 +338,8 @@ namespace MemPlus.Windows
             if (ChbRamMonitor.IsChecked != null && !ChbRamMonitor.IsChecked.Value)
             {
                 MessageBox.Show("This option will only work if the RAM Monitor is enabled!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                ChbRamMonitor.IsChecked = true;
             }
         }
     }

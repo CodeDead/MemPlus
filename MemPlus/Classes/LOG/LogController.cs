@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Timers;
+using MemPlus.Classes.EXPORT;
 
 namespace MemPlus.Classes.LOG
 {
@@ -148,7 +149,7 @@ namespace MemPlus.Classes.LOG
         /// <param name="path">The path where logs should be stored</param>
         /// <param name="logType">The type of logs that should be saved. Can be null if all logs should be saved</param>
         /// <param name="exportType">The type of export that should be performed</param>
-        internal void Export(string path, LogType? logType, ExportType exportType)
+        internal void Export(string path, LogType? logType, ExportTypes.ExportType exportType)
         {
             List<Log> exportList;
 
@@ -171,16 +172,16 @@ namespace MemPlus.Classes.LOG
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (exportType)
             {
-                case ExportType.Html:
+                case ExportTypes.ExportType.Html:
                     LogExporter.ExportHtml(path, exportList);
                     break;
                 default:
                     LogExporter.ExportTxt(path, exportList);
                     break;
-                case ExportType.Csv:
+                case ExportTypes.ExportType.Csv:
                     LogExporter.ExportCsv(path, exportList);
                     break;
-                case ExportType.Excel:
+                case ExportTypes.ExportType.Excel:
                     LogExporter.ExportExcel(path, exportList);
                     break;
             }

@@ -26,7 +26,7 @@ namespace MemPlus.Classes.GUI
             catch (Exception ex)
             {
                 SkinStorage.SetVisualStyle(o, "Metro");
-                MessageBox.Show(ex.Message, "AniView", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }

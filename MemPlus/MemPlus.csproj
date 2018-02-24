@@ -55,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -70,8 +71,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\EXPORT\ExportTypes.cs" />
     <Compile Include="Classes\RAM\RamAnalyzer.cs" />
-    <Compile Include="Classes\RAM\ViewModels\ProcessData.cs" />
+    <Compile Include="Classes\RAM\RamData.cs" />
+    <Compile Include="Classes\RAM\RamSticksExporter.cs" />
+    <Compile Include="Classes\RAM\RamStick.cs" />
     <Compile Include="Windows\AnalyzerWindow.xaml.cs">
       <DependentUpon>AnalyzerWindow.xaml</DependentUpon>
     </Compile>

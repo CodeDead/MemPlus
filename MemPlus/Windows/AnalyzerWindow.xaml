@@ -4,30 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:MemPlus.Windows"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     Title="MemPlus - RAM Analyzer" Height="350" Width="500" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <ListView x:Name="LsvProcesses" Grid.Column="0">
-            <ListView.View>
-                <GridView x:Name="DynGrid">
-                    <GridViewColumn Header="Process" DisplayMemberBinding="{Binding ProcessName}" />
-                    <GridViewColumn Header="PID" DisplayMemberBinding="{Binding Pid}" />
-                    <GridViewColumn Header="RAM usage" DisplayMemberBinding="{Binding WorkingSet}" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-        <Grid Grid.Column="2">
-
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TreeView Grid.Row="0" x:Name="TrvRam" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0" MinHeight="25" Content="Refresh" Margin="3" Click="BtnRefresh_OnClick"/>
+            <Button Grid.Column="1" MinHeight="25" Content="Export" Margin="3" Click="BtnExport_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using MemPlus.Classes.EXPORT;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
 using Microsoft.Win32;
@@ -194,20 +195,20 @@ namespace MemPlus.Windows
 
             if (sfd.ShowDialog() != true) return;
             _logController.AddLog(new ApplicationLog("Exporting logs"));
-            ExportType type;
+            ExportTypes.ExportType type;
             switch (sfd.FilterIndex)
             {
                 default:
-                    type = ExportType.Text;
+                    type = ExportTypes.ExportType.Text;
                     break;
                 case 2:
-                    type = ExportType.Html;
+                    type = ExportTypes.ExportType.Html;
                     break;
                 case 3:
-                    type = ExportType.Csv;
+                    type = ExportTypes.ExportType.Csv;
                     break;
                 case 4:
-                    type = ExportType.Excel;
+                    type = ExportTypes.ExportType.Excel;
                     break;
             }
 

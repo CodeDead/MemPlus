@@ -60,6 +60,7 @@
                     </MenuItem.Icon>
                     <MenuItem Header="RAM Optimizer logs" Click="RamExportMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
+                    <MenuItem Header="RAM Analyzer data" Click="ExportRamAnalyzerDataMenuItem_OnClick"/>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">

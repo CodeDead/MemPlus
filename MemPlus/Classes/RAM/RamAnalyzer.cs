@@ -1,118 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using System.Collections.Generic;
+using System.Management;
 using MemPlus.Classes.RAM.ViewModels;
 
 namespace MemPlus.Classes.RAM
 {
-    internal sealed class RamAnalyzer
+    /// <summary>
+    /// Static class that can be used to retrieve RAM information
+    /// </summary>
+    internal static class RamAnalyzer
     {
-        private readonly List<ProcessData> _processDataList;
-
-        internal delegate void ProcessAddedEvent(ProcessData processData);
-        internal delegate void ProcessRemovedEvent(ProcessData processData);
-
-        private readonly ProcessAddedEvent _processAddedEvent;
-        private readonly ProcessRemovedEvent _processRemovedEvent;
-
-        internal RamAnalyzer(int delay, ProcessAddedEvent processAddedEvent, ProcessRemovedEvent processRemovedEvent)
+        /// <summary>
+        /// Retrieve RAM information
+        /// </summary>
+        /// <returns>A list of RAM information</returns>
+        internal static List<RamStick> GetRamSticks()
         {
-            _processAddedEvent = processAddedEvent;
-            _processRemovedEvent = processRemovedEvent;
+            List<RamStick> ramSticks = new List<RamStick>();
 
-            _processDataList = new List<ProcessData>();
-            Timer updateTimer = new Timer
+            ConnectionOptions connection = new ConnectionOptions {Impersonation = ImpersonationLevel.Impersonate};
+
+            ManagementScope scope = new ManagementScope("\\root\\CIMV2", connection);
+            scope.Connect();
+
+            ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
+
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
+
+            // ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
+            foreach (ManagementObject queryObj in searcher.Get())
             {
-                Interval = delay,
-                Enabled = true
-            };
-
-            updateTimer.Elapsed += UpdateTimerOnElapsed;
-            UpdateTimerOnElapsed(null, null);
-        }
-
-        private async void UpdateTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
-        {
-            List<string> currentPaths = new List<string>();
-            await Task.Run(async () =>
-            {
-                foreach (Process p in Process.GetProcesses())
+                RamStick stick = new RamStick();
+                foreach (PropertyData data in queryObj.Properties)
                 {
-                    try
+                    if (data.Value != null)
                     {
-                        currentPaths.Add(p.MainModule.FileName);
-
-                        ProcessData processData = EqualsPath(p.MainModule.FileName);
-                        bool addProcessData = false;
-                        if (processData == null)
-                        {
-                            processData = new ProcessData();
-                            addProcessData = true;
-                        }
-
-                        processData.ProcessName = p.ProcessName;
-                        processData.ProcessLocation = p.MainModule.FileName;
-                        processData.Pid = p.Id;
-                        processData.WorkingSet = (p.WorkingSet64 / 1024 / 1024).ToString("F2") + " MB";
-
-                        if (addProcessData)
-                        {
-                            _processDataList.Add(processData);
-                            _processAddedEvent.Invoke(processData);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-
+                        stick.AddRamData(new RamData(data.Name, data.Value.ToString()));
                     }
                 }
-                await CleanProcessList(currentPaths);
-            });
-        }
 
-        private async Task CleanProcessList(IReadOnlyCollection<string> currentPaths)
-        {
-            await Task.Run(() =>
-            {
-                for (int i = _processDataList.Count - 1; i >= 0; i--)
-                {
-                    bool remove = true;
-
-                    foreach (string s in currentPaths)
-                    {
-                        if (_processDataList[i].ProcessLocation == s)
-                        {
-                            remove = false;
-                            break;
-                        }
-                    }
-
-                    if (remove)
-                    {
-                        _processRemovedEvent.Invoke(_processDataList[i]);
-                        _processDataList.RemoveAt(i);
-                    }
-                }
-            });
-        }
-
-        private ProcessData EqualsPath(string path)
-        {
-            foreach (ProcessData pd in _processDataList)
-            {
-                if (pd.ProcessLocation == path)
-                {
-                    return pd;
-                }
+                ramSticks.Add(stick);
             }
-            return null;
-        }
 
-        internal List<ProcessData> GetProcessData()
-        {
-            return _processDataList;
+            return ramSticks;
         }
     }
 }

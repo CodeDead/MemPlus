@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
+using MemPlus.Classes.EXPORT;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
 using MemPlus.Classes.RAM;
@@ -348,20 +349,20 @@ namespace MemPlus.Windows
 
             if (sfd.ShowDialog() != true) return;
             _logController.AddLog(new ApplicationLog("Exporting RAM logs"));
-            ExportType type;
+            ExportTypes.ExportType type;
             switch (sfd.FilterIndex)
             {
                 default:
-                    type = ExportType.Text;
+                    type = ExportTypes.ExportType.Text;
                     break;
                 case 2:
-                    type = ExportType.Html;
+                    type = ExportTypes.ExportType.Html;
                     break;
                 case 3:
-                    type = ExportType.Csv;
+                    type = ExportTypes.ExportType.Csv;
                     break;
                 case 4:
-                    type = ExportType.Excel;
+                    type = ExportTypes.ExportType.Excel;
                     break;
             }
 
@@ -530,6 +531,11 @@ namespace MemPlus.Windows
             }
         }
 
+        /// <summary>
+        /// Method that is called when the user wants to check for updates
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void UpdateMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             _logController.AddLog(new ApplicationLog("Checking for application updates"));
@@ -537,9 +543,24 @@ namespace MemPlus.Windows
             _logController.AddLog(new ApplicationLog("Done checking for application updates"));
         }
 
+        /// <summary>
+        /// Method that is called when the RamAnalyzer window should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void RamAnalyzerMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             new AnalyzerWindow(_logController).Show();
+        }
+
+        /// <summary>
+        /// Method that is called when the RamAnalyzer data should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ExportRamAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
