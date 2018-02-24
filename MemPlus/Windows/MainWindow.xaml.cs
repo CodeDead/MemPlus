@@ -348,7 +348,6 @@ namespace MemPlus.Windows
             };
 
             if (sfd.ShowDialog() != true) return;
-            _logController.AddLog(new ApplicationLog("Exporting RAM logs"));
             ExportTypes.ExportType type;
             switch (sfd.FilterIndex)
             {
@@ -371,7 +370,6 @@ namespace MemPlus.Windows
                 _logController.Export(sfd.FileName, logType, type);
 
                 MessageBox.Show("All logs have been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                _logController.AddLog(new ApplicationLog("Done exporting RAM logs"));
             }
             catch (Exception ex)
             {
@@ -560,7 +558,38 @@ namespace MemPlus.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ExportRamAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter =
+                    "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+            };
+            if (sfd.ShowDialog() != true) return;
+            try
+            {
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch (sfd.FilterIndex)
+                {
+                    //Filterindex starts at 1
+                    case 1:
+                        RamDataExporter.ExportText(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        break;
+                    case 2:
+                        RamDataExporter.ExportHtml(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        break;
+                    case 3:
+                        RamDataExporter.ExportCsv(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        break;
+                    case 4:
+                        RamDataExporter.ExportExcel(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        break;
+                }
+                MessageBox.Show("Exported all data!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
