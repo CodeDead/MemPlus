@@ -5,7 +5,7 @@ using System.IO;
 namespace MemPlus.Classes.LOG
 {
     /// <summary>
-    /// Interaction logic for exporting logs
+    /// Static class containing the logic for exporting logs
     /// </summary>
     internal static class LogExporter
     {
@@ -19,11 +19,11 @@ namespace MemPlus.Classes.LOG
             string exportData = "<html>";
 
             exportData += "<head>";
-            exportData += "<title>MemPlus - Export</title>";
+            exportData += "<title>MemPlus - Log Export</title>";
             exportData += "</head>";
 
             exportData += "<body>";
-            exportData += "<h1>MemPlus - Export (" + DateTime.Now + ")</h1>";
+            exportData += "<h1>MemPlus - Log Export (" + DateTime.Now + ")</h1>";
             exportData += "<table border=\"1\">";
             exportData += "<thead>";
             exportData += "<tr><th>Time</th><th>Data</th></tr>";
@@ -54,7 +54,7 @@ namespace MemPlus.Classes.LOG
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportTxt(string path, List<Log> logList)
         {
-            string exportData = "MemPlus - Export (" + DateTime.Now + ")";
+            string exportData = "MemPlus - Log Export (" + DateTime.Now + ")";
             exportData += Environment.NewLine;
 
             for (int i = 0; i < logList.Count; i++)

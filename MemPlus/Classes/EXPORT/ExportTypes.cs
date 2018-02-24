@@ -1,5 +1,8 @@
 ﻿namespace MemPlus.Classes.EXPORT
 {
+    /// <summary>
+    /// Sealed class containing all different export types that MemPlus supports
+    /// </summary>
     internal sealed class ExportTypes
     {
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Management;
-using MemPlus.Classes.RAM.ViewModels;
 
 namespace MemPlus.Classes.RAM
 {

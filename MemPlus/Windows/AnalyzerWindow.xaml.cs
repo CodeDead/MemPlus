@@ -4,7 +4,6 @@ using System.Windows.Controls;
 using MemPlus.Classes.GUI;
 using MemPlus.Classes.LOG;
 using MemPlus.Classes.RAM;
-using MemPlus.Classes.RAM.ViewModels;
 using Microsoft.Win32;
 
 namespace MemPlus.Windows
