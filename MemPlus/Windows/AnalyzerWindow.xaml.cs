@@ -155,9 +155,15 @@ namespace MemPlus.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void CopyMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (TrvRam.SelectedItem is TreeViewItem selectedItem)
+            if (!(TrvRam.SelectedItem is TreeViewItem selectedItem)) return;
+            try
             {
                 Clipboard.SetText(selectedItem.Header.ToString());
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
