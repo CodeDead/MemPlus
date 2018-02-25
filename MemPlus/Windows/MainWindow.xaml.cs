@@ -21,7 +21,7 @@ namespace MemPlus.Windows
         /// <summary>
         /// The UpdateManager object that checks for application updates
         /// </summary>
-        private readonly UpdateManager.UpdateManager _updateManager;
+        private readonly UpdateManager.Classes.UpdateManager _updateManager;
         /// <summary>
         /// The RamController object that can be used to clear the memory and view memory statistics
         /// </summary>
@@ -40,7 +40,7 @@ namespace MemPlus.Windows
         {
             _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
-            _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus");
+            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "A new version is now available.\n\nClick the download button to immediately download the update!", "Information", "Cancel", "Download", "No new version is currently available.");
 
             InitializeComponent();
             ChangeVisualStyle();
