@@ -60,9 +60,7 @@ namespace MemPlus.Windows
         private void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing AboutWindow theme style"));
-
             StyleManager.ChangeStyle(this);
-
             _logController.AddLog(new ApplicationLog("Done changing AboutWindow theme style"));
         }
 
@@ -73,7 +71,6 @@ namespace MemPlus.Windows
         /// <param name="e">The routed event arguments</param>
         private void BtnClose_OnClick(object sender, RoutedEventArgs e)
         {
-            _logController.AddLog(new ApplicationLog("Closing AboutWindow"));
             Close();
         }
 
@@ -84,9 +81,9 @@ namespace MemPlus.Windows
         /// <param name="e">The routed event arguments</param>
         private void BtnLicense_OnClick(object sender, RoutedEventArgs e)
         {
+            _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
             try
             {
-                _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
                 Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
             }
             catch (Exception ex)
@@ -103,9 +100,9 @@ namespace MemPlus.Windows
         /// <param name="e">The routed event arguments</param>
         private void BtnCodeDead_OnClick(object sender, RoutedEventArgs e)
         {
+            _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
             try
             {
-                _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
                 Process.Start("https://codedead.com/");
             }
             catch (Exception ex)

@@ -74,9 +74,9 @@ namespace MemPlus.Windows
         /// </summary>
         private void ChangeVisualStyle()
         {
-            _logController.AddLog(new ApplicationLog("Changing LogWindow theme style"));
+            _logController.AddLog(new ApplicationLog("Changing AnalyzerWindow theme style"));
             StyleManager.ChangeStyle(this);
-            _logController.AddLog(new ApplicationLog("Done changing LogWindow theme style"));
+            _logController.AddLog(new ApplicationLog("Done changing AnalyzerWindow theme style"));
         }
 
         /// <summary>
@@ -116,8 +116,7 @@ namespace MemPlus.Windows
         {
             SaveFileDialog sfd = new SaveFileDialog
             {
-                Filter =
-                    "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
             };
             if (sfd.ShowDialog() != true) return;
             try

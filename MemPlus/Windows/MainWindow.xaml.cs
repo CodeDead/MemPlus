@@ -39,8 +39,8 @@ namespace MemPlus.Windows
         public MainWindow()
         {
             _logController = new LogController(600000);
-            _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus");
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
+            _updateManager = new UpdateManager.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus");
 
             InitializeComponent();
             ChangeVisualStyle();
@@ -209,12 +209,12 @@ namespace MemPlus.Windows
                 if (ramSavings < 0)
                 {
                     ramSavings = Math.Abs(ramSavings);
-                    _logController.AddLog(new ApplicationLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
+                    _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
                     MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {
-                    _logController.AddLog(new ApplicationLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
+                    _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
                     MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
@@ -296,9 +296,9 @@ namespace MemPlus.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void HomePageMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
+            _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
             try
             {
-                _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
                 System.Diagnostics.Process.Start("https://codedead.com/");
             }
             catch (Exception ex)
@@ -315,9 +315,9 @@ namespace MemPlus.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void DonateMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
+            _logController.AddLog(new ApplicationLog("Opening donation website"));
             try
             {
-                _logController.AddLog(new ApplicationLog("Opening donation website"));
                 System.Diagnostics.Process.Start("https://codedead.com/?page_id=302");
             }
             catch (Exception ex)
@@ -499,9 +499,9 @@ namespace MemPlus.Windows
         /// <param name="e">The routed event arguments</param>
         private void LicenseMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
+            _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
             try
             {
-                _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
                 System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
             }
             catch (Exception ex)
@@ -518,9 +518,9 @@ namespace MemPlus.Windows
         /// <param name="e">The routed event arguments</param>
         private void HelpMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
+            _logController.AddLog(new ApplicationLog("Opening MemPlus help file"));
             try
             {
-                _logController.AddLog(new ApplicationLog("Opening MemPlus help file"));
                 System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\help.pdf");
             }
             catch (Exception ex)
@@ -561,8 +561,7 @@ namespace MemPlus.Windows
         {
             SaveFileDialog sfd = new SaveFileDialog
             {
-                Filter =
-                    "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
             };
             if (sfd.ShowDialog() != true) return;
             try
