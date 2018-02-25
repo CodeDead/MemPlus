@@ -59,7 +59,7 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/export.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="RAM Optimizer logs" Click="RamExportMenuItem_OnClick" />
+                    <MenuItem Header="RAM logs" Click="RamExportMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
                     <Separator />
                     <MenuItem Header="RAM Analyzer data" Click="ExportRamAnalyzerDataMenuItem_OnClick"/>
@@ -84,7 +84,7 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/log.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="RAM Optimizer logs" Click="RamLogsMenuItem_OnClick" />
+                    <MenuItem Header="RAM logs" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="Clear" Click="ClearLogsMenuItem_OnClick" />
