@@ -9,7 +9,8 @@
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
-    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png">
+    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png"
+    Closing="MainWindow_OnClosing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -17,7 +18,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <tb:TaskbarIcon
+        <tb:TaskbarIcon x:Name="TbiIcon"
             ToolTipText="DeviceLog"
             IconSource="../ram.ico"
             TrayMouseDoubleClick="OpenTbItem_Click">

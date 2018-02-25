@@ -334,12 +334,9 @@ namespace MemPlus.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ChbAutoOptimizePercentage_OnChecked(object sender, RoutedEventArgs e)
         {
-            if (ChbRamMonitor.IsChecked != null && !ChbRamMonitor.IsChecked.Value)
-            {
-                MessageBox.Show("This option will only work if the RAM Monitor is enabled!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-
-                ChbRamMonitor.IsChecked = true;
-            }
+            if (ChbRamMonitor.IsChecked == null || ChbRamMonitor.IsChecked.Value) return;
+            MessageBox.Show("This option will only work if the RAM Monitor is enabled!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            ChbRamMonitor.IsChecked = true;
         }
     }
 }

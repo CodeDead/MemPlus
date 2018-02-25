@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
@@ -590,6 +591,16 @@ namespace MemPlus.Windows
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        /// <summary>
+        /// Method that is called when the MainWindow is closing
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The CancelEventArgs</param>
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            TbiIcon.Visibility = Visibility.Hidden;
         }
     }
 }
