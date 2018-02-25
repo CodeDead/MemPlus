@@ -147,5 +147,18 @@ namespace MemPlus.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        /// <summary>
+        /// Method that is called when the selected item should be copied to the clipboard
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void CopyMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (TrvRam.SelectedItem is TreeViewItem selectedItem)
+            {
+                Clipboard.SetText(selectedItem.Header.ToString());
+            }
+        }
     }
 }

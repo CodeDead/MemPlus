@@ -583,7 +583,7 @@ namespace MemPlus.Windows
                         RamDataExporter.ExportExcel(sfd.FileName, RamAnalyzer.GetRamSticks());
                         break;
                 }
-                MessageBox.Show("Exported all data!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("All data has been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
