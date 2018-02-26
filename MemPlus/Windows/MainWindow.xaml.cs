@@ -340,8 +340,8 @@ namespace MemPlus.Windows
         /// <summary>
         /// Method that is called when Log objects from a specific type should be exported
         /// </summary>
-        /// <param name="logType">The LogType that should be exported</param>
-        private void ExportLogs(LogType logType)
+        /// <param name="logType">The LogType that should be exported. Null to export all logs</param>
+        private void ExportLogs(LogType? logType)
         {
             SaveFileDialog sfd = new SaveFileDialog
             {
@@ -600,6 +600,16 @@ namespace MemPlus.Windows
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
             TbiIcon.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Method that is called when all logs should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ExportAllLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ExportLogs(null);
         }
     }
 }

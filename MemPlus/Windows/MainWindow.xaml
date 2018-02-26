@@ -59,10 +59,21 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/export.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="RAM logs" Click="RamExportMenuItem_OnClick" />
-                    <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
+                    <MenuItem Header="Logs">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
+                        </MenuItem.Icon>
+                        <MenuItem Header="All logs" Click="ExportAllLogsMenuItem_OnClick" />
+                        <Separator />
+                        <MenuItem Header="RAM logs" Click="RamExportMenuItem_OnClick" />
+                        <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
+                    </MenuItem>
                     <Separator />
-                    <MenuItem Header="RAM Analyzer data" Click="ExportRamAnalyzerDataMenuItem_OnClick"/>
+                    <MenuItem Header="RAM Analyzer data" Click="ExportRamAnalyzerDataMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram_tab.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
@@ -76,7 +87,7 @@
                 <MenuItem x:Name="MniRamMonitor" Header="RAM Monitor" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
                 <MenuItem Header="RAM Analyzer" Click="RamAnalyzerMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/ram.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
