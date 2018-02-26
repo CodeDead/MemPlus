@@ -123,6 +123,8 @@ namespace MemPlus.Windows
                 {
                     _ramController.EnableMonitor();
                 }
+
+                TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
             }
             catch (Exception ex)
             {

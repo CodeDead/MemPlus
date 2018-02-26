@@ -80,6 +80,8 @@ namespace MemPlus.Windows
                     Topmost = false;
                 }
 
+                ChbNotifyIcon.IsChecked = Properties.Settings.Default.NotifyIcon;
+
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
                 ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
@@ -180,6 +182,7 @@ namespace MemPlus.Windows
                 }
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
                 if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
+                if (ChbNotifyIcon.IsChecked != null) Properties.Settings.Default.NotifyIcon = ChbNotifyIcon.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartMinimized.IsChecked.Value;
 
                 //RAM Monitor
