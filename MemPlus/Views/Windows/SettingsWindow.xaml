@@ -206,6 +206,7 @@
                         <ComboBoxItem>ShinyBlue</ComboBoxItem>
                         <ComboBoxItem>SyncOrange</ComboBoxItem>
                         <ComboBoxItem>Transparent</ComboBoxItem>
+                        <ComboBoxItem>None</ComboBoxItem>
                     </ComboBox>
                     <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:"></Label>
                     <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" />
