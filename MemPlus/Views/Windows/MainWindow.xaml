@@ -173,7 +173,11 @@
                                         FontSize="14"  HeaderAlignment="Bottom" FontWeight="Bold"
                                         Margin="5" MaxHeight="350" MaxWidth="350">
                 <syncfusion:SfCircularGauge.Scales>
-                    <syncfusion:CircularScale >
+                    <syncfusion:CircularScale>
+                        <syncfusion:CircularScale.Pointers>
+                            <syncfusion:CircularPointer PointerType="NeedlePointer" 
+                                                        NeedlePointerType="Arrow"/>
+                        </syncfusion:CircularScale.Pointers>
                         <syncfusion:CircularScale.Ranges>
                             <syncfusion:CircularRange StartValue="0" EndValue="80" Stroke="#666666" />
                             <syncfusion:CircularRange StartValue="80" EndValue="100" Stroke="Red" />
