@@ -138,7 +138,7 @@
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <ListView x:Name="LsvExclusions" Margin="3" Height="100" Width="250" AllowDrop="True" Drop="LsvExclusions_OnDrop">
+                            <ListView x:Name="LsvExclusions" Margin="3" Height="100" MinWidth="250" MaxWidth="350" AllowDrop="True" Drop="LsvExclusions_OnDrop">
                                 <ListView.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Copy" Click="CopyExclusionMenuItem_OnClick">
