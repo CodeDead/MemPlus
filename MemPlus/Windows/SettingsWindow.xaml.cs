@@ -153,7 +153,7 @@ namespace MemPlus.Windows
         /// <returns>A boolean to represent whether the program starts automatically or not.</returns>
         private static bool AutoStartUp()
         {
-            return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == AppDomain.CurrentDomain.BaseDirectory;
+            return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == System.Reflection.Assembly.GetExecutingAssembly().Location;
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace MemPlus.Windows
                 //General
                 if (ChbAutoStart.IsChecked != null && ChbAutoStart.IsChecked.Value)
                 {
-                    Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", AppDomain.CurrentDomain.BaseDirectory);
+                    Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", System.Reflection.Assembly.GetExecutingAssembly().Location);
                 } else if (ChbAutoStart.IsChecked != null && !ChbAutoStart.IsChecked.Value)
                 {
                     if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus","").ToString() != "")
