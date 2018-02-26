@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using MemPlus.Classes.GUI;
-using MemPlus.Classes.LOG;
+using MemPlus.Business.Classes.GUI;
+using MemPlus.Business.Classes.LOG;
 using Microsoft.Win32;
 
-namespace MemPlus.Windows
+namespace MemPlus.Views.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>

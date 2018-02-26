@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using Syncfusion.Windows.Shared;
 
-namespace MemPlus.Classes.GUI
+namespace MemPlus.Business.Classes.GUI
 {
     /// <summary>
     /// Static class to change the style of an object

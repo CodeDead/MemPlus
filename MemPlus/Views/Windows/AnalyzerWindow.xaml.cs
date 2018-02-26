@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using MemPlus.Classes.GUI;
-using MemPlus.Classes.LOG;
-using MemPlus.Classes.RAM;
+using MemPlus.Business.Classes.GUI;
+using MemPlus.Business.Classes.LOG;
+using MemPlus.Business.Classes.RAM;
 using Microsoft.Win32;
 
-namespace MemPlus.Windows
+namespace MemPlus.Views.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>

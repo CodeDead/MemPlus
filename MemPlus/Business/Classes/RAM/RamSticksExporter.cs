@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace MemPlus.Classes.RAM
+namespace MemPlus.Business.Classes.RAM
 {
     /// <summary>
     /// Static class that can be used to export RamStick information

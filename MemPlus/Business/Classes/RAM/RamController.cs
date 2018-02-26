@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using MemPlus.Classes.LOG;
+using MemPlus.Business.Classes.LOG;
 using Microsoft.VisualBasic.Devices;
 using Syncfusion.UI.Xaml.Gauges;
 
-namespace MemPlus.Classes.RAM
+namespace MemPlus.Business.Classes.RAM
 {
     /// <summary>
     /// Sealed class containing methods and interaction logic in terms of RAM

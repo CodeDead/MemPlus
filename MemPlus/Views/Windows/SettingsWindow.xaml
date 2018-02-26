@@ -1,5 +1,5 @@
 ﻿<syncfusion:ChromelessWindow
-    x:Class="MemPlus.Windows.SettingsWindow"
+    x:Class="MemPlus.Views.Windows.SettingsWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -18,7 +18,7 @@
         <syncfusion:TabControlExt CloseButtonType="Hide" EnableLabelEdit="False"
                                   AllowDragDrop="False" DefaultContextMenuItemVisibility="Hidden">
             <syncfusion:TabItemExt Header="General"
-                                   Image="../Resources/Images/settings.png"
+                                   Image="../../Resources/Images/settings.png"
                                    ImageWidth="16" ImageHeight="16">
 
 
@@ -51,7 +51,7 @@
             </syncfusion:TabItemExt>
             
             <syncfusion:TabItemExt Header="RAM Monitor"
-                                   Image="../Resources/Images/monitor.png"
+                                   Image="../../Resources/Images/monitor.png"
                                    ImageWidth="16"
                                    ImageHeight="16">
 
@@ -116,7 +116,7 @@
             </syncfusion:TabItemExt>
 
             <syncfusion:TabItemExt Header="RAM Optimizer"
-                                   Image="../Resources/Images/ram_tab.png"
+                                   Image="../../Resources/Images/ram_tab.png"
                                    ImageWidth="16" ImageHeight="16">
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -174,7 +174,7 @@
             </syncfusion:TabItemExt>
 
             <syncfusion:TabItemExt Header="Theme"
-                                   Image="../Resources/Images/home.png"
+                                   Image="../../Resources/Images/home.png"
                                    ImageWidth="16" ImageHeight="16">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>

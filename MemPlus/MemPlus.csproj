@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,30 +86,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\EXPORT\ExportTypes.cs" />
-    <Compile Include="Classes\RAM\RamAnalyzer.cs" />
-    <Compile Include="Classes\RAM\RamData.cs" />
-    <Compile Include="Classes\RAM\RamSticksExporter.cs" />
-    <Compile Include="Classes\RAM\RamStick.cs" />
-    <Compile Include="Windows\AnalyzerWindow.xaml.cs">
+    <Compile Include="Business\Classes\EXPORT\ExportTypes.cs" />
+    <Compile Include="Business\Classes\RAM\RamAnalyzer.cs" />
+    <Compile Include="Business\Classes\RAM\RamData.cs" />
+    <Compile Include="Business\Classes\RAM\RamSticksExporter.cs" />
+    <Compile Include="Business\Classes\RAM\RamStick.cs" />
+    <Compile Include="Views\Windows\AnalyzerWindow.xaml.cs">
       <DependentUpon>AnalyzerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\SettingsWindow.xaml.cs">
+    <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Windows\AboutWindow.xaml">
+    <Page Include="Views\Windows\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\AnalyzerWindow.xaml">
+    <Page Include="Views\Windows\AnalyzerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\LogWindow.xaml">
+    <Page Include="Views\Windows\LogWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\MainWindow.xaml">
+    <Page Include="Views\Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -102,26 +117,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\LOG\ApplicationLog.cs" />
-    <Compile Include="Classes\LOG\ILogMethods.cs" />
-    <Compile Include="Classes\LOG\Log.cs" />
-    <Compile Include="Classes\LOG\LogController.cs" />
-    <Compile Include="Classes\LOG\LogExporter.cs" />
-    <Compile Include="Classes\LOG\RamLog.cs" />
-    <Compile Include="Classes\RAM\RamController.cs" />
-    <Compile Include="Classes\RAM\RamOptimizer.cs" />
-    <Compile Include="Classes\GUI\StyleManager.cs" />
-    <Compile Include="Windows\AboutWindow.xaml.cs">
+    <Compile Include="Business\Classes\LOG\ApplicationLog.cs" />
+    <Compile Include="Business\Classes\LOG\ILogMethods.cs" />
+    <Compile Include="Business\Classes\LOG\Log.cs" />
+    <Compile Include="Business\Classes\LOG\LogController.cs" />
+    <Compile Include="Business\Classes\LOG\LogExporter.cs" />
+    <Compile Include="Business\Classes\LOG\RamLog.cs" />
+    <Compile Include="Business\Classes\RAM\RamController.cs" />
+    <Compile Include="Business\Classes\RAM\RamOptimizer.cs" />
+    <Compile Include="Business\Classes\GUI\StyleManager.cs" />
+    <Compile Include="Views\Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\LogWindow.xaml.cs">
+    <Compile Include="Views\Windows\LogWindow.xaml.cs">
       <DependentUpon>LogWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
+    <Compile Include="Views\Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\SettingsWindow.xaml">
+    <Page Include="Views\Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -200,6 +215,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\ram_tab.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

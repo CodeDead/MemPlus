@@ -4,12 +4,12 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using MemPlus.Classes.EXPORT;
-using MemPlus.Classes.GUI;
-using MemPlus.Classes.LOG;
+using MemPlus.Business.Classes.EXPORT;
+using MemPlus.Business.Classes.GUI;
+using MemPlus.Business.Classes.LOG;
 using Microsoft.Win32;
 
-namespace MemPlus.Windows
+namespace MemPlus.Views.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>

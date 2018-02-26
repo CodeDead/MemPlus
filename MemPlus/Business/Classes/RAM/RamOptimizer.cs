@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
-using MemPlus.Classes.LOG;
+using MemPlus.Business.Classes.LOG;
 
-namespace MemPlus.Classes.RAM
+namespace MemPlus.Business.Classes.RAM
 {
     /// <summary>
     /// System Cache Information structure for x86 working set

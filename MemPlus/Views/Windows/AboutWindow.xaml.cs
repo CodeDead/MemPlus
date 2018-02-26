@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
-using MemPlus.Classes.GUI;
-using MemPlus.Classes.LOG;
+using MemPlus.Business.Classes.GUI;
+using MemPlus.Business.Classes.LOG;
 
-namespace MemPlus.Windows
+namespace MemPlus.Views.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>

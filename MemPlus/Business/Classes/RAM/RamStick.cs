@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MemPlus.Classes.RAM
+namespace MemPlus.Business.Classes.RAM
 {
     /// <summary>
     /// Internal sealed class containing logic behind a physical RAM stick
