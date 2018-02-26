@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using MemPlus.Business.Classes.GUI;
 using MemPlus.Business.Classes.LOG;
 using Microsoft.Win32;
@@ -82,6 +83,16 @@ namespace MemPlus.Views.Windows
                 }
 
                 ChbNotifyIcon.IsChecked = Properties.Settings.Default.NotifyIcon;
+                if (Properties.Settings.Default.WindowDragging)
+                {
+                    MouseDown += OnMouseDown;
+                    ChbWindowDraggable.IsChecked = true;
+                }
+                else
+                {
+                    MouseDown -= OnMouseDown;
+                    ChbWindowDraggable.IsChecked = false;
+                }
 
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
@@ -151,6 +162,16 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Method that is called when the Window should be dragged
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The MouseButtonEventArgs</param>
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+        /// <summary>
         /// Check if the program starts automatically.
         /// </summary>
         /// <returns>A boolean to represent whether the program starts automatically or not.</returns>
@@ -184,6 +205,7 @@ namespace MemPlus.Views.Windows
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
                 if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
                 if (ChbNotifyIcon.IsChecked != null) Properties.Settings.Default.NotifyIcon = ChbNotifyIcon.IsChecked.Value;
+                if (ChbWindowDraggable.IsChecked != null) Properties.Settings.Default.WindowDragging = ChbWindowDraggable.IsChecked.Value;
                 if (ChbStartHidden.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartHidden.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
 
@@ -244,6 +266,7 @@ namespace MemPlus.Views.Windows
 
                 Properties.Settings.Default.Save();
 
+                LoadProperties();
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
                 ChangeVisualStyle();

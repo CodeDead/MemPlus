@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 using MemPlus.Business.Classes.EXPORT;
 using MemPlus.Business.Classes.GUI;
@@ -132,6 +133,15 @@ namespace MemPlus.Views.Windows
                 }
 
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
+
+                if (Properties.Settings.Default.WindowDragging)
+                {
+                    MouseDown += OnMouseDown;
+                }
+                else
+                {
+                    MouseDown -= OnMouseDown;
+                }
             }
             catch (Exception ex)
             {
@@ -140,6 +150,16 @@ namespace MemPlus.Views.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
+        }
+
+        /// <summary>
+        /// Method that is called when the Window should be dragged
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The MouseButtonEventArgs</param>
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
 
         /// <summary>

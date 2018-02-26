@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using MemPlus.Business.Classes.GUI;
 using MemPlus.Business.Classes.LOG;
 using MemPlus.Business.Classes.RAM;
@@ -99,6 +100,14 @@ namespace MemPlus.Views.Windows
             try
             {
                 Topmost = Properties.Settings.Default.Topmost;
+                if (Properties.Settings.Default.WindowDragging)
+                {
+                    MouseDown += OnMouseDown;
+                }
+                else
+                {
+                    MouseDown -= OnMouseDown;
+                }
             }
             catch (Exception ex)
             {
@@ -106,6 +115,16 @@ namespace MemPlus.Views.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _logController.AddLog(new ApplicationLog("Done loading AnalyzerWindow properties"));
+        }
+
+        /// <summary>
+        /// Method that is called when the Window should be dragged
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The MouseButtonEventArgs</param>
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
         }
 
         /// <summary>

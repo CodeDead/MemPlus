@@ -261,5 +261,17 @@ namespace MemPlus.Properties {
                 this["StartMinimized"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool WindowDragging {
+            get {
+                return ((bool)(this["WindowDragging"]));
+            }
+            set {
+                this["WindowDragging"] = value;
+            }
+        }
     }
 }
