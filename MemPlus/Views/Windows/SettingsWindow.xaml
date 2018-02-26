@@ -37,6 +37,7 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <CheckBox Grid.Row="0" x:Name="ChbAutoStart" Content="Automatic start MemPlus when Windows starts" Margin="3" />
@@ -46,6 +47,7 @@
                             <CheckBox Grid.Row="4" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
                             <CheckBox Grid.Row="5" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
                             <CheckBox Grid.Row="6" x:Name="ChbWindowDraggable" Content="Allow windows to be dragged by clicking anywhere" Margin="3" />
+                            <CheckBox Grid.Row="7" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
                         </Grid>
                     </GroupBox>
                 </Grid>

@@ -8,6 +8,7 @@ using MemPlus.Business.Classes.EXPORT;
 using MemPlus.Business.Classes.GUI;
 using MemPlus.Business.Classes.LOG;
 using MemPlus.Business.Classes.RAM;
+using MemPlus.Business.Classes.UTILS;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows
@@ -41,7 +42,7 @@ namespace MemPlus.Views.Windows
         {
             _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
-            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "A new version is now available.\n\nClick the download button to immediately download the update!", "Information", "Cancel", "Download", "No new version is currently available.");
+            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "Information", "Cancel", "Download", "No new version is currently available.");
 
             InitializeComponent();
             ChangeVisualStyle();
@@ -73,6 +74,14 @@ namespace MemPlus.Views.Windows
                 if (Properties.Settings.Default.StartMinimized)
                 {
                     WindowState = WindowState.Minimized;
+                }
+
+                if (Properties.Settings.Default.AdministrativeWarning)
+                {
+                    if (!Utils.IsAdministrator())
+                    {
+                        MessageBox.Show("MemPlus might not function correctly without administrative rights!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
             }
             catch (Exception ex)

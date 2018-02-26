@@ -273,5 +273,17 @@ namespace MemPlus.Properties {
                 this["WindowDragging"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AdministrativeWarning {
+            get {
+                return ((bool)(this["AdministrativeWarning"]));
+            }
+            set {
+                this["AdministrativeWarning"] = value;
+            }
+        }
     }
 }
