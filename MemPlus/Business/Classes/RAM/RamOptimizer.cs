@@ -19,6 +19,10 @@ namespace MemPlus.Business.Classes.RAM
         internal uint PageFaultCount;
         internal uint MinimumWorkingSet;
         internal uint MaximumWorkingSet;
+        internal uint Unused1;
+        internal uint Unused2;
+        internal uint Unused3;
+        internal uint Unused4;
     }
 
     /// <summary>
@@ -32,6 +36,10 @@ namespace MemPlus.Business.Classes.RAM
         internal long PageFaultCount;
         internal long MinimumWorkingSet;
         internal long MaximumWorkingSet;
+        internal long Unused1;
+        internal long Unused2;
+        internal long Unused3;
+        internal long Unused4;
     }
 
     /// <summary>
