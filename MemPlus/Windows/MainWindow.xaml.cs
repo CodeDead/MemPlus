@@ -64,8 +64,15 @@ namespace MemPlus.Windows
 
             try
             {
-                if (!Properties.Settings.Default.HideOnStart) return;
-                Hide();
+                if (Properties.Settings.Default.HideOnStart)
+                {
+                    Hide();
+                }
+
+                if (Properties.Settings.Default.StartMinimized)
+                {
+                    WindowState = WindowState.Minimized;
+                }
             }
             catch (Exception ex)
             {

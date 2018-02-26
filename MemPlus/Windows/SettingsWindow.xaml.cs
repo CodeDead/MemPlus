@@ -69,7 +69,8 @@ namespace MemPlus.Windows
                 //General
                 ChbAutoStart.IsChecked = AutoStartUp();
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
-                ChbStartMinimized.IsChecked = Properties.Settings.Default.HideOnStart;
+                ChbStartHidden.IsChecked = Properties.Settings.Default.HideOnStart;
+                ChbStartMinimized.IsChecked = Properties.Settings.Default.StartMinimized;
                 if (Properties.Settings.Default.Topmost)
                 {
                     ChbTopmost.IsChecked = Properties.Settings.Default.Topmost;
@@ -183,7 +184,8 @@ namespace MemPlus.Windows
                 if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
                 if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
                 if (ChbNotifyIcon.IsChecked != null) Properties.Settings.Default.NotifyIcon = ChbNotifyIcon.IsChecked.Value;
-                if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartMinimized.IsChecked.Value;
+                if (ChbStartHidden.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartHidden.IsChecked.Value;
+                if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
 
                 //RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;

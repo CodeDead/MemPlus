@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using MemPlus.Classes.GUI;
@@ -49,7 +50,17 @@ namespace MemPlus.Windows
             try
             {
                 TrvRam.Items.Clear();
-                foreach (RamStick s in RamAnalyzer.GetRamSticks())
+                List<RamStick> ramSticks = RamAnalyzer.GetRamSticks();
+
+                if (ramSticks == null || ramSticks.Count == 0)
+                {
+                    MessageBox.Show("Could not retrieve RAM Analyzer information!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+                    _logController.AddLog(new RamLog("Could not retrieve RAM Analyzer information"));
+                    Close();
+                    return;
+                }
+
+                foreach (RamStick s in ramSticks)
                 {
                     TreeViewItem treeItem = new TreeViewItem {Header = s.GetValue("BankLabel")};
 
