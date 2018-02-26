@@ -213,5 +213,29 @@ namespace MemPlus.Properties {
                 this["HideOnStart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int RamMonitorIntervalIndex {
+            get {
+                return ((int)(this["RamMonitorIntervalIndex"]));
+            }
+            set {
+                this["RamMonitorIntervalIndex"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AutoOptimizeTimedIntervalIndex {
+            get {
+                return ((int)(this["AutoOptimizeTimedIntervalIndex"]));
+            }
+            set {
+                this["AutoOptimizeTimedIntervalIndex"] = value;
+            }
+        }
     }
 }

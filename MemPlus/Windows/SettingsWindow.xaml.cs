@@ -83,13 +83,40 @@ namespace MemPlus.Windows
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
                 ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
-                ItbRamMonitorTimeout.Value = Properties.Settings.Default.RamMonitorInterval;
+
+                int ramInterval = Properties.Settings.Default.RamMonitorInterval;
+                switch (Properties.Settings.Default.RamMonitorIntervalIndex)
+                {
+                    case 0:
+                        ItbRamMonitorTimeout.Value = ramInterval;
+                        break;
+                    case 1:
+                        ItbRamMonitorTimeout.Value = ramInterval / 1000;
+                        break;
+                    case 2:
+                        ItbRamMonitorTimeout.Value = ramInterval / 1000 / 60;
+                        break;
+                    case 3:
+                        ItbRamMonitorTimeout.Value = ramInterval / 1000 / 60 / 60;
+                        break;
+                }
+                CboRamMonitorInterval.SelectedIndex = Properties.Settings.Default.RamMonitorIntervalIndex;
 
                 ChbAutoOptimizePercentage.IsChecked = Properties.Settings.Default.AutoOptimizePercentage;
                 ItbAutoOptimizePercentage.Value = Properties.Settings.Default.AutoOptimizePercentageThreshold;
 
                 ChbAutoOptimizeTimed.IsChecked = Properties.Settings.Default.AutoOptimizeTimed;
-                ItbAutoOptimizeTimed.Value = Properties.Settings.Default.AutoOptimizeTimedInterval / 1000 / 60;
+
+                CboAutoOptimizeTimedIndex.SelectedIndex = Properties.Settings.Default.AutoOptimizeTimedIntervalIndex;
+                switch (Properties.Settings.Default.AutoOptimizeTimedIntervalIndex)
+                {
+                    case 0:
+                        ItbAutoOptimizeTimed.Value = Properties.Settings.Default.AutoOptimizeTimedInterval / 1000 / 60;
+                        break;
+                    case 1:
+                        ItbAutoOptimizeTimed.Value = Properties.Settings.Default.AutoOptimizeTimedInterval / 1000 / 60 / 60;
+                        break;
+                }
 
 
                 ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
@@ -158,13 +185,45 @@ namespace MemPlus.Windows
                 //RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
                 if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
-                if (ItbRamMonitorTimeout.Value != null) Properties.Settings.Default.RamMonitorInterval = (int)ItbRamMonitorTimeout.Value;
+
+                Properties.Settings.Default.RamMonitorIntervalIndex = CboRamMonitorInterval.SelectedIndex;
+                if (ItbRamMonitorTimeout.Value != null)
+                {
+                    int ramInterval = (int)ItbRamMonitorTimeout.Value;
+                    switch (CboRamMonitorInterval.SelectedIndex)
+                    {
+                        case 1:
+                            ramInterval = ramInterval * 1000;
+                            break;
+                        case 2:
+                            ramInterval = ramInterval * 1000 * 60;
+                            break;
+                        case 3:
+                            ramInterval = ramInterval * 1000 * 60 * 60;
+                            break;
+                    }
+
+                    Properties.Settings.Default.RamMonitorInterval = ramInterval;
+                }
 
                 if (ChbAutoOptimizePercentage.IsChecked != null) Properties.Settings.Default.AutoOptimizePercentage = ChbAutoOptimizePercentage.IsChecked.Value;
                 if (ItbAutoOptimizePercentage.Value != null) Properties.Settings.Default.AutoOptimizePercentageThreshold = (int)ItbAutoOptimizePercentage.Value;
 
                 if (ChbAutoOptimizeTimed.IsChecked != null) Properties.Settings.Default.AutoOptimizeTimed = ChbAutoOptimizeTimed.IsChecked.Value;
-                if (ItbAutoOptimizeTimed.Value != null) Properties.Settings.Default.AutoOptimizeTimedInterval = (int)ItbAutoOptimizeTimed.Value * 1000 * 60;
+
+                Properties.Settings.Default.AutoOptimizeTimedIntervalIndex = CboAutoOptimizeTimedIndex.SelectedIndex;
+                if (ItbAutoOptimizeTimed.Value != null)
+                {
+                    switch (CboAutoOptimizeTimedIndex.SelectedIndex)
+                    {
+                        case 0:
+                            Properties.Settings.Default.AutoOptimizeTimedInterval = (int)ItbAutoOptimizeTimed.Value * 1000 * 60;
+                            break;
+                        case 1:
+                            Properties.Settings.Default.AutoOptimizeTimedInterval = (int)ItbAutoOptimizeTimed.Value * 1000 * 60 * 60;
+                            break;
+                    }
+                }
 
                 //RAM Optimizer
                 if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
