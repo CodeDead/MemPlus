@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
-    Title="MemPlus - RAM Analyzer" Height="350" Width="500" Icon="/MemPlus;component/Resources/Images/ram.png"
+    Title="MemPlus - RAM Analyzer" Height="350" Width="500"
+    Icon="/MemPlus;component/Resources/Images/ram.png"
     WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>

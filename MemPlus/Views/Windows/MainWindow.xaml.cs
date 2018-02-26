@@ -159,7 +159,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The MouseButtonEventArgs</param>
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            if (e.ChangedButton == MouseButton.Left && e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
             }
@@ -218,7 +218,11 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Changing MainWindow theme style"));
 
             StyleManager.ChangeStyle(this);
-            CgRamUsage.Scales[0].Ranges[0].Stroke = new SolidColorBrush(Properties.Settings.Default.MetroColor);
+
+            SolidColorBrush brush = new SolidColorBrush(Properties.Settings.Default.MetroColor);
+            CgRamUsage.Scales[0].Ranges[0].Stroke = brush;
+            CgRamUsage.Scales[0].Pointers[0].NeedlePointerStroke = brush;
+            CgRamUsage.Scales[0].Pointers[0].PointerCapStroke = brush;
 
             _logController.AddLog(new ApplicationLog("Done changing MainWindow theme style"));
         }
