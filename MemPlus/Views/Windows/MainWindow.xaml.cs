@@ -656,5 +656,24 @@ namespace MemPlus.Views.Windows
         {
             ExportLogs(null);
         }
+
+        /// <summary>
+        /// Method that is called when the application should restart
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void RestartMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

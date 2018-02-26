@@ -27,18 +27,23 @@
                 <ContextMenu>
                     <MenuItem Header="MemPlus" Click="OpenTbItem_Click">
                         <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram.png"></Image>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
                         <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/settings.png"></Image>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/settings.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator></Separator>
+                    <MenuItem Header="Restart" Click="RestartMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/paused.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
                         <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png"></Image>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </ContextMenu>
@@ -76,6 +81,11 @@
                     </MenuItem>
                 </MenuItem>
                 <Separator />
+                <MenuItem Header="Restart" Click="RestartMenuItem_OnClick">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/paused.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/exit.png"/>
