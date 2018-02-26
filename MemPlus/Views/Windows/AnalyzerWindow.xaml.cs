@@ -124,7 +124,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The MouseButtonEventArgs</param>
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
         }
 
         /// <summary>
