@@ -19,7 +19,7 @@
         </Grid.RowDefinitions>
 
         <tb:TaskbarIcon x:Name="TbiIcon"
-            ToolTipText="DeviceLog"
+            ToolTipText="MemPlus"
             IconSource="../ram.ico"
             TrayMouseDoubleClick="OpenTbItem_Click">
 
