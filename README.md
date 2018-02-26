@@ -1,5 +1,4 @@
 # MemPlus
-
 ![MemPlus](https://i.imgur.com/WG2oNG9.gif)
 
 MemPlus is an entirely free, completely functional 'memory optimizer' that will 'safely' free up non-essential memory in Windows.
@@ -21,7 +20,5 @@ Don't fall for these memory optimizers that will speed up your system by 100000%
 [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 # About
-
-Brought to you by CodeDead:
-
+Brought to you by CodeDead:  
 https://codedead.com/
