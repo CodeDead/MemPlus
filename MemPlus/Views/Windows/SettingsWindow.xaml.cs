@@ -402,5 +402,24 @@ namespace MemPlus.Views.Windows
             MessageBox.Show("This option will only work if the RAM Monitor is enabled!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             ChbRamMonitor.IsChecked = true;
         }
+
+        /// <summary>
+        /// Method that is called when an object is dropped on the ListView
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The DragEventArgs</param>
+        private void LsvExclusions_OnDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files == null) return;
+            foreach (string s in files)
+            {
+                if (System.IO.File.Exists(s))
+                {
+                    LsvExclusions.Items.Add(s);
+                }
+            }
+        }
     }
 }
