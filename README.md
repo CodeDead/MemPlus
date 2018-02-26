@@ -3,6 +3,8 @@
 ![MemPlus](https://i.imgur.com/WG2oNG9.gif)
 
 MemPlus is an entirely free, completely functional 'memory optimizer' that will 'safely' free up non-essential memory in Windows.
+For more information, please visit:  
+https://codedead.com/?page_id=1736
 
 # Requirements in order to build
 * [Visual Studio](https://vistualstudio.com)
