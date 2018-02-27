@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="400" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="MemPlus - Settings" Height="350" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -135,7 +135,7 @@
                                 <RowDefinition />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListView x:Name="LsvExclusions" Margin="3" Height="100" MinWidth="250" MaxWidth="350" AllowDrop="True" Drop="LsvExclusions_OnDrop">
+                            <ListView x:Name="LsvExclusions" Margin="3" Height="100" Width="300" AllowDrop="True" Drop="LsvExclusions_OnDrop">
                                 <ListView.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Copy" Click="CopyExclusionMenuItem_OnClick">
@@ -164,7 +164,7 @@
                                     <ColumnDefinition />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="TxtExclusion" Margin="3" Width="1" />
+                                <TextBox x:Name="TxtExclusion" Margin="3" Width="150" />
                                 <Button Grid.Column="1" Content="..." Margin="3" MinWidth="35" Click="BtnFileView_OnClick" />
                                 <Button Grid.Column="2" Content="Add" Margin="3" MinWidth="35" Click="BtnAddExclusion_OnClick" />
                             </Grid>
