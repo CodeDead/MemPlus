@@ -84,6 +84,10 @@ namespace MemPlus.Business.Classes.RAM
         /// </summary>
         internal bool RamMonitorEnabled { get; private set; }
         /// <summary>
+        /// Property displaying whether the working set of processes should be emptied
+        /// </summary>
+        internal bool EmptyWorkingSets { get; set; }
+        /// <summary>
         /// Property displaying whether the FileSystem cache should be cleared or not during memory optimisation
         /// </summary>
         internal bool ClearFileSystemCache { get; set; }
@@ -127,6 +131,7 @@ namespace MemPlus.Business.Classes.RAM
             _lblAvailable = lblAvailable ?? throw new ArgumentNullException(nameof(lblAvailable));
 
             _ramOptimizer = new RamOptimizer(_logController);
+            EmptyWorkingSets = true;
             ClearStandbyCache = true;
             ClearFileSystemCache = true;
 
@@ -264,7 +269,10 @@ namespace MemPlus.Business.Classes.RAM
 
                 double oldUsage = RamUsage;
 
-                _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
+                if (EmptyWorkingSets)
+                {
+                    _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
+                }
 
                 if (ClearFileSystemCache)
                 {

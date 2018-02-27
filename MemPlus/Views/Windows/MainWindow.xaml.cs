@@ -128,6 +128,7 @@ namespace MemPlus.Views.Windows
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
 
                 _ramController.SetProcessExceptionList(Properties.Settings.Default.ProcessExceptions);
+                _ramController.EmptyWorkingSets = Properties.Settings.Default.EmptyWorkingSet;
                 _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
                 _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);

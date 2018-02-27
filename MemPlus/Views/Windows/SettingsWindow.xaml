@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="350" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="MemPlus - Settings" Height="400" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -127,12 +127,14 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <CheckBox Grid.Row="0" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
-                    <CheckBox Grid.Row="1" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
-                    <GroupBox Grid.Row="2" Header="Exclusions" MinWidth="250" Margin="3">
+                    <CheckBox Grid.Row="0" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
+                    <CheckBox Grid.Row="1" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
+                    <CheckBox Grid.Row="2" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
+                    <GroupBox Grid.Row="3" Header="Working Set Exclusions" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>

@@ -133,7 +133,7 @@ namespace MemPlus.Views.Windows
                         break;
                 }
 
-
+                ChbEmptyWorkingSet.IsChecked = Properties.Settings.Default.EmptyWorkingSet;
                 ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
                 ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
                 if (Properties.Settings.Default.ProcessExceptions != null)
@@ -258,6 +258,7 @@ namespace MemPlus.Views.Windows
                 }
 
                 //RAM Optimizer
+                if (ChbEmptyWorkingSet.IsChecked != null) Properties.Settings.Default.EmptyWorkingSet = ChbEmptyWorkingSet.IsChecked.Value;
                 if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
                 if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
                 List<string> exclusionList = LsvExclusions.Items.Cast<string>().ToList();
