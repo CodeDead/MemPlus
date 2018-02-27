@@ -39,7 +39,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="AutoOptimizePercentageThreshold" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">50</Value>
+      <Value Profile="(Default)">75</Value>
     </Setting>
     <Setting Name="AutoOptimizeTimed" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

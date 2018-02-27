@@ -13,8 +13,8 @@
     Closing="MainWindow_OnClosing">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -162,11 +162,11 @@
             </MenuItem>
         </Menu>
 
-        <Grid Grid.Row="2" Visibility="Visible">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <syncfusion:SfCircularGauge Grid.Row="0" x:Name="CgRamUsage" GaugeHeader="RAM usage (%)"
@@ -179,8 +179,8 @@
                                                         NeedlePointerType="Arrow"/>
                         </syncfusion:CircularScale.Pointers>
                         <syncfusion:CircularScale.Ranges>
-                            <syncfusion:CircularRange StartValue="0" EndValue="80" Stroke="#666666" />
-                            <syncfusion:CircularRange StartValue="80" EndValue="100" Stroke="Red" />
+                            <syncfusion:CircularRange StartValue="0" EndValue="75" Stroke="#666666" />
+                            <syncfusion:CircularRange StartValue="75" EndValue="100" Stroke="Red" />
                         </syncfusion:CircularScale.Ranges>
                     </syncfusion:CircularScale>
                 </syncfusion:SfCircularGauge.Scales>
@@ -189,13 +189,13 @@
 
             <Grid Grid.Column="2" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <Label Content="Total physical memory:" FontSize="14" Margin="10,5" />

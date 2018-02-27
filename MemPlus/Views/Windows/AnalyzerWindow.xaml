@@ -13,8 +13,8 @@
     WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TreeView Grid.Row="0" x:Name="TrvRam">
             <TreeView.ContextMenu>
@@ -35,10 +35,9 @@
         </TreeView>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            
             <Button Grid.Column="0" MinHeight="25" Content="Refresh" Margin="3" Click="BtnRefresh_OnClick"/>
             <Button Grid.Column="1" MinHeight="25" Content="Export" Margin="3" Click="BtnExport_OnClick" />
         </Grid>

@@ -17,10 +17,8 @@
         </Grid.RowDefinitions>
         <syncfusion:TabControlExt CloseButtonType="Hide" EnableLabelEdit="False"
                                   AllowDragDrop="False" DefaultContextMenuItemVisibility="Hidden">
-            <syncfusion:TabItemExt Header="General"
-                                   Image="../../Resources/Images/settings.png"
+            <syncfusion:TabItemExt Header="General" Image="../../Resources/Images/settings.png"
                                    ImageWidth="16" ImageHeight="16">
-
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
@@ -30,14 +28,14 @@
                     <GroupBox Grid.Row="0" Header="MemPlus" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <CheckBox Grid.Row="0" x:Name="ChbAutoStart" Content="Automatic start MemPlus when Windows starts" Margin="3" />
@@ -54,31 +52,29 @@
 
             </syncfusion:TabItemExt>
             
-            <syncfusion:TabItemExt Header="RAM Monitor"
-                                   Image="../../Resources/Images/monitor.png"
-                                   ImageWidth="16"
-                                   ImageHeight="16">
+            <syncfusion:TabItemExt Header="RAM Monitor" Image="../../Resources/Images/monitor.png"
+                                   ImageWidth="16" ImageHeight="16">
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <GroupBox Grid.Row="0" Header="RAM Monitor" Margin="3">
                         <Grid MinWidth="250">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <CheckBox x:Name="ChbRamMonitor" Content="RAM Monitor" Margin="3" />
                             <CheckBox x:Name="ChbDisableInactive" Grid.Row="1" Content="Disable when inactive" Margin="3" />
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Content="Update interval:"  Margin="3" />
@@ -95,17 +91,17 @@
                     <GroupBox Grid.Row="1" Header="RAM Optimizer" Margin="3">
                         <Grid MinWidth="250">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             
                             <CheckBox x:Name="ChbAutoOptimizePercentage" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Optimize when RAM usage exceeds" Margin="3" Checked="ChbAutoOptimizePercentage_OnChecked"/>
-                            <syncfusion:IntegerTextBox x:Name="ItbAutoOptimizePercentage" Grid.Row="0" Grid.Column="1" Margin="3" MinValue="25" MaxValue="100"/>
+                            <syncfusion:IntegerTextBox x:Name="ItbAutoOptimizePercentage" Grid.Row="0" Grid.Column="1" Margin="3" MinValue="30" MaxValue="99"/>
                             <Label Grid.Row="0" Grid.Column="2" Content="%" Margin="3" />
 
                             <CheckBox x:Name="ChbAutoOptimizeTimed" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Optimize after" Margin="3"/>
@@ -119,16 +115,15 @@
                 </Grid>
             </syncfusion:TabItemExt>
 
-            <syncfusion:TabItemExt Header="RAM Optimizer"
-                                   Image="../../Resources/Images/ram_tab.png"
+            <syncfusion:TabItemExt Header="RAM Optimizer" Image="../../Resources/Images/ram_tab.png"
                                    ImageWidth="16" ImageHeight="16">
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <CheckBox Grid.Row="0" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
@@ -137,8 +132,8 @@
                     <GroupBox Grid.Row="3" Header="Working Set Exclusions" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <ListView x:Name="LsvExclusions" Margin="3" Height="100" MinWidth="250" MaxWidth="350" AllowDrop="True" Drop="LsvExclusions_OnDrop">
                                 <ListView.ContextMenu>
@@ -165,11 +160,11 @@
 
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <TextBox x:Name="TxtExclusion" Margin="3" Width="150"></TextBox>
+                                <TextBox x:Name="TxtExclusion" Margin="3" Width="1" />
                                 <Button Grid.Column="1" Content="..." Margin="3" MinWidth="35" Click="BtnFileView_OnClick" />
                                 <Button Grid.Column="2" Content="Add" Margin="3" MinWidth="35" Click="BtnAddExclusion_OnClick" />
                             </Grid>
@@ -179,18 +174,17 @@
 
             </syncfusion:TabItemExt>
 
-            <syncfusion:TabItemExt Header="Theme"
-                                   Image="../../Resources/Images/home.png"
+            <syncfusion:TabItemExt Header="Theme" Image="../../Resources/Images/home.png"
                                    ImageWidth="16" ImageHeight="16">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Label Margin="3" Content="Style:"></Label>
                     <ComboBox Margin="3" x:Name="CboStyle" SelectedValuePath="Content" Grid.Row="0" Grid.Column="1" IsReadOnly="True">
@@ -221,10 +215,9 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            
             <Button Content="Reset" Margin="5" MinHeight="25" Click="BtnReset_OnClick" />
             <Button Grid.Column="1" Content="Save" Margin="5" MinHeight="25" Click="BtnSave_OnClick" />
         </Grid>
