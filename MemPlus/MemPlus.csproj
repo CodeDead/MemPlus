@@ -87,7 +87,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\Classes\EXPORT\ExportTypes.cs" />
-    <Compile Include="Business\Classes\RAM\RamAnalyzer.cs" />
     <Compile Include="Business\Classes\RAM\RamData.cs" />
     <Compile Include="Business\Classes\RAM\RamSticksExporter.cs" />
     <Compile Include="Business\Classes\RAM\RamStick.cs" />

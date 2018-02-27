@@ -600,16 +600,16 @@ namespace MemPlus.Views.Windows
                 {
                     //Filterindex starts at 1
                     case 1:
-                        RamDataExporter.ExportText(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportText(sfd.FileName, Utils.GetRamSticks());
                         break;
                     case 2:
-                        RamDataExporter.ExportHtml(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportHtml(sfd.FileName, Utils.GetRamSticks());
                         break;
                     case 3:
-                        RamDataExporter.ExportCsv(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportCsv(sfd.FileName, Utils.GetRamSticks());
                         break;
                     case 4:
-                        RamDataExporter.ExportExcel(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportExcel(sfd.FileName, Utils.GetRamSticks());
                         break;
                 }
                 MessageBox.Show("All data has been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);

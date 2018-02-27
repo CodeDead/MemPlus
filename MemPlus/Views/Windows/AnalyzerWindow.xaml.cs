@@ -6,6 +6,7 @@ using System.Windows.Input;
 using MemPlus.Business.Classes.GUI;
 using MemPlus.Business.Classes.LOG;
 using MemPlus.Business.Classes.RAM;
+using MemPlus.Business.Classes.UTILS;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows
@@ -51,7 +52,7 @@ namespace MemPlus.Views.Windows
             try
             {
                 TrvRam.Items.Clear();
-                List<RamStick> ramSticks = RamAnalyzer.GetRamSticks();
+                List<RamStick> ramSticks = Utils.GetRamSticks();
 
                 if (ramSticks == null || ramSticks.Count == 0)
                 {
@@ -159,16 +160,16 @@ namespace MemPlus.Views.Windows
                 {
                     //Filterindex starts at 1
                     case 1:
-                        RamDataExporter.ExportText(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportText(sfd.FileName, Utils.GetRamSticks());
                         break;
                     case 2:
-                        RamDataExporter.ExportHtml(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportHtml(sfd.FileName, Utils.GetRamSticks());
                         break;
                     case 3:
-                        RamDataExporter.ExportCsv(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportCsv(sfd.FileName, Utils.GetRamSticks());
                         break;
                     case 4:
-                        RamDataExporter.ExportExcel(sfd.FileName, RamAnalyzer.GetRamSticks());
+                        RamDataExporter.ExportExcel(sfd.FileName, Utils.GetRamSticks());
                         break;
                 }
                 MessageBox.Show("Exported all data!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
