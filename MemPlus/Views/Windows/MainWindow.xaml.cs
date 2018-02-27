@@ -715,13 +715,15 @@ namespace MemPlus.Views.Windows
 
                 if (_statisticsMessage)
                 {
-                    if (Visibility == Visibility.Visible)
+                    // ReSharper disable once SwitchStatementMissingSomeCases
+                    switch (Visibility)
                     {
-                        MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                    else if (Visibility == Visibility.Hidden && TbiIcon.Visibility == Visibility.Visible)
-                    {
-                        TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
+                        default:
+                            MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                            break;
+                        case Visibility.Hidden when TbiIcon.Visibility == Visibility.Visible:
+                            TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
+                            break;
                     }
                 }
 
