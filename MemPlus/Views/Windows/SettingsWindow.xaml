@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="350" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="MemPlus - Settings" Height="380" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -36,6 +36,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <CheckBox Grid.Row="0" x:Name="ChbAutoStart" Content="Automatic start MemPlus when Windows starts" Margin="3" />
@@ -46,6 +47,7 @@
                             <CheckBox Grid.Row="5" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
                             <CheckBox Grid.Row="6" x:Name="ChbWindowDraggable" Content="Allow windows to be dragged by clicking anywhere" Margin="3" />
                             <CheckBox Grid.Row="7" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
+                            <CheckBox Grid.Row="8" x:Name="ChbRamClearingMessage" Content="Display information after clearing RAM" Margin="3" />
                         </Grid>
                     </GroupBox>
                 </Grid>

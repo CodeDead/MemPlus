@@ -264,7 +264,7 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool WindowDragging {
             get {
                 return ((bool)(this["WindowDragging"]));
@@ -295,6 +295,18 @@ namespace MemPlus.Properties {
             }
             set {
                 this["EmptyWorkingSet"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RamCleaningMessage {
+            get {
+                return ((bool)(this["RamCleaningMessage"]));
+            }
+            set {
+                this["RamCleaningMessage"] = value;
             }
         }
     }

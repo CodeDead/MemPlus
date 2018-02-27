@@ -32,6 +32,14 @@ namespace MemPlus.Views.Windows
         /// The LogController object that can be used to add new logs
         /// </summary>
         private readonly LogController _logController;
+        /// <summary>
+        /// A boolean to indicate whether RAM statistics should be displayed after clearing the memory
+        /// </summary>
+        private bool _statisticsMessage;
+        /// <summary>
+        /// A boolean to indicate whether RAM cleaning is currently in progress
+        /// </summary>
+        private bool _clearingMemory;
         #endregion
 
         /// <inheritdoc />
@@ -42,7 +50,9 @@ namespace MemPlus.Views.Windows
         {
             _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
+
             _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "Information", "Cancel", "Download", "No new version is currently available.");
+            _clearingMemory = false;
 
             InitializeComponent();
             ChangeVisualStyle();
@@ -123,6 +133,7 @@ namespace MemPlus.Views.Windows
 
             try
             {
+                _statisticsMessage = Properties.Settings.Default.RamCleaningMessage;
                 MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
                 MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
@@ -649,24 +660,42 @@ namespace MemPlus.Views.Windows
             }
         }
 
+        /// <summary>
+        /// Method that is called when the working set of processes should be cleared
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void ClearWorkingSetsDropDownMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ClearMemory(1);
         }
 
+        /// <summary>
+        /// Method that is called when the FileSystem cache should be cleared
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void ClearFileSystemCacheDropDownMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ClearMemory(2);
         }
 
+        /// <summary>
+        /// Clear the memory
+        /// </summary>
+        /// <param name="index">The type of memory that needs to be cleared</param>
         private async void ClearMemory(int index)
         {
+            if (_clearingMemory) return;
+
             _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
+            _clearingMemory = true;
 
             try
             {
                 BtnClearMemory.IsEnabled = false;
 
+                // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (index)
                 {
                     case 0:
@@ -685,12 +714,18 @@ namespace MemPlus.Views.Windows
                 {
                     ramSavings = Math.Abs(ramSavings);
                     _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
-                    MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (_statisticsMessage)
+                    {
+                        MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
                 else
                 {
                     _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
-                    MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    if (_statisticsMessage)
+                    {
+                        MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                 }
 
                 BtnClearMemory.IsEnabled = true;
@@ -701,6 +736,7 @@ namespace MemPlus.Views.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+            _clearingMemory = false;
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
     }
