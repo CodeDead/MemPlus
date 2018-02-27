@@ -293,6 +293,64 @@ namespace MemPlus.Business.Classes.RAM
         }
 
         /// <summary>
+        /// Clear the working set of all processes, excluding the exclusion list
+        /// </summary>
+        /// <returns>Nothing</returns>
+        internal async Task ClearWorkingSets()
+        {
+            _logController.AddLog(new ApplicationLog("Clearing process working sets"));
+
+            await Task.Run(async () =>
+            {
+                UpdateRamUsage();
+
+                double oldUsage = RamUsage;
+
+                _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
+
+                await Task.Delay(10000);
+
+                UpdateRamUsage();
+                UpdateGuiControls();
+
+                double newUsage = RamUsage;
+
+                RamSavings = oldUsage - newUsage;
+            });
+
+            _logController.AddLog(new ApplicationLog("Done clearing process working sets"));
+        }
+
+        /// <summary>
+        /// Clear the FileSystem cache
+        /// </summary>
+        /// <returns>Nothing</returns>
+        internal async Task ClearFileSystemCaches()
+        {
+            _logController.AddLog(new ApplicationLog("Clearing FileSystem cache"));
+
+            await Task.Run(async () =>
+            {
+                UpdateRamUsage();
+
+                double oldUsage = RamUsage;
+
+                _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
+
+                await Task.Delay(5000);
+
+                UpdateRamUsage();
+                UpdateGuiControls();
+
+                double newUsage = RamUsage;
+
+                RamSavings = oldUsage - newUsage;
+            });
+
+            _logController.AddLog(new ApplicationLog("Done clearing FileSystem cache"));
+        }
+
+        /// <summary>
         /// Update RAM usage statistics
         /// </summary>
         private void UpdateRamUsage()

@@ -194,16 +194,19 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Label Content="Total physical memory:" FontSize="14" Margin="10,5" />
-                <Label x:Name="LblTotalPhysicalMemory" Grid.Row="2" Content="" FontSize="14" Foreground="Green" Margin="10,5" />
-                <Label Grid.Row="3" Content="Used physical memory:" FontSize="14" Margin="10,5" />
-                <Label x:Name="LblAvailablePhysicalMemory" Grid.Row="4" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
+                <Label Grid.Row="0" Content="Total physical memory:" FontSize="14" Margin="10,5" />
+                <Label Grid.Row="1" x:Name="LblTotalPhysicalMemory"  Content="" FontSize="14" Foreground="Green" Margin="10,5" />
+                <Label Grid.Row="2" Content="Used physical memory:" FontSize="14" Margin="10,5" />
+                <Label Grid.Row="3" x:Name="LblAvailablePhysicalMemory" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
 
-                <Button Grid.Row="5" x:Name="BtnClearMemory" Content="Clear memory" Click="BtnClearMemory_OnClick" Margin="10,5" FontSize="14" MinHeight="25" />
+                <syncfusion:SplitButtonAdv Grid.Row="4" SmallIcon="../../Resources/Images/ram_tab.png" Label="Clear memory" x:Name="BtnClearMemory" Click="BtnClearMemory_OnClick" IsMultiLine="False">
+                    <syncfusion:DropDownMenuGroup>
+                        <syncfusion:DropDownMenuItem Header="Clear Working sets" Click="ClearWorkingSetsDropDownMenuItem_OnClick"/>
+                        <syncfusion:DropDownMenuItem Header="Clear FileSystem cache" Click="ClearFileSystemCacheDropDownMenuItem_OnClick"/>
+                    </syncfusion:DropDownMenuGroup>
+                </syncfusion:SplitButtonAdv>
             </Grid>
         </Grid>
     </Grid>

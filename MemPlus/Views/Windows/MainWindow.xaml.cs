@@ -242,37 +242,9 @@ namespace MemPlus.Views.Windows
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
-        private async void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
+        private void BtnClearMemory_OnClick(object sender, RoutedEventArgs e)
         {
-            _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
-
-            try
-            {
-                BtnClearMemory.IsEnabled = false;
-
-                await _ramController.ClearMemory();
-                double ramSavings = _ramController.RamSavings / 1024 / 1024;
-                if (ramSavings < 0)
-                {
-                    ramSavings = Math.Abs(ramSavings);
-                    _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
-                    MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
-                    MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
-                BtnClearMemory.IsEnabled = true;
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
-            _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
+            ClearMemory(0);
         }
 
         /// <summary>
@@ -675,6 +647,61 @@ namespace MemPlus.Views.Windows
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ClearWorkingSetsDropDownMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMemory(1);
+        }
+
+        private void ClearFileSystemCacheDropDownMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMemory(2);
+        }
+
+        private async void ClearMemory(int index)
+        {
+            _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
+
+            try
+            {
+                BtnClearMemory.IsEnabled = false;
+
+                switch (index)
+                {
+                    case 0:
+                        await _ramController.ClearMemory();
+                        break;
+                    case 1:
+                        await _ramController.ClearWorkingSets();
+                        break;
+                    case 2:
+                        await _ramController.ClearFileSystemCaches();
+                        break;
+                }
+
+                double ramSavings = _ramController.RamSavings / 1024 / 1024;
+                if (ramSavings < 0)
+                {
+                    ramSavings = Math.Abs(ramSavings);
+                    _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
+                    MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
+                    MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                BtnClearMemory.IsEnabled = true;
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
     }
 }
