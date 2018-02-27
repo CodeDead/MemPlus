@@ -1,9 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.Classes.EXPORT;
 using MemPlus.Business.Classes.GUI;
 using MemPlus.Business.Classes.LOG;
@@ -622,16 +622,6 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when the MainWindow is closing
-        /// </summary>
-        /// <param name="sender">The object that called this method</param>
-        /// <param name="e">The CancelEventArgs</param>
-        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
-        {
-            TbiIcon.Visibility = Visibility.Hidden;
-        }
-
-        /// <summary>
         /// Method that is called when all logs should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
@@ -710,21 +700,28 @@ namespace MemPlus.Views.Windows
                 }
 
                 double ramSavings = _ramController.RamSavings / 1024 / 1024;
+                string message;
                 if (ramSavings < 0)
                 {
                     ramSavings = Math.Abs(ramSavings);
                     _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
-                    if (_statisticsMessage)
-                    {
-                        MessageBox.Show("Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
+                    message = "Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!";
                 }
                 else
                 {
                     _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
-                    if (_statisticsMessage)
+                    message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
+                }
+
+                if (_statisticsMessage)
+                {
+                    if (Visibility == Visibility.Visible)
                     {
-                        MessageBox.Show("You saved " + ramSavings.ToString("F2") + " MB of RAM!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else if (Visibility == Visibility.Hidden && TbiIcon.Visibility == Visibility.Visible)
+                    {
+                        TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
                     }
                 }
 

@@ -9,8 +9,7 @@
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
-    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png"
-    Closing="MainWindow_OnClosing">
+    Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
