@@ -329,15 +329,13 @@ namespace MemPlus.Business.Classes.RAM
         {
             _logController.AddLog(new ApplicationLog("Clearing FileSystem cache"));
 
-            await Task.Run(async () =>
+            await Task.Run(() =>
             {
                 UpdateRamUsage();
 
                 double oldUsage = RamUsage;
 
                 _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
-
-                await Task.Delay(5000);
 
                 UpdateRamUsage();
                 UpdateGuiControls();
