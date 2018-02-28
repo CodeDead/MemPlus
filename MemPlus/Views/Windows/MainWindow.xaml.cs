@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
@@ -737,6 +738,17 @@ namespace MemPlus.Views.Windows
 
             _clearingMemory = false;
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
+        }
+
+        /// <summary>
+        /// Method that is called when the MainWindow is closing
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The CancelEventArgs</param>
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            // Disable the RAM Monitor to prevent exceptions from being thrown
+            _ramController?.DisableMonitor();
         }
     }
 }
