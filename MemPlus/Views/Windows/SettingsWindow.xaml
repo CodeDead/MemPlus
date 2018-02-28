@@ -122,22 +122,29 @@
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <CheckBox Grid.Row="0" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
-                    <CheckBox Grid.Row="1" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
-                    <CheckBox Grid.Row="2" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
-                    <GroupBox Grid.Row="3" Header="Working Set Exclusions" MinWidth="250" Margin="3">
+                    <GroupBox Grid.Row="0" Header="Options" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListView x:Name="LsvExclusions" Margin="3" Height="100" Width="300" AllowDrop="True" Drop="LsvExclusions_OnDrop">
+                            <CheckBox Grid.Row="0" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
+                            <CheckBox Grid.Row="1" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
+                            <CheckBox Grid.Row="2" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Header="Working Set Exclusions" MinWidth="250" Margin="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ListView x:Name="LsvExclusions" Margin="3" Height="80" Width="300" AllowDrop="True" Drop="LsvExclusions_OnDrop">
                                 <ListView.ContextMenu>
                                     <ContextMenu>
                                         <MenuItem Header="Copy" Click="CopyExclusionMenuItem_OnClick">
@@ -179,37 +186,41 @@
             <syncfusion:TabItemExt Header="Theme" Image="../../Resources/Images/home.png"
                                    ImageWidth="16" ImageHeight="16">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Label Margin="3" Content="Style:"></Label>
-                    <ComboBox Margin="3" x:Name="CboStyle" SelectedValuePath="Content" Grid.Row="0" Grid.Column="1" IsReadOnly="True">
-                        <ComboBoxItem>Metro</ComboBoxItem>
-                        <ComboBoxItem>Blend</ComboBoxItem>
-                        <ComboBoxItem>VS2010</ComboBoxItem>
-                        <ComboBoxItem>Office2003</ComboBoxItem>
-                        <ComboBoxItem>Office2007Blue</ComboBoxItem>
-                        <ComboBoxItem>Office2007Black</ComboBoxItem>
-                        <ComboBoxItem>Office2007Silver</ComboBoxItem>
-                        <ComboBoxItem>Office2010Blue</ComboBoxItem>
-                        <ComboBoxItem>Office2010Black</ComboBoxItem>
-                        <ComboBoxItem>Office2010Silver</ComboBoxItem>
-                        <ComboBoxItem>ShinyRed</ComboBoxItem>
-                        <ComboBoxItem>ShinyBlue</ComboBoxItem>
-                        <ComboBoxItem>SyncOrange</ComboBoxItem>
-                        <ComboBoxItem>Transparent</ComboBoxItem>
-                        <ComboBoxItem>None</ComboBoxItem>
-                    </ComboBox>
-                    <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:"></Label>
-                    <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" />
-                    <Label Margin="3"  Grid.Row="2" Grid.Column="0" Content="Border thickness:"></Label>
-                    <syncfusion:IntegerTextBox Margin="3" x:Name="IntBorderThickness" Grid.Row="2" Grid.Column="1" MinValue="0"></syncfusion:IntegerTextBox>
+                    <GroupBox Header="GUI" Margin="3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Margin="3" Content="Style:"></Label>
+                            <ComboBox Margin="3" x:Name="CboStyle" SelectedValuePath="Content" Grid.Row="0" Grid.Column="1" IsReadOnly="True">
+                                <ComboBoxItem>Metro</ComboBoxItem>
+                                <ComboBoxItem>Blend</ComboBoxItem>
+                                <ComboBoxItem>VS2010</ComboBoxItem>
+                                <ComboBoxItem>Office2003</ComboBoxItem>
+                                <ComboBoxItem>Office2007Blue</ComboBoxItem>
+                                <ComboBoxItem>Office2007Black</ComboBoxItem>
+                                <ComboBoxItem>Office2007Silver</ComboBoxItem>
+                                <ComboBoxItem>Office2010Blue</ComboBoxItem>
+                                <ComboBoxItem>Office2010Black</ComboBoxItem>
+                                <ComboBoxItem>Office2010Silver</ComboBoxItem>
+                                <ComboBoxItem>ShinyRed</ComboBoxItem>
+                                <ComboBoxItem>ShinyBlue</ComboBoxItem>
+                                <ComboBoxItem>SyncOrange</ComboBoxItem>
+                                <ComboBoxItem>Transparent</ComboBoxItem>
+                                <ComboBoxItem>None</ComboBoxItem>
+                            </ComboBox>
+                            <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:"></Label>
+                            <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" />
+                            <Label Margin="3"  Grid.Row="2" Grid.Column="0" Content="Border thickness:"></Label>
+                            <syncfusion:IntegerTextBox Margin="3" x:Name="IntBorderThickness" Grid.Row="2" Grid.Column="1" MinValue="0"></syncfusion:IntegerTextBox>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
 
             </syncfusion:TabItemExt>
