@@ -137,7 +137,6 @@ namespace MemPlus.Business.Classes.RAM
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
         }
 
-
         /// <summary>
         /// Clear the working sets of all processes that are available to the application
         /// </summary>
@@ -194,14 +193,14 @@ namespace MemPlus.Business.Classes.RAM
         /// <summary>
         /// Clear the FileSystem cache
         /// </summary>
-        /// <param name="clearStandbyCache">Set whether or not to clear cache that is in standby</param>
+        /// <param name="clearStandbyCache">Set whether or not to clear the standby cache</param>
         internal void ClearFileSystemCache(bool clearStandbyCache)
         {
             _logController.AddLog(new RamLog("Clearing FileSystem cache"));
 
             try
             {
-                //Check if privilege can be increased
+                // Check if privilege can be increased
                 if (SetIncreasePrivilege(SeIncreaseQuotaName))
                 {
                     _logController.AddLog(new RamLog("Privileges have successfully been increased"));
@@ -209,7 +208,7 @@ namespace MemPlus.Business.Classes.RAM
                     uint ntSetSystemInformationRet;
                     int systemInfoLength;
                     GCHandle gcHandle;
-                    //Depending on the working set, call the right external function using the right parameters
+                    // Depending on the working set, call NtSetSystemInformation using the right parameters
                     if (!Is64BitMode())
                     {
                         _logController.AddLog(new RamLog("Clearing 32 bit FileSystem cache information"));
@@ -248,7 +247,8 @@ namespace MemPlus.Business.Classes.RAM
                     if (ntSetSystemInformationRet != 0) throw new Exception("NtSetSystemInformation: ", new Win32Exception(Marshal.GetLastWin32Error()));
                 }
 
-                // If we don't have to clear the standby cache or cannot increase privileges, don't hesitate to clear the standby cache, otherwise we can clear the standby cache
+                // Clear the standby cache if we have to and if we can also increase the privileges
+                // If we can't increase the privileges, it's pointless to even try
                 if (!clearStandbyCache || !SetIncreasePrivilege(SeProfileSingleProcessName)) return;
                 {
                     _logController.AddLog(new RamLog("Clearing standby cache"));
@@ -273,7 +273,7 @@ namespace MemPlus.Business.Classes.RAM
         /// Increase the Privilege using a provilege name
         /// </summary>
         /// <param name="privilegeName">The name of the privilege that needs to be increased</param>
-        /// <returns>A boolean value indicating whether or not the operation was successfull</returns>
+        /// <returns>A boolean value indicating whether or not the operation was successful</returns>
         private bool SetIncreasePrivilege(string privilegeName)
         {
             _logController.AddLog(new RamLog("Increasing privilage: " + privilegeName));
@@ -292,7 +292,7 @@ namespace MemPlus.Business.Classes.RAM
 
 
                 _logController.AddLog(new RamLog("Adjusting token privilages"));
-                //Enables or disables privileges in a specified access token
+                // Enables or disables privileges in a specified access token
                 int adjustTokenPrivilegesRet = AdjustTokenPrivileges(current.Token, false, ref newst, 0, IntPtr.Zero, IntPtr.Zero) ? 1 : 0;
                 _logController.AddLog(new RamLog("Done adjusting token privilages"));
                 // Return value of zero indicates an error
