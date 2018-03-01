@@ -678,6 +678,7 @@ namespace MemPlus.Views.Windows
         private async void ClearMemory(int index)
         {
             if (_clearingMemory) return;
+            if (!_ramController.EmptyWorkingSets && !_ramController.ClearFileSystemCache) return;
 
             _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
             _clearingMemory = true;

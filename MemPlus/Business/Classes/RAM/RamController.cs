@@ -279,7 +279,11 @@ namespace MemPlus.Business.Classes.RAM
                     _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
                 }
 
-                await Task.Delay(10000);
+                // No need to wait if nothing happened
+                if (EmptyWorkingSets || ClearFileSystemCache)
+                {
+                    await Task.Delay(10000);
+                }
 
                 UpdateRamUsage();
                 UpdateGuiControls();
