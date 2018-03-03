@@ -203,7 +203,10 @@
                 <Label Grid.Row="2" Content="Used physical memory:" FontSize="14" Margin="10,5" />
                 <Label Grid.Row="3" x:Name="LblAvailablePhysicalMemory" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
 
-                <syncfusion:SplitButtonAdv Grid.Row="4" FontSize="14" SmallIcon="../../Resources/Images/ram_tab.png" Label="Clear memory" x:Name="BtnClearMemory" Click="BtnClearMemory_OnClick" IsMultiLine="False" HorizontalAlignment="Stretch" Margin="10,5">
+                <syncfusion:SplitButtonAdv Grid.Row="4" FontSize="14"
+                                           SmallIcon="../../Resources/Images/ram_tab.png" Label="Clear memory"
+                                           x:Name="BtnClearMemory" Click="BtnClearMemory_OnClick" IsMultiLine="False"
+                                           MinHeight="25" HorizontalAlignment="Stretch" Margin="10,5">
                     <syncfusion:DropDownMenuGroup>
                         <syncfusion:DropDownMenuItem Header="Clear Working sets" Click="ClearWorkingSetsDropDownMenuItem_OnClick"/>
                         <syncfusion:DropDownMenuItem Header="Clear FileSystem cache" Click="ClearFileSystemCacheDropDownMenuItem_OnClick"/>
