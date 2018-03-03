@@ -1,20 +1,20 @@
 ﻿using System;
 
-namespace MemPlus.Business.Classes.LOG
+namespace MemPlus.Business.LOG
 {
     /// <inheritdoc />
     /// <summary>
-    /// A class that represent a change in the application
+    /// A class that represent a change in the RAM Optimizer
     /// </summary>
-    internal class ApplicationLog : Log
+    internal class RamLog : Log
     {
         /// <summary>
-        /// Initialize a new ApplicationLog object
+        /// Initialize a new RamLog object
         /// </summary>
         /// <param name="data">The data that needs to be added to the Log</param>
-        internal ApplicationLog(string data)
+        internal RamLog(string data)
         {
-            LogType = LogType.Application;
+            LogType = LogType.Ram;
             Data = data;
             Time = DateTime.Now;
         }

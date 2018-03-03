@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MemPlus.Business.Classes.LOG
+namespace MemPlus.Business.LOG
 {
     /// <summary>
     /// Interface containing methods that are required for Log objects

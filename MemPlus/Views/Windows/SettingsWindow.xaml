@@ -39,13 +39,13 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <CheckBox Grid.Row="0" x:Name="ChbAutoStart" Content="Automatic start MemPlus when Windows starts" Margin="3" />
-                            <CheckBox Grid.Row="1" x:Name="ChbStartHidden" Content="Hide MemPlus on startup" Margin="3" />
-                            <CheckBox Grid.Row="2" x:Name="ChbStartMinimized" Content="Start MemPlus minimized" Margin="3" />
-                            <CheckBox Grid.Row="3" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
+                            <CheckBox Grid.Row="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
+                            <CheckBox Grid.Row="1" x:Name="ChbAutoStart" Content="Automatic start MemPlus when Windows starts" Margin="3" />
+                            <CheckBox Grid.Row="2" x:Name="ChbStartHidden" Content="Hide MemPlus on startup" Margin="3" />
+                            <CheckBox Grid.Row="3" x:Name="ChbStartMinimized" Content="Start MemPlus minimized" Margin="3" />
                             <CheckBox Grid.Row="4" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
-                            <CheckBox Grid.Row="5" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
-                            <CheckBox Grid.Row="6" x:Name="ChbWindowDraggable" Content="Allow windows to be dragged by clicking anywhere" Margin="3" />
+                            <CheckBox Grid.Row="5" x:Name="ChbWindowDraggable" Content="Window draggable" Margin="3" />
+                            <CheckBox Grid.Row="6" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
                             <CheckBox Grid.Row="7" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
                             <CheckBox Grid.Row="8" x:Name="ChbRamClearingMessage" Content="Display information after clearing RAM" Margin="3" />
                         </Grid>
@@ -231,8 +231,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Content="Reset" Margin="5" MinHeight="25" Click="BtnReset_OnClick" />
-            <Button Grid.Column="1" Content="Save" Margin="5" MinHeight="25" Click="BtnSave_OnClick" />
+            <Button Content="Reset" Margin="3" MinHeight="25" Click="BtnReset_OnClick" />
+            <Button Grid.Column="1" Content="Save" Margin="3" MinHeight="25" Click="BtnSave_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

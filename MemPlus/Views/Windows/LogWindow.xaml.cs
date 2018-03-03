@@ -6,9 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using MemPlus.Business.Classes.EXPORT;
-using MemPlus.Business.Classes.GUI;
-using MemPlus.Business.Classes.LOG;
+using MemPlus.Business.EXPORT;
+using MemPlus.Business.GUI;
+using MemPlus.Business.LOG;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows

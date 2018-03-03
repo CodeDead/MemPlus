@@ -34,6 +34,12 @@
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Export" Click="BtnExport_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
@@ -49,8 +55,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Margin="5" Content="Export" Click="BtnExport_OnClick" />
-            <Button Grid.Column="1" MinHeight="25" Margin="5" Content="Clear logs" Click="BtnClear_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="Export" Click="BtnExport_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="Clear logs" Click="BtnClear_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

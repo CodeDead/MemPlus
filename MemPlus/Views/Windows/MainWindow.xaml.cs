@@ -5,11 +5,11 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Hardcodet.Wpf.TaskbarNotification;
-using MemPlus.Business.Classes.EXPORT;
-using MemPlus.Business.Classes.GUI;
-using MemPlus.Business.Classes.LOG;
-using MemPlus.Business.Classes.RAM;
-using MemPlus.Business.Classes.UTILS;
+using MemPlus.Business.EXPORT;
+using MemPlus.Business.GUI;
+using MemPlus.Business.LOG;
+using MemPlus.Business.RAM;
+using MemPlus.Business.UTILS;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows

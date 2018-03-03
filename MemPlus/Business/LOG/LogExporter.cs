@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace MemPlus.Business.Classes.LOG
+namespace MemPlus.Business.LOG
 {
     /// <summary>
     /// Static class containing the logic for exporting logs

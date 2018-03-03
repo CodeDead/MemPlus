@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MemPlus.Business.Classes.LOG
+namespace MemPlus.Business.LOG
 {
     /// <inheritdoc />
     /// <summary>

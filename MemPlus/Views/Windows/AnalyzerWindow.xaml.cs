@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using MemPlus.Business.Classes.GUI;
-using MemPlus.Business.Classes.LOG;
-using MemPlus.Business.Classes.RAM;
-using MemPlus.Business.Classes.UTILS;
+using MemPlus.Business.GUI;
+using MemPlus.Business.LOG;
+using MemPlus.Business.RAM;
+using MemPlus.Business.UTILS;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows

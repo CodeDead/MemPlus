@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Management;
 using System.Security.Principal;
-using MemPlus.Business.Classes.RAM;
+using MemPlus.Business.RAM;
 
-namespace MemPlus.Business.Classes.UTILS
+namespace MemPlus.Business.UTILS
 {
     /// <summary>
     /// Static class containing utility code that can be used by different objects

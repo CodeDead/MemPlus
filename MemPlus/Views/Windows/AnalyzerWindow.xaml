@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
-    Title="MemPlus - RAM Analyzer" Height="350" Width="500"
+    Title="MemPlus - RAM Analyzer" Height="300" Width="350"
     Icon="/MemPlus;component/Resources/Images/ram.png"
     WindowStartupLocation="CenterScreen">
     <Grid>
@@ -25,6 +25,11 @@
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
+                    <MenuItem Header="Export" Click="BtnExport_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="Refresh" Click="BtnRefresh_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/paused.png" />

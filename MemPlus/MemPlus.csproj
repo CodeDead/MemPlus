@@ -86,11 +86,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Business\Classes\EXPORT\ExportTypes.cs" />
-    <Compile Include="Business\Classes\RAM\RamData.cs" />
-    <Compile Include="Business\Classes\RAM\RamSticksExporter.cs" />
-    <Compile Include="Business\Classes\RAM\RamStick.cs" />
-    <Compile Include="Business\Classes\UTILS\Utils.cs" />
+    <Compile Include="Business\EXPORT\ExportTypes.cs" />
+    <Compile Include="Business\RAM\RamData.cs" />
+    <Compile Include="Business\RAM\RamSticksExporter.cs" />
+    <Compile Include="Business\RAM\RamStick.cs" />
+    <Compile Include="Business\UTILS\Utils.cs" />
     <Compile Include="Views\Windows\AnalyzerWindow.xaml.cs">
       <DependentUpon>AnalyzerWindow.xaml</DependentUpon>
     </Compile>
@@ -117,15 +117,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Business\Classes\LOG\ApplicationLog.cs" />
-    <Compile Include="Business\Classes\LOG\ILogMethods.cs" />
-    <Compile Include="Business\Classes\LOG\Log.cs" />
-    <Compile Include="Business\Classes\LOG\LogController.cs" />
-    <Compile Include="Business\Classes\LOG\LogExporter.cs" />
-    <Compile Include="Business\Classes\LOG\RamLog.cs" />
-    <Compile Include="Business\Classes\RAM\RamController.cs" />
-    <Compile Include="Business\Classes\RAM\RamOptimizer.cs" />
-    <Compile Include="Business\Classes\GUI\StyleManager.cs" />
+    <Compile Include="Business\LOG\ApplicationLog.cs" />
+    <Compile Include="Business\LOG\ILogMethods.cs" />
+    <Compile Include="Business\LOG\Log.cs" />
+    <Compile Include="Business\LOG\LogController.cs" />
+    <Compile Include="Business\LOG\LogExporter.cs" />
+    <Compile Include="Business\LOG\RamLog.cs" />
+    <Compile Include="Business\RAM\RamController.cs" />
+    <Compile Include="Business\RAM\RamOptimizer.cs" />
+    <Compile Include="Business\GUI\StyleManager.cs" />
     <Compile Include="Views\Windows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>

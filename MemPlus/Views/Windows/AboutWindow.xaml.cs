@@ -2,8 +2,8 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
-using MemPlus.Business.Classes.GUI;
-using MemPlus.Business.Classes.LOG;
+using MemPlus.Business.GUI;
+using MemPlus.Business.LOG;
 
 namespace MemPlus.Views.Windows
 {

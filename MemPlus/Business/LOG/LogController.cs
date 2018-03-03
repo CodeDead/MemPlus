@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Timers;
-using MemPlus.Business.Classes.EXPORT;
+using MemPlus.Business.EXPORT;
 
-namespace MemPlus.Business.Classes.LOG
+namespace MemPlus.Business.LOG
 {
     /// <summary>
     /// Class containing methods to control logs

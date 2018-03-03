@@ -1,4 +1,4 @@
-﻿namespace MemPlus.Business.Classes.EXPORT
+﻿namespace MemPlus.Business.EXPORT
 {
     /// <summary>
     /// Sealed class containing all different export types that MemPlus supports

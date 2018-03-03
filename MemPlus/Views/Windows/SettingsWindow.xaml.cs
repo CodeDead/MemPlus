@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using MemPlus.Business.Classes.GUI;
-using MemPlus.Business.Classes.LOG;
+using MemPlus.Business.GUI;
+using MemPlus.Business.LOG;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows

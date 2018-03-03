@@ -1,4 +1,4 @@
-﻿namespace MemPlus.Business.Classes.RAM
+﻿namespace MemPlus.Business.RAM
 {
     /// <summary>
     /// ViewModal for displaying RAM information inside a treeview
