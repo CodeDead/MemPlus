@@ -10,6 +10,7 @@
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     Closing="MainWindow_OnClosing"
+    AllowsTransparency="True"
     Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>

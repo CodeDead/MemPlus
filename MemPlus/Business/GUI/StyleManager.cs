@@ -20,8 +20,11 @@ namespace MemPlus.Business.GUI
             {
                 SkinStorage.SetVisualStyle(o, Properties.Settings.Default.VisualStyle);
                 SkinStorage.SetMetroBrush(o, new SolidColorBrush(Properties.Settings.Default.MetroColor));
-                ((ChromelessWindow)o).BorderThickness = new Thickness(Properties.Settings.Default.BorderThickness);
-                ((ChromelessWindow)o).CornerRadius = new CornerRadius(0, 0, 0, 0);
+                if (!(o is ChromelessWindow window)) return;
+                window.BorderThickness = new Thickness(Properties.Settings.Default.BorderThickness);
+                window.CornerRadius = new CornerRadius(0, 0, 0, 0);
+                window.Opacity = Properties.Settings.Default.WindowOpacity;
+                window.ResizeBorderThickness = new Thickness(Properties.Settings.Default.WindowResizeBorder);
             }
             catch (Exception ex)
             {

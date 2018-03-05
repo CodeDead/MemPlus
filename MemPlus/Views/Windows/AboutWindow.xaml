@@ -9,6 +9,7 @@
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
     UseLayoutRounding="True"
+    AllowsTransparency="True"
     Title="MemPlus - About" Height="200" Width="350" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>

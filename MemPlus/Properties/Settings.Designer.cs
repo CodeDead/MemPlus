@@ -309,5 +309,29 @@ namespace MemPlus.Properties {
                 this["RamCleaningMessage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public double WindowOpacity {
+            get {
+                return ((double)(this["WindowOpacity"]));
+            }
+            set {
+                this["WindowOpacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public double WindowResizeBorder {
+            get {
+                return ((double)(this["WindowResizeBorder"]));
+            }
+            set {
+                this["WindowResizeBorder"] = value;
+            }
+        }
     }
 }

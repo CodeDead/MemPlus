@@ -35,13 +35,12 @@ namespace MemPlus.Views.Windows
         public SettingsWindow(MainWindow mainWindow, LogController logController)
         {
             _logController = logController;
+            _mainWindow = mainWindow;
             _logController.AddLog(new ApplicationLog("Initializing SettingsWindow"));
 
             InitializeComponent();
             ChangeVisualStyle();
             LoadProperties();
-
-            _mainWindow = mainWindow;
 
             _logController.AddLog(new ApplicationLog("Done initializing SettingsWindow"));
         }
@@ -153,6 +152,8 @@ namespace MemPlus.Views.Windows
                 CboStyle.Text = Properties.Settings.Default.VisualStyle;
                 CpMetroBrush.Color = Properties.Settings.Default.MetroColor;
                 IntBorderThickness.Value = Properties.Settings.Default.BorderThickness;
+                SldOpacity.Value = Properties.Settings.Default.WindowOpacity * 100;
+                SldWindowResize.Value = Properties.Settings.Default.WindowResizeBorder;
             }
             catch (Exception ex)
             {
@@ -268,16 +269,17 @@ namespace MemPlus.Views.Windows
 
                 //Theme
                 Properties.Settings.Default.VisualStyle = CboStyle.Text;
-
                 Properties.Settings.Default.MetroColor = CpMetroBrush.Color;
                 if (IntBorderThickness.Value != null) Properties.Settings.Default.BorderThickness = (int)IntBorderThickness.Value;
+                Properties.Settings.Default.WindowOpacity = SldOpacity.Value / 100;
+                Properties.Settings.Default.WindowResizeBorder = SldWindowResize.Value;
 
                 Properties.Settings.Default.Save();
 
-                LoadProperties();
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
                 ChangeVisualStyle();
+                LoadProperties();
 
                 _logController.AddLog(new ApplicationLog("Properties have been saved"));
 
@@ -451,6 +453,26 @@ namespace MemPlus.Views.Windows
                     LsvExclusions.Items.Add(s);
                 }
             }
+        }
+
+        /// <summary>
+        /// Method that is called when the opacity should change dynamically
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedPropertyChangedEventArgs</param>
+        private void SldOpacity_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Opacity = SldOpacity.Value / 100;
+        }
+
+        /// <summary>
+        /// Method  that is called when the ResizeBorderThickness should change dynamically
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedPropertyChangedEventArgs</param>
+        private void SldWindowResize_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ResizeBorderThickness = new Thickness(SldWindowResize.Value);
         }
     }
 }
