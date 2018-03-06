@@ -38,8 +38,6 @@ namespace MemPlus.Views.Windows
             ChangeVisualStyle();
             LoadProperties();
 
-            RefreshRamData();
-
             _logController.AddLog(new ApplicationLog("Done initializing AnalyzerWindow"));
         }
 
@@ -198,6 +196,16 @@ namespace MemPlus.Views.Windows
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        /// <summary>
+        /// Method that is called when the window has loaded
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void AnalyzerWindow_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            RefreshRamData();
         }
     }
 }
