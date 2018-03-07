@@ -90,6 +90,7 @@
     <Compile Include="Business\RAM\RamData.cs" />
     <Compile Include="Business\RAM\RamSticksExporter.cs" />
     <Compile Include="Business\RAM\RamStick.cs" />
+    <Compile Include="Business\UTILS\NativeMethods.cs" />
     <Compile Include="Business\UTILS\Utils.cs" />
     <Compile Include="Views\Windows\AnalyzerWindow.xaml.cs">
       <DependentUpon>AnalyzerWindow.xaml</DependentUpon>
