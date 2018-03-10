@@ -41,7 +41,7 @@
                             </Grid.RowDefinitions>
 
                             <CheckBox Grid.Row="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
-                            <CheckBox Grid.Row="1" x:Name="ChbAutoStart" Content="Automatic start MemPlus when Windows starts" Margin="3" />
+                            <CheckBox Grid.Row="1" x:Name="ChbAutoStart" Content="Start MemPlus when Windows starts" Margin="3" />
                             <CheckBox Grid.Row="2" x:Name="ChbStartHidden" Content="Hide MemPlus on startup" Margin="3" />
                             <CheckBox Grid.Row="3" x:Name="ChbStartMinimized" Content="Start MemPlus minimized" Margin="3" />
                             <CheckBox Grid.Row="4" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
