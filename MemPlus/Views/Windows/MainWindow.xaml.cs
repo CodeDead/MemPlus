@@ -702,34 +702,6 @@ namespace MemPlus.Views.Windows
                         break;
                 }
 
-                double ramSavings = _ramController.RamSavings / 1024 / 1024;
-                string message;
-                if (ramSavings < 0)
-                {
-                    ramSavings = Math.Abs(ramSavings);
-                    _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
-                    message = "Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!";
-                }
-                else
-                {
-                    _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
-                    message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
-                }
-
-                if (_statisticsMessage)
-                {
-                    // ReSharper disable once SwitchStatementMissingSomeCases
-                    switch (Visibility)
-                    {
-                        default:
-                            MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                            break;
-                        case Visibility.Hidden when TbiIcon.Visibility == Visibility.Visible:
-                            TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
-                            break;
-                    }
-                }
-
                 BtnClearMemory.IsEnabled = true;
             }
             catch (Exception ex)

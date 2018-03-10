@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
+using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.LOG;
 using MemPlus.Views.Windows;
 using Microsoft.VisualBasic.Devices;
@@ -190,7 +192,7 @@ namespace MemPlus.Business.RAM
 
             _ramTimer.Enabled = true;
             RamMonitorEnabled = true;
-            
+
             UpdateRamUsage();
             UpdateGuiControls();
 
@@ -271,6 +273,8 @@ namespace MemPlus.Business.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
+            ClearingStatistcs();
+
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
 
@@ -300,6 +304,8 @@ namespace MemPlus.Business.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
+            ClearingStatistcs();
+
             _logController.AddLog(new ApplicationLog("Done clearing process working sets"));
         }
 
@@ -327,7 +333,43 @@ namespace MemPlus.Business.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
+            ClearingStatistcs();
+
             _logController.AddLog(new ApplicationLog("Done clearing FileSystem cache"));
+        }
+
+        /// <summary>
+        /// Display a message about the last RAM Optimizer clearing statistics
+        /// </summary>
+        private void ClearingStatistcs()
+        {
+            double ramSavings = RamSavings / 1024 / 1024;
+            string message;
+            if (ramSavings < 0)
+            {
+                ramSavings = Math.Abs(ramSavings);
+                _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
+                message = "Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!";
+            }
+            else
+            {
+                _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
+                message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
+            }
+
+            if (ShowStatistics)
+            {
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch (_mainWindow.Visibility)
+                {
+                    default:
+                        MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+                    case Visibility.Hidden when _mainWindow.TbiIcon.Visibility == Visibility.Visible:
+                        _mainWindow.TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
+                        break;
+                }
+            }
         }
 
         /// <summary>
