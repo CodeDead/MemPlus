@@ -1,5 +1,5 @@
 # MemPlus
-![MemPlus](https://i.imgur.com/WG2oNG9.gif)
+![MemPlus](https://i.imgur.com/PLh2e5N.gif)
 
 MemPlus is an entirely free, completely functional 'memory optimizer' that will 'safely' free up non-essential memory for Windows devices.
 For more information, please visit:  
