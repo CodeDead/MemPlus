@@ -60,7 +60,7 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                _ramController = new RamController(Dispatcher, CgRamUsage, LblTotalPhysicalMemory, LblAvailablePhysicalMemory, Properties.Settings.Default.RamMonitorInterval, _logController);
+                _ramController = new RamController(this, Properties.Settings.Default.RamMonitorInterval, _logController);
             }
             catch (Exception ex)
             {
@@ -145,6 +145,7 @@ namespace MemPlus.Views.Windows
                 _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
+                _ramController.ShowStatistics = Properties.Settings.Default.RamCleaningMessage;
 
                 _ramController.AutoOptimizePercentage = Properties.Settings.Default.AutoOptimizePercentage;
                 _ramController.SetAutoOptimizeThreshold(Properties.Settings.Default.AutoOptimizePercentageThreshold);

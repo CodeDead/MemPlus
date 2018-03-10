@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using MemPlus.Business.LOG;
+using MemPlus.Views.Windows;
 using Microsoft.VisualBasic.Devices;
-using Syncfusion.UI.Xaml.Gauges;
 
 namespace MemPlus.Business.RAM
 {
@@ -33,22 +31,6 @@ namespace MemPlus.Business.RAM
         /// </summary>
         private readonly LogController _logController;
         /// <summary>
-        /// The Dispatcher object that can be used to update GUI components
-        /// </summary>
-        private readonly Dispatcher _dispatcher;
-        /// <summary>
-        /// The SfCircularGauge object that can be used to present RAM usage statistics
-        /// </summary>
-        private readonly SfCircularGauge _gauge;
-        /// <summary>
-        /// The Label object that can be used to show the total physical memory
-        /// </summary>
-        private readonly Label _lblTotal;
-        /// <summary>
-        /// The Label object that can be used to show the available physical memory
-        /// </summary>
-        private readonly Label _lblAvailable;
-        /// <summary>
         /// The ComputerInfo object that can be used to retrieve RAM usage statistics
         /// </summary>
         private readonly ComputerInfo _info;
@@ -60,6 +42,10 @@ namespace MemPlus.Business.RAM
         /// An integer value representative of the percentage of RAM usage that should be reached before RAM optimisation should be called
         /// </summary>
         private double _autoOptimizeRamThreshold;
+        /// <summary>
+        /// The MainWindow object that called this class
+        /// </summary>
+        private readonly MainWindow _mainWindow;
         #endregion
 
         #region Properties
@@ -100,6 +86,10 @@ namespace MemPlus.Business.RAM
         /// </summary>
         internal bool AutoOptimizePercentage { get; set; }
         /// <summary>
+        /// Property displaying whether or not RAM clearing statistics should be displayed
+        /// </summary>
+        internal bool ShowStatistics { get; set; }
+        /// <summary>
         /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
         /// </summary>
         private DateTime _lastAutoOptimizeTime;
@@ -108,27 +98,20 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Initialize a new RamController object
         /// </summary>
-        /// <param name="dispatcher">The Dispatcher object that can be used to update GUI components</param>
-        /// <param name="gauge">The SfCircularGauge control that can be used to present RAM usage statistics</param>
-        /// <param name="lblTotal">The Label control that can be used to display the total available memory statistics</param>
-        /// <param name="lblAvailable">The Label control that can be used to display the available memory statistics</param>
+        /// <param name="mainWindow">The MainWindow object that called this initializer</param>
         /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(Dispatcher dispatcher, SfCircularGauge gauge, Label lblTotal, Label lblAvailable, int ramUpdateTimerInterval, LogController logController)
+        internal RamController(MainWindow mainWindow, int ramUpdateTimerInterval, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
 
             if (ramUpdateTimerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
+            _mainWindow = mainWindow ?? throw new ArgumentNullException(nameof(mainWindow));
 
             RamSavings = 0;
 
             _info = new ComputerInfo();
-
-            _dispatcher = dispatcher ?? throw new ArgumentException("Dispatcher cannot be null!");
-            _gauge = gauge ?? throw new ArgumentException("Gauge cannot be null!");
-            _lblTotal = lblTotal ?? throw new ArgumentNullException(nameof(lblTotal));
-            _lblAvailable = lblAvailable ?? throw new ArgumentNullException(nameof(lblAvailable));
 
             _ramOptimizer = new RamOptimizer(_logController);
             EmptyWorkingSets = true;
@@ -230,12 +213,12 @@ namespace MemPlus.Business.RAM
         /// </summary>
         private void UpdateGuiControls()
         {
-            _dispatcher.Invoke(() =>
+            _mainWindow.Dispatcher.Invoke(() =>
             {
-                _gauge.Scales[0].Pointers[0].Value = RamUsagePercentage;
-                _gauge.GaugeHeader = "RAM usage (" + RamUsagePercentage.ToString("F2") + "%)";
-                _lblTotal.Content = (RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                _lblAvailable.Content = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                _mainWindow.CgRamUsage.Scales[0].Pointers[0].Value = RamUsagePercentage;
+                _mainWindow.CgRamUsage.GaugeHeader = "RAM usage (" + RamUsagePercentage.ToString("F2") + "%)";
+                _mainWindow.LblTotalPhysicalMemory.Content = (RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                _mainWindow.LblAvailablePhysicalMemory.Content = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
             });
         }
 
@@ -272,17 +255,12 @@ namespace MemPlus.Business.RAM
                 if (EmptyWorkingSets)
                 {
                     _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
+                    await Task.Delay(10000);
                 }
 
                 if (ClearFileSystemCache)
                 {
                     _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
-                }
-
-                // No need to wait if nothing happened
-                if (EmptyWorkingSets || ClearFileSystemCache)
-                {
-                    await Task.Delay(10000);
                 }
 
                 UpdateRamUsage();
