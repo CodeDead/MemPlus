@@ -47,12 +47,10 @@ namespace MemPlus.Business.RAM
                     }
                 }
 
-                if (index != ramSticks.Count - 1)
-                {
-                    exportData += Environment.NewLine;
-                    exportData += "----------";
-                    exportData += Environment.NewLine;
-                }
+                if (index == ramSticks.Count - 1) continue;
+                exportData += Environment.NewLine;
+                exportData += "----------";
+                exportData += Environment.NewLine;
             }
 
             Export(path, exportData);
@@ -150,12 +148,10 @@ namespace MemPlus.Business.RAM
                     }
                 }
 
-                if (i != ramSticks.Count - 1)
-                {
-                    exportData += Environment.NewLine;
-                    exportData += "----------" + delimiter + "----------";
-                    exportData += Environment.NewLine;
-                }
+                if (i == ramSticks.Count - 1) continue;
+                exportData += Environment.NewLine;
+                exportData += "----------" + delimiter + "----------";
+                exportData += Environment.NewLine;
             }
 
             Export(path, exportData);

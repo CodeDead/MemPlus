@@ -29,7 +29,7 @@
                     <Separator />
                     <MenuItem Header="Export" Click="BtnExport_OnClick">
                         <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png"></Image>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="Refresh" Click="BtnRefresh_OnClick">

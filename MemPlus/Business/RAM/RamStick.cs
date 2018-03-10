@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MemPlus.Business.RAM
 {
@@ -49,7 +50,7 @@ namespace MemPlus.Business.RAM
         {
             foreach(RamData r in _ramData)
             {
-                if (r.Key.ToLower() == key.ToLower())
+                if (string.Equals(r.Key, key, StringComparison.CurrentCultureIgnoreCase))
                 {
                     return r.Value;
                 }

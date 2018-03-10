@@ -22,15 +22,15 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Image Width="64" Height="64" Source="/MemPlus;component/Resources/Images/ram.png"></Image>
+            <Image Width="64" Height="64" Source="/MemPlus;component/Resources/Images/ram.png" />
             <Separator Margin="5" Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
             <TextBlock Grid.Column="2">
-                MemPlus was created by DeadLine.<LineBreak></LineBreak>
-                <LineBreak></LineBreak>
-                Images: small-n-flat by paomedia<LineBreak></LineBreak>
-                Theme: Syncfusion<LineBreak></LineBreak>
-                Version: 1.1.0.0<LineBreak></LineBreak>
-                <LineBreak></LineBreak>
+                MemPlus was created by DeadLine.<LineBreak />
+                <LineBreak />
+                Images: small-n-flat by paomedia<LineBreak />
+                Theme: Syncfusion<LineBreak />
+                Version: 1.1.1.0<LineBreak />
+                <LineBreak />
                 Copyright © CodeDead 2018
             </TextBlock>
         </Grid>

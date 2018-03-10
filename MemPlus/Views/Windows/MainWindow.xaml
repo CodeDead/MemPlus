@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition></RowDefinition>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
         <tb:TaskbarIcon x:Name="TbiIcon"
@@ -104,13 +104,13 @@
                 <MenuItem x:Name="MniRamMonitor" Header="RAM Monitor" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
                 <MenuItem Header="RAM Analyzer" Click="RamAnalyzerMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Logs">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/log.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/log.png" />
                     </MenuItem.Icon>
                     <MenuItem Header="RAM logs" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
@@ -120,14 +120,14 @@
                 <Separator />
                 <MenuItem Header="GUI">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/monitor.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/monitor.png" />
                     </MenuItem.Icon>
                     <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniDisableInactive" Header="Disable when inactive" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
                 </MenuItem>
                 <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/settings.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/settings.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -135,35 +135,35 @@
             <MenuItem Header="_Help">
                 <MenuItem Header="Help" Click="HelpMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/help.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/help.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Check for updates" Click="UpdateMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/update.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/update.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Homepage" Click="HomePageMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/home.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/home.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="License" Click="LicenseMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/pdf.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/pdf.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
                 <MenuItem Header="Donate" Click="DonateMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/donate.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/donate.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="About" Click="AboutMenuItem_OnClick">
                     <MenuItem.Icon>
-                        <Image Width="16" Height="16" Source="/Resources/Images/about.png"/>
+                        <Image Width="16" Height="16" Source="/Resources/Images/about.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
@@ -209,8 +209,8 @@
                                            x:Name="BtnClearMemory" Click="BtnClearMemory_OnClick" IsMultiLine="False"
                                            MinHeight="25" HorizontalAlignment="Stretch" Margin="10,5">
                     <syncfusion:DropDownMenuGroup>
-                        <syncfusion:DropDownMenuItem Header="Clear Working sets" Click="ClearWorkingSetsDropDownMenuItem_OnClick"/>
-                        <syncfusion:DropDownMenuItem Header="Clear FileSystem cache" Click="ClearFileSystemCacheDropDownMenuItem_OnClick"/>
+                        <syncfusion:DropDownMenuItem Header="Clear Working sets" Click="ClearWorkingSetsDropDownMenuItem_OnClick" />
+                        <syncfusion:DropDownMenuItem Header="Clear FileSystem cache" Click="ClearFileSystemCacheDropDownMenuItem_OnClick" />
                     </syncfusion:DropDownMenuGroup>
                 </syncfusion:SplitButtonAdv>
             </Grid>

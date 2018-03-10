@@ -13,8 +13,8 @@
     Title="MemPlus - Settings" Height="380" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <syncfusion:TabControlExt CloseButtonType="Hide" EnableLabelEdit="False"
                                   AllowDragDrop="False" DefaultContextMenuItemVisibility="Hidden">
@@ -23,7 +23,7 @@
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <GroupBox Grid.Row="0" Header="MemPlus" MinWidth="250" Margin="3">
@@ -142,7 +142,7 @@
                     <GroupBox Grid.Row="1" Header="Working Set Exclusions" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <ListView x:Name="LsvExclusions" Margin="3" Height="80" Width="300" AllowDrop="True" Drop="LsvExclusions_OnDrop">
@@ -150,18 +150,18 @@
                                     <ContextMenu>
                                         <MenuItem Header="Copy" Click="CopyExclusionMenuItem_OnClick">
                                             <MenuItem.Icon>
-                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" ></Image>
+                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <Separator />
                                         <MenuItem Header="Delete" Click="DeleteExclusionMenuItem_OnClick">
                                             <MenuItem.Icon>
-                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" ></Image>
+                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <MenuItem Header="Clear" Click="ClearExclusionsMenuItem_OnClick">
                                             <MenuItem.Icon>
-                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" ></Image>
+                                                <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                     </ContextMenu>
@@ -202,21 +202,21 @@
                             </Grid.ColumnDefinitions>
                             <Label Margin="3" Content="Style:" />
                             <ComboBox Margin="3" x:Name="CboStyle" SelectedValuePath="Content" Grid.Row="0" Grid.Column="1" IsReadOnly="True">
-                                <ComboBoxItem>Metro</ComboBoxItem>
-                                <ComboBoxItem>Blend</ComboBoxItem>
-                                <ComboBoxItem>VS2010</ComboBoxItem>
-                                <ComboBoxItem>Office2003</ComboBoxItem>
-                                <ComboBoxItem>Office2007Blue</ComboBoxItem>
-                                <ComboBoxItem>Office2007Black</ComboBoxItem>
-                                <ComboBoxItem>Office2007Silver</ComboBoxItem>
-                                <ComboBoxItem>Office2010Blue</ComboBoxItem>
-                                <ComboBoxItem>Office2010Black</ComboBoxItem>
-                                <ComboBoxItem>Office2010Silver</ComboBoxItem>
-                                <ComboBoxItem>ShinyRed</ComboBoxItem>
-                                <ComboBoxItem>ShinyBlue</ComboBoxItem>
-                                <ComboBoxItem>SyncOrange</ComboBoxItem>
-                                <ComboBoxItem>Transparent</ComboBoxItem>
-                                <ComboBoxItem>None</ComboBoxItem>
+                                <ComboBoxItem Content="Metro" />
+                                <ComboBoxItem Content="Blend" />
+                                <ComboBoxItem Content="VS2010" />
+                                <ComboBoxItem Content="Office2003" />
+                                <ComboBoxItem Content="Office2007Blue" />
+                                <ComboBoxItem Content="Office2007Black" />
+                                <ComboBoxItem Content="Office2007Silver" />
+                                <ComboBoxItem Content="Office2010Blue" />
+                                <ComboBoxItem Content="Office2010Black" />
+                                <ComboBoxItem Content="Office2010Silver" />
+                                <ComboBoxItem Content="ShinyRed" />
+                                <ComboBoxItem Content="ShinyBlue" />
+                                <ComboBoxItem Content="SyncOrange" />
+                                <ComboBoxItem Content="Transparent" />
+                                <ComboBoxItem Content="None" />
                             </ComboBox>
                             <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:" />
                             <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" />

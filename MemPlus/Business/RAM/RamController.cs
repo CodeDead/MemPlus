@@ -242,7 +242,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Clear all non-essential RAM
         /// </summary>
-        /// <returns>Nothing</returns>
+        /// <returns>A Task</returns>
         internal async Task ClearMemory()
         {
             _lastAutoOptimizeTime = DateTime.Now;
@@ -281,7 +281,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Clear the working set of all processes, excluding the exclusion list
         /// </summary>
-        /// <returns>Nothing</returns>
+        /// <returns>A Task</returns>
         internal async Task ClearWorkingSets()
         {
             _logController.AddLog(new ApplicationLog("Clearing process working sets"));
@@ -312,7 +312,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Clear the FileSystem cache
         /// </summary>
-        /// <returns>Nothing</returns>
+        /// <returns>A Task</returns>
         internal async Task ClearFileSystemCaches()
         {
             _logController.AddLog(new ApplicationLog("Clearing FileSystem cache"));
@@ -357,18 +357,16 @@ namespace MemPlus.Business.RAM
                 message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
             }
 
-            if (ShowStatistics)
+            if (!ShowStatistics) return;
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (_mainWindow.Visibility)
             {
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (_mainWindow.Visibility)
-                {
-                    default:
-                        MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                        break;
-                    case Visibility.Hidden when _mainWindow.TbiIcon.Visibility == Visibility.Visible:
-                        _mainWindow.TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
-                        break;
-                }
+                default:
+                    MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+                case Visibility.Hidden when _mainWindow.TbiIcon.Visibility == Visibility.Visible:
+                    _mainWindow.TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
+                    break;
             }
         }
 
