@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.EXPORT;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
@@ -33,10 +32,6 @@ namespace MemPlus.Views.Windows
         /// The LogController object that can be used to add new logs
         /// </summary>
         private readonly LogController _logController;
-        /// <summary>
-        /// A boolean to indicate whether RAM statistics should be displayed after clearing the memory
-        /// </summary>
-        private bool _statisticsMessage;
         /// <summary>
         /// A boolean to indicate whether RAM cleaning is currently in progress
         /// </summary>
@@ -134,7 +129,6 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                _statisticsMessage = Properties.Settings.Default.RamCleaningMessage;
                 MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
                 MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
