@@ -333,5 +333,17 @@ namespace MemPlus.Properties {
                 this["WindowResizeBorder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NotifyIconStatistics {
+            get {
+                return ((bool)(this["NotifyIconStatistics"]));
+            }
+            set {
+                this["NotifyIconStatistics"] = value;
+            }
+        }
     }
 }

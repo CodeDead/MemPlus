@@ -92,6 +92,10 @@ namespace MemPlus.Business.RAM
         /// </summary>
         internal bool ShowStatistics { get; set; }
         /// <summary>
+        /// Property displaying whether RAM usage statistics should be displayed in the notifyicon
+        /// </summary>
+        internal bool ShowNotifyIconStatistics { get; set; }
+        /// <summary>
         /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
         /// </summary>
         private DateTime _lastAutoOptimizeTime;
@@ -217,10 +221,23 @@ namespace MemPlus.Business.RAM
         {
             _mainWindow.Dispatcher.Invoke(() =>
             {
+                string ramTotal = (RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                string ramAvailable = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
                 _mainWindow.CgRamUsage.Scales[0].Pointers[0].Value = RamUsagePercentage;
                 _mainWindow.CgRamUsage.GaugeHeader = "RAM usage (" + RamUsagePercentage.ToString("F2") + "%)";
-                _mainWindow.LblTotalPhysicalMemory.Content = (RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                _mainWindow.LblAvailablePhysicalMemory.Content = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                _mainWindow.LblTotalPhysicalMemory.Content = ramTotal;
+                _mainWindow.LblAvailablePhysicalMemory.Content = ramAvailable;
+
+                if (ShowNotifyIconStatistics)
+                {
+                    string tooltipText = "DeviceLog";
+                    tooltipText += Environment.NewLine;
+                    tooltipText += "Total physical memory: " + ramTotal;
+                    tooltipText += Environment.NewLine;
+                    tooltipText += "Available physical memory: " + ramAvailable;
+
+                    _mainWindow.TbiIcon.ToolTipText = tooltipText;
+                }
             });
         }
 

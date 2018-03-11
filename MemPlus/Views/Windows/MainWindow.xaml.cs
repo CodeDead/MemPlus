@@ -141,6 +141,16 @@ namespace MemPlus.Views.Windows
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
                 _ramController.ShowStatistics = Properties.Settings.Default.RamCleaningMessage;
 
+                if (Properties.Settings.Default.NotifyIconStatistics)
+                {
+                    _ramController.ShowNotifyIconStatistics = true;
+                }
+                else
+                {
+                    _ramController.ShowNotifyIconStatistics = false;
+                    TbiIcon.ToolTipText = "DeviceLog";
+                }
+
                 _ramController.AutoOptimizePercentage = Properties.Settings.Default.AutoOptimizePercentage;
                 _ramController.SetAutoOptimizeThreshold(Properties.Settings.Default.AutoOptimizePercentageThreshold);
 

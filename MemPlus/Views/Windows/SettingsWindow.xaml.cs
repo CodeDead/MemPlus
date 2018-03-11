@@ -94,6 +94,7 @@ namespace MemPlus.Views.Windows
                 }
                 ChbAdminWarning.IsChecked = Properties.Settings.Default.AdministrativeWarning;
                 ChbRamClearingMessage.IsChecked = Properties.Settings.Default.RamCleaningMessage;
+                ChbNotifyIconStatistics.IsChecked = Properties.Settings.Default.NotifyIconStatistics;
 
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
@@ -214,6 +215,7 @@ namespace MemPlus.Views.Windows
                 if (ChbWindowDraggable.IsChecked != null) Properties.Settings.Default.WindowDragging = ChbWindowDraggable.IsChecked.Value;
                 if (ChbAdminWarning.IsChecked != null) Properties.Settings.Default.AdministrativeWarning = ChbAdminWarning.IsChecked.Value;
                 if (ChbRamClearingMessage.IsChecked != null) Properties.Settings.Default.RamCleaningMessage = ChbRamClearingMessage.IsChecked.Value;
+                if (ChbNotifyIconStatistics.IsChecked != null) Properties.Settings.Default.NotifyIconStatistics = ChbNotifyIconStatistics.IsChecked.Value;
                 if (ChbStartHidden.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartHidden.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
 

@@ -10,7 +10,7 @@
     AllowsTransparency="True"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="360" Width="450"
+    Title="MemPlus - Settings" Height="400" Width="450"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -39,6 +39,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <CheckBox Grid.Row="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
@@ -50,6 +51,7 @@
                             <CheckBox Grid.Row="6" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
                             <CheckBox Grid.Row="7" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
                             <CheckBox Grid.Row="8" x:Name="ChbRamClearingMessage" Content="Display information after clearing RAM" Margin="3" />
+                            <CheckBox Grid.Row="9" x:Name="ChbNotifyIconStatistics" Content="Display RAM statistics in notifyicon" Margin="3" />
                         </Grid>
                     </GroupBox>
                 </Grid>
