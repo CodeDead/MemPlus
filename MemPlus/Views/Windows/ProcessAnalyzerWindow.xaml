@@ -10,7 +10,7 @@
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="True"
     TitleTextAlignment="Center"
-    Title="MemPlus - Process Analyzer" Height="300" Width="450" Icon="/Resources/Images/ram.png">
+    Title="MemPlus - Process Analyzer" Height="350" Width="500" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -24,7 +24,7 @@
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator></Separator>
+                    <Separator />
                     <MenuItem Header="Clear" Click="BtnClear_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />

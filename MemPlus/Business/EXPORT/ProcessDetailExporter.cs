@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using MemPlus.Business.PROCESS;
 
-namespace MemPlus.Business.PROCESS
+namespace MemPlus.Business.EXPORT
 {
     /// <summary>
     /// Static class that can be used to export ProcessDetail information

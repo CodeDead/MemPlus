@@ -7,7 +7,6 @@ using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
-using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows
 {

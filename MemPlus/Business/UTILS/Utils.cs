@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Management;
 using System.Security.Principal;
 using System.Windows;
+using MemPlus.Business.EXPORT;
 using MemPlus.Business.LOG;
 using MemPlus.Business.PROCESS;
 using MemPlus.Business.RAM;

@@ -41,19 +41,19 @@ namespace MemPlus.Business.LOG
         /// <summary>
         /// Method that will be called when a Log object was added
         /// </summary>
-        internal LogAdded LogAddedEvent;
+        internal event LogAdded LogAddedEvent;
         /// <summary>
         /// Method that will be called when a Log object was removed
         /// </summary>
-        internal LogDeleted LogDeletedEvent;
+        internal event LogDeleted LogDeletedEvent;
         /// <summary>
         /// Method that will be called when all Log objects were removed
         /// </summary>
-        internal LogsCleared LogsClearedEvent;
+        internal event LogsCleared LogsClearedEvent;
         /// <summary>
         /// Method that will be called when a list of Log objects with a specific LogType were removed
         /// </summary>
-        internal LogTypeCleared LogTypeClearedEvent;
+        internal event LogTypeCleared LogTypeClearedEvent;
         #endregion
 
         /// <summary>

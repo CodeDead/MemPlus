@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
@@ -8,7 +7,6 @@ using System.Windows.Media;
 using MemPlus.Business.EXPORT;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
-using MemPlus.Business.PROCESS;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 using Microsoft.Win32;

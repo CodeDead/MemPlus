@@ -89,9 +89,9 @@
     <Compile Include="Business\EXPORT\ExportTypes.cs" />
     <Compile Include="Business\LOG\ProcessLog.cs" />
     <Compile Include="Business\PROCESS\ProcessDetail.cs" />
-    <Compile Include="Business\PROCESS\ProcessDetailExporter.cs" />
+    <Compile Include="Business\EXPORT\ProcessDetailExporter.cs" />
     <Compile Include="Business\RAM\RamData.cs" />
-    <Compile Include="Business\RAM\RamSticksExporter.cs" />
+    <Compile Include="Business\EXPORT\RamSticksExporter.cs" />
     <Compile Include="Business\RAM\RamStick.cs" />
     <Compile Include="Business\UTILS\NativeMethods.cs" />
     <Compile Include="Business\UTILS\Utils.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Business\LOG\ILogMethods.cs" />
     <Compile Include="Business\LOG\Log.cs" />
     <Compile Include="Business\LOG\LogController.cs" />
-    <Compile Include="Business\LOG\LogExporter.cs" />
+    <Compile Include="Business\EXPORT\LogExporter.cs" />
     <Compile Include="Business\LOG\RamLog.cs" />
     <Compile Include="Business\RAM\RamController.cs" />
     <Compile Include="Business\RAM\RamOptimizer.cs" />
