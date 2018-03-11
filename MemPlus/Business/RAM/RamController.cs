@@ -230,7 +230,7 @@ namespace MemPlus.Business.RAM
 
                 if (ShowNotifyIconStatistics)
                 {
-                    string tooltipText = "DeviceLog";
+                    string tooltipText = "MemPlus";
                     tooltipText += Environment.NewLine;
                     tooltipText += "Total physical memory: " + ramTotal;
                     tooltipText += Environment.NewLine;

@@ -148,7 +148,7 @@ namespace MemPlus.Views.Windows
                 else
                 {
                     _ramController.ShowNotifyIconStatistics = false;
-                    TbiIcon.ToolTipText = "DeviceLog";
+                    TbiIcon.ToolTipText = "MemPlus";
                 }
 
                 _ramController.AutoOptimizePercentage = Properties.Settings.Default.AutoOptimizePercentage;
