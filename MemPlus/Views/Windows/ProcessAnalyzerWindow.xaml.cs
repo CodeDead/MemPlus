@@ -123,11 +123,13 @@ namespace MemPlus.Views.Windows
         /// </summary>
         private void RefreshProcessDetails()
         {
+            _logController.AddLog(new ProcessLog("Refreshing process details"));
             LsvProcessList.Items.Clear();
             foreach (ProcessDetail pd in Utils.GetProcessDetails(_logController))
             {
                 LsvProcessList.Items.Add(pd);
             }
+            _logController.AddLog(new ProcessLog("Done refreshing process details"));
         }
 
         /// <summary>
