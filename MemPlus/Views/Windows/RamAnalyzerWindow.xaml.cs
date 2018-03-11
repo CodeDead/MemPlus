@@ -146,40 +146,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            List<RamStick> ramSticks = Utils.GetRamSticks();
-            if (ramSticks == null || ramSticks.Count == 0) return;
-
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
-            };
-            if (sfd.ShowDialog() != true) return;
-            try
-            {
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (sfd.FilterIndex)
-                {
-                    //Filterindex starts at 1
-                    case 1:
-                        RamDataExporter.ExportText(sfd.FileName, ramSticks);
-                        break;
-                    case 2:
-                        RamDataExporter.ExportHtml(sfd.FileName, ramSticks);
-                        break;
-                    case 3:
-                        RamDataExporter.ExportCsv(sfd.FileName, ramSticks);
-                        break;
-                    case 4:
-                        RamDataExporter.ExportExcel(sfd.FileName, ramSticks);
-                        break;
-                }
-                MessageBox.Show("Exported all data!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            Utils.ExportRamSticks(_logController);
         }
 
         /// <summary>

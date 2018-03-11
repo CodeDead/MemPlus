@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
@@ -7,6 +8,7 @@ using System.Windows.Media;
 using MemPlus.Business.EXPORT;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
+using MemPlus.Business.PROCESS;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 using Microsoft.Win32;
@@ -619,37 +621,17 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ExportRamAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
-            };
-            if (sfd.ShowDialog() != true) return;
-            try
-            {
-                // ReSharper disable once SwitchStatementMissingSomeCases
-                switch (sfd.FilterIndex)
-                {
-                    //Filterindex starts at 1
-                    case 1:
-                        RamDataExporter.ExportText(sfd.FileName, Utils.GetRamSticks());
-                        break;
-                    case 2:
-                        RamDataExporter.ExportHtml(sfd.FileName, Utils.GetRamSticks());
-                        break;
-                    case 3:
-                        RamDataExporter.ExportCsv(sfd.FileName, Utils.GetRamSticks());
-                        break;
-                    case 4:
-                        RamDataExporter.ExportExcel(sfd.FileName, Utils.GetRamSticks());
-                        break;
-                }
-                MessageBox.Show("All data has been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            Utils.ExportRamSticks(_logController);
+        }
+
+        /// <summary>
+        /// Method that is called when the ProcessAnalyzer data should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ExportProcessAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utils.ExportProcessDetails(_logController);
         }
 
         /// <summary>
@@ -752,11 +734,6 @@ namespace MemPlus.Views.Windows
         {
             // Disable the RAM Monitor to prevent exceptions from being thrown
             _ramController?.DisableMonitor();
-        }
-
-        private void ExportProcessAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
         }
     }
 }
