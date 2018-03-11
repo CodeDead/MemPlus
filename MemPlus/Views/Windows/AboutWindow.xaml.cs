@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using MemPlus.Business.GUI;
@@ -106,7 +105,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
             try
             {
-                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
+                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
             }
             catch (Exception ex)
             {
@@ -125,7 +124,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
             try
             {
-                Process.Start("https://codedead.com/");
+                System.Diagnostics.Process.Start("https://codedead.com/");
             }
             catch (Exception ex)
             {

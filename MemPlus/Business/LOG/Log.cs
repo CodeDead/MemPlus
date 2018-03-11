@@ -59,6 +59,7 @@ namespace MemPlus.Business.LOG
     public enum LogType
     {
         Application,
-        Ram
+        Ram,
+        Process
     }
 }

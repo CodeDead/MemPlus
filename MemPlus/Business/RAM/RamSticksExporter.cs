@@ -29,6 +29,8 @@ namespace MemPlus.Business.RAM
         /// <param name="ramSticks">The list of RamStick objects that need to be exported</param>
         internal static void ExportText(string path, List<RamStick> ramSticks)
         {
+            if (ramSticks == null || ramSticks.Count == 0) throw new ArgumentNullException();
+
             string exportData = "MemPlus - Ram Analyzer Data (" + DateTime.Now + ")";
             exportData += Environment.NewLine;
             exportData += "---";
@@ -63,6 +65,8 @@ namespace MemPlus.Business.RAM
         /// <param name="ramSticks">The list of RamStick objects that need to be exported</param>
         internal static void ExportHtml(string path, List<RamStick> ramSticks)
         {
+            if (ramSticks == null || ramSticks.Count == 0) throw new ArgumentNullException();
+
             string exportData = "<html>";
 
             exportData += "<head>";
@@ -131,8 +135,10 @@ namespace MemPlus.Business.RAM
         /// <param name="path">The path where the data should be stored</param>
         /// <param name="delimiter">The delimiter that should be used to split the data</param>
         /// <param name="ramSticks">The list of RamStick objects that need to be exported</param>
-        private static void ExportDelimiter(string path, string delimiter, List<RamStick> ramSticks)
+        private static void ExportDelimiter(string path, string delimiter, IReadOnlyList<RamStick> ramSticks)
         {
+            if (ramSticks == null || ramSticks.Count == 0) throw new ArgumentNullException();
+
             string exportData = "Key" + delimiter + "Value";
             exportData += Environment.NewLine;
 

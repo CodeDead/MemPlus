@@ -87,13 +87,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\EXPORT\ExportTypes.cs" />
+    <Compile Include="Business\LOG\ProcessLog.cs" />
+    <Compile Include="Business\PROCESS\ProcessDetail.cs" />
+    <Compile Include="Business\PROCESS\ProcessDetailExporter.cs" />
     <Compile Include="Business\RAM\RamData.cs" />
     <Compile Include="Business\RAM\RamSticksExporter.cs" />
     <Compile Include="Business\RAM\RamStick.cs" />
     <Compile Include="Business\UTILS\NativeMethods.cs" />
     <Compile Include="Business\UTILS\Utils.cs" />
-    <Compile Include="Views\Windows\AnalyzerWindow.xaml.cs">
-      <DependentUpon>AnalyzerWindow.xaml</DependentUpon>
+    <Compile Include="Views\Windows\RamAnalyzerWindow.xaml.cs">
+      <DependentUpon>RamAnalyzerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ProcessAnalyzerWindow.xaml.cs">
+      <DependentUpon>ProcessAnalyzerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -102,7 +108,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Windows\AnalyzerWindow.xaml">
+    <Page Include="Views\Windows\RamAnalyzerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +143,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Windows\ProcessAnalyzerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,6 +238,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\process.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

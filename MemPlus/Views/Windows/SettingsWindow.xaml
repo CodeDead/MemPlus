@@ -10,7 +10,8 @@
     AllowsTransparency="True"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="360" Width="450" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="MemPlus - Settings" Height="360" Width="450"
+    Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

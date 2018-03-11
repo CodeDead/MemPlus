@@ -78,12 +78,18 @@
                         <MenuItem Header="All logs" Click="ExportAllLogsMenuItem_OnClick" />
                         <Separator />
                         <MenuItem Header="RAM logs" Click="RamExportMenuItem_OnClick" />
+                        <MenuItem Header="Process logs" Click="ProcessExportMenuItem_OnClick" />
                         <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="RAM Analyzer data" Click="ExportRamAnalyzerDataMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram_tab.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Process Analyzer data" Click="ExportProcessAnalyzerDataMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
@@ -107,12 +113,18 @@
                         <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png" />
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Process Analyzer" Click="ProcessAnalyzerMenuItem_OnClick">
+                    <MenuItem.Icon>
+                        <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator />
                 <MenuItem Header="Logs">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/log.png" />
                     </MenuItem.Icon>
                     <MenuItem Header="RAM logs" Click="RamLogsMenuItem_OnClick" />
+                    <MenuItem Header="Process logs" Click="ProcessLogsMenuItem_OnClick" />
                     <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="Clear" Click="ClearLogsMenuItem_OnClick" />

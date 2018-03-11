@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using MemPlus.Business.EXPORT;
 
@@ -37,7 +38,6 @@ namespace MemPlus.Business.LOG
         /// </summary>
         /// <param name="clearedList">The list of Log objects that were removed</param>
         internal delegate void LogTypeCleared(List<Log> clearedList);
-
         /// <summary>
         /// Method that will be called when a Log object was added
         /// </summary>
@@ -135,12 +135,25 @@ namespace MemPlus.Business.LOG
         }
 
         /// <summary>
-        /// Retrieve the list of currently available Log objects
+        /// Retrieve the list of available Log objects
         /// </summary>
-        /// <returns>The list of currently available Log objects</returns>
-        internal List<Log> GetLogs()
+        /// <returns>The list of available Log objects</returns>
+        private List<Log> GetLogs()
         {
             return _logList;
+        }
+
+        /// <summary>
+        /// Retrieve the list of available Log objects of a specific LogType
+        /// </summary>
+        /// <param name="logType">The LogType of the Log objects that should be returned</param>
+        /// <returns>A list of Log objects that are of the specified LogType</returns>
+        internal List<Log> GetLogs(LogType? logType)
+        {
+            if (logType == null) return GetLogs();
+
+            List<Log> logList = _logList.Where(l => l.LogType == logType).ToList();
+            return logList;
         }
 
         /// <summary>
@@ -168,6 +181,8 @@ namespace MemPlus.Business.LOG
             {
                 exportList = _logList;
             }
+
+            if (exportList == null || exportList.Count == 0) throw new ArgumentNullException();
 
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (exportType)

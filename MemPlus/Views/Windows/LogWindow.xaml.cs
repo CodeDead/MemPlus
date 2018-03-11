@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -122,7 +120,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         private void FillLogView()
         {
-            foreach (Log l in _logController.GetLogs().Where(l => l.LogType == _logType))
+            foreach (Log l in _logController.GetLogs(_logType))
             {
                 LsvLogs.Items.Add(l);
             }

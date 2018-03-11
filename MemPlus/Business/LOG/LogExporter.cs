@@ -16,6 +16,7 @@ namespace MemPlus.Business.LOG
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportHtml(string path, List<Log> logList)
         {
+            if (logList == null || logList.Count == 0) throw new ArgumentNullException();
             string exportData = "<html>";
 
             exportData += "<head>";
@@ -54,6 +55,8 @@ namespace MemPlus.Business.LOG
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportTxt(string path, List<Log> logList)
         {
+            if (logList == null || logList.Count == 0) throw new ArgumentNullException();
+
             string exportData = "MemPlus - Log Export (" + DateTime.Now + ")";
             exportData += Environment.NewLine;
 
@@ -76,6 +79,7 @@ namespace MemPlus.Business.LOG
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportCsv(string path, List<Log> logList)
         {
+            if (logList == null || logList.Count == 0) throw new ArgumentNullException();
             ExportDelimiter(path, logList, ",");
         }
 
@@ -86,6 +90,7 @@ namespace MemPlus.Business.LOG
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportExcel(string path, List<Log> logList)
         {
+            if (logList == null || logList.Count == 0) throw new ArgumentNullException();
             ExportDelimiter(path, logList, ";");
         }
 
@@ -97,6 +102,7 @@ namespace MemPlus.Business.LOG
         /// <param name="delimiter">The delimiter character that should be used</param>
         private static void ExportDelimiter(string path, IReadOnlyList<Log> logList, string delimiter)
         {
+            if (logList == null || logList.Count == 0) throw new ArgumentNullException();
             string exportData = "Time" + delimiter + "Data";
             exportData += Environment.NewLine;
 

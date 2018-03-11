@@ -285,6 +285,16 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Method that is called when the Process logs should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ProcessLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new LogWindow(_logController, LogType.Process).Show();
+        }
+
+        /// <summary>
         /// Method that is called when the Application logs should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
@@ -368,6 +378,11 @@ namespace MemPlus.Views.Windows
         /// <param name="logType">The LogType that should be exported. Null to export all logs</param>
         private void ExportLogs(LogType? logType)
         {
+            if (logType != null)
+            {
+                if (_logController.GetLogs(logType).Count == 0) return;
+            }
+
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
@@ -412,6 +427,16 @@ namespace MemPlus.Views.Windows
         private void RamExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ExportLogs(LogType.Ram);
+        }
+
+        /// <summary>
+        /// Method that is called when all Process logs should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ProcessExportMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ExportLogs(LogType.Process);
         }
 
         /// <summary>
@@ -574,7 +599,17 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void RamAnalyzerMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            new AnalyzerWindow(_logController).Show();
+            new RamAnalyzerWindow(_logController).Show();
+        }
+
+        /// <summary>
+        /// Method that is called when the ProcessAnalyzer window should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ProcessAnalyzerMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new ProcessAnalyzerWindow(_logController).Show();
         }
 
         /// <summary>
@@ -717,6 +752,11 @@ namespace MemPlus.Views.Windows
         {
             // Disable the RAM Monitor to prevent exceptions from being thrown
             _ramController?.DisableMonitor();
+        }
+
+        private void ExportProcessAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

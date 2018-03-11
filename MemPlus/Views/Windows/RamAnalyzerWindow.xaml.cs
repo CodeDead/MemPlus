@@ -13,9 +13,9 @@ namespace MemPlus.Views.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>
-    /// Interaction logic for AnalyzerWindow.xaml
+    /// Interaction logic for RamAnalyzerWindow.xaml
     /// </summary>
-    public partial class AnalyzerWindow
+    public partial class RamAnalyzerWindow
     {
         #region Variables
         /// <summary>
@@ -29,7 +29,7 @@ namespace MemPlus.Views.Windows
         /// Initialize a new AnalyzerWindow object
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        public AnalyzerWindow(LogController logController)
+        public RamAnalyzerWindow(LogController logController)
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing AnalyzerWindow"));
@@ -146,6 +146,9 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
+            List<RamStick> ramSticks = Utils.GetRamSticks();
+            if (ramSticks == null || ramSticks.Count == 0) return;
+
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
@@ -158,16 +161,16 @@ namespace MemPlus.Views.Windows
                 {
                     //Filterindex starts at 1
                     case 1:
-                        RamDataExporter.ExportText(sfd.FileName, Utils.GetRamSticks());
+                        RamDataExporter.ExportText(sfd.FileName, ramSticks);
                         break;
                     case 2:
-                        RamDataExporter.ExportHtml(sfd.FileName, Utils.GetRamSticks());
+                        RamDataExporter.ExportHtml(sfd.FileName, ramSticks);
                         break;
                     case 3:
-                        RamDataExporter.ExportCsv(sfd.FileName, Utils.GetRamSticks());
+                        RamDataExporter.ExportCsv(sfd.FileName, ramSticks);
                         break;
                     case 4:
-                        RamDataExporter.ExportExcel(sfd.FileName, Utils.GetRamSticks());
+                        RamDataExporter.ExportExcel(sfd.FileName, ramSticks);
                         break;
                 }
                 MessageBox.Show("Exported all data!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);

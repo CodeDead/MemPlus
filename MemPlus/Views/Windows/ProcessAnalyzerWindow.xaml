@@ -1,5 +1,5 @@
 ﻿<syncfusion:ChromelessWindow
-    x:Class="MemPlus.Views.Windows.LogWindow"
+    x:Class="MemPlus.Views.Windows.ProcessAnalyzerWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -10,13 +10,13 @@
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="True"
     TitleTextAlignment="Center"
-    Title="MemPlus - Logs" Height="300" Width="450" Icon="/Resources/Images/ram.png">
+    Title="MemPlus - Process Analyzer" Height="300" Width="450" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single">
+        <ListView x:Name="LsvProcessList" SelectionMode="Single">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Click="CopyMenuItem_OnClick">
@@ -24,12 +24,7 @@
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <Separator />
-                    <MenuItem Header="Delete" Click="DeleteMenuItem_OnClick">
-                        <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <Separator></Separator>
                     <MenuItem Header="Clear" Click="BtnClear_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
@@ -45,8 +40,10 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView x:Name="DynGrid">
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Time}" />
-                    <GridViewColumn Header="Content" DisplayMemberBinding="{Binding Data}" />
+                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessId}" />
+                    <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding ProcessName}" />
+                    <GridViewColumn Header="Process location" DisplayMemberBinding="{Binding ProcessLocation}" />
+                    <GridViewColumn Header="Memory usage" DisplayMemberBinding="{Binding MemoryUsage}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -56,8 +53,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="Export" Click="BtnExport_OnClick" />
-            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="Clear logs" Click="BtnClear_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Content="Refresh" Margin="3" Click="BtnRefresh_OnClick"/>
+            <Button Grid.Column="1" MinHeight="25" Content="Export" Margin="3" Click="BtnExport_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>
