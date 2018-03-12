@@ -9,6 +9,7 @@
     UseLayoutRounding="True"
     AllowsTransparency="True"
     TitleTextAlignment="Center"
+    UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
     Title="MemPlus - Settings" Height="400" Width="450"
     Icon="/MemPlus;component/Resources/Images/ram.png">

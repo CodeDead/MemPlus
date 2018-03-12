@@ -10,7 +10,7 @@
     AllowsTransparency="True"
     TitleTextAlignment="Center"
     Title="MemPlus - RAM Analyzer" Height="300" Width="350"
-    Loaded="AnalyzerWindow_OnLoaded"
+    Loaded="AnalyzerWindow_OnLoaded" UseNativeChrome="True"
     Icon="/MemPlus;component/Resources/Images/ram.png"
     WindowStartupLocation="CenterScreen">
     <Grid>

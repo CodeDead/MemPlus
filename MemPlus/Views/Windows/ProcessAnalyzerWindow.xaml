@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="True"
-    TitleTextAlignment="Center"
+    TitleTextAlignment="Center" UseNativeChrome="True"
     Title="MemPlus - Process Analyzer" Height="350" Width="500" Icon="/Resources/Images/ram.png" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>

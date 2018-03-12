@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="True"
-    TitleTextAlignment="Center"
+    TitleTextAlignment="Center" UseNativeChrome="True"
     Title="MemPlus - Logs" Height="300" Width="450" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
