@@ -136,6 +136,7 @@
                     </MenuItem.Icon>
                     <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniDisableInactive" Header="Disable when inactive" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniWindowDraggable" Header="Window draggable" IsCheckable="True" Checked="WindowDraggableMenuItem_OnCheckedChanged" Unchecked="WindowDraggableMenuItem_OnCheckedChanged" />
                 </MenuItem>
                 <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
                     <MenuItem.Icon>

@@ -132,6 +132,7 @@ namespace MemPlus.Views.Windows
             {
                 MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
                 MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
+                MniWindowDraggable.IsChecked = Properties.Settings.Default.WindowDragging;
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
 
                 _ramController.SetProcessExceptionList(Properties.Settings.Default.ProcessExceptions);
@@ -161,9 +162,28 @@ namespace MemPlus.Views.Windows
                 }
 
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
+                WindowDraggable();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 
+            _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
+        }
+
+        /// <summary>
+        /// Check whether the Window should be draggable or not
+        /// </summary>
+        private void WindowDraggable()
+        {
+            try
+            {
                 if (Properties.Settings.Default.WindowDragging)
                 {
+                    // Delete event handler first to prevent duplicate handlers
+                    MouseDown -= OnMouseDown;
                     MouseDown += OnMouseDown;
                 }
                 else
@@ -176,8 +196,6 @@ namespace MemPlus.Views.Windows
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
-            _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
         }
 
         /// <summary>
@@ -524,6 +542,27 @@ namespace MemPlus.Views.Windows
             {
                 Properties.Settings.Default.DisableOnInactive = MniDisableInactive.IsChecked;
                 Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Method that is called when the Window draggable setting should be changed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void WindowDraggableMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Properties.Settings.Default.WindowDragging = MniWindowDraggable.IsChecked;
+                Properties.Settings.Default.Save();
+
+                WindowDraggable();
             }
             catch (Exception ex)
             {
