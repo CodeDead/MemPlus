@@ -151,5 +151,23 @@ namespace MemPlus.Views.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void EmptyWorkingSetMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvProcessList.SelectedItems.Count == 0) return;
+            if (!(LsvProcessList.SelectedItem is ProcessDetail detail)) return;
+            try
+            {
+                _logController.AddLog(new RamLog("Emptying working set for process: " + detail.ProcessName));
+                // Empty the working set of the process
+                NativeMethods.EmptyWorkingSet(detail.Handle);
+                _logController.AddLog(new RamLog("Successfully emptied working set for process " + detail.ProcessName));
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }
