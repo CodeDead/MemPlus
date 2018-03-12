@@ -83,5 +83,8 @@
     <Setting Name="NotifyIconStatistics" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="WarningLevel" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">75</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

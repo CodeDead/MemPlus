@@ -10,6 +10,7 @@ using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 using Microsoft.Win32;
+using Syncfusion.UI.Xaml.Gauges;
 
 namespace MemPlus.Views.Windows
 {
@@ -246,10 +247,28 @@ namespace MemPlus.Views.Windows
 
             StyleManager.ChangeStyle(this);
 
-            SolidColorBrush brush = new SolidColorBrush(Properties.Settings.Default.MetroColor);
-            CgRamUsage.Scales[0].Ranges[0].Stroke = brush;
-            CgRamUsage.Scales[0].Pointers[0].NeedlePointerStroke = brush;
-            CgRamUsage.Scales[0].Pointers[0].PointerCapStroke = brush;
+            try
+            {
+                SolidColorBrush brush = new SolidColorBrush(Properties.Settings.Default.MetroColor);
+
+                CircularRange rangeNormal = CgRamUsage.Scales[0].Ranges[0];
+                CircularRange rangeWarning = CgRamUsage.Scales[0].Ranges[1];
+
+                rangeNormal.Stroke = brush;
+                rangeNormal.StartValue = 0;
+                rangeNormal.EndValue = Properties.Settings.Default.WarningLevel;
+
+                rangeWarning.StartValue = Properties.Settings.Default.WarningLevel;
+                rangeWarning.EndValue = 100;
+
+                CgRamUsage.Scales[0].Pointers[0].NeedlePointerStroke = brush;
+                CgRamUsage.Scales[0].Pointers[0].PointerCapStroke = brush;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+                _logController.AddLog(new ApplicationLog(ex.Message));
+            }
 
             _logController.AddLog(new ApplicationLog("Done changing MainWindow theme style"));
         }

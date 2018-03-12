@@ -345,5 +345,17 @@ namespace MemPlus.Properties {
                 this["NotifyIconStatistics"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("75")]
+        public long WarningLevel {
+            get {
+                return ((long)(this["WarningLevel"]));
+            }
+            set {
+                this["WarningLevel"] = value;
+            }
+        }
     }
 }

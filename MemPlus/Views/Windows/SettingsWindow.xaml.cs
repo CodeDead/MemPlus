@@ -155,6 +155,7 @@ namespace MemPlus.Views.Windows
                 IntBorderThickness.Value = Properties.Settings.Default.BorderThickness;
                 SldOpacity.Value = Properties.Settings.Default.WindowOpacity * 100;
                 SldWindowResize.Value = Properties.Settings.Default.WindowResizeBorder;
+                ItbWarningLevel.Value = Properties.Settings.Default.WarningLevel;
             }
             catch (Exception ex)
             {
@@ -275,6 +276,7 @@ namespace MemPlus.Views.Windows
                 if (IntBorderThickness.Value != null) Properties.Settings.Default.BorderThickness = (int)IntBorderThickness.Value;
                 Properties.Settings.Default.WindowOpacity = SldOpacity.Value / 100;
                 Properties.Settings.Default.WindowResizeBorder = SldWindowResize.Value;
+                if (ItbWarningLevel.Value != null) Properties.Settings.Default.WarningLevel = ItbWarningLevel.Value.Value;
 
                 Properties.Settings.Default.Save();
 
