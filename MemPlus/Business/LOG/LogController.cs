@@ -77,7 +77,7 @@ namespace MemPlus.Business.LOG
         /// <param name="e">The ElapsedEventArgs</param>
         private void OnTimedEvent(object sender, ElapsedEventArgs e)
         {
-            ClearLogs(LogType.Application);
+            ClearLogs();
         }
 
         /// <summary>
