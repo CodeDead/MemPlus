@@ -56,23 +56,28 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                _ramController = new RamController(this, Properties.Settings.Default.RamMonitorInterval, _logController);
+                _ramController = new RamController(this, Properties.Settings.Default.RamMonitorInterval, Properties.Settings.Default.NotifyIconStatistics, _logController);
             }
             catch (Exception ex)
             {
                 _logController.AddLog(new ApplicationLog(ex.Message));
             }
-            
 
             Application app = Application.Current;
             app.Activated += Active;
             app.Deactivated += Passive;
 
             LoadProperties();
-            AutoUpdate();
 
             try
             {
+                _logController.AddLog(new ApplicationLog("Checking for application updates"));
+                if (Properties.Settings.Default.AutoUpdate)
+                {
+                    _updateManager.CheckForUpdate(false, false);
+                }
+                _logController.AddLog(new ApplicationLog("Done checking for application updates"));
+
                 if (Properties.Settings.Default.HideOnStart)
                 {
                     Hide();
@@ -98,27 +103,6 @@ namespace MemPlus.Views.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
-        }
-
-        /// <summary>
-        /// Automatically check for updates
-        /// </summary>
-        private void AutoUpdate()
-        {
-            _logController.AddLog(new ApplicationLog("Checking for application updates"));
-            try
-            {
-                if (Properties.Settings.Default.AutoUpdate)
-                {
-                    _updateManager.CheckForUpdate(false, false);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            _logController.AddLog(new ApplicationLog("Done checking for application updates"));
         }
 
         /// <summary>

@@ -107,7 +107,7 @@ namespace MemPlus.Business.RAM
         /// <param name="mainWindow">The MainWindow object that called this initializer</param>
         /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(MainWindow mainWindow, int ramUpdateTimerInterval, LogController logController)
+        internal RamController(MainWindow mainWindow, int ramUpdateTimerInterval, bool showStatistics, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
@@ -123,6 +123,8 @@ namespace MemPlus.Business.RAM
             EmptyWorkingSets = true;
             ClearStandbyCache = true;
             ClearFileSystemCache = true;
+            ShowStatistics = true;
+            ShowNotifyIconStatistics = showStatistics;
 
             _ramTimer = new Timer();
             _ramTimer.Elapsed += OnTimedEvent;
