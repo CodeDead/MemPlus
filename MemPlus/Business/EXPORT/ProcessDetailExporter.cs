@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using MemPlus.Business.PROCESS;
 
 namespace MemPlus.Business.EXPORT
@@ -31,24 +32,22 @@ namespace MemPlus.Business.EXPORT
         internal static void ExportText(string path, List<ProcessDetail> processDetails)
         {
             if (processDetails == null || processDetails.Count == 0) throw new ArgumentNullException();
+            StringBuilder sb = new StringBuilder();
 
-            string exportData = "MemPlus - Process Analyzer Data (" + DateTime.Now + ")";
-            exportData += Environment.NewLine;
-            exportData += "---";
-            exportData += Environment.NewLine;
+            sb.Append("MemPlus - Process Analyzer Data (" + DateTime.Now + ")" + Environment.NewLine + "---" + Environment.NewLine);
 
             for (int i = 0; i < processDetails.Count; i++)
             {
                 ProcessDetail pd = processDetails[i];
-                exportData += pd.ProcessId + "\t" + pd.ProcessName + "\t" + pd.ProcessLocation + "\t" + pd.MemoryUsage;
+                sb.Append(pd.ProcessId + "\t" + pd.ProcessName + "\t" + pd.ProcessLocation + "\t" + pd.MemoryUsage);
 
                 if (i != processDetails.Count - 1)
                 {
-                    exportData += Environment.NewLine;
+                    sb.Append(Environment.NewLine);
                 }
             }
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>
@@ -60,36 +59,18 @@ namespace MemPlus.Business.EXPORT
         {
             if (processDetails == null || processDetails.Count == 0) throw new ArgumentNullException();
 
-            string exportData = "<html>";
-
-            exportData += "<head>";
-            exportData += "<title>MemPlus - Process Analyzer Data</title>";
-            exportData += "</head>";
-
-            exportData += "<body>";
-            exportData += "<h1>MemPlus - Process Analyzer Data (" + DateTime.Now + ")</h1>";
-
-            exportData += "<table border=\"1\">";
-            exportData += "<thead>";
-            exportData += "<tr><th>Process ID</th><th>Process name</th><th>Process location</th><th>Memory usage</th></tr>";
-            exportData += "</thead>";
-            exportData += "<tbody>";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<html><head><title>MemPlus - Process Analyzer Data</title></head><body><h1>MemPlus - Process Analyzer Data (" + DateTime.Now + ")</h1>");
+            sb.Append("<table border=\"1\"><thead><tr><th>Process ID</th><th>Process name</th><th>Process location</th><th>Memory usage</th></tr></thead><tbody>");
 
             foreach (ProcessDetail pd in processDetails)
             {
-                exportData += "<tr>";
-                exportData += "<td>" + pd.ProcessId + "</td>";
-                exportData += "<td>" + pd.ProcessName + "</td>";
-                exportData += "<td>" + pd.ProcessLocation + "</td>";
-                exportData += "<td>" + pd.MemoryUsage + "</td>";
+                sb.Append("<tr><td>" + pd.ProcessId + "</td><td>" + pd.ProcessName + "</td><td>" + pd.ProcessLocation + "</td><td>" + pd.MemoryUsage + "</td>");
             }
 
-            exportData += "</tbody>";
-            exportData += "</table>";
-            exportData += "</body>";
-            exportData += "</html>";
+            sb.Append("</tbody></table></body></html>");
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>
@@ -122,21 +103,18 @@ namespace MemPlus.Business.EXPORT
         {
             if (processDetails == null || processDetails.Count == 0) throw new ArgumentNullException();
 
-            string exportData = "Process ID" + delimiter + "Process name" + delimiter + "Process location" + delimiter + "Memory usage";
-            exportData += Environment.NewLine;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Process ID" + delimiter + "Process name" + delimiter + "Process location" + delimiter + "Memory usage" + Environment.NewLine);
 
             for (int i = 0; i < processDetails.Count; i++)
             {
-                exportData += processDetails[i].ProcessId + delimiter + processDetails[i].ProcessName + delimiter +
-                              processDetails[i].ProcessLocation + delimiter + processDetails[i].MemoryUsage;
+                sb.Append(processDetails[i].ProcessId + delimiter + processDetails[i].ProcessName + delimiter + processDetails[i].ProcessLocation + delimiter + processDetails[i].MemoryUsage);
 
-                if (i != processDetails.Count - 1)
-                {
-                    exportData += Environment.NewLine;
-                }
+                if (i == processDetails.Count - 1) continue;
+                sb.Append(Environment.NewLine);
             }
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
     }
 }

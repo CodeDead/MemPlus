@@ -4,10 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using MemPlus.Business.EXPORT;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
-using Microsoft.Win32;
+using MemPlus.Business.UTILS;
 
 namespace MemPlus.Views.Windows
 {
@@ -209,42 +208,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
-            };
-
-            if (sfd.ShowDialog() != true) return;
-            _logController.AddLog(new ApplicationLog("Exporting logs"));
-            ExportTypes.ExportType type;
-            switch (sfd.FilterIndex)
-            {
-                default:
-                    type = ExportTypes.ExportType.Text;
-                    break;
-                case 2:
-                    type = ExportTypes.ExportType.Html;
-                    break;
-                case 3:
-                    type = ExportTypes.ExportType.Csv;
-                    break;
-                case 4:
-                    type = ExportTypes.ExportType.Excel;
-                    break;
-            }
-
-            try
-            {
-                _logController.Export(sfd.FileName, _logType, type);
-
-                MessageBox.Show("All logs have been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                _logController.AddLog(new ApplicationLog("Done exporting logs"));
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            Utils.ExportLogs(_logType, _logController);
         }
 
         /// <summary>

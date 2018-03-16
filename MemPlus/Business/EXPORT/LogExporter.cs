@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using MemPlus.Business.LOG;
 
 namespace MemPlus.Business.EXPORT
@@ -18,35 +19,17 @@ namespace MemPlus.Business.EXPORT
         internal static void ExportHtml(string path, List<Log> logList)
         {
             if (logList == null || logList.Count == 0) throw new ArgumentNullException();
-            string exportData = "<html>";
-
-            exportData += "<head>";
-            exportData += "<title>MemPlus - Log Export</title>";
-            exportData += "</head>";
-
-            exportData += "<body>";
-            exportData += "<h1>MemPlus - Log Export (" + DateTime.Now + ")</h1>";
-            exportData += "<table border=\"1\">";
-            exportData += "<thead>";
-            exportData += "<tr><th>Time</th><th>Data</th></tr>";
-            exportData += "</thead>";
-            exportData += "<tbody>";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<html><head><title>MemPlus - Log Export</title></head><body><h1>MemPlus - Log Export (" + DateTime.Now + ")</h1><table border=\"1\"><thead><tr><th>Time</th><th>Data</th></tr></thead><tbody>");
 
             foreach (Log l in logList)
             {
-                exportData += "<tr>";
-                exportData += "<td>" + l.Time + "</td>";
-                exportData += "<td>" + l.Data + "</td>";
-                exportData += "</tr>";
+                sb.Append("<tr><td>" + l.Time + "</td><td>" + l.Data + "</td></tr>");
             }
 
-            exportData += "</tbody>";
-            exportData += "</table>";
-            exportData += "</body>";
+            sb.Append("</tbody></table></body></html>");
 
-            exportData += "</html>";
-
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>
@@ -57,20 +40,17 @@ namespace MemPlus.Business.EXPORT
         internal static void ExportTxt(string path, List<Log> logList)
         {
             if (logList == null || logList.Count == 0) throw new ArgumentNullException();
-
-            string exportData = "MemPlus - Log Export (" + DateTime.Now + ")";
-            exportData += Environment.NewLine;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("MemPlus - Log Export (" + DateTime.Now + ")" + Environment.NewLine);
 
             for (int i = 0; i < logList.Count; i++)
             {
-                exportData += "[" + logList[i].Time + "]\t" + logList[i].Data;
-                if (i != logList.Count - 1)
-                {
-                    exportData += Environment.NewLine;
-                }
+                sb.Append("[" + logList[i].Time + "]\t" + logList[i].Data);
+                if (i == logList.Count - 1) continue;
+                sb.Append(Environment.NewLine);
             }
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>
@@ -104,19 +84,17 @@ namespace MemPlus.Business.EXPORT
         private static void ExportDelimiter(string path, IReadOnlyList<Log> logList, string delimiter)
         {
             if (logList == null || logList.Count == 0) throw new ArgumentNullException();
-            string exportData = "Time" + delimiter + "Data";
-            exportData += Environment.NewLine;
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Time" + delimiter + "Data" + Environment.NewLine);
 
             for (int i = 0; i < logList.Count; i++)
             {
-                exportData += logList[i].Time + delimiter + logList[i].Data;
-                if (i != logList.Count - 1)
-                {
-                    exportData += Environment.NewLine;
-                }
+                sb.Append(logList[i].Time + delimiter + logList[i].Data);
+                if (i == logList.Count - 1) continue;
+                sb.Append(Environment.NewLine);
             }
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>

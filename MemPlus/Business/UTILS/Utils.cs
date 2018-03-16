@@ -104,6 +104,53 @@ namespace MemPlus.Business.UTILS
         }
 
         /// <summary>
+        /// Export logs to the disk
+        /// </summary>
+        /// <param name="logType">The LogType that should be exported (can be null to export all logs)</param>
+        /// <param name="logController">The LogController object that can be used to export logs</param>
+        internal static void ExportLogs(LogType? logType, LogController logController)
+        {
+            if (logType != null)
+            {
+                if (logController.GetLogs(logType).Count == 0) return;
+            }
+
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+            };
+
+            if (sfd.ShowDialog() != true) return;
+            ExportTypes.ExportType type;
+            switch (sfd.FilterIndex)
+            {
+                default:
+                    type = ExportTypes.ExportType.Text;
+                    break;
+                case 2:
+                    type = ExportTypes.ExportType.Html;
+                    break;
+                case 3:
+                    type = ExportTypes.ExportType.Csv;
+                    break;
+                case 4:
+                    type = ExportTypes.ExportType.Excel;
+                    break;
+            }
+
+            try
+            {
+                logController.Export(sfd.FileName, logType, type);
+                MessageBox.Show("All logs have been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         /// Export all ProcessDetail objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>

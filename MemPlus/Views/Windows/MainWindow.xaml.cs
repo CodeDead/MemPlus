@@ -4,12 +4,10 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using MemPlus.Business.EXPORT;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
-using Microsoft.Win32;
 using Syncfusion.UI.Xaml.Gauges;
 
 namespace MemPlus.Views.Windows
@@ -404,60 +402,13 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when Log objects from a specific type should be exported
-        /// </summary>
-        /// <param name="logType">The LogType that should be exported. Null to export all logs</param>
-        private void ExportLogs(LogType? logType)
-        {
-            if (logType != null)
-            {
-                if (_logController.GetLogs(logType).Count == 0) return;
-            }
-
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
-            };
-
-            if (sfd.ShowDialog() != true) return;
-            ExportTypes.ExportType type;
-            switch (sfd.FilterIndex)
-            {
-                default:
-                    type = ExportTypes.ExportType.Text;
-                    break;
-                case 2:
-                    type = ExportTypes.ExportType.Html;
-                    break;
-                case 3:
-                    type = ExportTypes.ExportType.Csv;
-                    break;
-                case 4:
-                    type = ExportTypes.ExportType.Excel;
-                    break;
-            }
-
-            try
-            {
-                _logController.Export(sfd.FileName, logType, type);
-
-                MessageBox.Show("All logs have been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        /// <summary>
         /// Method that is called when all RAM Optimizer logs should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
         private void RamExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            ExportLogs(LogType.Ram);
+            Utils.ExportLogs(LogType.Ram, _logController);
         }
 
         /// <summary>
@@ -467,7 +418,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ProcessExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            ExportLogs(LogType.Process);
+            Utils.ExportLogs(LogType.Process, _logController);
         }
 
         /// <summary>
@@ -477,7 +428,17 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            ExportLogs(LogType.Application);
+            Utils.ExportLogs(LogType.Application, _logController);
+        }
+
+        /// <summary>
+        /// Method that is called when all logs should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ExportAllLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            Utils.ExportLogs(null, _logController);
         }
 
         /// <summary>
@@ -682,16 +643,6 @@ namespace MemPlus.Views.Windows
         private void ExportProcessAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Utils.ExportProcessDetails(_logController);
-        }
-
-        /// <summary>
-        /// Method that is called when all logs should be exported
-        /// </summary>
-        /// <param name="sender">The object that called this method</param>
-        /// <param name="e">The RoutedEventArgs</param>
-        private void ExportAllLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
-        {
-            ExportLogs(null);
         }
 
         /// <summary>

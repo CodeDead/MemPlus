@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using MemPlus.Business.RAM;
 
 namespace MemPlus.Business.EXPORT
@@ -32,10 +33,10 @@ namespace MemPlus.Business.EXPORT
         {
             if (ramSticks == null || ramSticks.Count == 0) throw new ArgumentNullException();
 
-            string exportData = "MemPlus - Ram Analyzer Data (" + DateTime.Now + ")";
-            exportData += Environment.NewLine;
-            exportData += "---";
-            exportData += Environment.NewLine;
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("MemPlus - Ram Analyzer Data (" + DateTime.Now + ")");
+            sb.Append(Environment.NewLine + "---" + Environment.NewLine);
 
             for (int index = 0; index < ramSticks.Count; index++)
             {
@@ -43,20 +44,16 @@ namespace MemPlus.Business.EXPORT
                 List<RamData> ramDataList = stick.GetRamData();
                 for (int i = 0; i < ramDataList.Count; i++)
                 {
-                    exportData += ramDataList[i].Key + "\t" + ramDataList[i].Value;
-                    if (i != ramDataList.Count - 1)
-                    {
-                        exportData += Environment.NewLine;
-                    }
+                    sb.Append(ramDataList[i].Key + "\t" + ramDataList[i].Value);
+                    if (i == ramDataList.Count - 1) continue;
+                    sb.Append(Environment.NewLine);
                 }
 
                 if (index == ramSticks.Count - 1) continue;
-                exportData += Environment.NewLine;
-                exportData += "----------";
-                exportData += Environment.NewLine;
+                sb.Append(Environment.NewLine + "----------" + Environment.NewLine);
             }
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>
@@ -68,46 +65,28 @@ namespace MemPlus.Business.EXPORT
         {
             if (ramSticks == null || ramSticks.Count == 0) throw new ArgumentNullException();
 
-            string exportData = "<html>";
-
-            exportData += "<head>";
-            exportData += "<title>MemPlus - Ram Analyzer Data</title>";
-            exportData += "</head>";
-
-            exportData += "<body>";
-            exportData += "<h1>MemPlus - Ram Analyzer Data (" + DateTime.Now + ")</h1>";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<html><head><title>MemPlus - Ram Analyzer Data</title></head><body><h1>MemPlus - Ram Analyzer Data (" + DateTime.Now + ")</h1>");
 
             for (int index = 0; index < ramSticks.Count; index++)
             {
                 RamStick stick = ramSticks[index];
-                exportData += "<table border=\"1\">";
-                exportData += "<thead>";
-                exportData += "<tr><th>Key</th><th>Value</th></tr>";
-                exportData += "</thead>";
-                exportData += "<tbody>";
+                sb.Append("<table border=\"1\"><thead><tr><th>Key</th><th>Value</th></tr></thead><tbody>");
 
                 foreach (RamData data in stick.GetRamData())
                 {
-                    exportData += "<tr>";
-                    exportData += "<td>" + data.Key + "</td>";
-                    exportData += "<td>" + data.Value + "</td>";
-                    exportData += "</tr>";
+                    sb.Append("<tr><td>" + data.Key + "</td><td>" + data.Value + "</td></tr>");
                 }
 
-                exportData += "</tbody>";
-                exportData += "</table>";
+                sb.Append("</tbody></table>");
 
-                if (index != ramSticks.Count - 1)
-                {
-                    exportData += "<br />";
-                }
+                if (index == ramSticks.Count - 1) continue;
+                sb.Append("<br />");
             }
 
-            exportData += "</body>";
+            sb.Append("</body></html>");
 
-            exportData += "</html>";
-
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
 
         /// <summary>
@@ -139,29 +118,25 @@ namespace MemPlus.Business.EXPORT
         private static void ExportDelimiter(string path, string delimiter, IReadOnlyList<RamStick> ramSticks)
         {
             if (ramSticks == null || ramSticks.Count == 0) throw new ArgumentNullException();
+            StringBuilder sb = new StringBuilder();
 
-            string exportData = "Key" + delimiter + "Value";
-            exportData += Environment.NewLine;
+            sb.Append("Key" + delimiter + "Value" + Environment.NewLine);
 
             for (int i = 0; i < ramSticks.Count; i++)
             {
                 List<RamData> ramData = ramSticks[i].GetRamData();
                 for (int index = 0; index < ramData.Count; index++)
                 {
-                    exportData += ramData[index].Key + delimiter + ramData[index].Value;
-                    if (index != ramData.Count - 1)
-                    {
-                        exportData += Environment.NewLine;
-                    }
+                    sb.Append(ramData[index].Key + delimiter + ramData[index].Value);
+                    if (index == ramData.Count - 1) continue;
+                    sb.Append(Environment.NewLine);
                 }
 
                 if (i == ramSticks.Count - 1) continue;
-                exportData += Environment.NewLine;
-                exportData += "----------" + delimiter + "----------";
-                exportData += Environment.NewLine;
+                sb.Append(Environment.NewLine + "----------" + delimiter + "----------" + Environment.NewLine);
             }
 
-            Export(path, exportData);
+            Export(path, sb.ToString());
         }
     }
 }
