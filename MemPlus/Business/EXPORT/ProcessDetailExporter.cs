@@ -41,10 +41,8 @@ namespace MemPlus.Business.EXPORT
                 ProcessDetail pd = processDetails[i];
                 sb.Append(pd.ProcessId + "\t" + pd.ProcessName + "\t" + pd.ProcessLocation + "\t" + pd.MemoryUsage);
 
-                if (i != processDetails.Count - 1)
-                {
-                    sb.Append(Environment.NewLine);
-                }
+                if (i == processDetails.Count - 1) continue;
+                sb.Append(Environment.NewLine);
             }
 
             Export(path, sb.ToString());

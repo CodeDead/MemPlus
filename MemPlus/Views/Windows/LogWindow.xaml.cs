@@ -160,10 +160,8 @@ namespace MemPlus.Views.Windows
             {
                 LsvLogs.Items.Add(log);
 
-                if (_autoScroll)
-                {
-                    LsvLogs.ScrollIntoView(LsvLogs.Items[LsvLogs.Items.Count - 1]);
-                }
+                if (!_autoScroll) return;
+                LsvLogs.ScrollIntoView(LsvLogs.Items[LsvLogs.Items.Count - 1]);
             });
         }
 
@@ -185,9 +183,8 @@ namespace MemPlus.Views.Windows
         private void LsvLogs_OnScroll(object sender, ScrollEventArgs e)
         {
             if (!(e.OriginalSource is ScrollBar sb)) return;
+            if (sb.Orientation == Orientation.Horizontal) return;
 
-            if (sb.Orientation == Orientation.Horizontal)
-                return;
             _autoScroll = Math.Abs(sb.Value - sb.Maximum) < 1;
         }
 
@@ -231,6 +228,7 @@ namespace MemPlus.Views.Windows
         {
             if (LsvLogs.SelectedItems.Count == 0) return;
             if (!(LsvLogs.SelectedItem is Log selectedLog)) return;
+
             try
             {
                 Clipboard.SetText(selectedLog.Time + "\t" + selectedLog.Data);

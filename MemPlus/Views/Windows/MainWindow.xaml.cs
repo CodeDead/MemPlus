@@ -80,7 +80,6 @@ namespace MemPlus.Views.Windows
                 {
                     Hide();
                 }
-
                 if (Properties.Settings.Default.StartMinimized)
                 {
                     WindowState = WindowState.Minimized;
