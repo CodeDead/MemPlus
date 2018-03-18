@@ -35,8 +35,9 @@ namespace MemPlus.Views.Windows
         public SettingsWindow(MainWindow mainWindow, LogController logController)
         {
             _logController = logController;
-            _mainWindow = mainWindow;
             _logController.AddLog(new ApplicationLog("Initializing SettingsWindow"));
+
+            _mainWindow = mainWindow;
 
             InitializeComponent();
             ChangeVisualStyle();

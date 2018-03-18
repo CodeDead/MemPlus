@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
@@ -54,7 +55,7 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                _ramController = new RamController(this, Properties.Settings.Default.RamMonitorInterval, Properties.Settings.Default.NotifyIconStatistics, _logController);
+                _ramController = new RamController(UpdateGuiStatistics, RamClearingCompleted, Properties.Settings.Default.RamMonitorInterval, _logController);
             }
             catch (Exception ex)
             {
@@ -103,6 +104,63 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Event that is called when the GUI statistics should be updated
+        /// </summary>
+        private void UpdateGuiStatistics()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                string ramTotal = (_ramController.RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                string ramAvailable = (_ramController.RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                CgRamUsage.Scales[0].Pointers[0].Value = _ramController.RamUsagePercentage;
+                CgRamUsage.GaugeHeader = "RAM usage (" + _ramController.RamUsagePercentage.ToString("F2") + "%)";
+                LblTotalPhysicalMemory.Content = ramTotal;
+                LblAvailablePhysicalMemory.Content = ramAvailable;
+
+                if (!Properties.Settings.Default.NotifyIconStatistics) return;
+                string tooltipText = "MemPlus";
+                tooltipText += Environment.NewLine;
+                tooltipText += "Total physical memory: " + ramTotal;
+                tooltipText += Environment.NewLine;
+                tooltipText += "Available physical memory: " + ramAvailable;
+
+                TbiIcon.ToolTipText = tooltipText;
+            });
+        }
+
+        /// <summary>
+        /// Event that is called when a RAM clearing has occurred and statistics could be shown to the user
+        /// </summary>
+        private void RamClearingCompleted()
+        {
+            double ramSavings = _ramController.RamSavings / 1024 / 1024;
+            string message;
+            if (ramSavings < 0)
+            {
+                ramSavings = Math.Abs(ramSavings);
+                _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
+                message = "Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!";
+            }
+            else
+            {
+                _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
+                message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
+            }
+
+            if (!Properties.Settings.Default.RamCleaningMessage) return;
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (Visibility)
+            {
+                default:
+                    MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    break;
+                case Visibility.Hidden when TbiIcon.Visibility == Visibility.Visible:
+                    TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Load the properties into the GUI
         /// </summary>
         internal void LoadProperties()
@@ -122,15 +180,9 @@ namespace MemPlus.Views.Windows
                 _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
-                _ramController.ShowStatistics = Properties.Settings.Default.RamCleaningMessage;
 
-                if (Properties.Settings.Default.NotifyIconStatistics)
+                if (!Properties.Settings.Default.NotifyIconStatistics)
                 {
-                    _ramController.ShowNotifyIconStatistics = true;
-                }
-                else
-                {
-                    _ramController.ShowNotifyIconStatistics = false;
                     TbiIcon.ToolTipText = "MemPlus";
                 }
 

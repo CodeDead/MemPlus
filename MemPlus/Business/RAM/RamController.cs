@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Windows;
-using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.LOG;
-using MemPlus.Views.Windows;
 using Microsoft.VisualBasic.Devices;
+// ReSharper disable PossibleNullReferenceException
 
 namespace MemPlus.Business.RAM
 {
@@ -44,10 +42,6 @@ namespace MemPlus.Business.RAM
         /// An integer value representative of the percentage of RAM usage that should be reached before RAM optimisation should be called
         /// </summary>
         private double _autoOptimizeRamThreshold;
-        /// <summary>
-        /// The MainWindow object that called this class
-        /// </summary>
-        private readonly MainWindow _mainWindow;
         #endregion
 
         #region Properties
@@ -88,32 +82,45 @@ namespace MemPlus.Business.RAM
         /// </summary>
         internal bool AutoOptimizePercentage { get; set; }
         /// <summary>
-        /// Property displaying whether or not RAM clearing statistics should be displayed
-        /// </summary>
-        internal bool ShowStatistics { get; set; }
-        /// <summary>
-        /// Property displaying whether RAM usage statistics should be displayed in the notifyicon
-        /// </summary>
-        internal bool ShowNotifyIconStatistics { get; set; }
-        /// <summary>
         /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
         /// </summary>
         private DateTime _lastAutoOptimizeTime;
         #endregion
 
+        #region Delegates
+        /// <summary>
+        /// Event that is called when the GUI should be updated with new RAM statistics
+        /// </summary>
+        private event UpdateGuiStatistics UpdateGuiStatisticsEvent;
+        /// <summary>
+        /// Event that is called when RAM clearing has occurred
+        /// </summary>
+        private event RamClearingCompleted RamClearingCompletedEvcent;
+        /// <summary>
+        /// Delegate void that indicates that a GUI update should occur when called
+        /// </summary>
+        internal delegate void UpdateGuiStatistics();
+        /// <summary>
+        /// Delegate void that indicates that a RAM clearing has occured
+        /// </summary>
+        internal delegate void RamClearingCompleted();
+        #endregion
+
         /// <summary>
         /// Initialize a new RamController object
         /// </summary>
-        /// <param name="mainWindow">The MainWindow object that called this initializer</param>
+        /// <param name="updateGuiStatisticsEvent">An event to indicate that a GUI update should occur</param>
+        /// <param name="ramClearingCompletedEvcent">An event to indicate that the RAM has been cleared</param>
         /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(MainWindow mainWindow, int ramUpdateTimerInterval, bool showStatistics, LogController logController)
+        internal RamController(UpdateGuiStatistics updateGuiStatisticsEvent, RamClearingCompleted ramClearingCompletedEvcent, int ramUpdateTimerInterval, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
 
             if (ramUpdateTimerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
-            _mainWindow = mainWindow ?? throw new ArgumentNullException(nameof(mainWindow));
+            UpdateGuiStatisticsEvent = updateGuiStatisticsEvent ?? throw new ArgumentNullException(nameof(updateGuiStatisticsEvent));
+            RamClearingCompletedEvcent = ramClearingCompletedEvcent ?? throw new ArgumentNullException(nameof(ramClearingCompletedEvcent));
 
             RamSavings = 0;
 
@@ -123,8 +130,6 @@ namespace MemPlus.Business.RAM
             EmptyWorkingSets = true;
             ClearStandbyCache = true;
             ClearFileSystemCache = true;
-            ShowStatistics = true;
-            ShowNotifyIconStatistics = showStatistics;
 
             _ramTimer = new Timer();
             _ramTimer.Elapsed += OnTimedEvent;
@@ -200,7 +205,7 @@ namespace MemPlus.Business.RAM
             RamMonitorEnabled = true;
 
             UpdateRamUsage();
-            UpdateGuiControls();
+            UpdateGuiStatisticsEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("The RAM monitor has been enabled"));
         }
@@ -217,33 +222,6 @@ namespace MemPlus.Business.RAM
         }
 
         /// <summary>
-        /// Update the GUI controls with the available RAM usage statistics
-        /// </summary>
-        private void UpdateGuiControls()
-        {
-            _mainWindow.Dispatcher.Invoke(() =>
-            {
-                string ramTotal = (RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                string ramAvailable = (RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                _mainWindow.CgRamUsage.Scales[0].Pointers[0].Value = RamUsagePercentage;
-                _mainWindow.CgRamUsage.GaugeHeader = "RAM usage (" + RamUsagePercentage.ToString("F2") + "%)";
-                _mainWindow.LblTotalPhysicalMemory.Content = ramTotal;
-                _mainWindow.LblAvailablePhysicalMemory.Content = ramAvailable;
-
-                if (ShowNotifyIconStatistics)
-                {
-                    string tooltipText = "MemPlus";
-                    tooltipText += Environment.NewLine;
-                    tooltipText += "Total physical memory: " + ramTotal;
-                    tooltipText += Environment.NewLine;
-                    tooltipText += "Available physical memory: " + ramAvailable;
-
-                    _mainWindow.TbiIcon.ToolTipText = tooltipText;
-                }
-            });
-        }
-
-        /// <summary>
         /// Event that will be called when the timer interval was reached
         /// </summary>
         /// <param name="source">The calling object</param>
@@ -253,7 +231,7 @@ namespace MemPlus.Business.RAM
             _logController.AddLog(new ApplicationLog("RAM monitor timer has been called"));
 
             UpdateRamUsage();
-            UpdateGuiControls();
+            UpdateGuiStatisticsEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Finished RAM monitor timer"));
         }
@@ -285,14 +263,14 @@ namespace MemPlus.Business.RAM
                 }
 
                 UpdateRamUsage();
-                UpdateGuiControls();
+                UpdateGuiStatisticsEvent?.Invoke();
 
                 double newUsage = RamUsage;
 
                 RamSavings = oldUsage - newUsage;
             });
 
-            ClearingStatistcs();
+            RamClearingCompletedEvcent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
@@ -316,14 +294,14 @@ namespace MemPlus.Business.RAM
                 await Task.Delay(10000);
 
                 UpdateRamUsage();
-                UpdateGuiControls();
+                UpdateGuiStatisticsEvent?.Invoke();
 
                 double newUsage = RamUsage;
 
                 RamSavings = oldUsage - newUsage;
             });
 
-            ClearingStatistcs();
+            RamClearingCompletedEvcent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing process working sets"));
         }
@@ -345,48 +323,16 @@ namespace MemPlus.Business.RAM
                 _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
 
                 UpdateRamUsage();
-                UpdateGuiControls();
+                UpdateGuiStatisticsEvent?.Invoke();
 
                 double newUsage = RamUsage;
 
                 RamSavings = oldUsage - newUsage;
             });
 
-            ClearingStatistcs();
+            RamClearingCompletedEvcent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing FileSystem cache"));
-        }
-
-        /// <summary>
-        /// Display a message about the last RAM Optimizer clearing statistics
-        /// </summary>
-        private void ClearingStatistcs()
-        {
-            double ramSavings = RamSavings / 1024 / 1024;
-            string message;
-            if (ramSavings < 0)
-            {
-                ramSavings = Math.Abs(ramSavings);
-                _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
-                message = "Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!";
-            }
-            else
-            {
-                _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
-                message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
-            }
-
-            if (!ShowStatistics) return;
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (_mainWindow.Visibility)
-            {
-                default:
-                    MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                    break;
-                case Visibility.Hidden when _mainWindow.TbiIcon.Visibility == Visibility.Visible:
-                    _mainWindow.TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
-                    break;
-            }
         }
 
         /// <summary>
