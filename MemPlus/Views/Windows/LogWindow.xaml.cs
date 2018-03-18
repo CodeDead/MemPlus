@@ -239,5 +239,15 @@ namespace MemPlus.Views.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        /// <summary>
+        /// Event that is called when the mouse wheel is used
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The MouseWheelEventArgs</param>
+        private void LsvLogs_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            _autoScroll = false;
+        }
     }
 }

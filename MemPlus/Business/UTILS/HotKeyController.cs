@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using MemPlus.Business.LOG;
 
 namespace MemPlus.Business.UTILS
 {
@@ -25,6 +26,10 @@ namespace MemPlus.Business.UTILS
         /// The HwndSource that can be used to retrieve messages
         /// </summary>
         private HwndSource _source;
+        /// <summary>
+        /// The LogController object that can be used to add logs
+        /// </summary>
+        private readonly LogController _logController;
         #endregion
 
         #region Events
@@ -41,10 +46,17 @@ namespace MemPlus.Business.UTILS
         /// <summary>
         /// Initialize a new HotKeyController
         /// </summary>
-        internal HotKeyController(WindowInteropHelper helper)
+        /// <param name="helper">The WindowInteropHelper object that can be used to retrieve the Window handle</param>
+        /// <param name="logController">The LogController object that can be used to add logs</param>
+        internal HotKeyController(WindowInteropHelper helper, LogController logController)
         {
+            _logController = logController;
+            _logController?.AddLog(new ApplicationLog("Initializing HotKeyController"));
+
             _helper = helper;
             _source = HwndSource.FromHwnd(_helper.Handle);
+
+            _logController?.AddLog(new ApplicationLog("Done initializing HotKeyController"));
         }
 
         /// <summary>
@@ -54,6 +66,7 @@ namespace MemPlus.Business.UTILS
         /// <param name="key">The key that is associated with the hotkey</param>
         internal void RegisterHotKey(uint modifier, Keys key)
         {
+            _logController?.AddLog(new ApplicationLog("Registering hotkey"));
             // Increment the counter.
             _currentId++;
 
@@ -64,6 +77,7 @@ namespace MemPlus.Business.UTILS
 
             if (!NativeMethods.RegisterHotKey(_helper.Handle, _currentId, modifier, (uint)key))
                 throw new Exception("RegisterHotKey: ", new Win32Exception(Marshal.GetLastWin32Error()));
+            _logController?.AddLog(new ApplicationLog("Done registering hotkey"));
         }
 
         private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -84,14 +98,17 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         public void Dispose()
         {
+            _logController?.AddLog(new ApplicationLog("Disposing all available hotkey objects and hooks"));
             // Unregister all the registered hot keys.
             for (int i = _currentId; i > 0; i--)
             {
                 NativeMethods.UnregisterHotKey(_helper.Handle, i);
             }
             // Remove the hook from the HwndSource
-            _source.RemoveHook(HwndHook);
+            _source?.RemoveHook(HwndHook);
             _source = null;
+
+            _logController?.AddLog(new ApplicationLog("Done disposing all available hotkey objects and hooks"));
         }
         #endregion
     }

@@ -233,6 +233,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         internal void HotKeyModifier(WindowInteropHelper helper)
         {
+            _logController?.AddLog(new ApplicationLog("Initializing hotkey hook"));
             try
             {
                 if (Properties.Settings.Default.UseHotKey)
@@ -241,8 +242,9 @@ namespace MemPlus.Views.Windows
 
                     if (Properties.Settings.Default.HotKey == Key.None) return;
 
-                    _hotKeyController = new HotKeyController(helper);
+                    _hotKeyController = new HotKeyController(helper, _logController);
                     _hotKeyController.HotKeyPressedEvent += HotKeyPressed;
+
                     string[] mods = Properties.Settings.Default.HotKeyModifiers.Split('+');
 
                     uint values = 0;
@@ -273,6 +275,7 @@ namespace MemPlus.Views.Windows
                 _logController?.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            _logController?.AddLog(new ApplicationLog("Done initializing hotkey hook"));
         }
 
         /// <summary>

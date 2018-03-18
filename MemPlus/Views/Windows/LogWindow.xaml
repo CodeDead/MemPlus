@@ -16,7 +16,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single">
+        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvLogs_MouseWheel">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Copy" Click="CopyMenuItem_OnClick">
