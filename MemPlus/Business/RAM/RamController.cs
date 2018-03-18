@@ -263,7 +263,7 @@ namespace MemPlus.Business.RAM
                 }
 
                 UpdateRamUsage();
-                UpdateGuiStatisticsEvent?.Invoke();
+                UpdateGuiStatisticsEvent.Invoke();
 
                 double newUsage = RamUsage;
 
@@ -294,7 +294,7 @@ namespace MemPlus.Business.RAM
                 await Task.Delay(10000);
 
                 UpdateRamUsage();
-                UpdateGuiStatisticsEvent?.Invoke();
+                UpdateGuiStatisticsEvent.Invoke();
 
                 double newUsage = RamUsage;
 
@@ -323,7 +323,7 @@ namespace MemPlus.Business.RAM
                 _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
 
                 UpdateRamUsage();
-                UpdateGuiStatisticsEvent?.Invoke();
+                UpdateGuiStatisticsEvent.Invoke();
 
                 double newUsage = RamUsage;
 
