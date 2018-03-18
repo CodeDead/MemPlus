@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Interop;
 
 namespace MemPlus.Business.UTILS
 {
@@ -13,89 +14,37 @@ namespace MemPlus.Business.UTILS
     {
         #region Variables
         /// <summary>
-        /// The NativeWindow that can be used to receive messages
-        /// </summary>
-        private readonly Window _window = new Window();
-        /// <summary>
         /// Holds the amount of hotkeys that were registered
         /// </summary>
         private int _currentId;
+        /// <summary>
+        /// The WindowInteropHelper that can be used to retrieve the handle of this Window
+        /// </summary>
+        private readonly WindowInteropHelper _helper;
+        /// <summary>
+        /// The HwndSource that can be used to retrieve messages
+        /// </summary>
+        private HwndSource _source;
         #endregion
 
         #region Events
         /// <summary>
-        /// The event that is called when a hotkey has been pressed.
+        /// Event that is called when the hotkey was pressed
         /// </summary>
-        internal event EventHandler<KeyPressedEventArgs> KeyPressed;
+        internal event HotKeyPressed HotKeyPressedEvent;
+        /// <summary>
+        /// Delegate that is called when the hotkey was pressed
+        /// </summary>
+        internal delegate void HotKeyPressed();
         #endregion
 
-        /// <inheritdoc cref="NativeWindow" />
         /// <summary>
-        /// Represents the Window object that is used internally to get messages
+        /// Initialize a new HotKeyController
         /// </summary>
-        private sealed class Window : NativeWindow, IDisposable
+        internal HotKeyController(WindowInteropHelper helper)
         {
-            /// <summary>
-            /// The value for the Window Message, representing a hotkey
-            /// </summary>
-            private const int WmHotkey = 0x0312;
-
-            /// <summary>
-            /// The event that is called when the hotkey was pressed
-            /// </summary>
-            internal event EventHandler<KeyPressedEventArgs> KeyPressed;
-
-            /// <inheritdoc />
-            /// <summary>
-            /// Initialize a new NativeWindow object
-            /// </summary>
-            public Window()
-            {
-                // Create the handle for the window.
-                CreateHandle(new CreateParams());
-            }
-
-            /// <inheritdoc />
-            /// <summary>
-            /// Overridden to get the notifications.
-            /// </summary>
-            /// <param name="m"></param>
-            protected override void WndProc(ref Message m)
-            {
-                base.WndProc(ref m);
-
-                // Only continue if the hotkey message was sent
-                if (m.Msg != WmHotkey) return;
-                // Get the keys
-                Keys key = (Keys)(((int)m.LParam >> 16) & 0xFFFF);
-                ModifierKeys modifier = (ModifierKeys)((int)m.LParam & 0xFFFF);
-
-                // Invoke the event to notify the parent.
-                KeyPressed?.Invoke(this, new KeyPressedEventArgs(modifier, key));
-            }
-
-            #region IDisposable Members
-            /// <inheritdoc />
-            /// <summary>
-            /// Dispose this NativeWindow and destroy the handles
-            /// </summary>
-            public void Dispose()
-            {
-                DestroyHandle();
-            }
-            #endregion
-        }
-
-        /// <summary>
-        /// Initialize a new HotKeyController object
-        /// </summary>
-        internal HotKeyController()
-        {
-            // register the event of the inner native window.
-            _window.KeyPressed += delegate (object sender, KeyPressedEventArgs args)
-            {
-                KeyPressed?.Invoke(this, args);
-            };
+            _helper = helper;
+            _source = HwndSource.FromHwnd(_helper.Handle);
         }
 
         /// <summary>
@@ -109,8 +58,23 @@ namespace MemPlus.Business.UTILS
             _currentId++;
 
             // Register the hotkey.
-            if (!NativeMethods.RegisterHotKey(_window.Handle, _currentId, modifier, (uint)key))
+            _source = HwndSource.FromHwnd(_helper.Handle);
+            if (_source == null) throw new ArgumentNullException(nameof(_source));
+            _source.AddHook(HwndHook);
+
+            if (!NativeMethods.RegisterHotKey(_helper.Handle, _currentId, modifier, (uint)key))
                 throw new Exception("RegisterHotKey: ", new Win32Exception(Marshal.GetLastWin32Error()));
+        }
+
+        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            const int wmHotkey = 0x0312;
+            if (msg == wmHotkey)
+            {
+                HotKeyPressedEvent?.Invoke();
+                handled = true;
+            }
+            return IntPtr.Zero;
         }
 
         #region IDisposable Members
@@ -123,43 +87,13 @@ namespace MemPlus.Business.UTILS
             // Unregister all the registered hot keys.
             for (int i = _currentId; i > 0; i--)
             {
-                NativeMethods.UnregisterHotKey(_window.Handle, i);
+                NativeMethods.UnregisterHotKey(_helper.Handle, i);
             }
-
-            // dispose the inner native window.
-            _window.Dispose();
+            // Remove the hook from the HwndSource
+            _source.RemoveHook(HwndHook);
+            _source = null;
         }
         #endregion
-    }
-}
-
-/// <inheritdoc />
-/// <summary>
-/// Custom EventArgs for the event that is fired after the hotkey has been pressed
-/// </summary>
-internal class KeyPressedEventArgs : EventArgs
-{
-    #region Properties
-    /// <summary>
-    /// Property containing the ModifierKeys that were pressed
-    /// </summary>
-    internal ModifierKeys Modifier { get; }
-    /// <summary>
-    /// Property containing the key that was pressed
-    /// </summary>
-    internal Keys Key { get; }
-    #endregion
-
-    /// <inheritdoc />
-    /// <summary>
-    /// Initialize a new KeyPressedEventArgs
-    /// </summary>
-    /// <param name="modifier">The ModifierKeys that were pressed</param>
-    /// <param name="key">The Kkey that was pressed</param>
-    internal KeyPressedEventArgs(ModifierKeys modifier, Keys key)
-    {
-        Modifier = modifier;
-        Key = key;
     }
 }
 

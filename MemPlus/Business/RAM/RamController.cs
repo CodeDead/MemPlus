@@ -262,6 +262,9 @@ namespace MemPlus.Business.RAM
                     _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
                 }
 
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+
                 UpdateRamUsage();
                 UpdateGuiStatisticsEvent.Invoke();
 

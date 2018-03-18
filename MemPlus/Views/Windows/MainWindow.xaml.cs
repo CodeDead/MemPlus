@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.GUI;
@@ -206,7 +207,6 @@ namespace MemPlus.Views.Windows
 
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
                 WindowDraggable();
-                HotKeyModifier();
             }
             catch (Exception ex)
             {
@@ -217,10 +217,21 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Event that is called when the source is initialized
+        /// </summary>
+        /// <param name="e">The EventArgs</param>
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            HotKeyModifier(new WindowInteropHelper(this));
+        }
+
         /// <summary>
         /// Register a hotkey or not, depending on the properties
         /// </summary>
-        private void HotKeyModifier()
+        internal void HotKeyModifier(WindowInteropHelper helper)
         {
             try
             {
@@ -230,7 +241,8 @@ namespace MemPlus.Views.Windows
 
                     if (Properties.Settings.Default.HotKey == Key.None) return;
 
-                    _hotKeyController = new HotKeyController();
+                    _hotKeyController = new HotKeyController(helper);
+                    _hotKeyController.HotKeyPressedEvent += HotKeyPressed;
                     string[] mods = Properties.Settings.Default.HotKeyModifiers.Split('+');
 
                     uint values = 0;
@@ -249,8 +261,6 @@ namespace MemPlus.Views.Windows
                                 break;
                         }
                     }
-
-                    _hotKeyController.KeyPressed += Hook_KeyPressed;
                     _hotKeyController.RegisterHotKey(values, (Keys)KeyInterop.VirtualKeyFromKey(Properties.Settings.Default.HotKey));
                 }
                 else
@@ -260,7 +270,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController?.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -268,12 +278,9 @@ namespace MemPlus.Views.Windows
         /// <summary>
         /// Method that is called when a specific set of keys was pressed
         /// </summary>
-        /// <param name="sender">The object that called this method</param>
-        /// <param name="e">The KeyPressedEventArgs</param>
-        private async void Hook_KeyPressed(object sender, KeyPressedEventArgs e)
+        private void HotKeyPressed()
         {
-            if (_clearingMemory) return;
-            await _ramController.ClearMemory();
+            ClearMemory(0);
         }
 
         /// <summary>

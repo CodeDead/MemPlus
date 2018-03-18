@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
 using Microsoft.Win32;
@@ -305,6 +306,7 @@ namespace MemPlus.Views.Windows
 
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
+                _mainWindow.HotKeyModifier(new WindowInteropHelper(_mainWindow));
                 ChangeVisualStyle();
                 LoadProperties();
 
@@ -341,6 +343,7 @@ namespace MemPlus.Views.Windows
 
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
+                _mainWindow.HotKeyModifier(new WindowInteropHelper(_mainWindow));
 
                 ChangeVisualStyle();
                 LoadProperties();
