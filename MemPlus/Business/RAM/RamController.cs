@@ -11,7 +11,7 @@ namespace MemPlus.Business.RAM
     /// <summary>
     /// Sealed class containing methods and interaction logic in terms of RAM
     /// </summary>
-    internal sealed class RamController
+    internal sealed class RamController : IDisposable
     {
         #region Variables
         /// <summary>
@@ -365,6 +365,16 @@ namespace MemPlus.Business.RAM
             }
 
             _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Dispose all disposable objects
+        /// </summary>
+        public void Dispose()
+        {
+            _ramTimer?.Dispose();
+            _ramAutoOptimizeTimer?.Dispose();
         }
     }
 }

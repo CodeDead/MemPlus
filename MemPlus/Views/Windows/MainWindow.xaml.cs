@@ -918,6 +918,7 @@ namespace MemPlus.Views.Windows
                 _hotKeyController?.Dispose();
                 // Disable the RAM Monitor to prevent exceptions from being thrown
                 _ramController?.DisableMonitor();
+                TbiIcon?.Dispose();
             }
         }
     }
