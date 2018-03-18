@@ -18,7 +18,7 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         private int _currentId;
         /// <summary>
-        /// The WindowInteropHelper that can be used to retrieve the handle of this Window
+        /// The WindowInteropHelper that can be used to retrieve the handle of a Window
         /// </summary>
         private readonly WindowInteropHelper _helper;
         /// <summary>
