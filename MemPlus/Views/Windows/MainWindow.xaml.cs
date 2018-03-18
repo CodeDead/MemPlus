@@ -172,6 +172,7 @@ namespace MemPlus.Views.Windows
                 MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
                 MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
                 MniWindowDraggable.IsChecked = Properties.Settings.Default.WindowDragging;
+                MniRamGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
 
                 _ramController.SetProcessExceptionList(Properties.Settings.Default.ProcessExceptions);
@@ -194,6 +195,8 @@ namespace MemPlus.Views.Windows
                     _ramController.EnableMonitor();
                 }
 
+                RamGaugeVisibility();
+
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
                 WindowDraggable();
             }
@@ -204,6 +207,28 @@ namespace MemPlus.Views.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
+        }
+
+        private void RamGaugeVisibility()
+        {
+            try
+            {
+                if (Properties.Settings.Default.DisplayGauge)
+                {
+                    CgRamUsage.Visibility = Visibility.Visible;
+                    SepGauge.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    CgRamUsage.Visibility = Visibility.Collapsed;
+                    SepGauge.Visibility = Visibility.Collapsed;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -568,6 +593,27 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Method that is called when the Ram Gauge visibility should change
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void RamGaugeMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Properties.Settings.Default.DisplayGauge = MniRamGauge.IsChecked;
+                Properties.Settings.Default.Save();
+
+                RamGaugeVisibility();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         /// Method that is called when the SettingsWindow should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
@@ -784,8 +830,16 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The CancelEventArgs</param>
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            // Disable the RAM Monitor to prevent exceptions from being thrown
-            _ramController?.DisableMonitor();
+            if (Properties.Settings.Default.HideOnClose && Visibility == Visibility.Visible)
+            {
+                Hide();
+                e.Cancel = true;
+            }
+            else
+            {
+                // Disable the RAM Monitor to prevent exceptions from being thrown
+                _ramController?.DisableMonitor();
+            }
         }
     }
 }

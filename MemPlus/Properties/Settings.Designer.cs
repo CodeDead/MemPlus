@@ -357,5 +357,29 @@ namespace MemPlus.Properties {
                 this["WarningLevel"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HideOnClose {
+            get {
+                return ((bool)(this["HideOnClose"]));
+            }
+            set {
+                this["HideOnClose"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DisplayGauge {
+            get {
+                return ((bool)(this["DisplayGauge"]));
+            }
+            set {
+                this["DisplayGauge"] = value;
+            }
+        }
     }
 }

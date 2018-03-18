@@ -71,6 +71,7 @@ namespace MemPlus.Views.Windows
                 ChbAutoStart.IsChecked = AutoStartUp();
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
                 ChbStartHidden.IsChecked = Properties.Settings.Default.HideOnStart;
+                ChbHideOnClose.IsChecked = Properties.Settings.Default.HideOnClose;
                 ChbStartMinimized.IsChecked = Properties.Settings.Default.StartMinimized;
                 if (Properties.Settings.Default.Topmost)
                 {
@@ -96,6 +97,7 @@ namespace MemPlus.Views.Windows
                 ChbAdminWarning.IsChecked = Properties.Settings.Default.AdministrativeWarning;
                 ChbRamClearingMessage.IsChecked = Properties.Settings.Default.RamCleaningMessage;
                 ChbNotifyIconStatistics.IsChecked = Properties.Settings.Default.NotifyIconStatistics;
+                ChbDisplayGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
 
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
@@ -218,7 +220,9 @@ namespace MemPlus.Views.Windows
                 if (ChbAdminWarning.IsChecked != null) Properties.Settings.Default.AdministrativeWarning = ChbAdminWarning.IsChecked.Value;
                 if (ChbRamClearingMessage.IsChecked != null) Properties.Settings.Default.RamCleaningMessage = ChbRamClearingMessage.IsChecked.Value;
                 if (ChbNotifyIconStatistics.IsChecked != null) Properties.Settings.Default.NotifyIconStatistics = ChbNotifyIconStatistics.IsChecked.Value;
+                if (ChbDisplayGauge.IsChecked != null) Properties.Settings.Default.DisplayGauge = ChbDisplayGauge.IsChecked.Value;
                 if (ChbStartHidden.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartHidden.IsChecked.Value;
+                if (ChbHideOnClose.IsChecked != null) Properties.Settings.Default.HideOnClose = ChbHideOnClose.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
 
                 //RAM Monitor

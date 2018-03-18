@@ -11,7 +11,7 @@
     TitleTextAlignment="Center"
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="400" Width="450"
+    Title="MemPlus - Settings" Height="400" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -37,22 +37,28 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                            <CheckBox Grid.Row="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
-                            <CheckBox Grid.Row="1" x:Name="ChbAutoStart" Content="Start MemPlus when Windows starts" Margin="3" />
-                            <CheckBox Grid.Row="2" x:Name="ChbStartHidden" Content="Hide MemPlus on startup" Margin="3" />
-                            <CheckBox Grid.Row="3" x:Name="ChbStartMinimized" Content="Start MemPlus minimized" Margin="3" />
-                            <CheckBox Grid.Row="4" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
-                            <CheckBox Grid.Row="5" x:Name="ChbWindowDraggable" Content="Window draggable" Margin="3" />
-                            <CheckBox Grid.Row="6" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
-                            <CheckBox Grid.Row="7" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
-                            <CheckBox Grid.Row="8" x:Name="ChbRamClearingMessage" Content="Display information after clearing RAM" Margin="3" />
-                            <CheckBox Grid.Row="9" x:Name="ChbNotifyIconStatistics" Content="Display RAM statistics in notifyicon" Margin="3" />
+                            <CheckBox Grid.Row="0" Grid.Column="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
+                            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="ChbAutoStart" Content="Start MemPlus when Windows starts" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbStartMinimized" Content="Start MemPlus minimized" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbStartHidden" Content="Hide MemPlus on startup" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbHideOnClose" Content="Hide MemPlus when closing" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbWindowDraggable" Content="Window draggable" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="1" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
+                            <CheckBox Grid.Row="4" Grid.Column="0" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
+                            <CheckBox Grid.Row="4" Grid.Column="1" x:Name="ChbRamClearingMessage" Content="Display information after clearing RAM" Margin="3" />
+                            <CheckBox Grid.Row="5" Grid.Column="0" x:Name="ChbNotifyIconStatistics" Content="Display RAM statistics in notifyicon" Margin="3" />
+                            <CheckBox Grid.Row="5" Grid.Column="1" x:Name="ChbDisplayGauge" Content="Display RAM Gauge" Margin="3" />
                         </Grid>
                     </GroupBox>
                 </Grid>
