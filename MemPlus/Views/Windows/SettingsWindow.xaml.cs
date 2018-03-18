@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using MemPlus.Business.GUI;
@@ -24,6 +25,14 @@ namespace MemPlus.Views.Windows
         /// The LogController object that can be used to add logs
         /// </summary>
         private readonly LogController _logController;
+        /// <summary>
+        /// The Key that is being used as a hotkey for clearing the memory
+        /// </summary>
+        private Key _hotKey;
+        /// <summary>
+        /// The modifier keys that are used to control the hotkey
+        /// </summary>
+        private string _hotKeyModifiers;
         #endregion
 
         /// <inheritdoc />
@@ -152,6 +161,11 @@ namespace MemPlus.Views.Windows
                     LsvExclusions.Items.Clear();
                 }
 
+                ChbHotKey.IsChecked = Properties.Settings.Default.UseHotKey;
+                _hotKey = Properties.Settings.Default.HotKey;
+                _hotKeyModifiers = Properties.Settings.Default.HotKeyModifiers;
+                TxtHotKey.Text = _hotKeyModifiers + _hotKey;
+
                 //Theme
                 CboStyle.Text = Properties.Settings.Default.VisualStyle;
                 CpMetroBrush.Color = Properties.Settings.Default.MetroColor;
@@ -274,6 +288,10 @@ namespace MemPlus.Views.Windows
                 if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
                 List<string> exclusionList = LsvExclusions.Items.Cast<string>().ToList();
                 Properties.Settings.Default.ProcessExceptions = exclusionList;
+                if (ChbHotKey.IsChecked != null) Properties.Settings.Default.UseHotKey = ChbHotKey.IsChecked.Value;
+                Properties.Settings.Default.HotKey = _hotKey;
+                Properties.Settings.Default.HotKeyModifiers = _hotKeyModifiers;
+                
 
                 //Theme
                 Properties.Settings.Default.VisualStyle = CboStyle.Text;
@@ -482,6 +500,41 @@ namespace MemPlus.Views.Windows
         private void SldWindowResize_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             ResizeBorderThickness = new Thickness(SldWindowResize.Value);
+        }
+
+        private void TxtHotKey_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+            Key key = (e.Key == Key.System ? e.SystemKey : e.Key);
+
+            if (key == Key.Back || key == Key.LeftShift || key == Key.RightShift || key == Key.LeftCtrl || key == Key.RightCtrl || key == Key.LeftAlt || key == Key.RightAlt || key == Key.LWin || key == Key.RWin)
+            {
+                _hotKey = Key.None;
+                _hotKeyModifiers = "";
+                TxtHotKey.Text = "";
+                return;
+            }
+
+            StringBuilder shortcutText = new StringBuilder();
+            if ((Keyboard.Modifiers & System.Windows.Input.ModifierKeys.Control) != 0)
+            {
+                shortcutText.Append("Ctrl+");
+            }
+            if ((Keyboard.Modifiers & System.Windows.Input.ModifierKeys.Shift) != 0)
+            {
+                shortcutText.Append("Shift+");
+            }
+            if ((Keyboard.Modifiers & System.Windows.Input.ModifierKeys.Alt) != 0)
+            {
+                shortcutText.Append("Alt+");
+            }
+
+            _hotKeyModifiers = shortcutText.ToString();
+            _hotKey = key;
+
+            shortcutText.Append(key);
+
+            TxtHotKey.Text = shortcutText.ToString();
         }
     }
 }

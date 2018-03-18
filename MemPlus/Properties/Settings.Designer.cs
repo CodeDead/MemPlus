@@ -381,5 +381,41 @@ namespace MemPlus.Properties {
                 this["DisplayGauge"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Key>None</Key>")]
+        public global::System.Windows.Input.Key HotKey {
+            get {
+                return ((global::System.Windows.Input.Key)(this["HotKey"]));
+            }
+            set {
+                this["HotKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseHotKey {
+            get {
+                return ((bool)(this["UseHotKey"]));
+            }
+            set {
+                this["UseHotKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HotKeyModifiers {
+            get {
+                return ((string)(this["HotKeyModifiers"]));
+            }
+            set {
+                this["HotKeyModifiers"] = value;
+            }
+        }
     }
 }

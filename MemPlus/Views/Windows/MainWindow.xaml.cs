@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using Hardcodet.Wpf.TaskbarNotification;
@@ -10,6 +11,8 @@ using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 using Syncfusion.UI.Xaml.Gauges;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
 
 namespace MemPlus.Views.Windows
 {
@@ -36,6 +39,10 @@ namespace MemPlus.Views.Windows
         /// A boolean to indicate whether RAM cleaning is currently in progress
         /// </summary>
         private bool _clearingMemory;
+        /// <summary>
+        /// The HotKeyController that can be used to register a hotkey for fast memory cleaning
+        /// </summary>
+        private HotKeyController _hotKeyController;
         #endregion
 
         /// <inheritdoc />
@@ -199,6 +206,7 @@ namespace MemPlus.Views.Windows
 
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
                 WindowDraggable();
+                HotKeyModifier();
             }
             catch (Exception ex)
             {
@@ -209,6 +217,68 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
         }
 
+        /// <summary>
+        /// Register a hotkey or not, depending on the properties
+        /// </summary>
+        private void HotKeyModifier()
+        {
+            try
+            {
+                if (Properties.Settings.Default.UseHotKey)
+                {
+                    _hotKeyController?.Dispose();
+
+                    if (Properties.Settings.Default.HotKey == Key.None) return;
+
+                    _hotKeyController = new HotKeyController();
+                    string[] mods = Properties.Settings.Default.HotKeyModifiers.Split('+');
+
+                    uint values = 0;
+                    foreach (string s in mods)
+                    {
+                        switch (s)
+                        {
+                            case "Ctrl":
+                                values = values | (uint)ModifierKeys.Control;
+                                break;
+                            case "Alt":
+                                values = values | (uint)ModifierKeys.Alt;
+                                break;
+                            case "Shift":
+                                values = values | (uint)ModifierKeys.Shift;
+                                break;
+                        }
+                    }
+
+                    _hotKeyController.KeyPressed += Hook_KeyPressed;
+                    _hotKeyController.RegisterHotKey(values, (Keys)KeyInterop.VirtualKeyFromKey(Properties.Settings.Default.HotKey));
+                }
+                else
+                {
+                    _hotKeyController?.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Method that is called when a specific set of keys was pressed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The KeyPressedEventArgs</param>
+        private async void Hook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (_clearingMemory) return;
+            await _ramController.ClearMemory();
+        }
+
+        /// <summary>
+        /// Change the visibility of the RAM Gauge
+        /// </summary>
         private void RamGaugeVisibility()
         {
             try
@@ -837,6 +907,8 @@ namespace MemPlus.Views.Windows
             }
             else
             {
+                // Unregister any hotkeys, if applicable
+                _hotKeyController?.Dispose();
                 // Disable the RAM Monitor to prevent exceptions from being thrown
                 _ramController?.DisableMonitor();
             }
