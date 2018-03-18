@@ -150,6 +150,7 @@ namespace MemPlus.Views.Windows
                 ChbEmptyWorkingSet.IsChecked = Properties.Settings.Default.EmptyWorkingSet;
                 ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
                 ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
+                ChbClearClipboard.IsChecked = Properties.Settings.Default.ClearClipboard;
                 if (Properties.Settings.Default.ProcessExceptions != null)
                 {
                     foreach (string s in Properties.Settings.Default.ProcessExceptions)
@@ -287,6 +288,7 @@ namespace MemPlus.Views.Windows
                 if (ChbEmptyWorkingSet.IsChecked != null) Properties.Settings.Default.EmptyWorkingSet = ChbEmptyWorkingSet.IsChecked.Value;
                 if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
                 if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
+                if (ChbClearClipboard.IsChecked != null) Properties.Settings.Default.ClearClipboard = ChbClearClipboard.IsChecked.Value;
                 List<string> exclusionList = LsvExclusions.Items.Cast<string>().ToList();
                 Properties.Settings.Default.ProcessExceptions = exclusionList;
                 if (ChbHotKey.IsChecked != null) Properties.Settings.Default.UseHotKey = ChbHotKey.IsChecked.Value;

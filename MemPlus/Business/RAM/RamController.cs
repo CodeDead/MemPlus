@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
+using System.Windows;
 using MemPlus.Business.LOG;
 using Microsoft.VisualBasic.Devices;
 // ReSharper disable PossibleNullReferenceException
@@ -42,6 +43,10 @@ namespace MemPlus.Business.RAM
         /// An integer value representative of the percentage of RAM usage that should be reached before RAM optimisation should be called
         /// </summary>
         private double _autoOptimizeRamThreshold;
+        /// <summary>
+        /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
+        /// </summary>
+        private DateTime _lastAutoOptimizeTime;
         #endregion
 
         #region Properties
@@ -82,9 +87,9 @@ namespace MemPlus.Business.RAM
         /// </summary>
         internal bool AutoOptimizePercentage { get; set; }
         /// <summary>
-        /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
+        /// Property displaying whether the clipboard should be cleared during memory cleaning
         /// </summary>
-        private DateTime _lastAutoOptimizeTime;
+        internal bool ClearClipboard { get; set; }
         #endregion
 
         #region Delegates
@@ -272,6 +277,11 @@ namespace MemPlus.Business.RAM
 
                 RamSavings = oldUsage - newUsage;
             });
+
+            if (ClearClipboard)
+            {
+                Clipboard.Clear();
+            }
 
             RamClearingCompletedEvcent.Invoke();
 

@@ -11,7 +11,7 @@
     TitleTextAlignment="Center"
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="380" Width="550"
+    Title="MemPlus - Settings" Height="400" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -142,18 +142,18 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
-                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbHotKey" Content="Hotkey:" Margin="3" />
-                            <TextBox Grid.Row="3" Grid.Column="1" x:Name="TxtHotKey" Margin="3" PreviewKeyDown="TxtHotKey_PreviewKeyDown"/>
+                            <CheckBox Grid.Row="0" Grid.Column="0" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
+                            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbClearClipboard" Content="Clear clipboard data" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbHotKey" Content="Hotkey:" Margin="3" />
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="TxtHotKey" Margin="3" HorizontalAlignment="Stretch" PreviewKeyDown="TxtHotKey_PreviewKeyDown"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Grid.Row="1" Header="Working Set Exclusions" MinWidth="250" Margin="3">

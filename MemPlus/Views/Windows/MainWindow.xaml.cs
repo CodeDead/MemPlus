@@ -197,6 +197,7 @@ namespace MemPlus.Views.Windows
 
                 _ramController.AutoOptimizePercentage = Properties.Settings.Default.AutoOptimizePercentage;
                 _ramController.SetAutoOptimizeThreshold(Properties.Settings.Default.AutoOptimizePercentageThreshold);
+                _ramController.ClearClipboard = Properties.Settings.Default.ClearClipboard;
 
                 if (Properties.Settings.Default.RamMonitor)
                 {
@@ -868,7 +869,7 @@ namespace MemPlus.Views.Windows
         private async void ClearMemory(int index)
         {
             if (_clearingMemory) return;
-            if (!_ramController.EmptyWorkingSets && !_ramController.ClearFileSystemCache) return;
+            if (!_ramController.EmptyWorkingSets && !_ramController.ClearFileSystemCache && !_ramController.ClearClipboard) return;
 
             _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
             _clearingMemory = true;
@@ -890,8 +891,6 @@ namespace MemPlus.Views.Windows
                         await _ramController.ClearFileSystemCaches();
                         break;
                 }
-
-                BtnClearMemory.IsEnabled = true;
             }
             catch (Exception ex)
             {
@@ -899,7 +898,9 @@ namespace MemPlus.Views.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
+            BtnClearMemory.IsEnabled = true;
             _clearingMemory = false;
+
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
 
