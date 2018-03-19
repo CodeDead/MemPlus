@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Management;
+using System.Reflection;
 using System.Security.Principal;
 using System.Windows;
 using MemPlus.Business.EXPORT;
@@ -35,6 +36,32 @@ namespace MemPlus.Business.UTILS
                 isAdmin = false;
             }
             return isAdmin;
+        }
+
+        /// <summary>
+        /// Run the application using Administrative rights
+        /// </summary>
+        internal static void RunAsAdministrator(LogController logController)
+        {
+            try
+            {
+                Process proc = new Process
+                {
+                    StartInfo =
+                    {
+                        FileName = Assembly.GetExecutingAssembly().Location,
+                        UseShellExecute = true,
+                        Verb = "runas"
+                    }
+                };
+                proc.Start();
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>

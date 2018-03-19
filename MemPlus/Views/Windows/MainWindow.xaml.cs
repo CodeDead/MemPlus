@@ -98,7 +98,7 @@ namespace MemPlus.Views.Windows
                 {
                     if (Properties.Settings.Default.RunAsAdministrator)
                     {
-                        RunAsAdministrator();
+                        Utils.RunAsAdministrator(_logController);
                     }
                     else if (Properties.Settings.Default.AdministrativeWarning)
                     {
@@ -113,32 +113,6 @@ namespace MemPlus.Views.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
-        }
-
-        /// <summary>
-        /// Run the application using Administrative rights
-        /// </summary>
-        private void RunAsAdministrator()
-        {
-            try
-            {
-                System.Diagnostics.Process proc = new System.Diagnostics.Process
-                {
-                    StartInfo =
-                    {
-                        FileName = Assembly.GetExecutingAssembly().Location,
-                        UseShellExecute = true,
-                        Verb = "runas"
-                    }
-                };
-                proc.Start();
-                Application.Current.Shutdown();
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ApplicationLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
 
         /// <summary>
