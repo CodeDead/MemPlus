@@ -137,6 +137,7 @@
                     <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniDisableInactive" Header="Disable when inactive" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniWindowDraggable" Header="Window draggable" IsCheckable="True" Checked="WindowDraggableMenuItem_OnCheckedChanged" Unchecked="WindowDraggableMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniRamStatistics" Header="Display RAM statistics" IsCheckable="True" Checked="RamStatisticsMenuItem_OnCheckedChanged" Unchecked="RamStatisticsMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniRamGauge" Header="Display RAM Gauge" IsCheckable="True" Checked="RamGaugeMenuItem_OnCheckedChanged" Unchecked="RamGaugeMenuItem_OnCheckedChanged" />
                 </MenuItem>
                 <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
@@ -208,17 +209,23 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="Total physical memory:" FontSize="14" Margin="10,5" />
-                <Label Grid.Row="1" x:Name="LblTotalPhysicalMemory"  Content="" FontSize="14" Foreground="Green" Margin="10,5" />
-                <Label Grid.Row="2" Content="Used physical memory:" FontSize="14" Margin="10,5" />
-                <Label Grid.Row="3" x:Name="LblAvailablePhysicalMemory" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
+                <Grid x:Name="GrdRamStatistics" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-                <syncfusion:SplitButtonAdv Grid.Row="4" FontSize="14"
+                    <Label Grid.Row="0" Content="Total physical memory:" FontSize="14" Margin="10,5" />
+                    <Label Grid.Row="1" x:Name="LblTotalPhysicalMemory"  Content="" FontSize="14" Foreground="Green" Margin="10,5" />
+                    <Label Grid.Row="2" Content="Used physical memory:" FontSize="14" Margin="10,5" />
+                    <Label Grid.Row="3" x:Name="LblAvailablePhysicalMemory" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
+                </Grid>
+
+                <syncfusion:SplitButtonAdv Grid.Row="1" FontSize="14"
                                            SmallIcon="../../Resources/Images/ram_tab.png" Label="Clear memory"
                                            x:Name="BtnClearMemory" Click="BtnClearMemory_OnClick" IsMultiLine="False"
                                            MinHeight="25" HorizontalAlignment="Stretch" Margin="10,5">

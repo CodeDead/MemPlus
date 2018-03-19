@@ -441,5 +441,17 @@ namespace MemPlus.Properties {
                 this["RunAsAdministrator"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool WindowRamStatistics {
+            get {
+                return ((bool)(this["WindowRamStatistics"]));
+            }
+            set {
+                this["WindowRamStatistics"] = value;
+            }
+        }
     }
 }

@@ -184,6 +184,7 @@ namespace MemPlus.Views.Windows
                 MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
                 MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
                 MniWindowDraggable.IsChecked = Properties.Settings.Default.WindowDragging;
+                MniRamStatistics.IsChecked = Properties.Settings.Default.WindowRamStatistics;
                 MniRamGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
 
@@ -208,16 +209,17 @@ namespace MemPlus.Views.Windows
                     _ramController.EnableMonitor();
                 }
 
-                RamGaugeVisibility();
-
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
-                WindowDraggable();
             }
             catch (Exception ex)
             {
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            RamGaugeVisibility();
+            RamStatisticsVisibility();
+            WindowDraggable();
 
             _logController.AddLog(new ApplicationLog("Done loading MainWindow properties"));
         }
@@ -308,6 +310,22 @@ namespace MemPlus.Views.Windows
                     CgRamUsage.Visibility = Visibility.Collapsed;
                     SepGauge.Visibility = Visibility.Collapsed;
                 }
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Check whether the RAM statistics should be displayed in the MainWindow
+        /// </summary>
+        private void RamStatisticsVisibility()
+        {
+            try
+            {
+                GrdRamStatistics.Visibility = Properties.Settings.Default.WindowRamStatistics ? Visibility.Visible : Visibility.Collapsed;
             }
             catch (Exception ex)
             {
@@ -667,14 +685,33 @@ namespace MemPlus.Views.Windows
             {
                 Properties.Settings.Default.WindowDragging = MniWindowDraggable.IsChecked;
                 Properties.Settings.Default.Save();
-
-                WindowDraggable();
             }
             catch (Exception ex)
             {
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            WindowDraggable();
+        }
+
+        /// <summary>
+        /// Method that is called when the RAM statistics visibility should be changed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void RamStatisticsMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Properties.Settings.Default.WindowRamStatistics = MniRamStatistics.IsChecked;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            RamStatisticsVisibility();
         }
 
         /// <summary>
@@ -688,14 +725,13 @@ namespace MemPlus.Views.Windows
             {
                 Properties.Settings.Default.DisplayGauge = MniRamGauge.IsChecked;
                 Properties.Settings.Default.Save();
-
-                RamGaugeVisibility();
             }
             catch (Exception ex)
             {
                 _logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            RamGaugeVisibility();
         }
 
         /// <summary>
