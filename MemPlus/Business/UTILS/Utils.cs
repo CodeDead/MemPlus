@@ -23,7 +23,18 @@ namespace MemPlus.Business.UTILS
         /// <returns>True if the application has Administrative rights, otherwise false</returns>
         internal static bool IsAdministrator()
         {
-            return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+            bool isAdmin;
+            try
+            {
+                WindowsIdentity user = WindowsIdentity.GetCurrent();
+                WindowsPrincipal principal = new WindowsPrincipal(user);
+                isAdmin = principal.IsInRole(WindowsBuiltInRole.Administrator);
+            }
+            catch (Exception)
+            {
+                isAdmin = false;
+            }
+            return isAdmin;
         }
 
         /// <summary>

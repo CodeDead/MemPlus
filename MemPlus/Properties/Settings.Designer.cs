@@ -429,5 +429,17 @@ namespace MemPlus.Properties {
                 this["ClearClipboard"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RunAsAdministrator {
+            get {
+                return ((bool)(this["RunAsAdministrator"]));
+            }
+            set {
+                this["RunAsAdministrator"] = value;
+            }
+        }
     }
 }

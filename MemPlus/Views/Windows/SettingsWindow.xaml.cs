@@ -82,6 +82,7 @@ namespace MemPlus.Views.Windows
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
                 ChbStartHidden.IsChecked = Properties.Settings.Default.HideOnStart;
                 ChbHideOnClose.IsChecked = Properties.Settings.Default.HideOnClose;
+                ChbRunAsAdmin.IsChecked = Properties.Settings.Default.RunAsAdministrator;
                 ChbStartMinimized.IsChecked = Properties.Settings.Default.StartMinimized;
                 if (Properties.Settings.Default.Topmost)
                 {
@@ -239,6 +240,7 @@ namespace MemPlus.Views.Windows
                 if (ChbDisplayGauge.IsChecked != null) Properties.Settings.Default.DisplayGauge = ChbDisplayGauge.IsChecked.Value;
                 if (ChbStartHidden.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartHidden.IsChecked.Value;
                 if (ChbHideOnClose.IsChecked != null) Properties.Settings.Default.HideOnClose = ChbHideOnClose.IsChecked.Value;
+                if (ChbRunAsAdmin.IsChecked != null) Properties.Settings.Default.RunAsAdministrator = ChbRunAsAdmin.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
 
                 //RAM Monitor

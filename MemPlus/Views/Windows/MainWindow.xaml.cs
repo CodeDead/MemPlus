@@ -94,9 +94,13 @@ namespace MemPlus.Views.Windows
                     WindowState = WindowState.Minimized;
                 }
 
-                if (Properties.Settings.Default.AdministrativeWarning)
+                if (!Utils.IsAdministrator())
                 {
-                    if (!Utils.IsAdministrator())
+                    if (Properties.Settings.Default.RunAsAdministrator)
+                    {
+                        RunAsAdministrator();
+                    }
+                    else if (Properties.Settings.Default.AdministrativeWarning)
                     {
                         MessageBox.Show("MemPlus might not function correctly without administrative rights!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
@@ -109,6 +113,32 @@ namespace MemPlus.Views.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
+        }
+
+        /// <summary>
+        /// Run the application using Administrative rights
+        /// </summary>
+        private void RunAsAdministrator()
+        {
+            try
+            {
+                System.Diagnostics.Process proc = new System.Diagnostics.Process
+                {
+                    StartInfo =
+                    {
+                        FileName = Assembly.GetExecutingAssembly().Location,
+                        UseShellExecute = true,
+                        Verb = "runas"
+                    }
+                };
+                proc.Start();
+                Application.Current.Shutdown();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
