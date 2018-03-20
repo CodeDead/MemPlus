@@ -134,7 +134,7 @@ namespace MemPlus.Views.Windows
                 tooltipText += Environment.NewLine;
                 tooltipText += "Total physical memory: " + ramTotal;
                 tooltipText += Environment.NewLine;
-                tooltipText += "Available physical memory: " + ramAvailable;
+                tooltipText += "Used physical memory: " + ramAvailable;
 
                 TbiIcon.ToolTipText = tooltipText;
             });
