@@ -49,10 +49,6 @@ namespace MemPlus.Views.Windows
                 {
                     MouseDown += OnMouseDown;
                 }
-                else
-                {
-                    MouseDown -= OnMouseDown;
-                }
             }
             catch (Exception ex)
             {
