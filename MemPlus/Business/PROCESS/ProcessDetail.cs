@@ -23,9 +23,5 @@ namespace MemPlus.Business.PROCESS
         /// The current memory usage of the Process in MB
         /// </summary>
         public string MemoryUsage { get; set; }
-        /// <summary>
-        /// The Handle of the process
-        /// </summary>
-        internal IntPtr Handle { get; set; }
     }
 }

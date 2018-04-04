@@ -246,7 +246,6 @@ namespace MemPlus.Business.UTILS
                         ProcessName = p.ProcessName,
                         ProcessLocation = p.MainModule.FileName,
                         MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB",
-                        Handle = p.Handle
                     };
                     processDetailsList.Add(pd);
                 }

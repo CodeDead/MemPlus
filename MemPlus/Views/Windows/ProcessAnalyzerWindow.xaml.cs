@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using MemPlus.Business.GUI;
@@ -152,6 +153,11 @@ namespace MemPlus.Views.Windows
             }
         }
 
+        /// <summary>
+        /// Method that is called when the working set of a process should be emptied
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
         private void EmptyWorkingSetMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             if (LsvProcessList.SelectedItems.Count == 0) return;
@@ -160,7 +166,8 @@ namespace MemPlus.Views.Windows
             {
                 _logController.AddLog(new RamLog("Emptying working set for process: " + detail.ProcessName));
                 // Empty the working set of the process
-                NativeMethods.EmptyWorkingSet(detail.Handle);
+                NativeMethods.EmptyWorkingSet(Process.GetProcessById(detail.ProcessId).Handle);
+
                 _logController.AddLog(new RamLog("Successfully emptied working set for process " + detail.ProcessName));
             }
             catch (Exception ex)
