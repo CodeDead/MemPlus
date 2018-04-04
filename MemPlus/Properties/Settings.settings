@@ -8,7 +8,7 @@
     <Setting Name="MetroColor" Type="System.Windows.Media.Color" Scope="User">
       <Value Profile="(Default)">#FF07779C</Value>
     </Setting>
-    <Setting Name="BorderThickness" Type="System.Int32" Scope="User">
+    <Setting Name="BorderThickness" Type="System.Double" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
     <Setting Name="StandByCache" Type="System.Boolean" Scope="User">

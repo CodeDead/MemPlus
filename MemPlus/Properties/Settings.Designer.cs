@@ -50,9 +50,9 @@ namespace MemPlus.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3")]
-        public int BorderThickness {
+        public double BorderThickness {
             get {
-                return ((int)(this["BorderThickness"]));
+                return ((double)(this["BorderThickness"]));
             }
             set {
                 this["BorderThickness"] = value;

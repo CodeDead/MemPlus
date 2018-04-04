@@ -173,7 +173,7 @@ namespace MemPlus.Views.Windows
                 //Theme
                 CboStyle.Text = Properties.Settings.Default.VisualStyle;
                 CpMetroBrush.Color = Properties.Settings.Default.MetroColor;
-                IntBorderThickness.Value = Properties.Settings.Default.BorderThickness;
+                SldBorderThickness.Value = Properties.Settings.Default.BorderThickness;
                 SldOpacity.Value = Properties.Settings.Default.WindowOpacity * 100;
                 SldWindowResize.Value = Properties.Settings.Default.WindowResizeBorder;
                 ItbWarningLevel.Value = Properties.Settings.Default.WarningLevel;
@@ -303,7 +303,7 @@ namespace MemPlus.Views.Windows
                 //Theme
                 Properties.Settings.Default.VisualStyle = CboStyle.Text;
                 Properties.Settings.Default.MetroColor = CpMetroBrush.Color;
-                if (IntBorderThickness.Value != null) Properties.Settings.Default.BorderThickness = (int)IntBorderThickness.Value;
+                Properties.Settings.Default.BorderThickness = SldBorderThickness.Value;
                 Properties.Settings.Default.WindowOpacity = SldOpacity.Value / 100;
                 Properties.Settings.Default.WindowResizeBorder = SldWindowResize.Value;
                 if (ItbWarningLevel.Value != null) Properties.Settings.Default.WarningLevel = ItbWarningLevel.Value.Value;
@@ -489,6 +489,16 @@ namespace MemPlus.Views.Windows
                     LsvExclusions.Items.Add(s);
                 }
             }
+        }
+
+        /// <summary>
+        /// Method that is called when the border thickness should change
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedPropertyChangedEventArgs</param>
+        private void SldBorderThickness_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            BorderThickness = new Thickness(SldBorderThickness.Value);
         }
 
         /// <summary>

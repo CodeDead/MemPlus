@@ -240,12 +240,11 @@
                             <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:" />
                             <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
                             <Label Margin="3"  Grid.Row="2" Grid.Column="0" Content="Border thickness:" />
-                            <syncfusion:IntegerTextBox Margin="3" x:Name="IntBorderThickness" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" MinValue="0"></syncfusion:IntegerTextBox>
+                            <Slider Margin="3" x:Name="SldBorderThickness" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Minimum="1" ValueChanged="SldBorderThickness_OnValueChanged" />
                             <Label Margin="3" Grid.Row="3" Grid.Column="0" Content="Window opacity:" />
                             <Slider x:Name="SldOpacity" Margin="3" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Minimum="30" Maximum="100" Width="180" ValueChanged="SldOpacity_OnValueChanged" />
                             <Label Margin="3" Grid.Row="4" Grid.Column="0" Content="Resize border:" />
-                            <Slider x:Name="SldWindowResize" Margin="3" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Minimum="2" Maximum="10" Width="180" ValueChanged="SldWindowResize_OnValueChanged" />
-                            
+                            <Slider x:Name="SldWindowResize" Margin="3" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Minimum="1" Maximum="10" Width="180" ValueChanged="SldWindowResize_OnValueChanged" />
                             <Label Grid.Row="5" Grid.Column="0" Content="Warning level:" />
                             <syncfusion:IntegerTextBox x:Name="ItbWarningLevel" Grid.Row="5" Grid.Column="1" MinValue="1" MaxValue="99" />
                             <Label Grid.Row="5" Grid.Column="2" Content="%" />
