@@ -116,7 +116,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Event that is called when the GUI statistics should be updated
+        /// Method that is called when the GUI statistics should be updated
         /// </summary>
         private void UpdateGuiStatistics()
         {
@@ -141,7 +141,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Event that is called when a RAM clearing has occurred and statistics could be shown to the user
+        /// Method that is called when a RAM clearing has occurred and statistics could be shown to the user
         /// </summary>
         private void RamClearingCompleted()
         {
@@ -226,7 +226,7 @@ namespace MemPlus.Views.Windows
 
         /// <inheritdoc />
         /// <summary>
-        /// Event that is called when the source is initialized
+        /// Method that is called when the source is initialized
         /// </summary>
         /// <param name="e">The EventArgs</param>
         protected override void OnSourceInitialized(EventArgs e)

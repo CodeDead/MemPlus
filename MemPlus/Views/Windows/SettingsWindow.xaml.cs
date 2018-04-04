@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
+using MemPlus.Business.UTILS;
 using Microsoft.Win32;
 
 namespace MemPlus.Views.Windows
@@ -78,7 +79,7 @@ namespace MemPlus.Views.Windows
             try
             {
                 //General
-                ChbAutoStart.IsChecked = AutoStartUp();
+                ChbAutoStart.IsChecked = Utils.AutoStartUp();
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
                 ChbStartHidden.IsChecked = Properties.Settings.Default.HideOnStart;
                 ChbHideOnClose.IsChecked = Properties.Settings.Default.HideOnClose;
@@ -198,15 +199,6 @@ namespace MemPlus.Views.Windows
             {
                 DragMove();
             }
-        }
-
-        /// <summary>
-        /// Check if the program starts automatically.
-        /// </summary>
-        /// <returns>A boolean to represent whether the program starts automatically or not.</returns>
-        private static bool AutoStartUp()
-        {
-            return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == System.Reflection.Assembly.GetExecutingAssembly().Location;
         }
 
         /// <summary>
@@ -376,7 +368,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all properties should be saved
+        /// Method that is called when all properties should be saved
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -521,10 +513,15 @@ namespace MemPlus.Views.Windows
             ResizeBorderThickness = new Thickness(SldWindowResize.Value);
         }
 
+        /// <summary>
+        /// Method that is called when the user is pressing a key on the textbox
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The KeyEventArgs</param>
         private void TxtHotKey_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
-            Key key = (e.Key == Key.System ? e.SystemKey : e.Key);
+            Key key = e.Key == Key.System ? e.SystemKey : e.Key;
 
             if (key == Key.Back || key == Key.LeftShift || key == Key.RightShift || key == Key.LeftCtrl || key == Key.RightCtrl || key == Key.LeftAlt || key == Key.RightAlt || key == Key.LWin || key == Key.RWin)
             {

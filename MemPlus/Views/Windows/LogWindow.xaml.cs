@@ -100,7 +100,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all logs of a certain type have been cleared
+        /// Method that is called when all logs of a certain type have been cleared
         /// </summary>
         /// <param name="clearedList">The list of Log objects that were removed</param>
         private void LogTypeClearedEvent(List<Log> clearedList)
@@ -126,7 +126,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when a Log object was removed
+        /// Method that is called when a Log object was removed
         /// </summary>
         /// <param name="log">The Log object that was removed</param>
         private void LogDeletedEvent(Log log)
@@ -139,7 +139,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all logs were removed
+        /// Method that is called when all logs were removed
         /// </summary>
         private void LogsClearedEvent()
         {
@@ -150,7 +150,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when a Log object was added
+        /// Method that is called when a Log object was added
         /// </summary>
         /// <param name="log">The Log object that was added</param>
         private void LogAddedEvent(Log log)
@@ -189,7 +189,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all logs of a certain type should be cleared
+        /// Method that is called when all logs of a certain type should be cleared
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -199,7 +199,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all Logs of a certain type should be exported
+        /// Method that is called when all Logs of a certain type should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -209,7 +209,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when a Log object should be removed
+        /// Method that is called when a Log object should be removed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -220,7 +220,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when a Log object should be copied to the clipboard
+        /// Method that is called when a Log object should be copied to the clipboard
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -241,7 +241,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Event that is called when the mouse wheel is used
+        /// Method that is called when the mouse wheel is used
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The MouseWheelEventArgs</param>

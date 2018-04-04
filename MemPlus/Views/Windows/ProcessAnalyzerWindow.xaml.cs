@@ -90,7 +90,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all ProcessDetail objects should be cleared
+        /// Method that is called when all ProcessDetail objects should be cleared
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -100,7 +100,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when all ProcessDetail objects should be exported
+        /// Method that is called when all ProcessDetail objects should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -134,7 +134,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that will be called when a ProcessDetail object should be copied to the clipboard
+        /// Method that is called when a ProcessDetail object should be copied to the clipboard
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>

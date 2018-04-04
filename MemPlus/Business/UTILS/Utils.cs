@@ -67,7 +67,7 @@ namespace MemPlus.Business.UTILS
         /// <summary>
         /// Retrieve RAM information
         /// </summary>
-        /// <returns>A list of RAM information</returns>
+        /// <returns>A list of RamStick objects</returns>
         internal static List<RamStick> GetRamSticks()
         {
             List<RamStick> ramSticks = new List<RamStick>();
@@ -231,7 +231,7 @@ namespace MemPlus.Business.UTILS
         /// Retrieve a list of ProcessDetail objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        /// <returns></returns>
+        /// <returns>A list of ProcessDetail objects that are currently available</returns>
         internal static List<ProcessDetail> GetProcessDetails(LogController logController)
         {
             logController.AddLog(new ProcessLog("Retrieving process details"));
@@ -256,6 +256,15 @@ namespace MemPlus.Business.UTILS
             }
             logController.AddLog(new ProcessLog("Done retrieving process details"));
             return processDetailsList;
+        }
+
+        /// <summary>
+        /// Check if the program starts automatically.
+        /// </summary>
+        /// <returns>A boolean to represent whether the program starts automatically or not.</returns>
+        internal static bool AutoStartUp()
+        {
+            return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == Assembly.GetExecutingAssembly().Location;
         }
     }
 }
