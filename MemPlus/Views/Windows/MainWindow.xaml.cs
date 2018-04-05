@@ -105,6 +105,11 @@ namespace MemPlus.Views.Windows
                         MessageBox.Show("MemPlus might not function correctly without administrative rights!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
+
+                if (Properties.Settings.Default.StartupMemoryClear)
+                {
+                    ClearMemory(0);
+                }
             }
             catch (Exception ex)
             {

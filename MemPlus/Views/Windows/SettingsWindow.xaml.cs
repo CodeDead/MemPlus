@@ -150,6 +150,7 @@ namespace MemPlus.Views.Windows
                         break;
                 }
 
+                ChbStartupMemoryClear.IsChecked = Properties.Settings.Default.StartupMemoryClear;
                 ChbEmptyWorkingSet.IsChecked = Properties.Settings.Default.EmptyWorkingSet;
                 ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
                 ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
@@ -281,6 +282,7 @@ namespace MemPlus.Views.Windows
                 }
 
                 //RAM Optimizer
+                if (ChbStartupMemoryClear.IsChecked != null) Properties.Settings.Default.StartupMemoryClear = ChbStartupMemoryClear.IsChecked.Value;
                 if (ChbEmptyWorkingSet.IsChecked != null) Properties.Settings.Default.EmptyWorkingSet = ChbEmptyWorkingSet.IsChecked.Value;
                 if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
                 if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;

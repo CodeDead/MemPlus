@@ -453,5 +453,17 @@ namespace MemPlus.Properties {
                 this["WindowRamStatistics"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool StartupMemoryClear {
+            get {
+                return ((bool)(this["StartupMemoryClear"]));
+            }
+            set {
+                this["StartupMemoryClear"] = value;
+            }
+        }
     }
 }
