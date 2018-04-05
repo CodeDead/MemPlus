@@ -176,5 +176,28 @@ namespace MemPlus.Views.Windows
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        /// <summary>
+        /// Method that is called when a Process should be killed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void KillMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (LsvProcessList.SelectedItems.Count == 0) return;
+            if (!(LsvProcessList.SelectedItem is ProcessDetail detail)) return;
+
+            try
+            {
+                _logController.AddLog(new ApplicationLog("Killing " + detail.ProcessName + " (" + detail.ProcessId + ")"));
+                Process.GetProcessById(detail.ProcessId).Kill();
+                _logController.AddLog(new ApplicationLog("Done killing " + detail.ProcessName + " (" + detail.ProcessId + ")"));
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

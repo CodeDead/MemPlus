@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MemPlus.Business.PROCESS
+﻿namespace MemPlus.Business.PROCESS
 {
     /// <summary>
     /// Internal class that represents the presentable details of a Process object
@@ -23,5 +21,9 @@ namespace MemPlus.Business.PROCESS
         /// The current memory usage of the Process in MB
         /// </summary>
         public string MemoryUsage { get; set; }
+        /// <summary>
+        /// The current memory usage of the Process
+        /// </summary>
+        public long MemoryUsageLong { get; set; }
     }
 }

@@ -99,6 +99,7 @@
     <Compile Include="Business\RAM\RamData.cs" />
     <Compile Include="Business\EXPORT\RamSticksExporter.cs" />
     <Compile Include="Business\RAM\RamStick.cs" />
+    <Compile Include="Business\UTILS\GridViewSort.cs" />
     <Compile Include="Business\UTILS\HotKeyController.cs" />
     <Compile Include="Business\UTILS\NativeMethods.cs" />
     <Compile Include="Business\UTILS\Utils.cs" />

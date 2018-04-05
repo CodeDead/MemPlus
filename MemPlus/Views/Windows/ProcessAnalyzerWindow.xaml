@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
     mc:Ignorable="d" UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen" AllowsTransparency="True"
     TitleTextAlignment="Center" UseNativeChrome="True"
@@ -14,12 +15,20 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvProcessList" SelectionMode="Single">
+        <ListView x:Name="LsvProcessList"
+                  SelectionMode="Single"
+                  IsSynchronizedWithCurrentItem="True"
+                  utils:GridViewSort.Enabled="True">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Empty working set" Click="EmptyWorkingSetMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png"></Image>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Kill" Click="KillMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png"></Image>
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
@@ -48,10 +57,10 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView x:Name="DynGrid">
-                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessId}" />
-                    <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding ProcessName}" />
-                    <GridViewColumn Header="Process location" DisplayMemberBinding="{Binding ProcessLocation}" />
-                    <GridViewColumn Header="Memory usage" DisplayMemberBinding="{Binding MemoryUsage}" />
+                    <GridViewColumn Header="Process ID" DisplayMemberBinding="{Binding ProcessId}" utils:GridViewSort.PropertyName="ProcessId" />
+                    <GridViewColumn Header="Process name" DisplayMemberBinding="{Binding ProcessName}" utils:GridViewSort.PropertyName="ProcessName" />
+                    <GridViewColumn Header="Process location" DisplayMemberBinding="{Binding ProcessLocation}" utils:GridViewSort.PropertyName="ProcessLocation" />
+                    <GridViewColumn Header="Memory usage" DisplayMemberBinding="{Binding MemoryUsage}" utils:GridViewSort.PropertyName="MemoryUsageLong" />
                 </GridView>
             </ListView.View>
         </ListView>
