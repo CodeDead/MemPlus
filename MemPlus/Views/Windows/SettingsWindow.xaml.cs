@@ -98,6 +98,8 @@ namespace MemPlus.Views.Windows
                 ChbNotifyIcon.IsChecked = Properties.Settings.Default.NotifyIcon;
                 if (Properties.Settings.Default.WindowDragging)
                 {
+                    // Remove previously added event handler if applicable
+                    MouseDown -= OnMouseDown;
                     MouseDown += OnMouseDown;
                     ChbWindowDraggable.IsChecked = true;
                 }
