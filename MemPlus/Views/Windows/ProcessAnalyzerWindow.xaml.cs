@@ -122,11 +122,11 @@ namespace MemPlus.Views.Windows
         /// <summary>
         /// Refresh all ProcessDetail objects
         /// </summary>
-        private void RefreshProcessDetails()
+        private async void RefreshProcessDetails()
         {
             _logController.AddLog(new ProcessLog("Refreshing process details"));
             LsvProcessList.Items.Clear();
-            foreach (ProcessDetail pd in Utils.GetProcessDetails(_logController))
+            foreach (ProcessDetail pd in await Utils.GetProcessDetails(_logController))
             {
                 LsvProcessList.Items.Add(pd);
             }

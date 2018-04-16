@@ -13,7 +13,6 @@ namespace MemPlus.Business.UTILS
     internal class GridViewSort
     {
         #region Properties
-
         /// <summary>
         /// Check whether sorting is enabled or not
         /// </summary>
@@ -89,11 +88,9 @@ namespace MemPlus.Business.UTILS
                 typeof(GridViewSort),
                 new UIPropertyMetadata(null)
             );
-
         #endregion
 
         #region ColumnHeader
-
         /// <summary>
         /// Method that is called when a ColumnHeader object is clicked
         /// </summary>
@@ -111,11 +108,9 @@ namespace MemPlus.Business.UTILS
                 ApplySort(listView.Items, propertyName);
             }
         }
-
         #endregion
 
         #region Helpermethods
-
         /// <summary>
         /// Get the parent object of a DependencyObject
         /// </summary>
@@ -154,7 +149,6 @@ namespace MemPlus.Business.UTILS
                 view.SortDescriptions.Add(new SortDescription(propertyName, direction));
             }
         }
-
         #endregion
     }
 }

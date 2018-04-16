@@ -55,7 +55,7 @@ namespace MemPlus.Views.Windows
             _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
 
-            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "Information", "Cancel", "Download", "No new version is currently available.");
+            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "Information", "Cancel", "Download", "You are using the latest version!");
             _clearingMemory = false;
 
             InitializeComponent();

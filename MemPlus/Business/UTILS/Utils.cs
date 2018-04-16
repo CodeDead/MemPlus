@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Management;
 using System.Reflection;
 using System.Security.Principal;
+using System.Threading.Tasks;
 using System.Windows;
 using MemPlus.Business.EXPORT;
 using MemPlus.Business.LOG;
@@ -192,7 +193,7 @@ namespace MemPlus.Business.UTILS
         /// Export all ProcessDetail objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal static void ExportProcessDetails(LogController logController)
+        internal static async void ExportProcessDetails(LogController logController)
         {
             SaveFileDialog sfd = new SaveFileDialog
             {
@@ -206,16 +207,16 @@ namespace MemPlus.Business.UTILS
                 {
                     //Filterindex starts at 1
                     case 1:
-                        ProcessDetailExporter.ExportText(sfd.FileName, GetProcessDetails(logController));
+                        ProcessDetailExporter.ExportText(sfd.FileName, await GetProcessDetails(logController));
                         break;
                     case 2:
-                        ProcessDetailExporter.ExportHtml(sfd.FileName, GetProcessDetails(logController));
+                        ProcessDetailExporter.ExportHtml(sfd.FileName, await GetProcessDetails(logController));
                         break;
                     case 3:
-                        ProcessDetailExporter.ExportCsv(sfd.FileName, GetProcessDetails(logController));
+                        ProcessDetailExporter.ExportCsv(sfd.FileName, await GetProcessDetails(logController));
                         break;
                     case 4:
-                        ProcessDetailExporter.ExportExcel(sfd.FileName, GetProcessDetails(logController));
+                        ProcessDetailExporter.ExportExcel(sfd.FileName, await GetProcessDetails(logController));
                         break;
                 }
                 MessageBox.Show("All data has been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -232,29 +233,34 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
         /// <returns>A list of ProcessDetail objects that are currently available</returns>
-        internal static List<ProcessDetail> GetProcessDetails(LogController logController)
+        internal static async Task<List<ProcessDetail>> GetProcessDetails(LogController logController)
         {
             logController.AddLog(new ProcessLog("Retrieving process details"));
             List<ProcessDetail> processDetailsList = new List<ProcessDetail>();
-            foreach (Process p in Process.GetProcesses())
+
+            await Task.Run(() =>
             {
-                try
+                foreach (Process p in Process.GetProcesses())
                 {
-                    ProcessDetail pd = new ProcessDetail
+                    try
                     {
-                        ProcessId = p.Id,
-                        ProcessName = p.ProcessName,
-                        ProcessLocation = p.MainModule.FileName,
-                        MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB",
-                        MemoryUsageLong = p.WorkingSet64
-                    };
-                    processDetailsList.Add(pd);
+                        ProcessDetail pd = new ProcessDetail
+                        {
+                            ProcessId = p.Id,
+                            ProcessName = p.ProcessName,
+                            ProcessLocation = p.MainModule.FileName,
+                            MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB",
+                            MemoryUsageLong = p.WorkingSet64
+                        };
+                        processDetailsList.Add(pd);
+                    }
+                    catch (Exception ex)
+                    {
+                        logController.AddLog(new ProcessLog(p.ProcessName + ": " + ex.Message));
+                    }
                 }
-                catch (Exception ex)
-                {
-                    logController.AddLog(new ProcessLog(p.ProcessName + ": " + ex.Message));
-                }
-            }
+            });
+
             logController.AddLog(new ProcessLog("Done retrieving process details"));
             return processDetailsList;
         }
