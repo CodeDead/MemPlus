@@ -12,6 +12,7 @@ using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 using Syncfusion.UI.Xaml.Gauges;
+using UpdateManager.Classes;
 using Application = System.Windows.Application;
 using MessageBox = System.Windows.MessageBox;
 
@@ -55,7 +56,17 @@ namespace MemPlus.Views.Windows
             _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
 
-            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", "MemPlus", "Information", "Cancel", "Download", "You are using the latest version!");
+            StringVariables stringVariables = new StringVariables
+            {
+                CancelButtonText = "Cancel",
+                DownloadButtonText = "Download",
+                InformationButtonText = "Information",
+                NoNewVersionText = "You are running the latest version!",
+                TitleText = "MemPlus",
+                UpdateNowText = "Would you like to update the application now?"
+            };
+            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", stringVariables);
+
             _clearingMemory = false;
 
             InitializeComponent();
