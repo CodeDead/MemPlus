@@ -89,6 +89,18 @@ namespace MemPlus.Views.Windows
 
             try
             {
+                if (!Utils.IsAdministrator())
+                {
+                    if (Properties.Settings.Default.RunAsAdministrator)
+                    {
+                        Utils.RunAsAdministrator(_logController);
+                    }
+                    else if (Properties.Settings.Default.AdministrativeWarning)
+                    {
+                        MessageBox.Show("MemPlus might not function correctly without administrative rights!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+
                 _logController.AddLog(new ApplicationLog("Checking for application updates"));
                 if (Properties.Settings.Default.AutoUpdate)
                 {
@@ -103,18 +115,6 @@ namespace MemPlus.Views.Windows
                 if (Properties.Settings.Default.StartMinimized)
                 {
                     WindowState = WindowState.Minimized;
-                }
-
-                if (!Utils.IsAdministrator())
-                {
-                    if (Properties.Settings.Default.RunAsAdministrator)
-                    {
-                        Utils.RunAsAdministrator(_logController);
-                    }
-                    else if (Properties.Settings.Default.AdministrativeWarning)
-                    {
-                        MessageBox.Show("MemPlus might not function correctly without administrative rights!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
                 }
 
                 if (Properties.Settings.Default.StartupMemoryClear)
