@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using MemPlus.Business.GUI;
@@ -32,6 +33,8 @@ namespace MemPlus.Views.Windows
             InitializeComponent();
             ChangeVisualStyle();
             LoadProperties();
+
+            TxbInfo.Text = "MemPlus was created by DeadLine.\n\nImages: small-n-flat by paomedia\nTheme: Syncfusion\nVersion: " + Assembly.GetExecutingAssembly().GetName().Version + "\n\nCopyright © CodeDead 2018";
 
             _logController.AddLog(new ApplicationLog("Done initializing AboutWindow"));
         }
