@@ -156,6 +156,9 @@ namespace MemPlus.Views.Windows
                     case 1:
                         langUri = new Uri("..\\Resources\\Languages\\nl.xaml", UriKind.Relative);
                         break;
+                    case 2:
+                        langUri = new Uri("..\\Resources\\Languages\\yourlang.xaml", UriKind.Relative);
+                        break;
                 }
             }
             catch (Exception ex)
@@ -648,10 +651,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void RamExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Utils.ExportLogs(LogType.Ram, _logController))
-            {
-                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            ExportLogs(LogType.Ram);
         }
 
         /// <summary>
@@ -661,10 +661,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ProcessExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Utils.ExportLogs(LogType.Process, _logController))
-            {
-                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            ExportLogs(LogType.Process);
         }
 
         /// <summary>
@@ -674,10 +671,7 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Utils.ExportLogs(LogType.Application, _logController))
-            {
-                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            ExportLogs(LogType.Application);
         }
 
         /// <summary>
@@ -687,7 +681,16 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ExportAllLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Utils.ExportLogs(null, _logController))
+            ExportLogs(null);
+        }
+
+        /// <summary>
+        /// Export logs of a certain type
+        /// </summary>
+        /// <param name="logType">The type of log that needs to be exported</param>
+        private void ExportLogs(LogType? logType)
+        {
+            if (Utils.ExportLogs(logType, _logController))
             {
                 MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }

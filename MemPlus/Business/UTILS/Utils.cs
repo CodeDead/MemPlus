@@ -104,6 +104,7 @@ namespace MemPlus.Business.UTILS
         /// Export all RamStick objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
+        /// <returns>True if the operation completed successfully, otherwise false</returns>
         internal static bool ExportRamSticks(LogController logController)
         {
             List<RamStick> ramSticks = GetRamSticks();
@@ -150,6 +151,7 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         /// <param name="logType">The LogType that should be exported (can be null to export all logs)</param>
         /// <param name="logController">The LogController object that can be used to export logs</param>
+        /// <returns>True if the operation complted successfully, otherwise false</returns>
         internal static bool ExportLogs(LogType? logType, LogController logController)
         {
             if (logType != null)
@@ -197,6 +199,7 @@ namespace MemPlus.Business.UTILS
         /// Export all ProcessDetail objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
+        /// <returns>True if the operation completed successfully, otherwise false</returns>
         internal static async Task<bool> ExportProcessDetails(LogController logController)
         {
             SaveFileDialog sfd = new SaveFileDialog
