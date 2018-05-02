@@ -112,6 +112,7 @@
     <system:String x:Key="Hotkey">Hotkey:</system:String>
     <system:String x:Key="WorkingSetExclusions">Working Set Exclusions</system:String>
     <system:String x:Key="Add">Add</system:String>
+    <system:String x:Key="Theme">Theme</system:String>
     <system:String x:Key="Style">Style:</system:String>
     <system:String x:Key="MetroBrushString">Metro brush:</system:String>
     <system:String x:Key="BorderThickness">Border thickness:</system:String>

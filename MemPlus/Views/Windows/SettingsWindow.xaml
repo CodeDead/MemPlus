@@ -75,6 +75,8 @@
                                 <ComboBox.Items>
                                     <ComboBoxItem Content="English" />
                                     <ComboBoxItem Content="Nederlands" />
+                                    <ComboBoxItem Content="Español" />
+                                    <ComboBoxItem Content="Galego" />
                                 </ComboBox.Items>
                             </ComboBox>
                         </Grid>
@@ -222,7 +224,7 @@
 
             </syncfusion:TabItemExt>
 
-            <syncfusion:TabItemExt Header="Theme" Image="../../Resources/Images/home.png"
+            <syncfusion:TabItemExt Header="{DynamicResource Theme}" Image="../../Resources/Images/home.png"
                                    ImageWidth="16" ImageHeight="16">
                 <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                     <GroupBox Header="GUI" Margin="3">

@@ -112,6 +112,7 @@
     <system:String x:Key="Hotkey">Atallo de teclado:</system:String>
     <system:String x:Key="WorkingSetExclusions">Exclusións de Conxuntos de Traballo</system:String>
     <system:String x:Key="Add">Engadir</system:String>
+    <system:String x:Key="Theme">Tema</system:String>
     <system:String x:Key="Style">Estilo:</system:String>
     <system:String x:Key="MetroBrushString">Brocha de Metro:</system:String>
     <system:String x:Key="BorderThickness">Largura do bordo:</system:String>

@@ -111,6 +111,7 @@
     <system:String x:Key="ClearClipboard">Verwijder klembord gegevens</system:String>
     <system:String x:Key="Hotkey">Hotkey:</system:String>
     <system:String x:Key="WorkingSetExclusions">Working Set Uitsluitingen</system:String>
+    <system:String x:Key="Theme">Thema</system:String>
     <system:String x:Key="Add">+</system:String>
     <system:String x:Key="Style">Stijl:</system:String>
     <system:String x:Key="MetroBrushString">Metro borstel:</system:String>

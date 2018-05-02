@@ -148,13 +148,19 @@ namespace MemPlus.Views.Windows
         {
             _logController.AddLog(new ApplicationLog("Changing language"));
             ResourceDictionary dict = new ResourceDictionary();
-            Uri langUri = new Uri("..\\Resources\\Languages\\en.xaml", UriKind.Relative);
+            Uri langUri = new Uri("..\\Resources\\Languages\\en_US.xaml", UriKind.Relative);
             try
             {
                 switch (Properties.Settings.Default.SelectedLanguage)
                 {
                     case 1:
-                        langUri = new Uri("..\\Resources\\Languages\\nl.xaml", UriKind.Relative);
+                        langUri = new Uri("..\\Resources\\Languages\\nl_BE.xaml", UriKind.Relative);
+                        break;
+                    case 2:
+                        langUri = new Uri("..\\Resources\\Languages\\es_ES.xaml", UriKind.Relative);
+                        break;
+                    case 3:
+                        langUri = new Uri("..\\Resources\\Languages\\gl_ES.xaml", UriKind.Relative);
                         break;
                 }
             }
