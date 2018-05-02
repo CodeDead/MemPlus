@@ -14,6 +14,9 @@ https://codedead.com/?page_id=1736
 * [UpdateManager](https://github.com/CodeDead/UpdateManager)
 * [Resharper](https://www.jetbrains.com/resharper/) (Optional, we just really like Resharper)
 
+# Translations
+We're in dire need of translations. The current translations can be found [here](https://github.com/CodeDead/MemPlus/tree/master/MemPlus/Resources/Languages). If you would like to see your native language added, feel free to create a pull request or send us an email!
+
 # Anything else?
 Don't fall for these memory optimizers that will speed up your system by 100000% scams. This will actually free up your memory, but it might cost you dearly in performance and might cause system instability. Do not use these tools on any essential devices. And we, CodeDead, are not responsible for any damages that this type of software can cause to your system.
 
@@ -24,4 +27,5 @@ This application was created so people would stop buying those paid alternatives
 
 # About
 Brought to you by CodeDead:  
-https://codedead.com/
+https://codedead.com/  
+admin(at)codedead.com
