@@ -66,12 +66,12 @@
                     <GroupBox Grid.Row="1" Header="{DynamicResource Language}">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             
-                            <Label Grid.Column="0" Content="{DynamicResource LanguageSetting}" />
-                            <ComboBox x:Name="CboLanguage" Grid.Column="1">
+                            <Label Grid.Column="0" Content="{DynamicResource LanguageSetting}" Margin="3" />
+                            <ComboBox x:Name="CboLanguage" Grid.Column="1" Margin="3">
                                 <ComboBox.Items>
                                     <ComboBoxItem Content="English" />
                                     <ComboBoxItem Content="Nederlands" />
