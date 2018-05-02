@@ -120,7 +120,6 @@ namespace MemPlus.Business.RAM
                     if (processExceptions == null || processExceptions.Count == 0 || !processExceptions.Contains(process.MainModule.FileName.ToLower()))
                     {
                         _logController.AddLog(new RamLog("Emptying working set for process: " + process.ProcessName));
-                        // Empty the working set of the process
                         NativeMethods.EmptyWorkingSet(process.Handle);
                         _logController.AddLog(new RamLog("Successfully emptied working set for process " + process.ProcessName));
                     }
@@ -145,9 +144,7 @@ namespace MemPlus.Business.RAM
         private bool Is64BitMode()
         {
             _logController.AddLog(new RamLog("Checking if 64 bit mode is enabled"));
-
             bool is64Bit = Marshal.SizeOf(typeof(IntPtr)) == 8;
-
             _logController.AddLog(is64Bit ? new RamLog("64 bit mode is enabled") : new RamLog("64 bit mode is disabled"));
 
             return is64Bit;

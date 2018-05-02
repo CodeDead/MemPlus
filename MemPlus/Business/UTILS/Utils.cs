@@ -104,16 +104,16 @@ namespace MemPlus.Business.UTILS
         /// Export all RamStick objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal static void ExportRamSticks(LogController logController)
+        internal static bool ExportRamSticks(LogController logController)
         {
             List<RamStick> ramSticks = GetRamSticks();
-            if (ramSticks == null || ramSticks.Count == 0) return;
+            if (ramSticks == null || ramSticks.Count == 0) return false;
 
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
             };
-            if (sfd.ShowDialog() != true) return;
+            if (sfd.ShowDialog() != true) return false;
             try
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
@@ -133,13 +133,16 @@ namespace MemPlus.Business.UTILS
                         RamDataExporter.ExportExcel(sfd.FileName, ramSticks);
                         break;
                 }
-                MessageBox.Show("Exported all data!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                return true;
             }
             catch (Exception ex)
             {
                 logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            return false;
         }
 
         /// <summary>
@@ -147,11 +150,11 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         /// <param name="logType">The LogType that should be exported (can be null to export all logs)</param>
         /// <param name="logController">The LogController object that can be used to export logs</param>
-        internal static void ExportLogs(LogType? logType, LogController logController)
+        internal static bool ExportLogs(LogType? logType, LogController logController)
         {
             if (logType != null)
             {
-                if (logController.GetLogs(logType).Count == 0) return;
+                if (logController.GetLogs(logType).Count == 0) return false;
             }
 
             SaveFileDialog sfd = new SaveFileDialog
@@ -159,7 +162,7 @@ namespace MemPlus.Business.UTILS
                 Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
             };
 
-            if (sfd.ShowDialog() != true) return;
+            if (sfd.ShowDialog() != true) return false;
             ExportTypes.ExportType type;
             switch (sfd.FilterIndex)
             {
@@ -180,26 +183,27 @@ namespace MemPlus.Business.UTILS
             try
             {
                 logController.Export(sfd.FileName, logType, type);
-                MessageBox.Show("All logs have been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                return true;
             }
             catch (Exception ex)
             {
                 logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            return false;
         }
 
         /// <summary>
         /// Export all ProcessDetail objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal static async void ExportProcessDetails(LogController logController)
+        internal static async Task<bool> ExportProcessDetails(LogController logController)
         {
             SaveFileDialog sfd = new SaveFileDialog
             {
                 Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
             };
-            if (sfd.ShowDialog() != true) return;
+            if (sfd.ShowDialog() != true) return false;
             try
             {
                 // ReSharper disable once SwitchStatementMissingSomeCases
@@ -219,13 +223,16 @@ namespace MemPlus.Business.UTILS
                         ProcessDetailExporter.ExportExcel(sfd.FileName, await GetProcessDetails(logController));
                         break;
                 }
-                MessageBox.Show("All data has been exported!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                return true;
             }
             catch (Exception ex)
             {
                 logController.AddLog(new ApplicationLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            return false;
         }
 
         /// <summary>

@@ -10,7 +10,7 @@
     WindowStartupLocation="CenterScreen"
     UseLayoutRounding="True"
     AllowsTransparency="True" UseNativeChrome="True"
-    Title="MemPlus - About" Height="200" Width="350" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="{DynamicResource AboutWindowTitle}" Height="200" Width="350" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -32,8 +32,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Margin="5" x:Name="BtnClose" Content="Close" Click="BtnClose_OnClick" />
-            <Button Margin="5"  Grid.Column="1" x:Name="BtnLicense" Content="License" Click="BtnLicense_OnClick" />
+            <Button Margin="5" x:Name="BtnClose" Content="{DynamicResource Close}" Click="BtnClose_OnClick" />
+            <Button Margin="5"  Grid.Column="1" x:Name="BtnLicense" Content="{DynamicResource License}" Click="BtnLicense_OnClick" />
             <Button Margin="5" Grid.Column="2" x:Name="BtnCodeDead" Content="CodeDead" Click="BtnCodeDead_OnClick" />
         </Grid>
     </Grid>

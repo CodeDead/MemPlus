@@ -9,6 +9,7 @@ using Microsoft.VisualBasic.Devices;
 
 namespace MemPlus.Business.RAM
 {
+    /// <inheritdoc />
     /// <summary>
     /// Sealed class containing methods and interaction logic in terms of RAM
     /// </summary>

@@ -205,7 +205,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportLogs(_logType, _logController);
+            if (Utils.ExportLogs(_logType, _logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>

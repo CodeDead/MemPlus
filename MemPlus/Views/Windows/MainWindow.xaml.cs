@@ -56,21 +56,13 @@ namespace MemPlus.Views.Windows
             _logController = new LogController(600000);
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
 
-            StringVariables stringVariables = new StringVariables
-            {
-                CancelButtonText = "Cancel",
-                DownloadButtonText = "Download",
-                InformationButtonText = "Information",
-                NoNewVersionText = "You are running the latest version!",
-                TitleText = "MemPlus",
-                UpdateNowText = "Would you like to update the application now?"
-            };
-            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", stringVariables);
-
             _clearingMemory = false;
 
+            LoadLanguage();
             InitializeComponent();
             ChangeVisualStyle();
+
+            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", LoadUpdateManagerStrings());
 
             try
             {
@@ -97,7 +89,7 @@ namespace MemPlus.Views.Windows
                     }
                     else if (Properties.Settings.Default.AdministrativeWarning)
                     {
-                        MessageBox.Show("MemPlus might not function correctly without administrative rights!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show((string)Application.Current.FindResource("AdministrativeRightsWarning"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
 
@@ -132,6 +124,59 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Load the strings that are required for the UpdateManager library
+        /// </summary>
+        /// <returns></returns>
+        private static StringVariables LoadUpdateManagerStrings()
+        {
+            StringVariables stringVariables = new StringVariables
+            {
+                CancelButtonText = (string)Application.Current.FindResource("Cancel"),
+                DownloadButtonText = (string)Application.Current.FindResource("Download"),
+                InformationButtonText = (string)Application.Current.FindResource("Information"),
+                NoNewVersionText = (string)Application.Current.FindResource("RunningLatestVersion"),
+                TitleText = "MemPlus",
+                UpdateNowText = (string)Application.Current.FindResource("UpdateNow")
+            };
+            return stringVariables;
+        }
+
+        /// <summary>
+        /// Change the language of MemPlus
+        /// </summary>
+        internal void LoadLanguage()
+        {
+            _logController.AddLog(new ApplicationLog("Changing language"));
+            ResourceDictionary dict = new ResourceDictionary();
+            Uri langUri = new Uri("..\\Resources\\Languages\\en.xaml", UriKind.Relative);
+            try
+            {
+                switch (Properties.Settings.Default.SelectedLanguage)
+                {
+                    case 1:
+                        langUri = new Uri("..\\Resources\\Languages\\nl.xaml", UriKind.Relative);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                langUri = new Uri("..\\Resources\\Languages\\en.xaml", UriKind.Relative);
+                _logController.AddLog(new ApplicationLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+            dict.Source = langUri;
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(dict);
+
+            _updateManager?.SetStringVariables(LoadUpdateManagerStrings());
+            TbiIcon?.InvalidateVisual();
+
+            _logController.AddLog(new ApplicationLog("Done changing language"));
+        }
+
+        /// <summary>
         /// Method that is called when the GUI statistics should be updated
         /// </summary>
         private void UpdateGuiStatistics()
@@ -141,16 +186,16 @@ namespace MemPlus.Views.Windows
                 string ramTotal = (_ramController.RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
                 string ramAvailable = (_ramController.RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
                 CgRamUsage.Scales[0].Pointers[0].Value = _ramController.RamUsagePercentage;
-                CgRamUsage.GaugeHeader = "RAM usage (" + _ramController.RamUsagePercentage.ToString("F2") + "%)";
+                CgRamUsage.GaugeHeader = ((string)Application.Current.FindResource("GaugeRamUsage"))?.Replace("%", _ramController.RamUsagePercentage.ToString("F2") + "%");
                 LblTotalPhysicalMemory.Content = ramTotal;
                 LblAvailablePhysicalMemory.Content = ramAvailable;
 
                 if (!Properties.Settings.Default.NotifyIconStatistics) return;
                 string tooltipText = "MemPlus";
                 tooltipText += Environment.NewLine;
-                tooltipText += "Total physical memory: " + ramTotal;
+                tooltipText += (string)Application.Current.FindResource("TotalPhysicalMemory") + " " + ramTotal;
                 tooltipText += Environment.NewLine;
-                tooltipText += "Used physical memory: " + ramAvailable;
+                tooltipText += (string)Application.Current.FindResource("UsedPhysicalMemory") + " " + ramAvailable;
 
                 TbiIcon.ToolTipText = tooltipText;
             });
@@ -167,12 +212,12 @@ namespace MemPlus.Views.Windows
             {
                 ramSavings = Math.Abs(ramSavings);
                 _logController.AddLog(new RamLog("RAM usage increase: " + ramSavings.ToString("F2") + " MB"));
-                message = "Looks like your RAM usage has increased with " + ramSavings.ToString("F2") + " MB!";
+                message = ((string)Application.Current.FindResource("RamUsageIncreased"))?.Replace("%", ramSavings.ToString("F2"));
             }
             else
             {
                 _logController.AddLog(new RamLog("RAM usage decrease: " + ramSavings.ToString("F2") + " MB"));
-                message = "You saved " + ramSavings.ToString("F2") + " MB of RAM!";
+                message = ((string)Application.Current.FindResource("RamUsageSaved"))?.Replace("%", ramSavings.ToString("F2"));
             }
 
             if (!Properties.Settings.Default.RamCleaningMessage) return;
@@ -603,7 +648,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void RamExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportLogs(LogType.Ram, _logController);
+            if (Utils.ExportLogs(LogType.Ram, _logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>
@@ -613,7 +661,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ProcessExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportLogs(LogType.Process, _logController);
+            if (Utils.ExportLogs(LogType.Process, _logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>
@@ -623,7 +674,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportLogs(LogType.Application, _logController);
+            if (Utils.ExportLogs(LogType.Application, _logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>
@@ -633,7 +687,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ExportAllLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportLogs(null, _logController);
+            if (Utils.ExportLogs(null, _logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>
@@ -866,7 +923,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ExportRamAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportRamSticks(_logController);
+            if (Utils.ExportRamSticks(_logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>
@@ -874,9 +934,12 @@ namespace MemPlus.Views.Windows
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
-        private void ExportProcessAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
+        private async void ExportProcessAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportProcessDetails(_logController);
+            if (await Utils.ExportProcessDetails(_logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>

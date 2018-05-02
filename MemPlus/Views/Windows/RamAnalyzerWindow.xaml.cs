@@ -53,7 +53,7 @@ namespace MemPlus.Views.Windows
 
                 if (ramSticks == null || ramSticks.Count == 0)
                 {
-                    MessageBox.Show("Could not retrieve RAM Analyzer information!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show((string)Application.Current.FindResource("CouldNotRetrieveInformation"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
                     _logController.AddLog(new RamLog("Could not retrieve RAM Analyzer information"));
                     Close();
                     return;
@@ -145,7 +145,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            Utils.ExportRamSticks(_logController);
+            if (Utils.ExportRamSticks(_logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>

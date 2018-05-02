@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="ClearMemory">Geheugen opschonen</system:String>
+    <system:String x:Key="Settings">Instellingen</system:String>
+    <system:String x:Key="Restart">Herstarten</system:String>
+    <system:String x:Key="Exit">Sluiten</system:String>
+    <system:String x:Key="ExportedAllData">Alle gegevens zijn geëxporteerd!</system:String>
+
+    <!--UpdateManager-->
+    <system:String x:Key="Cancel">Annuleren</system:String>
+    <system:String x:Key="Download">Download</system:String>
+    <system:String x:Key="Information">Informatie</system:String>
+    <system:String x:Key="RunningLatestVersion">U heeft de laatste versie!</system:String>
+    <system:String x:Key="UpdateNow">Wenst u de update nu te installeren?</system:String>
+
+
+    <!--Menu-->
+    <system:String x:Key="File">_Bestand</system:String>
+    <system:String x:Key="Export">Exporteren</system:String>
+    <system:String x:Key="Logs">Logs</system:String>
+    <system:String x:Key="AllLogs">Alle logs</system:String>
+    <system:String x:Key="RamLogs">RAM logs</system:String>
+    <system:String x:Key="ProcessLogs">Proces logs</system:String>
+    <system:String x:Key="ApplicationLogs">Applicatie logs</system:String>
+    <system:String x:Key="RamAnalyzerData">RAM Analyzer data</system:String>
+    <system:String x:Key="ProcessAnalyzerData">Proces Analyzer data</system:String>
+    <system:String x:Key="Tools">_Gereedschap</system:String>
+    <system:String x:Key="RamMonitor">RAM Monitor</system:String>
+    <system:String x:Key="RamAnalyzer">RAM Analyzer</system:String>
+    <system:String x:Key="ProcessAnalyzer">Proces Analyzer</system:String>
+    <system:String x:Key="Clear">Wissen</system:String>
+    <system:String x:Key="Gui">GUI</system:String>
+    <system:String x:Key="AlwaysOnTop">Altijd vanboven</system:String>
+    <system:String x:Key="DisableWhenInactive">Uitschakelen wanneer inactief</system:String>
+    <system:String x:Key="WindowDraggable">Venster verschuifbaar</system:String>
+    <system:String x:Key="DisplayRamStatistics">Toon RAM statistieken</system:String>
+    <system:String x:Key="DisplayRamGauge">Toon RAM meter</system:String>
+    <system:String x:Key="Help">_Help</system:String>
+    <system:String x:Key="CheckForUpdates">Controleer op updates</system:String>
+    <system:String x:Key="HomePage">Homepagina</system:String>
+    <system:String x:Key="License">Licentie</system:String>
+    <system:String x:Key="Donate">Doneer</system:String>
+    <system:String x:Key="About">Over</system:String>
+
+    <!--MainWindow-->
+    <system:String x:Key="TotalPhysicalMemory">Totaal fysiek geheugen:</system:String>
+    <system:String x:Key="UsedPhysicalMemory">Gebruikt fysiek geheugen:</system:String>
+    <system:String x:Key="ClearWorkingSets">Verwijder werksets</system:String>
+    <system:String x:Key="ClearFileSystemCache">Verwijder bestandssysteem cache</system:String>
+    <system:String x:Key="AdministrativeRightsWarning">MemPlus zal mogelijk niet correct functioneren zonder administratieve rechten!</system:String>
+    <system:String x:Key="GaugeRamUsage">RAM gebruik (%)</system:String>
+    <system:String x:Key="RamUsageIncreased">Uw RAM verbruik is verhoogd met % MB!</system:String>
+    <system:String x:Key="RamUsageSaved">Uw RAM verbruik is verminderd met % MB!</system:String>
+
+    <!--AboutWindow-->
+    <system:String x:Key="AboutWindowTitle">MemPlus - Over</system:String>
+    <system:String x:Key="Close">Sluiten</system:String>
+    <system:String x:Key="AboutInfo">MemPlus werd gemaakt door DeadLine.\n\nAfbeeldingen: small-n-flat door paomedia\nThema: Syncfusion\nVersie: %\n\nCopyright © CodeDead 2018</system:String>
+
+    <!--LogWindow-->
+    <system:String x:Key="LogWindowTitle">MemPlus - Logs</system:String>
+    <system:String x:Key="Copy">Kopiëren</system:String>
+    <system:String x:Key="Delete">Verwijderen</system:String>
+    <system:String x:Key="Date">Datum</system:String>
+    <system:String x:Key="Content">Inhoud</system:String>
+    <system:String x:Key="ClearLogs">Verwijder logs</system:String>
+
+    <!--ProcessAnalyzerWindow-->
+    <system:String x:Key="ProcessAnalyzerWindowTitle">MemPlus - Proces Analyzer</system:String>
+    <system:String x:Key="ClearWorkingSet">Verwijder werkset</system:String>
+    <system:String x:Key="KillProcess">Beëindigen</system:String>
+    <system:String x:Key="Refresh">Verversen</system:String>
+    <system:String x:Key="ProcessId">Proces ID</system:String>
+    <system:String x:Key="ProcessName">Proces naam</system:String>
+    <system:String x:Key="ProcessLocation">Proces locatie</system:String>
+    <system:String x:Key="MemoryUsage">Geheugengebruik</system:String>
+
+    <!--RamAnalyzerWindow-->
+    <system:String x:Key="RamAnalyzerWindowTitle">MemPlus - RAM Analyzer</system:String>
+    <system:String x:Key="CouldNotRetrieveInformation">Kon de RAM Analyzer informatie niet verkrijgen!</system:String>
+
+    <!--SettingsWindow-->
+    <system:String x:Key="SettingsWindowTitle">MemPlus - Instellingen</system:String>
+    <system:String x:Key="General">Algemeen</system:String>
+    <system:String x:Key="AutomaticUpdates">Automatische updates</system:String>
+    <system:String x:Key="AutoStartMemPlus">Start MemPlus bij het starten van Windows</system:String>
+    <system:String x:Key="StartMinimized">Start MemPlus geminimalizeerd</system:String>
+    <system:String x:Key="HideOnStart">Verberg MemPlus tijdens het opstarten</system:String>
+    <system:String x:Key="HideInsteadOfClose">Verberg MemPlus na het sluiten</system:String>
+    <system:String x:Key="AutoRunAsAdministrator">Automatisch als administrator uitvoeren</system:String>
+    <system:String x:Key="Topmost">Topmost</system:String>
+    <system:String x:Key="DisplayNotifyIcon">Toon notifyicon</system:String>
+    <system:String x:Key="DisplayAdminWarning">Toon administratieve waarschuwing</system:String>
+    <system:String x:Key="DisplayRamStatisticsNotifyIcon">Toon RAM statistieken in de notifyicon</system:String>
+    <system:String x:Key="DisplayRamStatisticsWindow">Toon RAM statistieken in het venster</system:String>
+    <system:String x:Key="Language">Taal</system:String>
+    <system:String x:Key="LanguageSetting">Taal:</system:String>
+    <system:String x:Key="UpdateInterval">Update interval:</system:String>
+    <system:String x:Key="Milliseconds">milliseconden</system:String>
+    <system:String x:Key="Seconds">seconden</system:String>
+    <system:String x:Key="Minutes">minuten</system:String>
+    <system:String x:Key="Hours">uren</system:String>
+    <system:String x:Key="RamOptimizer">RAM Optimizer</system:String>
+    <system:String x:Key="OptimizeWhenExceeds">Optimaliseer wanneer het RAM-gebruik groter is dan</system:String>
+    <system:String x:Key="OptimizeAfter">Optimaliseer na</system:String>
+    <system:String x:Key="Options">Opties</system:String>
+    <system:String x:Key="ClearMemoryOnStartup">Wis RAM bij het opstarten van het programma</system:String>
+    <system:String x:Key="ClearStandByCache">Verwijder standby cache</system:String>
+    <system:String x:Key="ClearClipboard">Verwijder klembord gegevens</system:String>
+    <system:String x:Key="Hotkey">Hotkey:</system:String>
+    <system:String x:Key="WorkingSetExclusions">Working Set Uitsluitingen</system:String>
+    <system:String x:Key="Add">+</system:String>
+    <system:String x:Key="Style">Stijl:</system:String>
+    <system:String x:Key="MetroBrushString">Metro borstel:</system:String>
+    <system:String x:Key="BorderThickness">Boord dikte:</system:String>
+    <system:String x:Key="WindowOpacity">Doorzichtigheid:</system:String>
+    <system:String x:Key="ResizeBorder">Resize grens:</system:String>
+    <system:String x:Key="WarningLevel">Waarschuwingsniveau:</system:String>
+    <system:String x:Key="Reset">Reset</system:String>
+    <system:String x:Key="Save">Opslaan</system:String>
+    <system:String x:Key="SavedAllSettings">Alle instellingen zijn opgeslagen!</system:String>
+    <system:String x:Key="ResetAllSettings">Alle instellingen zijn gereset!</system:String>
+    <system:String x:Key="FileDoesNotExist">Het geselecteerde bestand bestaat niet!</system:String>
+    <system:String x:Key="AutoOptimizeWarning">Deze optie werkt alleen als de RAM Monitor is ingeschakeld!</system:String>
+
+</ResourceDictionary>
+    

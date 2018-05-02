@@ -9,7 +9,7 @@
     UseLayoutRounding="True"
     AllowsTransparency="True"
     TitleTextAlignment="Center"
-    Title="MemPlus - RAM Analyzer" Height="300" Width="350"
+    Title="{DynamicResource RamAnalyzerWindowTitle}" Height="300" Width="350"
     Loaded="AnalyzerWindow_OnLoaded" UseNativeChrome="True"
     Icon="/MemPlus;component/Resources/Images/ram.png"
     WindowStartupLocation="CenterScreen">
@@ -21,18 +21,18 @@
         <TreeView Grid.Row="0" x:Name="TrvRam">
             <TreeView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Copy" Click="CopyMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource Copy}" Click="CopyMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="Export" Click="BtnExport_OnClick">
+                    <MenuItem Header="{DynamicResource Export}" Click="BtnExport_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Refresh" Click="BtnRefresh_OnClick">
+                    <MenuItem Header="{DynamicResource Refresh}" Click="BtnRefresh_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/paused.png" />
                         </MenuItem.Icon>
@@ -45,8 +45,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Content="Refresh" Margin="3" Click="BtnRefresh_OnClick"/>
-            <Button Grid.Column="1" MinHeight="25" Content="Export" Margin="3" Click="BtnExport_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Content="{DynamicResource Refresh}" Margin="3" Click="BtnRefresh_OnClick"/>
+            <Button Grid.Column="1" MinHeight="25" Content="{DynamicResource Export}" Margin="3" Click="BtnExport_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

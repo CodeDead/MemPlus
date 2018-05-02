@@ -34,7 +34,7 @@ namespace MemPlus.Views.Windows
             ChangeVisualStyle();
             LoadProperties();
 
-            TxbInfo.Text = "MemPlus was created by DeadLine.\n\nImages: small-n-flat by paomedia\nTheme: Syncfusion\nVersion: " + Assembly.GetExecutingAssembly().GetName().Version + "\n\nCopyright © CodeDead 2018";
+            TxbInfo.Text = ((string)Application.Current.FindResource("AboutInfo"))?.Replace("\\n", Environment.NewLine).Replace("%", Assembly.GetExecutingAssembly().GetName().Version.ToString());
 
             _logController.AddLog(new ApplicationLog("Done initializing AboutWindow"));
         }

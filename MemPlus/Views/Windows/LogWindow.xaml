@@ -10,7 +10,7 @@
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="True"
     TitleTextAlignment="Center" UseNativeChrome="True"
-    Title="MemPlus - Logs" Height="300" Width="450" Icon="/Resources/Images/ram.png">
+    Title="{DynamicResource LogWindowTitle}" Height="300" Width="450" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -19,24 +19,24 @@
         <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvLogs_MouseWheel">
             <ListView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Copy" Click="CopyMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource Copy}" Click="CopyMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="Delete" Click="DeleteMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource Delete}" Click="DeleteMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Clear" Click="BtnClear_OnClick">
+                    <MenuItem Header="{DynamicResource Clear}" Click="BtnClear_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="Export" Click="BtnExport_OnClick">
+                    <MenuItem Header="{DynamicResource Export}" Click="BtnExport_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png" />
                         </MenuItem.Icon>
@@ -45,8 +45,8 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView x:Name="DynGrid">
-                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding Time}" />
-                    <GridViewColumn Header="Content" DisplayMemberBinding="{Binding Data}" />
+                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding Time}" />
+                    <GridViewColumn Header="{DynamicResource Content}" DisplayMemberBinding="{Binding Data}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -56,8 +56,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="Export" Click="BtnExport_OnClick" />
-            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="Clear logs" Click="BtnClear_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="{DynamicResource Export}" Click="BtnExport_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="{DynamicResource ClearLogs}" Click="BtnClear_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

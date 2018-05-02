@@ -63,9 +63,7 @@ namespace MemPlus.Views.Windows
         private void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing SettingsWindow theme style"));
-
             StyleManager.ChangeStyle(this);
-
             _logController.AddLog(new ApplicationLog("Done changing SettingsWindow theme style"));
         }
 
@@ -113,6 +111,8 @@ namespace MemPlus.Views.Windows
                 ChbNotifyIconStatistics.IsChecked = Properties.Settings.Default.NotifyIconStatistics;
                 ChbDisplayGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
                 ChbWindowRamStatistics.IsChecked = Properties.Settings.Default.WindowRamStatistics;
+
+                CboLanguage.SelectedIndex = Properties.Settings.Default.SelectedLanguage;
 
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
@@ -239,6 +239,7 @@ namespace MemPlus.Views.Windows
                 if (ChbHideOnClose.IsChecked != null) Properties.Settings.Default.HideOnClose = ChbHideOnClose.IsChecked.Value;
                 if (ChbRunAsAdmin.IsChecked != null) Properties.Settings.Default.RunAsAdministrator = ChbRunAsAdmin.IsChecked.Value;
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
+                Properties.Settings.Default.SelectedLanguage = CboLanguage.SelectedIndex;
 
                 //RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
@@ -308,13 +309,15 @@ namespace MemPlus.Views.Windows
 
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
+                _mainWindow.LoadLanguage();
                 _mainWindow.HotKeyModifier(new WindowInteropHelper(_mainWindow));
                 ChangeVisualStyle();
                 LoadProperties();
 
                 _logController.AddLog(new ApplicationLog("Properties have been saved"));
 
-                MessageBox.Show("All settings have been saved!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                MessageBox.Show((string)Application.Current.FindResource("SavedAllSettings"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -345,6 +348,7 @@ namespace MemPlus.Views.Windows
 
                 _mainWindow.ChangeVisualStyle();
                 _mainWindow.LoadProperties();
+                _mainWindow.LoadLanguage();
                 _mainWindow.HotKeyModifier(new WindowInteropHelper(_mainWindow));
 
                 ChangeVisualStyle();
@@ -352,7 +356,7 @@ namespace MemPlus.Views.Windows
 
                 _logController.AddLog(new ApplicationLog("Properties have been reset"));
 
-                MessageBox.Show("All settings have been reset!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show((string)Application.Current.FindResource("ResetAllSettings"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -412,7 +416,7 @@ namespace MemPlus.Views.Windows
             }
             else
             {
-                MessageBox.Show("The selected file does not exist!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show((string)Application.Current.FindResource("FileDoesNotExist"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -464,7 +468,7 @@ namespace MemPlus.Views.Windows
         private void ChbAutoOptimizePercentage_OnChecked(object sender, RoutedEventArgs e)
         {
             if (ChbRamMonitor.IsChecked == null || ChbRamMonitor.IsChecked.Value) return;
-            MessageBox.Show("This option will only work if the RAM Monitor is enabled!", "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show((string)Application.Current.FindResource("AutoOptimizeWarning"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             ChbRamMonitor.IsChecked = true;
         }
 

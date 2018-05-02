@@ -11,7 +11,7 @@
     TitleTextAlignment="Center"
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
-    Title="MemPlus - Settings" Height="400" Width="550"
+    Title="{DynamicResource SettingsWindowTitle}" Height="400" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,11 +20,12 @@
         </Grid.RowDefinitions>
         <syncfusion:TabControlExt CloseButtonType="Hide" EnableLabelEdit="False"
                                   AllowDragDrop="False" DefaultContextMenuItemVisibility="Hidden">
-            <syncfusion:TabItemExt Header="General" Image="../../Resources/Images/settings.png"
+            <syncfusion:TabItemExt Header="{DynamicResource General}" Image="../../Resources/Images/settings.png"
                                    ImageWidth="16" ImageHeight="16">
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
@@ -39,33 +40,51 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <CheckBox Grid.Row="0" Grid.Column="0" x:Name="ChbAutoUpdate" Content="Automatic updates" Margin="3" />
-                            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="ChbAutoStart" Content="Start MemPlus when Windows starts" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbStartMinimized" Content="Start MemPlus minimized" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbStartHidden" Content="Hide MemPlus on startup" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbHideOnClose" Content="Hide MemPlus when closing" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbRunAsAdmin" Content="Automatically run as administrator" Margin="3" />
-                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbTopmost" Content="Topmost" Margin="3" />
-                            <CheckBox Grid.Row="3" Grid.Column="1" x:Name="ChbWindowDraggable" Content="Window draggable" Margin="3" />
-                            <CheckBox Grid.Row="4" Grid.Column="0" x:Name="ChbNotifyIcon" Content="Display notifyicon" Margin="3" />
-                            <CheckBox Grid.Row="4" Grid.Column="1" x:Name="ChbAdminWarning" Content="Display administrative rights warning" Margin="3" />
-                            <CheckBox Grid.Row="5" Grid.Column="0" x:Name="ChbRamClearingMessage" Content="Display statistics after clearing RAM" Margin="3" />
-                            <CheckBox Grid.Row="5" Grid.Column="1" x:Name="ChbNotifyIconStatistics" Content="Display RAM statistics in notifyicon" Margin="3" />
-                            <CheckBox Grid.Row="6" Grid.Column="0" x:Name="ChbDisplayGauge" Content="Display RAM Gauge" Margin="3" />
-                            <CheckBox Grid.Row="6" Grid.Column="1" x:Name="ChbWindowRamStatistics" Content="Display RAM statistics in window" Margin="3" />
+                            <CheckBox Grid.Row="0" Grid.Column="0" x:Name="ChbAutoUpdate" Content="{DynamicResource AutomaticUpdates}" Margin="3" />
+                            <CheckBox Grid.Row="0" Grid.Column="1" x:Name="ChbAutoStart" Content="{DynamicResource AutoStartMemPlus}" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbStartMinimized" Content="{DynamicResource StartMinimized}" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbStartHidden" Content="{DynamicResource HideOnStart}" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbHideOnClose" Content="{DynamicResource HideInsteadOfClose}" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbRunAsAdmin" Content="{DynamicResource AutoRunAsAdministrator}" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbTopmost" Content="{DynamicResource Topmost}" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="1" x:Name="ChbWindowDraggable" Content="{DynamicResource WindowDraggable}" Margin="3" />
+                            <CheckBox Grid.Row="4" Grid.Column="0" x:Name="ChbNotifyIcon" Content="{DynamicResource DisplayNotifyIcon}" Margin="3" />
+                            <CheckBox Grid.Row="4" Grid.Column="1" x:Name="ChbAdminWarning" Content="{DynamicResource DisplayAdminWarning}" Margin="3" />
+                            <CheckBox Grid.Row="5" Grid.Column="0" x:Name="ChbRamClearingMessage" Content="{DynamicResource DisplayRamStatistics}" Margin="3" />
+                            <CheckBox Grid.Row="5" Grid.Column="1" x:Name="ChbNotifyIconStatistics" Content="{DynamicResource DisplayRamStatisticsNotifyIcon}" Margin="3" />
+                            <CheckBox Grid.Row="6" Grid.Column="0" x:Name="ChbDisplayGauge" Content="{DynamicResource DisplayRamGauge}" Margin="3" />
+                            <CheckBox Grid.Row="6" Grid.Column="1" x:Name="ChbWindowRamStatistics" Content="{DynamicResource DisplayRamStatisticsWindow}" Margin="3" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Row="1" Header="{DynamicResource Language}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Grid.Column="0" Content="{DynamicResource LanguageSetting}" />
+                            <ComboBox x:Name="CboLanguage" Grid.Column="1">
+                                <ComboBox.Items>
+                                    <ComboBoxItem Content="English" />
+                                    <ComboBoxItem Content="Nederlands" />
+                                </ComboBox.Items>
+                            </ComboBox>
                         </Grid>
                     </GroupBox>
                 </Grid>
 
             </syncfusion:TabItemExt>
             
-            <syncfusion:TabItemExt Header="RAM Monitor" Image="../../Resources/Images/monitor.png"
+            <syncfusion:TabItemExt Header="{DynamicResource RamMonitor}"
+                                   Image="../../Resources/Images/monitor.png"
                                    ImageWidth="16" ImageHeight="16">
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -73,7 +92,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <GroupBox Grid.Row="0" Header="RAM Monitor" Margin="3">
+                    <GroupBox Grid.Row="0" Header="{DynamicResource RamMonitor}" Margin="3">
                         <Grid MinWidth="250">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -81,8 +100,8 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <CheckBox x:Name="ChbRamMonitor" Content="RAM Monitor" Margin="3" />
-                            <CheckBox x:Name="ChbDisableInactive" Grid.Row="1" Content="Disable when inactive" Margin="3" />
+                            <CheckBox x:Name="ChbRamMonitor" Content="{DynamicResource RamMonitor}" Margin="3" />
+                            <CheckBox x:Name="ChbDisableInactive" Grid.Row="1" Content="{DynamicResource DisableWhenInactive}" Margin="3" />
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -90,18 +109,18 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Content="Update interval:"  Margin="3" />
+                                <Label Content="{DynamicResource UpdateInterval}"  Margin="3" />
                                 <syncfusion:IntegerTextBox Grid.Column="1" x:Name="ItbRamMonitorTimeout" MinValue="1" Margin="3" />
                                 <ComboBox x:Name="CboRamMonitorInterval" Grid.Column="2" Margin="3" SelectedIndex="0">
-                                    <ComboBoxItem Content="milliseconds" />
-                                    <ComboBoxItem Content="seconds" />
-                                    <ComboBoxItem Content="minutes" />
-                                    <ComboBoxItem Content="hours" />
+                                    <ComboBoxItem Content="{DynamicResource Milliseconds}" />
+                                    <ComboBoxItem Content="{DynamicResource Seconds}" />
+                                    <ComboBoxItem Content="{DynamicResource Minutes}" />
+                                    <ComboBoxItem Content="{DynamicResource Hours}" />
                                 </ComboBox>
                             </Grid>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Grid.Row="1" Header="RAM Optimizer" Margin="3">
+                    <GroupBox Grid.Row="1" Header="{DynamicResource RamOptimizer}" Margin="3">
                         <Grid MinWidth="250">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -113,22 +132,22 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             
-                            <CheckBox x:Name="ChbAutoOptimizePercentage" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="Optimize when RAM usage exceeds" Margin="3" Checked="ChbAutoOptimizePercentage_OnChecked"/>
+                            <CheckBox x:Name="ChbAutoOptimizePercentage" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Content="{DynamicResource OptimizeWhenExceeds}" Margin="3" Checked="ChbAutoOptimizePercentage_OnChecked"/>
                             <syncfusion:IntegerTextBox x:Name="ItbAutoOptimizePercentage" Grid.Row="0" Grid.Column="1" Margin="3" MinValue="30" MaxValue="99"/>
                             <Label Grid.Row="0" Grid.Column="2" Content="%" Margin="3" />
 
-                            <CheckBox x:Name="ChbAutoOptimizeTimed" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="Optimize after" Margin="3"/>
+                            <CheckBox x:Name="ChbAutoOptimizeTimed" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0" Content="{DynamicResource OptimizeAfter}" Margin="3"/>
                             <syncfusion:IntegerTextBox x:Name="ItbAutoOptimizeTimed" MinValue="1" Grid.Row="1" Grid.Column="1" Margin="3" />
                             <ComboBox Grid.Row="1" Grid.Column="2" x:Name="CboAutoOptimizeTimedIndex" Margin="3" SelectedIndex="0">
-                                <ComboBoxItem Content="minutes" />
-                                <ComboBoxItem Content="hours" />
+                                <ComboBoxItem Content="{DynamicResource Minutes}" />
+                                <ComboBoxItem Content="{DynamicResource Hours}" />
                             </ComboBox>
                         </Grid>
                     </GroupBox>
                 </Grid>
             </syncfusion:TabItemExt>
 
-            <syncfusion:TabItemExt Header="RAM Optimizer" Image="../../Resources/Images/ram_tab.png"
+            <syncfusion:TabItemExt Header="{DynamicResource RamOptimizer}" Image="../../Resources/Images/ram_tab.png"
                                    ImageWidth="16" ImageHeight="16">
 
                 <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -137,7 +156,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <GroupBox Grid.Row="0" Header="Options" Margin="3">
+                    <GroupBox Grid.Row="0" Header="{DynamicResource Options}" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -149,36 +168,36 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbStartupMemoryClear" Content="Clear memory on application startup" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbEmptyWorkingSet" Content="Empty working sets" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbFileSystemCache" Content="Clear FileSystem cache" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbStandByCache" Content="Clear standby cache" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbClearClipboard" Content="Clear clipboard data" Margin="3" />
-                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbHotKey" Content="Hotkey:" Margin="3" />
+                            <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbStartupMemoryClear" Content="{DynamicResource ClearMemoryOnStartup}" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbEmptyWorkingSet" Content="{DynamicResource ClearWorkingSets}" Margin="3" />
+                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbFileSystemCache" Content="{DynamicResource ClearFileSystemCache}" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbStandByCache" Content="{DynamicResource ClearStandByCache}" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbClearClipboard" Content="{DynamicResource ClearClipboard}" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbHotKey" Content="{DynamicResource Hotkey}" Margin="3" />
                             <TextBox Grid.Row="3" Grid.Column="1" x:Name="TxtHotKey" Margin="3" HorizontalAlignment="Stretch" PreviewKeyDown="TxtHotKey_PreviewKeyDown"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Grid.Row="1" Header="Working Set Exclusions" MinWidth="250" Margin="3">
+                    <GroupBox Grid.Row="1" Header="{DynamicResource WorkingSetExclusions}" MinWidth="250" Margin="3">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListView x:Name="LsvExclusions" Margin="3" Height="80" Width="300" AllowDrop="True" Drop="LsvExclusions_OnDrop">
+                            <ListView x:Name="LsvExclusions" Margin="3" Height="80" HorizontalAlignment="Stretch" AllowDrop="True" Drop="LsvExclusions_OnDrop">
                                 <ListView.ContextMenu>
                                     <ContextMenu>
-                                        <MenuItem Header="Copy" Click="CopyExclusionMenuItem_OnClick">
+                                        <MenuItem Header="{DynamicResource Copy}" Click="CopyExclusionMenuItem_OnClick">
                                             <MenuItem.Icon>
                                                 <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                                             </MenuItem.Icon>
                                         </MenuItem>
                                         <Separator />
-                                        <MenuItem Header="Delete" Click="DeleteExclusionMenuItem_OnClick">
+                                        <MenuItem Header="{DynamicResource Delete}" Click="DeleteExclusionMenuItem_OnClick">
                                             <MenuItem.Icon>
                                                 <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
                                             </MenuItem.Icon>
                                         </MenuItem>
-                                        <MenuItem Header="Clear" Click="ClearExclusionsMenuItem_OnClick">
+                                        <MenuItem Header="{DynamicResource Clear}" Click="ClearExclusionsMenuItem_OnClick">
                                             <MenuItem.Icon>
                                                 <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
                                             </MenuItem.Icon>
@@ -195,7 +214,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox x:Name="TxtExclusion" Margin="3" Width="150" />
                                 <Button Grid.Column="1" Content="..." Margin="3" MinWidth="35" Click="BtnFileView_OnClick" />
-                                <Button Grid.Column="2" Content="Add" Margin="3" MinWidth="35" Click="BtnAddExclusion_OnClick" />
+                                <Button Grid.Column="2" Content="{DynamicResource Add}" Margin="3" MinWidth="35" Click="BtnAddExclusion_OnClick" />
                             </Grid>
                         </Grid>
                     </GroupBox>
@@ -221,7 +240,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Label Margin="3" Content="Style:" />
+                            <Label Margin="3" Content="{DynamicResource Style}" />
                             <ComboBox Margin="3" x:Name="CboStyle" SelectedValuePath="Content" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" IsReadOnly="True">
                                 <ComboBoxItem Content="Metro" />
                                 <ComboBoxItem Content="Blend" />
@@ -239,15 +258,15 @@
                                 <ComboBoxItem Content="Transparent" />
                                 <ComboBoxItem Content="None" />
                             </ComboBox>
-                            <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="Metro brush:" />
+                            <Label Margin="3" Grid.Row="1" Grid.Column="0" Content="{DynamicResource MetroBrushString}" />
                             <syncfusion:ColorPicker Margin="3" x:Name="CpMetroBrush" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" />
-                            <Label Margin="3"  Grid.Row="2" Grid.Column="0" Content="Border thickness:" />
+                            <Label Margin="3"  Grid.Row="2" Grid.Column="0" Content="{DynamicResource BorderThickness}" />
                             <Slider Margin="3" x:Name="SldBorderThickness" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Minimum="1" ValueChanged="SldBorderThickness_OnValueChanged" />
-                            <Label Margin="3" Grid.Row="3" Grid.Column="0" Content="Window opacity:" />
+                            <Label Margin="3" Grid.Row="3" Grid.Column="0" Content="{DynamicResource WindowOpacity}" />
                             <Slider x:Name="SldOpacity" Margin="3" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Minimum="30" Maximum="100" Width="180" ValueChanged="SldOpacity_OnValueChanged" />
-                            <Label Margin="3" Grid.Row="4" Grid.Column="0" Content="Resize border:" />
+                            <Label Margin="3" Grid.Row="4" Grid.Column="0" Content="{DynamicResource ResizeBorder}" />
                             <Slider x:Name="SldWindowResize" Margin="3" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Minimum="1" Maximum="10" Width="180" ValueChanged="SldWindowResize_OnValueChanged" />
-                            <Label Grid.Row="5" Grid.Column="0" Content="Warning level:" />
+                            <Label Grid.Row="5" Grid.Column="0" Content="{DynamicResource WarningLevel}" />
                             <syncfusion:IntegerTextBox x:Name="ItbWarningLevel" Grid.Row="5" Grid.Column="1" MinValue="1" MaxValue="99" />
                             <Label Grid.Row="5" Grid.Column="2" Content="%" />
                         </Grid>
@@ -262,8 +281,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Content="Reset" Margin="3" MinHeight="25" Click="BtnReset_OnClick" />
-            <Button Grid.Column="1" Content="Save" Margin="3" MinHeight="25" Click="BtnSave_OnClick" />
+            <Button Content="{DynamicResource Reset}" Margin="3" MinHeight="25" Click="BtnReset_OnClick" />
+            <Button Grid.Column="1" Content="{DynamicResource Save}" Margin="3" MinHeight="25" Click="BtnSave_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

@@ -2,11 +2,10 @@
 
 namespace MemPlus.Business.LOG
 {
-    /// <inheritdoc />
     /// <summary>
     /// Abstract class containing logging information
     /// </summary>
-    public abstract class Log : ILogMethods
+    public abstract class Log
     {
         /// <summary>
         /// The type of log
@@ -20,37 +19,6 @@ namespace MemPlus.Business.LOG
         /// The data inside the Log object
         /// </summary>
         public string Data { get; set; }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Retrieve the data of the Log object
-        /// </summary>
-        /// <returns>The data of the Log object</returns>
-        public DateTime GetDate()
-        {
-            return Time;
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Add data to the Log object
-        /// </summary>
-        /// <param name="data">The data that needs to be added to the log</param>
-        public void AddData(string data)
-        {
-            Time = DateTime.Now;
-            Data = data;
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Retrieve the data from the Log object
-        /// </summary>
-        /// <returns>The data from the Log object</returns>
-        public string GetData()
-        {
-            return Data;
-        }
     }
 
     /// <summary>

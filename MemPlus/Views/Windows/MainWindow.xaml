@@ -31,24 +31,24 @@
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Clear memory" Click="BtnClearMemory_OnClick">
+                    <MenuItem Header="{DynamicResource ClearMemory}" Click="BtnClearMemory_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram_tab.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource Settings}" Click="SettingsMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/settings.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="Restart" Click="RestartMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource Restart}" Click="RestartMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/paused.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource Exit}" Click="ExitMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
                         </MenuItem.Icon>
@@ -66,117 +66,117 @@
         </Grid>
 
         <Menu Grid.Row="1" IsMainMenu="True">
-            <MenuItem Header="_File">
-                <MenuItem Header="Export">
+            <MenuItem Header="{DynamicResource File}">
+                <MenuItem Header="{DynamicResource Export}">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/export.png"/>
                     </MenuItem.Icon>
-                    <MenuItem Header="Logs">
+                    <MenuItem Header="{DynamicResource Logs}">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
                         </MenuItem.Icon>
-                        <MenuItem Header="All logs" Click="ExportAllLogsMenuItem_OnClick" />
+                        <MenuItem Header="{DynamicResource AllLogs}" Click="ExportAllLogsMenuItem_OnClick" />
                         <Separator />
-                        <MenuItem Header="RAM logs" Click="RamExportMenuItem_OnClick" />
-                        <MenuItem Header="Process logs" Click="ProcessExportMenuItem_OnClick" />
-                        <MenuItem Header="Application logs" Click="ApplicationExportMenuItem_OnClick"/>
+                        <MenuItem Header="{DynamicResource RamLogs}" Click="RamExportMenuItem_OnClick" />
+                        <MenuItem Header="{DynamicResource ProcessLogs}" Click="ProcessExportMenuItem_OnClick" />
+                        <MenuItem Header="{DynamicResource ApplicationLogs}" Click="ApplicationExportMenuItem_OnClick"/>
                     </MenuItem>
                     <Separator />
-                    <MenuItem Header="RAM Analyzer data" Click="ExportRamAnalyzerDataMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource RamAnalyzerData}" Click="ExportRamAnalyzerDataMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram_tab.png" />
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Process Analyzer data" Click="ExportProcessAnalyzerDataMenuItem_OnClick">
+                    <MenuItem Header="{DynamicResource ProcessAnalyzerData}" Click="ExportProcessAnalyzerDataMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Restart" Click="RestartMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource Restart}" Click="RestartMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/paused.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Exit" Click="ExitMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource Exit}" Click="ExitMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/exit.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="_Tools">
-                <MenuItem x:Name="MniRamMonitor" Header="RAM Monitor" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
-                <MenuItem Header="RAM Analyzer" Click="RamAnalyzerMenuItem_OnClick">
+            <MenuItem Header="{DynamicResource Tools}">
+                <MenuItem x:Name="MniRamMonitor" Header="{DynamicResource RamMonitor}" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
+                <MenuItem Header="{DynamicResource RamAnalyzer}" Click="RamAnalyzerMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Process Analyzer" Click="ProcessAnalyzerMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource ProcessAnalyzer}" Click="ProcessAnalyzerMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Logs">
+                <MenuItem Header="{DynamicResource Logs}">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/log.png" />
                     </MenuItem.Icon>
-                    <MenuItem Header="RAM logs" Click="RamLogsMenuItem_OnClick" />
-                    <MenuItem Header="Process logs" Click="ProcessLogsMenuItem_OnClick" />
-                    <MenuItem Header="Application logs" Click="ApplicationLogsMenuItem_OnClick" />
+                    <MenuItem Header="{DynamicResource RamLogs}" Click="RamLogsMenuItem_OnClick" />
+                    <MenuItem Header="{DynamicResource ProcessLogs}" Click="ProcessLogsMenuItem_OnClick" />
+                    <MenuItem Header="{DynamicResource ApplicationLogs}" Click="ApplicationLogsMenuItem_OnClick" />
                     <Separator />
-                    <MenuItem Header="Clear" Click="ClearLogsMenuItem_OnClick" />
+                    <MenuItem Header="{DynamicResource Clear}" Click="ClearLogsMenuItem_OnClick" />
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="GUI">
+                <MenuItem Header="{DynamicResource Gui}">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/monitor.png" />
                     </MenuItem.Icon>
-                    <MenuItem x:Name="MniOnTop" Header="Always on top" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
-                    <MenuItem x:Name="MniDisableInactive" Header="Disable when inactive" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
-                    <MenuItem x:Name="MniWindowDraggable" Header="Window draggable" IsCheckable="True" Checked="WindowDraggableMenuItem_OnCheckedChanged" Unchecked="WindowDraggableMenuItem_OnCheckedChanged" />
-                    <MenuItem x:Name="MniRamStatistics" Header="Display RAM statistics" IsCheckable="True" Checked="RamStatisticsMenuItem_OnCheckedChanged" Unchecked="RamStatisticsMenuItem_OnCheckedChanged" />
-                    <MenuItem x:Name="MniRamGauge" Header="Display RAM Gauge" IsCheckable="True" Checked="RamGaugeMenuItem_OnCheckedChanged" Unchecked="RamGaugeMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniOnTop" Header="{DynamicResource AlwaysOnTop}" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniDisableInactive" Header="{DynamicResource DisableWhenInactive}" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniWindowDraggable" Header="{DynamicResource WindowDraggable}" IsCheckable="True" Checked="WindowDraggableMenuItem_OnCheckedChanged" Unchecked="WindowDraggableMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniRamStatistics" Header="{DynamicResource DisplayRamStatistics}" IsCheckable="True" Checked="RamStatisticsMenuItem_OnCheckedChanged" Unchecked="RamStatisticsMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniRamGauge" Header="{DynamicResource DisplayRamGauge}" IsCheckable="True" Checked="RamGaugeMenuItem_OnCheckedChanged" Unchecked="RamGaugeMenuItem_OnCheckedChanged" />
                 </MenuItem>
-                <MenuItem Header="Settings" Click="SettingsMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource Settings}" Click="SettingsMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/settings.png" />
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
-            <MenuItem Header="_Help">
+            <MenuItem Header="{DynamicResource Help}">
                 <MenuItem Header="Help" Click="HelpMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/help.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Check for updates" Click="UpdateMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource CheckForUpdates}" Click="UpdateMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/update.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Homepage" Click="HomePageMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource HomePage}" Click="HomePageMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/home.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="License" Click="LicenseMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource License}" Click="LicenseMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/pdf.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="Donate" Click="DonateMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource Donate}" Click="DonateMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/donate.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="About" Click="AboutMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource About}" Click="AboutMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/about.png" />
                     </MenuItem.Icon>
@@ -219,19 +219,19 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Row="0" Content="Total physical memory:" FontSize="14" Margin="10,5" />
+                    <Label Grid.Row="0" Content="{DynamicResource TotalPhysicalMemory}" FontSize="14" Margin="10,5" />
                     <Label Grid.Row="1" x:Name="LblTotalPhysicalMemory"  Content="" FontSize="14" Foreground="Green" Margin="10,5" />
-                    <Label Grid.Row="2" Content="Used physical memory:" FontSize="14" Margin="10,5" />
+                    <Label Grid.Row="2" Content="{DynamicResource UsedPhysicalMemory}" FontSize="14" Margin="10,5" />
                     <Label Grid.Row="3" x:Name="LblAvailablePhysicalMemory" Content="" FontSize="14" Foreground="Red" Margin="10,5" />
                 </Grid>
 
                 <syncfusion:SplitButtonAdv Grid.Row="1" FontSize="14"
-                                           SmallIcon="../../Resources/Images/ram_tab.png" Label="Clear memory"
+                                           SmallIcon="../../Resources/Images/ram_tab.png" Label="{DynamicResource ClearMemory}"
                                            x:Name="BtnClearMemory" Click="BtnClearMemory_OnClick" IsMultiLine="False"
                                            MinHeight="25" HorizontalAlignment="Stretch" Margin="10,5">
                     <syncfusion:DropDownMenuGroup>
-                        <syncfusion:DropDownMenuItem Header="Clear Working sets" Click="ClearWorkingSetsDropDownMenuItem_OnClick" />
-                        <syncfusion:DropDownMenuItem Header="Clear FileSystem cache" Click="ClearFileSystemCacheDropDownMenuItem_OnClick" />
+                        <syncfusion:DropDownMenuItem Header="{DynamicResource ClearWorkingSets}" Click="ClearWorkingSetsDropDownMenuItem_OnClick" />
+                        <syncfusion:DropDownMenuItem Header="{DynamicResource ClearFileSystemCache}" Click="ClearFileSystemCacheDropDownMenuItem_OnClick" />
                     </syncfusion:DropDownMenuGroup>
                 </syncfusion:SplitButtonAdv>
             </Grid>
