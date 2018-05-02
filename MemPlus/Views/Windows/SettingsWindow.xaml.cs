@@ -411,6 +411,7 @@ namespace MemPlus.Views.Windows
 
             if (System.IO.File.Exists(TxtExclusion.Text))
             {
+                if (LsvExclusions.Items.Contains(TxtExclusion.Text)) return;
                 LsvExclusions.Items.Add(TxtExclusion.Text);
                 TxtExclusion.Text = "";
             }
