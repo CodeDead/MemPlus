@@ -156,9 +156,6 @@ namespace MemPlus.Views.Windows
                     case 1:
                         langUri = new Uri("..\\Resources\\Languages\\nl.xaml", UriKind.Relative);
                         break;
-                    case 2:
-                        langUri = new Uri("..\\Resources\\Languages\\yourlang.xaml", UriKind.Relative);
-                        break;
                 }
             }
             catch (Exception ex)
