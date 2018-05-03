@@ -12,7 +12,7 @@
     <system:String x:Key="Cancel">Annuler</system:String>
     <system:String x:Key="Download">Télécharger</system:String>
     <system:String x:Key="Information">Information</system:String>
-    <system:String x:Key="RunningLatestVersion">Vous utilisez la dernière version!!</system:String>
+    <system:String x:Key="RunningLatestVersion">Vous utilisez la dernière version!</system:String>
     <system:String x:Key="UpdateNow">Voulez-vous mettre à jour l'application maintenant?</system:String>
 
 
