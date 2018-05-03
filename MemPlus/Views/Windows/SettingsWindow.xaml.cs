@@ -63,7 +63,7 @@ namespace MemPlus.Views.Windows
         private void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing SettingsWindow theme style"));
-            StyleManager.ChangeStyle(this);
+            GuiManager.ChangeStyle(this);
             _logController.AddLog(new ApplicationLog("Done changing SettingsWindow theme style"));
         }
 
@@ -407,11 +407,10 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnAddExclusion_OnClick(object sender, RoutedEventArgs e)
         {
-            if (TxtExclusion.Text.Length == 0) return;
+            if (TxtExclusion.Text.Length == 0 || LsvExclusions.Items.Contains(TxtExclusion.Text)) return;
 
             if (System.IO.File.Exists(TxtExclusion.Text))
             {
-                if (LsvExclusions.Items.Contains(TxtExclusion.Text)) return;
                 LsvExclusions.Items.Add(TxtExclusion.Text);
                 TxtExclusion.Text = "";
             }

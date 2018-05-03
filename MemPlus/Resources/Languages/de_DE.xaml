@@ -15,7 +15,6 @@
     <system:String x:Key="RunningLatestVersion">Du hast die neuste Version!</system:String>
     <system:String x:Key="UpdateNow">Möchtest du die Bewerbung jetzt aktualisieren?</system:String>
 
-
     <!--Menu-->
     <system:String x:Key="File">_Datei</system:String>
     <system:String x:Key="Export">Exportieren</system:String>

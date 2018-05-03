@@ -15,7 +15,6 @@
     <system:String x:Key="RunningLatestVersion">U heeft de laatste versie!</system:String>
     <system:String x:Key="UpdateNow">Wenst u de update nu te installeren?</system:String>
 
-
     <!--Menu-->
     <system:String x:Key="File">_Bestand</system:String>
     <system:String x:Key="Export">Exporteren</system:String>
@@ -127,4 +126,3 @@
     <system:String x:Key="AutoOptimizeWarning">Deze optie werkt alleen als de RAM Monitor is ingeschakeld!</system:String>
 
 </ResourceDictionary>
-    

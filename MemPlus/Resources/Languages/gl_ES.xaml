@@ -15,7 +15,6 @@
     <system:String x:Key="RunningLatestVersion">Estás a executar a última versión!</system:String>
     <system:String x:Key="UpdateNow">Queres actualizar o aplicativo agora?</system:String>
 
-
     <!--Menu-->
     <system:String x:Key="File">_Ficheiro</system:String>
     <system:String x:Key="Export">Exportar</system:String>

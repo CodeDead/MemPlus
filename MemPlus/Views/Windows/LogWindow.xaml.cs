@@ -171,7 +171,7 @@ namespace MemPlus.Views.Windows
         private void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing LogWindow theme style"));
-            StyleManager.ChangeStyle(this);
+            GuiManager.ChangeStyle(this);
             _logController.AddLog(new ApplicationLog("Done changing LogWindow theme style"));
         }
 

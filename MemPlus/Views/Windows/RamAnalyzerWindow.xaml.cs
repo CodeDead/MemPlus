@@ -85,7 +85,7 @@ namespace MemPlus.Views.Windows
         private void ChangeVisualStyle()
         {
             _logController.AddLog(new ApplicationLog("Changing AnalyzerWindow theme style"));
-            StyleManager.ChangeStyle(this);
+            GuiManager.ChangeStyle(this);
             _logController.AddLog(new ApplicationLog("Done changing AnalyzerWindow theme style"));
         }
 

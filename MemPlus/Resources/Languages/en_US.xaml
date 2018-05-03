@@ -15,7 +15,6 @@
     <system:String x:Key="RunningLatestVersion">You are running the latest version!</system:String>
     <system:String x:Key="UpdateNow">Would you like to update the application now?</system:String>
 
-
     <!--Menu-->
     <system:String x:Key="File">_File</system:String>
     <system:String x:Key="Export">Export</system:String>
@@ -127,4 +126,3 @@
     <system:String x:Key="AutoOptimizeWarning">This option will only work if the RAM Monitor is enabled!</system:String>
 
 </ResourceDictionary>
-    

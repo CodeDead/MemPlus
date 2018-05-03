@@ -45,8 +45,8 @@
     <system:String x:Key="About">A propos</system:String>
 
     <!--MainWindow-->
-    <system:String x:Key="TotalPhysicalMemory">Mémoire physique totale:system:String>
-    <system:String x:Key="UsedPhysicalMemory">Mémoire physique utilisée:system:String>
+    <system:String x:Key="TotalPhysicalMemory">Mémoire physique totale:</system:String>
+    <system:String x:Key="UsedPhysicalMemory">Mémoire physique utilisée:</system:String>
     <system:String x:Key="ClearWorkingSets">Effacer les ensembles de travail</system:String>
     <system:String x:Key="ClearFileSystemCache">Effacer le cache des fichiers systèmes</system:String>
     <system:String x:Key="AdministrativeRightsWarning">MemPlus peut ne pas fonctionner correctement sans droits d'administration!</system:String>
@@ -57,7 +57,7 @@
     <!--AboutWindow-->
     <system:String x:Key="AboutWindowTitle">MemPlus - À propos</system:String>
     <system:String x:Key="Close">Fermer</system:String>
-    <system:String x:Key="AboutInfo">MemPlus a été créé par DeadLine. \ N \ nImages: petit-n-plat par paomedia \ nThème: Syncfusion \ nVersion:% \ n \ nCopyright © CodeDead 2018</system:String>
+    <system:String x:Key="AboutInfo">MemPlus a été créé par DeadLine.\n\nImages: petit-n-plat par paomedia\nThème: Syncfusion\nVersion:%\n\nCopyright © CodeDead 2018</system:String>
 
     <!--LogWindow-->
     <system:String x:Key="LogWindowTitle">MemPlus - Journaux</system:String>
@@ -88,7 +88,7 @@
     <system:String x:Key="AutoStartMemPlus">Démarrer MemPlus lorsque Windows démarre</system:String>
     <system:String x:Key="StartMinimized">Démarrer MemPlus minimisé</system:String>
     <system:String x:Key="HideOnStart">Masquer MemPlus au démarrage</system:String>
-    <system:String x:Key="HideInsteadOfClose"> Masquer MemPlus au lieu de le fermer</system:String>
+    <system:String x:Key="HideInsteadOfClose">Masquer MemPlus au lieu de le fermer</system:String>
     <system:String x:Key="AutoRunAsAdministrator">Exécuter automatiquement en tant qu'administrateur</system:String>
     <system:String x:Key="Topmost">Le plus haut</system:String>
     <system:String x:Key="DisplayNotifyIcon">Afficher l'icone de notification</system:String>
