@@ -1,0 +1,128 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="ClearMemory">تفرغة الذاكرة</system:String>
+    <system:String x:Key="Settings">الخصائص</system:String>
+    <system:String x:Key="Restart">اعادة البدء</system:String>
+    <system:String x:Key="Exit">الخروج</system:String>
+    <system:String x:Key="ExportedAllData">تم تصدير جميع البيانات</system:String>
+
+    <!--UpdateManager-->
+    <system:String x:Key="Cancel">الغاء</system:String>
+    <system:String x:Key="Download">تحميل</system:String>
+    <system:String x:Key="Information">معلومات</system:String>
+    <system:String x:Key="RunningLatestVersion">هذا هو احدث اصدار.</system:String>
+    <system:String x:Key="UpdateNow">هل تريد ان تحدِّث البرنامج الان؟</system:String>
+
+    <!--Menu-->
+    <system:String x:Key="File">_ملف</system:String>
+    <system:String x:Key="Export">تصدير</system:String>
+    <system:String x:Key="Logs">سجلات</system:String>
+    <system:String x:Key="AllLogs">كل السجلات</system:String>
+    <system:String x:Key="RamLogs">سجلات الرام</system:String>
+    <system:String x:Key="ProcessLogs">سجلات العمليات</system:String>
+    <system:String x:Key="ApplicationLogs">سجلات البرنامج</system:String>
+    <system:String x:Key="RamAnalyzerData">بيانات محلل الرام</system:String>
+    <system:String x:Key="ProcessAnalyzerData">بيانات محلل العمليات</system:String>
+    <system:String x:Key="Tools">_أدوات</system:String>
+    <system:String x:Key="RamMonitor">مراقب الرام</system:String>
+    <system:String x:Key="RamAnalyzer">محلل الرام</system:String>
+    <system:String x:Key="ProcessAnalyzer">محلل العمليات</system:String>
+    <system:String x:Key="Clear">تفرغة</system:String>
+    <system:String x:Key="Gui">واجهة المستخدم</system:String>
+    <system:String x:Key="AlwaysOnTop">دائما في الاعلي</system:String>
+    <system:String x:Key="DisableWhenInactive">الايقاف عند عدم الاستخدام</system:String>
+    <system:String x:Key="WindowDraggable">النافذة قابلة للتحريك</system:String>
+    <system:String x:Key="DisplayRamStatistics">عرض احصائيات الرام</system:String>
+    <system:String x:Key="DisplayRamGauge">عرض عداد الرام</system:String>
+    <system:String x:Key="Help">_مساعدة</system:String>
+    <system:String x:Key="CheckForUpdates">تحقق من وجود تحديثات</system:String>
+    <system:String x:Key="HomePage">الصفحة الرئيسية</system:String>
+    <system:String x:Key="License">الرخصة</system:String>
+    <system:String x:Key="Donate">تبرع</system:String>
+    <system:String x:Key="About">نبذة</system:String>
+
+    <!--MainWindow-->
+    <system:String x:Key="TotalPhysicalMemory">الذاكرة الفعلية الكلية:</system:String>
+    <system:String x:Key="UsedPhysicalMemory">الذاكرة الفعلية المستخدمة:</system:String>
+    <system:String x:Key="ClearWorkingSets">تفرغة الاطقم العاملة</system:String>
+    <system:String x:Key="ClearFileSystemCache">تفرغة الذاكرة الخبيئة لنظام الملفات</system:String>
+    <system:String x:Key="AdministrativeRightsWarning">ميم بلس قد لا يعمل بشكل صحيح بدون اذن حساب مسؤول.</system:String>
+    <system:String x:Key="GaugeRamUsage">استخدام الرام (%)</system:String>
+    <system:String x:Key="RamUsageIncreased">يبدو ان استخدامك للرام قد ازداد % ميجابايت</system:String>
+    <system:String x:Key="RamUsageSaved">لقد أفرغت % ميجابايت من الرام</system:String>
+
+    <!--AboutWindow-->
+    <system:String x:Key="AboutWindowTitle">ميم بلس - نبذة</system:String>
+    <system:String x:Key="Close">اغلق</system:String>
+    <system:String x:Key="AboutInfo">ميم بلس تم عمله بواسطة ديدلاين.\n\nالصور: صغير ومسطح بواسطة باوميديا\nالمظهر: سينفيوجن\nالاصدار: %\n\nحقوق النشر © كودديد 2018</system:String>
+
+    <!--LogWindow-->
+    <system:String x:Key="LogWindowTitle">ميم بلس - السجلات</system:String>
+    <system:String x:Key="Copy">نسخ</system:String>
+    <system:String x:Key="Delete">حذف</system:String>
+    <system:String x:Key="Date">التاريخ</system:String>
+    <system:String x:Key="Content">المحتويات</system:String>
+    <system:String x:Key="ClearLogs">تفرغة السجلات</system:String>
+
+    <!--ProcessAnalyzerWindow-->
+    <system:String x:Key="ProcessAnalyzerWindowTitle">ميم بلس - محلل العمليات</system:String>
+    <system:String x:Key="ClearWorkingSet">تفرغة الطاقم العامل</system:String>
+    <system:String x:Key="KillProcess">انهِ</system:String>
+    <system:String x:Key="Refresh">تحديث</system:String>
+    <system:String x:Key="ProcessId">معرف العملية</system:String>
+    <system:String x:Key="ProcessName">اسم العملية</system:String>
+    <system:String x:Key="ProcessLocation">مكان العملية</system:String>
+    <system:String x:Key="MemoryUsage">استخدام الذاكرة</system:String>
+
+    <!--RamAnalyzerWindow-->
+    <system:String x:Key="RamAnalyzerWindowTitle">ميم بلس - محلل الرام</system:String>
+    <system:String x:Key="CouldNotRetrieveInformation">لم يستطع البرنامج الوصول الي معلومات محلل الرام.</system:String>
+
+    <!--SettingsWindow-->
+    <system:String x:Key="SettingsWindowTitle">ميم بلس - الخصائص</system:String>
+    <system:String x:Key="General">عام</system:String>
+    <system:String x:Key="AutomaticUpdates">تحديثات تلقائية</system:String>
+    <system:String x:Key="AutoStartMemPlus">ابدأ ميم بلس عند بداية ويندوز</system:String>
+    <system:String x:Key="StartMinimized">ابدأ ميم بلس مصغر</system:String>
+    <system:String x:Key="HideOnStart">اخفِ ميم بلس عند البدء</system:String>
+    <system:String x:Key="HideInsteadOfClose">اخفِ ميم بلس عند الاغلاق</system:String>
+    <system:String x:Key="AutoRunAsAdministrator">ابدأ بحساب مسؤول بشكل تلقائي</system:String>
+    <system:String x:Key="Topmost">الأعلي</system:String>
+    <system:String x:Key="DisplayNotifyIcon">اعرض ايكونة الاشعارات</system:String>
+    <system:String x:Key="DisplayAdminWarning">اعرض تحذير الحساب المسؤول</system:String>
+    <system:String x:Key="DisplayRamStatisticsNotifyIcon">اعرض احصائيات الرام في ايكونة الاشعارات</system:String>
+    <system:String x:Key="DisplayRamStatisticsWindow">اعرض احصائيات الرام في النافذة</system:String>
+    <system:String x:Key="Language">اللغة</system:String>
+    <system:String x:Key="LanguageSetting">اللغة:</system:String>
+    <system:String x:Key="UpdateInterval">فترة التحديث:</system:String>
+    <system:String x:Key="Milliseconds">مللي ثانية</system:String>
+    <system:String x:Key="Seconds">ثانية</system:String>
+    <system:String x:Key="Minutes">دقيقة</system:String>
+    <system:String x:Key="Hours">ساعة</system:String>
+    <system:String x:Key="RamOptimizer">محَسِّن الرام</system:String>
+    <system:String x:Key="OptimizeWhenExceeds">حسِّن الرام عندما يتخطي استخدامها</system:String>
+    <system:String x:Key="OptimizeAfter">حسِّن الرام بعد</system:String>
+    <system:String x:Key="Options">الخصائص</system:String>
+    <system:String x:Key="ClearMemoryOnStartup">تفرغة الذاكرة عند بدء البرنامج</system:String>
+    <system:String x:Key="ClearStandByCache">تفرغة الذاكرة الخبيئة المعلقة</system:String>
+    <system:String x:Key="ClearClipboard">تفرغة بيانات الحافظة</system:String>
+    <system:String x:Key="Hotkey">اختصار:</system:String>
+    <system:String x:Key="WorkingSetExclusions">استثناءات الطاقم العامل</system:String>
+    <system:String x:Key="Add">إضافة</system:String>
+    <system:String x:Key="Theme">المظهر</system:String>
+    <system:String x:Key="Style">الشكل:</system:String>
+    <system:String x:Key="MetroBrushString">فرشة العداد:</system:String>
+    <system:String x:Key="BorderThickness">سمك الحدود:</system:String>
+    <system:String x:Key="WindowOpacity">شفافية النافذة:</system:String>
+    <system:String x:Key="ResizeBorder">تغيير مقاس الحدود:</system:String>
+    <system:String x:Key="WarningLevel">مستوي التحذير:</system:String>
+    <system:String x:Key="Reset">اعادة الضبط</system:String>
+    <system:String x:Key="Save">خفظ</system:String>
+    <system:String x:Key="SavedAllSettings">تم حفظ جميع الخصائص.</system:String>
+    <system:String x:Key="ResetAllSettings">تمت اعادة ضبظ جميع الخصائص.</system:String>
+    <system:String x:Key="FileDoesNotExist">الملف المحدد غير موجود.</system:String>
+    <system:String x:Key="AutoOptimizeWarning">هذة الخاصية لن تعمل الا اذا كان مراقب الرام منشط.</system:String>
+
+</ResourceDictionary>

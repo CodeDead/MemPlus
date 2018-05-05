@@ -105,6 +105,10 @@
     <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Languages\ar_SA.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\Languages\de_DE.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
