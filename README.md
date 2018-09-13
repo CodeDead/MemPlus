@@ -6,7 +6,7 @@ For more information, please visit:
 https://codedead.com/?page_id=1736
 
 # Requirements in order to build
-* [Visual Studio](https://vistualstudio.com)
+* [Visual Studio](https://visualstudio.com)
 * [.NET Framework 4.7.1](https://www.microsoft.com/en-us/download/details.aspx?id=56116)
 * [Syncfusion](https://syncfusion.com) ([Community edition available](https://www.syncfusion.com/products/communitylicense))
 * [Paomedia small-n-flat](https://github.com/paomedia/small-n-flat) (Images)
