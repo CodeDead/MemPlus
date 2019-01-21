@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
 using MemPlus.Business.UTILS;
 using Microsoft.Win32;
+using Application = System.Windows.Application;
+using Clipboard = System.Windows.Clipboard;
+using DataFormats = System.Windows.DataFormats;
+using DragEventArgs = System.Windows.DragEventArgs;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace MemPlus.Views.Windows
 {
@@ -114,6 +122,29 @@ namespace MemPlus.Views.Windows
 
                 CboLanguage.SelectedIndex = Properties.Settings.Default.SelectedLanguage;
 
+                //Logging
+                ChbAutoClearLogs.IsChecked = Properties.Settings.Default.LogClearAuto;
+                int clearInterval = Properties.Settings.Default.LogClearInterval;
+                switch (Properties.Settings.Default.LogClearIntervalIndex)
+                {
+                    case 0:
+                        ItbAutoClearLogsInterval.Value = clearInterval;
+                        break;
+                    default:
+                        ItbAutoClearLogsInterval.Value = clearInterval / 1000;
+                        break;
+                    case 2:
+                        ItbAutoClearLogsInterval.Value = clearInterval / 1000 / 60;
+                        break;
+                    case 3:
+                        ItbAutoClearLogsInterval.Value = clearInterval / 1000 / 60 / 60;
+                        break;
+                }
+                CboLogClearInterval.SelectedIndex = Properties.Settings.Default.LogClearIntervalIndex;
+
+                ChbSaveLogsToFile.IsChecked = Properties.Settings.Default.SaveLogsToFile;
+                TxtLogFilePath.Text = Properties.Settings.Default.LogPath;
+
                 //RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
                 ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
@@ -124,7 +155,7 @@ namespace MemPlus.Views.Windows
                     case 0:
                         ItbRamMonitorTimeout.Value = ramInterval;
                         break;
-                    case 1:
+                    default:
                         ItbRamMonitorTimeout.Value = ramInterval / 1000;
                         break;
                     case 2:
@@ -144,7 +175,7 @@ namespace MemPlus.Views.Windows
                 CboAutoOptimizeTimedIndex.SelectedIndex = Properties.Settings.Default.AutoOptimizeTimedIntervalIndex;
                 switch (Properties.Settings.Default.AutoOptimizeTimedIntervalIndex)
                 {
-                    case 0:
+                    default:
                         ItbAutoOptimizeTimed.Value = Properties.Settings.Default.AutoOptimizeTimedInterval / 1000 / 60;
                         break;
                     case 1:
@@ -241,6 +272,51 @@ namespace MemPlus.Views.Windows
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
                 Properties.Settings.Default.SelectedLanguage = CboLanguage.SelectedIndex;
 
+                //Logging
+                if (ChbAutoClearLogs.IsChecked != null)
+                {
+                    Properties.Settings.Default.LogClearAuto = ChbAutoClearLogs.IsChecked.Value;
+                    _logController.SetAutoClear(ChbAutoClearLogs.IsChecked.Value);
+                }
+
+                Properties.Settings.Default.LogClearIntervalIndex = CboLogClearInterval.SelectedIndex;
+
+                if (ItbAutoClearLogsInterval.Value != null)
+                {
+                    int logInterval = (int)ItbAutoClearLogsInterval.Value;
+                    switch (CboLogClearInterval.SelectedIndex)
+                    {
+                        case 1:
+                            logInterval = logInterval * 1000;
+                            break;
+                        case 2:
+                            logInterval = logInterval * 1000 * 60;
+                            break;
+                        case 3:
+                            logInterval = logInterval * 1000 * 60 * 60;
+                            break;
+                    }
+                    Properties.Settings.Default.LogClearInterval = logInterval;
+                    _logController.SetAutoClearInterval(logInterval);
+                }
+
+                Properties.Settings.Default.LogPath = TxtLogFilePath.Text;
+                if (TxtLogFilePath.Text.Length > 0)
+                {
+                    _logController.SetSaveDirectory(TxtLogFilePath.Text);
+                }
+
+                if (ChbSaveLogsToFile.IsChecked != null)
+                {
+                    Properties.Settings.Default.SaveLogsToFile = ChbSaveLogsToFile.IsChecked.Value;
+                    /*
+                     * Make sure this is the last LogController method that is called when saving the settings
+                     * because this will only work properly when all other settings (especially the directory)
+                     * have been set correctly
+                     */
+                    _logController.SetSaveToFile(ChbSaveLogsToFile.IsChecked.Value);
+                }
+
                 //RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
                 if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
@@ -249,6 +325,7 @@ namespace MemPlus.Views.Windows
                 if (ItbRamMonitorTimeout.Value != null)
                 {
                     int ramInterval = (int)ItbRamMonitorTimeout.Value;
+                    // ReSharper disable once SwitchStatementMissingSomeCases
                     switch (CboRamMonitorInterval.SelectedIndex)
                     {
                         case 1:
@@ -275,7 +352,7 @@ namespace MemPlus.Views.Windows
                 {
                     switch (CboAutoOptimizeTimedIndex.SelectedIndex)
                     {
-                        case 0:
+                        default:
                             Properties.Settings.Default.AutoOptimizeTimedInterval = (int)ItbAutoOptimizeTimed.Value * 1000 * 60;
                             break;
                         case 1:
@@ -316,7 +393,6 @@ namespace MemPlus.Views.Windows
 
                 _logController.AddLog(new ApplicationLog("Properties have been saved"));
 
-
                 MessageBox.Show((string)Application.Current.FindResource("SavedAllSettings"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -350,6 +426,10 @@ namespace MemPlus.Views.Windows
                 _mainWindow.LoadProperties();
                 _mainWindow.LoadLanguage();
                 _mainWindow.HotKeyModifier(new WindowInteropHelper(_mainWindow));
+
+                _logController.SetAutoClear(Properties.Settings.Default.LogClearAuto);
+                _logController.SetAutoClearInterval(Properties.Settings.Default.LogClearInterval);
+                _logController.SetSaveToFile(Properties.Settings.Default.SaveLogsToFile);
 
                 ChangeVisualStyle();
                 LoadProperties();
@@ -559,6 +639,20 @@ namespace MemPlus.Views.Windows
             shortcutText.Append(key);
 
             TxtHotKey.Text = shortcutText.ToString();
+        }
+
+        /// <summary>
+        /// Method that is called when the user clicks the button to select the path for saving log files
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void BtnSelectLogFilePath(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                TxtLogFilePath.Text = fbd.SelectedPath;
+            }
         }
     }
 }

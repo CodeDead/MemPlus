@@ -1,21 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Timers;
 using MemPlus.Business.EXPORT;
+using Timer = System.Timers.Timer;
 
 namespace MemPlus.Business.LOG
 {
+    /// <inheritdoc />
     /// <summary>
     /// Class containing methods to control logs
     /// </summary>
-    public class LogController
+    // ReSharper disable once InconsistentNaming
+    public class LogController : IDisposable
     {
         #region Variables
         /// <summary>
         /// The list of available Log objects
         /// </summary>
         private readonly List<Log> _logList;
+        /// <summary>
+        /// The timer that can be used to automatically clear logs
+        /// </summary>
+        private readonly Timer _autoClearTimer;
+        /// <summary>
+        /// True if logs should be written to a file, otherwise false
+        /// </summary>
+        private bool _saveToFile;
+        /// <summary>
+        /// The DateTime object at which the LogController object was initialized
+        /// </summary>
+        private readonly DateTime _startTime;
+        /// <summary>
+        /// The path where logs can be stored
+        /// </summary>
+        private string _logPath;
+        /// <summary>
+        /// The FileStream object that can be used to write logs to the disk
+        /// </summary>
+        private FileStream _fileStream;
+        /// <summary>
+        /// The StreamWriter object that can be used to write logs to the disk
+        /// </summary>
+        private StreamWriter _streamWriter;
+        /// <summary>
+        /// True if the StreamWriter is writing data to the log file, otherwise false
+        /// </summary>
+        private bool _isWriting;
         #endregion
 
         #region Delegates
@@ -23,11 +55,13 @@ namespace MemPlus.Business.LOG
         /// Delegate that will be called when a Log object was added
         /// </summary>
         /// <param name="l">The Log object that was added</param>
+        // ReSharper disable once InconsistentNaming
         internal delegate void LogAdded(Log l);
         /// <summary>
         /// Delegate that will be called when a Log object was removed
         /// </summary>
         /// <param name="l">The Log object that was deleted</param>
+        // ReSharper disable once InconsistentNaming
         internal delegate void LogDeleted(Log l);
         /// <summary>
         /// Delegate that will be called when all Log objects are removed
@@ -37,6 +71,7 @@ namespace MemPlus.Business.LOG
         /// Delegate that will be called when a list of Log objects with a specific LogType were removed
         /// </summary>
         /// <param name="clearedList">The list of Log objects that were removed</param>
+        // ReSharper disable once InconsistentNaming
         internal delegate void LogTypeCleared(List<Log> clearedList);
         /// <summary>
         /// Method that will be called when a Log object was added
@@ -59,15 +94,108 @@ namespace MemPlus.Business.LOG
         /// <summary>
         /// Initialize a new LogController object
         /// </summary>
-        /// <param name="clearInterval">The interval for when ApplicationLog objects should automatically be cleared</param>
-        internal LogController(int clearInterval)
+        internal LogController()
         {
             _logList = new List<Log>();
 
-            Timer logTimer = new Timer();
-            logTimer.Elapsed += OnTimedEvent;
-            logTimer.Interval = clearInterval;
-            logTimer.Enabled = true;
+            _autoClearTimer = new Timer();
+            _autoClearTimer.Elapsed += OnTimedEvent;
+            _autoClearTimer.Interval = 600000;
+            _autoClearTimer.Enabled = true;
+
+            _saveToFile = false;
+            _startTime = DateTime.Now;
+            _logPath = null;
+        }
+
+        /// <summary>
+        /// Initialize a new LogController object
+        /// </summary>
+        /// <param name="autoClear">True if the logs should be cleared automatically</param>
+        /// <param name="clearInterval">The interval for when ApplicationLog objects should automatically be cleared</param>
+        /// <param name="saveToFile">True if logs should be written to a file</param>
+        /// <param name="saveDirectory">The directory to which the logs should be written</param>
+        internal LogController(bool autoClear, int clearInterval, bool saveToFile, string saveDirectory)
+        {
+            _logList = new List<Log>();
+
+            _autoClearTimer = new Timer();
+            _autoClearTimer.Elapsed += OnTimedEvent;
+            _autoClearTimer.Interval = clearInterval;
+            _autoClearTimer.Enabled = autoClear;
+
+            _startTime = DateTime.Now;
+            // Set this after the DateTime has been established
+            SetSaveDirectory(saveDirectory);
+            /*
+             * Make sure this is the last LogController method that is called
+             * because this will only work properly when all other settings (especially the directory)
+             * have been set correctly
+             */
+            SetSaveToFile(saveToFile);
+        }
+
+        /// <summary>
+        /// Set whether logs should be cleared automatically or not
+        /// </summary>
+        /// <param name="autoClear">True if logs should be cleared automatically, otherwise false</param>
+        internal void SetAutoClear(bool autoClear)
+        {
+            _autoClearTimer.Enabled = autoClear;
+        }
+
+        /// <summary>
+        /// Set the automatic log clearing interval
+        /// </summary>
+        /// <param name="clearInterval">The time it takes in milliseconds before logs are cleared</param>
+        internal void SetAutoClearInterval(int clearInterval)
+        {
+            _autoClearTimer.Interval = clearInterval;
+        }
+
+        /// <summary>
+        /// Set whether logs should be saved to a file
+        /// </summary>
+        /// <param name="saveToFile">True if logs should be saved to a file, otherwise false</param>
+        internal void SetSaveToFile(bool saveToFile)
+        {
+            if (_saveToFile)
+            {
+                // Make sure the contents of the log file is written before disabling this function
+                DisposeFileResources();
+            }
+
+            if (saveToFile)
+            {
+                // Generate a new FileStream that allows other handles to access the file
+                _fileStream = new FileStream(_logPath,
+                    FileMode.OpenOrCreate,
+                    FileAccess.Write,
+                    FileShare.ReadWrite);
+                _streamWriter = new StreamWriter(_fileStream) {AutoFlush = true};
+            }
+
+            _saveToFile = saveToFile;
+        }
+
+        /// <summary>
+        /// Set the directory to which logs can be saved
+        /// </summary>
+        /// <param name="saveDirectory">The directory to which logs can be saved</param>
+        internal void SetSaveDirectory(string saveDirectory)
+        {
+            if (!Directory.Exists(saveDirectory)) throw new IOException("The selected log directory (" + saveDirectory + ") does not exist!");
+
+            // Format the directory string
+            if (saveDirectory.Substring(saveDirectory.Length - 1, 1) != "\\")
+            {
+                saveDirectory += "\\";
+            }
+
+            // Generate a new file path for the logs using the starting time of the LogController instance
+            // ReSharper disable once StringLiteralTypo
+            _logPath = saveDirectory + "memplus_" + _startTime.Year + _startTime.Month + _startTime.Day + "_" +
+                       _startTime.Hour + _startTime.Minute + _startTime.Second + ".log";
         }
 
         /// <summary>
@@ -88,6 +216,18 @@ namespace MemPlus.Business.LOG
         {
             _logList.Add(l);
             LogAddedEvent?.Invoke(l);
+            if (_saveToFile) WriteLogToFile(l);
+        }
+
+        /// <summary>
+        /// Write a log to a file
+        /// </summary>
+        /// <param name="l">The log that should be written to a file</param>
+        private void WriteLogToFile(Log l)
+        {
+            _isWriting = true;
+            _streamWriter.WriteLine("[" + l.Time + "]\t" + l.Data);
+            _isWriting = false;
         }
 
         /// <summary>
@@ -200,6 +340,33 @@ namespace MemPlus.Business.LOG
                     LogExporter.ExportExcel(path, exportList);
                     break;
             }
+        }
+
+        /// <summary>
+        /// Dispose of and flush the StreamWriter and FileStream objects that are in use to write logs to the disk
+        /// </summary>
+        private void DisposeFileResources()
+        {
+            while (_isWriting)
+            {
+                // Wait for the StreamWriter to complete
+            }
+
+            // Flush and close the StreamWriter if applicable
+            _streamWriter?.Close();
+
+            // Close the FileStream if applicable
+            _fileStream?.Close();
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Flush and close all used resources
+        /// </summary>
+        public void Dispose()
+        {
+            _autoClearTimer?.Dispose();
+            DisposeFileResources();
         }
     }
 }

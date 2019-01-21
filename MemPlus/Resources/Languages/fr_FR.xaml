@@ -125,4 +125,11 @@
     <system:String x:Key="ResetAllSettings">Tous les paramètres ont été réinitialisés!</system:String>
     <system:String x:Key="FileDoesNotExist">Le fichier sélectionné n'existe pas!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Cette option ne fonctionnera que si le moniteur RAM est activé!</system:String>
+
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">Enregistrement</system:String>
+    <system:String x:Key="AutoClearLogs">Effacer automatiquement les journaux de la mémoire tous les</system:String>
+    <system:String x:Key="LogFile">Enregistrer automatiquement les journaux dans un fichier</system:String>
+    <system:String x:Key="LogFilePath">Chemin du fichier journal:</system:String>
+
 </ResourceDictionary>

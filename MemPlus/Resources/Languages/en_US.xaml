@@ -125,4 +125,10 @@
     <system:String x:Key="FileDoesNotExist">The selected file does not exist!</system:String>
     <system:String x:Key="AutoOptimizeWarning">This option will only work if the RAM Monitor is enabled!</system:String>
 
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">Logging</system:String>
+    <system:String x:Key="AutoClearLogs">Automatically clear logs from memory every</system:String>
+    <system:String x:Key="LogFile">Automatically save logs to file</system:String>
+    <system:String x:Key="LogFilePath">Log file path:</system:String>
+
 </ResourceDictionary>

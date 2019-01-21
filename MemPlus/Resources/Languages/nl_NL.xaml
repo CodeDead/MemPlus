@@ -125,4 +125,10 @@
     <system:String x:Key="FileDoesNotExist">Het geselecteerde bestand bestaat niet!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Deze optie werkt alleen als de RAM Monitor is ingeschakeld!</system:String>
 
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">Logging</system:String>
+    <system:String x:Key="AutoClearLogs">Automatisch logs uit het geheugen wissen elke</system:String>
+    <system:String x:Key="LogFile">Automatisch logs in een bestand opslaan</system:String>
+    <system:String x:Key="LogFilePath">Logbestand pad:</system:String>
+
 </ResourceDictionary>    

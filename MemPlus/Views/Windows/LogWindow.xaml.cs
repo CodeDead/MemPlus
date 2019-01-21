@@ -14,6 +14,7 @@ namespace MemPlus.Views.Windows
     /// <summary>
     /// Interaction logic for LogWindow.xaml
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public partial class LogWindow
     {
         #region Variables
@@ -103,6 +104,7 @@ namespace MemPlus.Views.Windows
         /// Method that is called when all logs of a certain type have been cleared
         /// </summary>
         /// <param name="clearedList">The list of Log objects that were removed</param>
+        // ReSharper disable once InconsistentNaming
         private void LogTypeClearedEvent(List<Log> clearedList)
         {
             Dispatcher.Invoke(() =>
@@ -129,6 +131,7 @@ namespace MemPlus.Views.Windows
         /// Method that is called when a Log object was removed
         /// </summary>
         /// <param name="log">The Log object that was removed</param>
+        // ReSharper disable once InconsistentNaming
         private void LogDeletedEvent(Log log)
         {
             if (log.LogType != _logType) return;
@@ -153,6 +156,7 @@ namespace MemPlus.Views.Windows
         /// Method that is called when a Log object was added
         /// </summary>
         /// <param name="log">The Log object that was added</param>
+        // ReSharper disable once InconsistentNaming
         private void LogAddedEvent(Log log)
         {
             if (log.LogType != _logType) return;

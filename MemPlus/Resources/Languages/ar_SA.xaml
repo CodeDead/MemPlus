@@ -125,4 +125,10 @@
     <system:String x:Key="FileDoesNotExist">الملف المحدد غير موجود.</system:String>
     <system:String x:Key="AutoOptimizeWarning">هذة الخاصية لن تعمل الا اذا كان مراقب الرام منشط.</system:String>
 
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">تسجيل</system:String>
+    <system:String x:Key="AutoClearLogs">مسح السجلات تلقائيا من الذاكرة كل</system:String>
+    <system:String x:Key="LogFile">حفظ سجلات تلقائيا إلى ملف</system:String>
+    <system:String x:Key="LogFilePath">مسار ملف السجل:</system:String>
+
 </ResourceDictionary>

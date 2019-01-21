@@ -1,0 +1,134 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="ClearMemory">Svuota memoria</system:String>
+    <system:String x:Key="Settings">Impostazioni</system:String>
+    <system:String x:Key="Restart">Riavvia</system:String>
+    <system:String x:Key="Exit">Esci</system:String>
+    <system:String x:Key="ExportedAllData">Dati esportati!</system:String>
+
+    <!--UpdateManager-->
+    <system:String x:Key="Cancel">Annulla</system:String>
+    <system:String x:Key="Download">Download</system:String>
+    <system:String x:Key="Information">Informazioni</system:String>
+    <system:String x:Key="RunningLatestVersion">La versione installata è aggiornata!</system:String>
+    <system:String x:Key="UpdateNow">Vuoi aggiornare ora l'applicazione?</system:String>
+
+    <!--Menu-->
+    <system:String x:Key="File">_File</system:String>
+    <system:String x:Key="Export">Esporta</system:String>
+    <system:String x:Key="Logs">Registri</system:String>
+    <system:String x:Key="AllLogs">Tutti i registri</system:String>
+    <system:String x:Key="RamLogs">Registri RAM</system:String>
+    <system:String x:Key="ProcessLogs">Registri elaborazione</system:String>
+    <system:String x:Key="ApplicationLogs">Registri applicazione</system:String>
+    <system:String x:Key="RamAnalyzerData">Dati analisi RAM</system:String>
+    <system:String x:Key="ProcessAnalyzerData">Elabora dati analisi</system:String>
+    <system:String x:Key="Tools">S_trumenti</system:String>
+    <system:String x:Key="RamMonitor">Monitor RAM</system:String>
+    <system:String x:Key="RamAnalyzer">Analisi RAM</system:String>
+    <system:String x:Key="ProcessAnalyzer">Analisi processi</system:String>
+    <system:String x:Key="Clear">Azzera</system:String>
+    <system:String x:Key="Gui">Interfaccia</system:String>
+    <system:String x:Key="AlwaysOnTop">Sempre in primo piano</system:String>
+    <system:String x:Key="DisableWhenInactive">Disabilita quando non attivo</system:String>
+    <system:String x:Key="WindowDraggable">Finestra trascinabile</system:String>
+    <system:String x:Key="DisplayRamStatistics">Visualizza statistiche RAM</system:String>
+    <system:String x:Key="DisplayRamGauge">Visualizza calibro RAM</system:String>
+    <system:String x:Key="Help">_Guida in linea</system:String>
+    <system:String x:Key="CheckForUpdates">Controlla aggiornamenti</system:String>
+    <system:String x:Key="HomePage">Sito web programma</system:String>
+    <system:String x:Key="License">Licenza</system:String>
+    <system:String x:Key="Donate">Dona</system:String>
+    <system:String x:Key="About">Info sul programma</system:String>
+
+    <!--MainWindow-->
+    <system:String x:Key="TotalPhysicalMemory">Memoria fisica totale:</system:String>
+    <system:String x:Key="UsedPhysicalMemory">Memoria fisica usata:</system:String>
+    <system:String x:Key="ClearWorkingSets">Azzerra set lavoro</system:String>
+    <system:String x:Key="ClearFileSystemCache">Svuota cache file system</system:String>
+    <system:String x:Key="AdministrativeRightsWarning">MemPlus potrebbe non funzionare correttamente senza i diritti di amministratore!</system:String>
+    <system:String x:Key="GaugeRamUsage">Uso RAM (%)</system:String>
+    <system:String x:Key="RamUsageIncreased">Sembra che l'uso della RAM sia aumentato di % MB!</system:String>
+    <system:String x:Key="RamUsageSaved">Hai risparmiato % MB di RAM!</system:String>
+
+    <!--AboutWindow-->
+    <system:String x:Key="AboutWindowTitle">MemPlus - Info sul programma</system:String>
+    <system:String x:Key="Close">Chiudi</system:String>
+    <system:String x:Key="AboutInfo">MemPlus è stato creato da DeadLine.\n\nImmagini: small-n-flat di paomedia\nTema: Syncfusion\nVersione: %\n\nCopyright © CodeDead 2018</system:String>
+
+    <!--LogWindow-->
+    <system:String x:Key="LogWindowTitle">MemPlus - Registri</system:String>
+    <system:String x:Key="Copy">Copia</system:String>
+    <system:String x:Key="Delete">Elimina</system:String>
+    <system:String x:Key="Date">Data</system:String>
+    <system:String x:Key="Content">Contenuto</system:String>
+    <system:String x:Key="ClearLogs">Azzera registri</system:String>
+
+    <!--ProcessAnalyzerWindow-->
+    <system:String x:Key="ProcessAnalyzerWindowTitle">MemPlus - Analisi processi</system:String>
+    <system:String x:Key="ClearWorkingSet">Azzera set di lavoro</system:String>
+    <system:String x:Key="KillProcess">Termina</system:String>
+    <system:String x:Key="Refresh">Aggiorna</system:String>
+    <system:String x:Key="ProcessId">ID processo</system:String>
+    <system:String x:Key="ProcessName">Nome processo</system:String>
+    <system:String x:Key="ProcessLocation">Percorso processo</system:String>
+    <system:String x:Key="MemoryUsage">Uso memoria</system:String>
+
+    <!--RamAnalyzerWindow-->
+    <system:String x:Key="RamAnalyzerWindowTitle">MemPlus - Analisi RAM</system:String>
+    <system:String x:Key="CouldNotRetrieveInformation">Impossibile recuperare le informazioni analisi RAM!</system:String>
+
+    <!--SettingsWindow-->
+    <system:String x:Key="SettingsWindowTitle">MemPlus - Impostazioni</system:String>
+    <system:String x:Key="General">Generale</system:String>
+    <system:String x:Key="AutomaticUpdates">Aggiornamenti automatici</system:String>
+    <system:String x:Key="AutoStartMemPlus">Esegui MemPlus all'avvio di Windows</system:String>
+    <system:String x:Key="StartMinimized">Avvia MemPlus minimizzato</system:String>
+    <system:String x:Key="HideOnStart">Nascondi MemPlus all'avvio</system:String>
+    <system:String x:Key="HideInsteadOfClose">Nascondi MemPlus alla chiusura</system:String>
+    <system:String x:Key="AutoRunAsAdministrator">Esegui automaticamente come amministratore</system:String>
+    <system:String x:Key="Topmost">Sempre in primo piano</system:String>
+    <system:String x:Key="DisplayNotifyIcon">Visualizza notifiche</system:String>
+    <system:String x:Key="DisplayAdminWarning">Visualizza avviso diritti amministratore</system:String>
+    <system:String x:Key="DisplayRamStatisticsNotifyIcon">Visualizza statiche RAM nell'icona notifica</system:String>
+    <system:String x:Key="DisplayRamStatisticsWindow">Visualizza statistiche RAM nella finestra</system:String>
+    <system:String x:Key="Language">Lingua</system:String>
+    <system:String x:Key="LanguageSetting">Lingua:</system:String>
+    <system:String x:Key="UpdateInterval">Intervallo aggiornamento:</system:String>
+    <system:String x:Key="Milliseconds">millisecondi</system:String>
+    <system:String x:Key="Seconds">secondi</system:String>
+    <system:String x:Key="Minutes">minuti</system:String>
+    <system:String x:Key="Hours">ore</system:String>
+    <system:String x:Key="RamOptimizer">Ottimizzazione RAM</system:String>
+    <system:String x:Key="OptimizeWhenExceeds">Ottimizza quando ececde uso RAM</system:String>
+    <system:String x:Key="OptimizeAfter">Ottimizza dopo</system:String>
+    <system:String x:Key="Options">Opzioni</system:String>
+    <system:String x:Key="ClearMemoryOnStartup">Svuota memoria ad avvio applicazione</system:String>
+    <system:String x:Key="ClearStandByCache">Svuota cache standby</system:String>
+    <system:String x:Key="ClearClipboard">Svuota dati Appunti</system:String>
+    <system:String x:Key="Hotkey">Tasti rapidi:</system:String>
+    <system:String x:Key="WorkingSetExclusions">Esclusioni set lavoro</system:String>
+    <system:String x:Key="Add">Aggiungi</system:String>
+    <system:String x:Key="Theme">Tema</system:String>
+    <system:String x:Key="Style">Stile:</system:String>
+    <system:String x:Key="MetroBrushString">Pennello:</system:String>
+    <system:String x:Key="BorderThickness">Spessore bordo:</system:String>
+    <system:String x:Key="WindowOpacity">Opacità finestra:</system:String>
+    <system:String x:Key="ResizeBorder">Ridimensiona bordo:</system:String>
+    <system:String x:Key="WarningLevel">Livello avviso:</system:String>
+    <system:String x:Key="Reset">Ripristina</system:String>
+    <system:String x:Key="Save">Salva</system:String>
+    <system:String x:Key="SavedAllSettings">Tutte le impostazioni sono state salvate!</system:String>
+    <system:String x:Key="ResetAllSettings">Tutte le impostazioni sono state ripristinate!</system:String>
+    <system:String x:Key="FileDoesNotExist">Il file selezionato non esiste!</system:String>
+    <system:String x:Key="AutoOptimizeWarning">Questa opzione funziona solo se il monitor RAM è abilitato!</system:String>
+
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">Registrazione</system:String>
+    <system:String x:Key="AutoClearLogs">Cancella automaticamente i log dalla memoria ogni</system:String>
+    <system:String x:Key="LogFile">Salva automaticamente i registri nel file</system:String>
+    <system:String x:Key="LogFilePath">Percorso del file di registro:</system:String>
+
+</ResourceDictionary>

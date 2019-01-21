@@ -78,12 +78,66 @@
                                     <ComboBoxItem Content="Español" />
                                     <ComboBoxItem Content="Français" />
                                     <ComboBoxItem Content="Galego" />
+                                    <ComboBoxItem Content="Italiano" />
                                     <ComboBoxItem Content="Nederlands (België)" />
                                     <ComboBoxItem Content="Nederlands (Nederland)" />
                                 </ComboBox.Items>
                             </ComboBox>
                         </Grid>
                     </GroupBox>
+                </Grid>
+
+            </syncfusion:TabItemExt>
+
+            <syncfusion:TabItemExt
+                Header="{DynamicResource LogSettings}"
+                Image="../../Resources/Images/log.png"
+                ImageWidth="16" ImageHeight="16">
+
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox x:Name="ChbAutoClearLogs" Margin="3" Content="{DynamicResource AutoClearLogs}" />
+                        <syncfusion:IntegerTextBox x:Name="ItbAutoClearLogsInterval" Margin="3" Grid.Row="0" Grid.Column="1" MinValue="1" />
+
+                        <ComboBox x:Name="CboLogClearInterval" Grid.Column="2" Margin="3" SelectedIndex="0">
+                            <ComboBoxItem Content="{DynamicResource Milliseconds}" />
+                            <ComboBoxItem Content="{DynamicResource Seconds}" />
+                            <ComboBoxItem Content="{DynamicResource Minutes}" />
+                            <ComboBoxItem Content="{DynamicResource Hours}" />
+                        </ComboBox>
+
+                    </Grid>
+
+                    <CheckBox x:Name="ChbSaveLogsToFile" Margin="3" Grid.Row="1" Content="{DynamicResource LogFile}" />
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label Margin="3" Content="{DynamicResource LogFilePath}" Grid.Row="1" Grid.Column="0" />
+                        <TextBox x:Name="TxtLogFilePath" Margin="3" Grid.Row="1" Grid.Column="1" MaxWidth="300" MouseDoubleClick="BtnSelectLogFilePath" />
+                        <Button Margin="3" MinWidth="40" Grid.Row="1" Grid.Column="2" Content="..." Click="BtnSelectLogFilePath" />
+                    </Grid>
+
                 </Grid>
 
             </syncfusion:TabItemExt>

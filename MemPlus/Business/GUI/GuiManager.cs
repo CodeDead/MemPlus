@@ -63,9 +63,12 @@ namespace MemPlus.Business.GUI
                         langUri = new Uri("..\\Resources\\Languages\\gl_ES.xaml", UriKind.Relative);
                         break;
                     case 5:
-                        langUri = new Uri("..\\Resources\\Languages\\nl_BE.xaml", UriKind.Relative);
+                        langUri = new Uri("..\\Resources\\Languages\\it_IT.xaml", UriKind.Relative);
                         break;
                     case 6:
+                        langUri = new Uri("..\\Resources\\Languages\\nl_BE.xaml", UriKind.Relative);
+                        break;
+                    case 7:
                         langUri = new Uri("..\\Resources\\Languages\\nl_NL.xaml", UriKind.Relative);
                         break;
                 }

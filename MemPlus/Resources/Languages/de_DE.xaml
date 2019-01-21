@@ -125,4 +125,10 @@
     <system:String x:Key="FileDoesNotExist">Die ausgewählte Datei existiert nicht!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Diese Option funktioniert nur wenn der RAM Überwacher aktiviert ist!</system:String>
 
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">Protokollierung</system:String>
+    <system:String x:Key="AutoClearLogs">Alle Protokolle automatisch aus dem Speicher löschen</system:String>
+    <system:String x:Key="LogFile">Protokolle automatisch in Datei speichern</system:String>
+    <system:String x:Key="LogFilePath">Protokolldateipfad:</system:String>
+
 </ResourceDictionary>

@@ -125,4 +125,10 @@
     <system:String x:Key="FileDoesNotExist">¡El fichero seleccionado no existe!</system:String>
     <system:String x:Key="AutoOptimizeWarning">¡Esta opción solo funciona si el Monitor de RAM está activado!</system:String>
 
+    <!-- Automatic translation - Needs translation -->
+    <system:String x:Key="LogSettings">El registro</system:String>
+    <system:String x:Key="AutoClearLogs">Borrar automáticamente los registros de la memoria cada</system:String>
+    <system:String x:Key="LogFile">Guardar automáticamente los registros en el archivo</system:String>
+    <system:String x:Key="LogFilePath">Ruta del archivo de registro:</system:String>
+
 </ResourceDictionary>
