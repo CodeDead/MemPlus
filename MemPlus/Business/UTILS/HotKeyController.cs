@@ -9,7 +9,7 @@ namespace MemPlus.Business.UTILS
 {
     /// <inheritdoc />
     /// <summary>
-    /// Internal class used for controlling the registering and unregistering of hotkeys
+    /// Internal class used for controlling the registering and de-registering of hotkeys
     /// </summary>
     internal sealed class HotKeyController : IDisposable
     {
@@ -22,6 +22,7 @@ namespace MemPlus.Business.UTILS
         /// The WindowInteropHelper that can be used to retrieve the handle of a Window
         /// </summary>
         private readonly WindowInteropHelper _helper;
+        // ReSharper disable once CommentTypo
         /// <summary>
         /// The HwndSource that can be used to retrieve messages
         /// </summary>

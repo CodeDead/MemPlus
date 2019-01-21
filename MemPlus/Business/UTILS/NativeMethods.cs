@@ -2,6 +2,9 @@
 using System.Runtime.InteropServices;
 using MemPlus.Business.RAM;
 
+// ReSharper disable StringLiteralTypo
+// ReSharper disable CommentTypo
+// ReSharper disable IdentifierTypo
 namespace MemPlus.Business.UTILS
 {
     /// <summary>

@@ -56,7 +56,7 @@
     <!--AboutWindow-->
     <system:String x:Key="AboutWindowTitle">ميم بلس - نبذة</system:String>
     <system:String x:Key="Close">اغلق</system:String>
-    <system:String x:Key="AboutInfo">ميم بلس تم عمله بواسطة ديدلاين.\n\nالصور: صغير ومسطح بواسطة باوميديا\nالمظهر: سينفيوجن\nالاصدار: %\n\nحقوق النشر © كودديد 2018</system:String>
+    <system:String x:Key="AboutInfo">ميم بلس تم عمله بواسطة ديدلاين.\n\nالصور: صغير ومسطح بواسطة باوميديا\nالمظهر: سينفيوجن\nالاصدار: %\n\nحقوق النشر © كودديد 2019</system:String>
 
     <!--LogWindow-->
     <system:String x:Key="LogWindowTitle">ميم بلس - السجلات</system:String>

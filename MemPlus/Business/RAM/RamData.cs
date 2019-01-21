@@ -1,7 +1,7 @@
 ﻿namespace MemPlus.Business.RAM
 {
     /// <summary>
-    /// Class for displaying RAM information inside a treeview
+    /// Class for displaying RAM information inside a TreeView component
     /// </summary>
     internal sealed class RamData
     {

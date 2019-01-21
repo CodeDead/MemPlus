@@ -9,6 +9,7 @@ namespace MemPlus.Business.EXPORT
     /// <summary>
     /// Static class containing the logic for exporting logs
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     internal static class LogExporter
     {
         /// <summary>

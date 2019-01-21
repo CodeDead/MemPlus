@@ -1,5 +1,6 @@
 ﻿using System;
 
+// ReSharper disable InconsistentNaming
 namespace MemPlus.Business.LOG
 {
     /// <summary>

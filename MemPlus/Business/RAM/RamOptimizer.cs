@@ -50,6 +50,7 @@ namespace MemPlus.Business.RAM
     internal struct TokenPrivileges
     {
         internal int Count;
+        // ReSharper disable once IdentifierTypo
         internal long Luid;
         internal int Attr;
     }
@@ -70,17 +71,17 @@ namespace MemPlus.Business.RAM
     {
         #region Variables
         /// <summary>
-        /// Constant int used for TokenPrivileges Atrr variable
+        /// Constant int used for TokenPrivileges Attribute variable
         /// </summary>
-        private const int SePrivilegeEnabled = 2;
+        private const int PrivilegeEnabled = 2;
         /// <summary>
         /// Adjust memory quotas for a process
         /// </summary>
-        private const string SeIncreaseQuotaName = "SeIncreaseQuotaPrivilege";
+        private const string IncreaseQuotaName = "SeIncreaseQuotaPrivilege";
         /// <summary>
         /// Profile single process
         /// </summary>
-        private const string SeProfileSingleProcessName = "SeProfileSingleProcessPrivilege";
+        private const string ProfileSingleProcessName = "SeProfileSingleProcessPrivilege";
         /// <summary>
         /// Memory purge standby list
         /// </summary>
@@ -103,7 +104,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Clear the working sets of all processes that are available to the application
         /// </summary>
-        /// <param name="processExceptions">A list of processes that should be excluded from memory optimisation</param>
+        /// <param name="processExceptions">A list of processes that should be excluded from memory optimization</param>
         internal void EmptyWorkingSetFunction(List<string> processExceptions)
         {
             _logController.AddLog(new RamLog("Emptying working set"));
@@ -161,7 +162,7 @@ namespace MemPlus.Business.RAM
             try
             {
                 // Check if privilege can be increased
-                if (SetIncreasePrivilege(SeIncreaseQuotaName))
+                if (SetIncreasePrivilege(IncreaseQuotaName))
                 {
                     _logController.AddLog(new RamLog("Privileges have successfully been increased"));
 
@@ -211,7 +212,7 @@ namespace MemPlus.Business.RAM
 
                 // Clear the standby cache if we have to and if we can also increase the privileges
                 // If we can't increase the privileges, it's pointless to even try
-                if (!clearStandbyCache || !SetIncreasePrivilege(SeProfileSingleProcessName)) return;
+                if (!clearStandbyCache || !SetIncreasePrivilege(ProfileSingleProcessName)) return;
                 {
                     _logController.AddLog(new RamLog("Clearing standby cache"));
 
@@ -244,7 +245,7 @@ namespace MemPlus.Business.RAM
                 TokenPrivileges newst;
                 newst.Count = 1;
                 newst.Luid = 0L;
-                newst.Attr = SePrivilegeEnabled;
+                newst.Attr = PrivilegeEnabled;
 
                 _logController.AddLog(new RamLog("Looking up privilage value"));
                 // If we can't look up the privilege value, we can't function properly

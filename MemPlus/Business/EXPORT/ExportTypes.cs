@@ -6,7 +6,7 @@
     internal sealed class ExportTypes
     {
         /// <summary>
-        /// Enumaration containing all the different export types
+        /// Enumeration containing all the different export types
         /// </summary>
         internal enum ExportType
         {

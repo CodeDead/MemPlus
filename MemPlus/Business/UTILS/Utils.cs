@@ -151,7 +151,7 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         /// <param name="logType">The LogType that should be exported (can be null to export all logs)</param>
         /// <param name="logController">The LogController object that can be used to export logs</param>
-        /// <returns>True if the operation complted successfully, otherwise false</returns>
+        /// <returns>True if the operation completed successfully, otherwise false</returns>
         internal static bool ExportLogs(LogType? logType, LogController logController)
         {
             if (logType != null)
@@ -212,7 +212,7 @@ namespace MemPlus.Business.UTILS
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (sfd.FilterIndex)
                 {
-                    //Filterindex starts at 1
+                    // Filter index starts at 1
                     case 1:
                         ProcessDetailExporter.ExportText(sfd.FileName, await GetProcessDetails(logController));
                         break;

@@ -9,6 +9,7 @@ namespace MemPlus.Business.EXPORT
     /// <summary>
     /// Static class that can be used to export ProcessDetail information
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     internal static class ProcessDetailExporter
     {
         /// <summary>

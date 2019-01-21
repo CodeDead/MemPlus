@@ -37,15 +37,15 @@ namespace MemPlus.Business.RAM
         /// </summary>
         private readonly ComputerInfo _info;
         /// <summary>
-        /// The list of processes that should be excluded from memory optimisation
+        /// The list of processes that should be excluded from memory optimization
         /// </summary>
         private List<string> _processExceptionList;
         /// <summary>
-        /// An integer value representative of the percentage of RAM usage that should be reached before RAM optimisation should be called
+        /// An integer value representative of the percentage of RAM usage that should be reached before RAM optimization should be called
         /// </summary>
         private double _autoOptimizeRamThreshold;
         /// <summary>
-        /// The last time automatic RAM optimisation was called in terms of RAM percentage threshold settings
+        /// The last time automatic RAM optimization was called in terms of RAM percentage threshold settings
         /// </summary>
         private DateTime _lastAutoOptimizeTime;
         #endregion
@@ -64,7 +64,7 @@ namespace MemPlus.Business.RAM
         /// </summary>
         internal double RamTotal { get; private set; }
         /// <summary>
-        /// Property containing how much RAM was saved during the last optimisation
+        /// Property containing how much RAM was saved during the last optimization
         /// </summary>
         internal double RamSavings { get; private set; }
         /// <summary>
@@ -76,15 +76,15 @@ namespace MemPlus.Business.RAM
         /// </summary>
         internal bool EmptyWorkingSets { get; set; }
         /// <summary>
-        /// Property displaying whether the FileSystem cache should be cleared or not during memory optimisation
+        /// Property displaying whether the FileSystem cache should be cleared or not during memory optimization
         /// </summary>
         internal bool ClearFileSystemCache { get; set; }
         /// <summary>
-        /// Property displaying whether the standby cache should be cleared or not during memory optimisation
+        /// Property displaying whether the standby cache should be cleared or not during memory optimization
         /// </summary>
         internal bool ClearStandbyCache { get; set; }
         /// <summary>
-        /// Property displaying whether automatic RAM optimisation should occur after a certain RAM usage percentage was reached
+        /// Property displaying whether automatic RAM optimization should occur after a certain RAM usage percentage was reached
         /// </summary>
         internal bool AutoOptimizePercentage { get; set; }
         /// <summary>
@@ -101,7 +101,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Event that is called when RAM clearing has occurred
         /// </summary>
-        private event RamClearingCompleted RamClearingCompletedEvcent;
+        private event RamClearingCompleted RamClearingCompletedEvent;
         /// <summary>
         /// Delegate void that indicates that a GUI update should occur when called
         /// </summary>
@@ -116,17 +116,17 @@ namespace MemPlus.Business.RAM
         /// Initialize a new RamController object
         /// </summary>
         /// <param name="updateGuiStatisticsEvent">An event to indicate that a GUI update should occur</param>
-        /// <param name="ramClearingCompletedEvcent">An event to indicate that the RAM has been cleared</param>
+        /// <param name="ramClearingCompletedEvent">An event to indicate that the RAM has been cleared</param>
         /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(UpdateGuiStatistics updateGuiStatisticsEvent, RamClearingCompleted ramClearingCompletedEvcent, int ramUpdateTimerInterval, LogController logController)
+        internal RamController(UpdateGuiStatistics updateGuiStatisticsEvent, RamClearingCompleted ramClearingCompletedEvent, int ramUpdateTimerInterval, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
 
             if (ramUpdateTimerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
             UpdateGuiStatisticsEvent = updateGuiStatisticsEvent ?? throw new ArgumentNullException(nameof(updateGuiStatisticsEvent));
-            RamClearingCompletedEvcent = ramClearingCompletedEvcent ?? throw new ArgumentNullException(nameof(ramClearingCompletedEvcent));
+            RamClearingCompletedEvent = ramClearingCompletedEvent ?? throw new ArgumentNullException(nameof(ramClearingCompletedEvent));
 
             RamSavings = 0;
 
@@ -146,7 +146,7 @@ namespace MemPlus.Business.RAM
         }
 
         /// <summary>
-        /// Set the threshold percentage for automatic RAM optimisation
+        /// Set the threshold percentage for automatic RAM optimization
         /// </summary>
         /// <param name="threshold">The percentage threshold</param>
         internal void SetAutoOptimizeThreshold(double threshold)
@@ -156,10 +156,10 @@ namespace MemPlus.Business.RAM
         }
 
         /// <summary>
-        /// Enable or disable automatic timed RAM optimisation
+        /// Enable or disable automatic timed RAM optimization
         /// </summary>
-        /// <param name="enabled">A boolean to indicate whether automatic RAM optimisation should occur or not</param>
-        /// <param name="interval">The interval for automatic RAM optimisation</param>
+        /// <param name="enabled">A boolean to indicate whether automatic RAM optimization should occur or not</param>
+        /// <param name="interval">The interval for automatic RAM optimization</param>
         internal void AutoOptimizeTimed(bool enabled, int interval)
         {
             if (_ramAutoOptimizeTimer == null)
@@ -183,9 +183,9 @@ namespace MemPlus.Business.RAM
         }
 
         /// <summary>
-        /// Set the list of processes that should excluded from RAM optimisation
+        /// Set the list of processes that should excluded from RAM optimization
         /// </summary>
-        /// <param name="processExceptionList">The list of processes that should be excluded from RAM optimisation</param>
+        /// <param name="processExceptionList">The list of processes that should be excluded from RAM optimization</param>
         internal void SetProcessExceptionList(List<string> processExceptionList)
         {
             _processExceptionList = processExceptionList;
@@ -194,7 +194,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Set the interval for the RAM Monitor updates
         /// </summary>
-        /// <param name="interval">The amount of miliseconds before an update should occur</param>
+        /// <param name="interval">The amount of milliseconds before an update should occur</param>
         internal void SetRamUpdateTimerInterval(int interval)
         {
             _ramTimer.Interval = interval;
@@ -284,7 +284,7 @@ namespace MemPlus.Business.RAM
                 Clipboard.Clear();
             }
 
-            RamClearingCompletedEvcent.Invoke();
+            RamClearingCompletedEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
@@ -315,7 +315,7 @@ namespace MemPlus.Business.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
-            RamClearingCompletedEvcent.Invoke();
+            RamClearingCompletedEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing process working sets"));
         }
@@ -344,7 +344,7 @@ namespace MemPlus.Business.RAM
                 RamSavings = oldUsage - newUsage;
             });
 
-            RamClearingCompletedEvcent.Invoke();
+            RamClearingCompletedEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing FileSystem cache"));
         }
@@ -358,10 +358,10 @@ namespace MemPlus.Business.RAM
 
             double total = Convert.ToDouble(_info.TotalPhysicalMemory);
             double usage = total - Convert.ToDouble(_info.AvailablePhysicalMemory);
-            double perc = usage / total * 100;
+            double percentage = usage / total * 100;
 
             RamUsage = usage;
-            RamUsagePercentage = perc;
+            RamUsagePercentage = percentage;
             RamTotal = total;
 
             if (RamUsagePercentage >= _autoOptimizeRamThreshold && AutoOptimizePercentage)

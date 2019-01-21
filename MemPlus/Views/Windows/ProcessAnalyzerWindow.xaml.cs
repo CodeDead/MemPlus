@@ -13,6 +13,7 @@ namespace MemPlus.Views.Windows
     /// <summary>
     /// Interaction logic for ProcessAnalyzerWindow.xaml
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public partial class ProcessAnalyzerWindow
     {
         #region Variables
