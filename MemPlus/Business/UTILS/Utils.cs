@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Management;
 using System.Reflection;
 using System.Security.Principal;
@@ -282,6 +283,27 @@ namespace MemPlus.Business.UTILS
         internal static bool AutoStartUp()
         {
             return Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() == Assembly.GetExecutingAssembly().Location;
+        }
+
+        /// <summary>
+        /// Get the process for a specific file, if applicable
+        /// </summary>
+        /// <param name="file">The file for which the Process object should be retrieved</param>
+        /// <returns></returns>
+        internal static Process GetProcessForFile(string file)
+        {
+            foreach (Process p in Process.GetProcesses())
+            {
+                try
+                {
+                    if (p.MainModule.FileName == file) return p;
+                }
+                catch (Exception)
+                {
+                    // ignored
+                }
+            }
+            return null;
         }
     }
 }

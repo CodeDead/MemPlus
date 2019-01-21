@@ -106,6 +106,7 @@
     <system:String x:Key="OptimizeAfter">حسِّن الرام بعد</system:String>
     <system:String x:Key="Options">الخصائص</system:String>
     <system:String x:Key="ClearMemoryOnStartup">تفرغة الذاكرة عند بدء البرنامج</system:String>
+    <system:String x:Key="DragDropClear">مسح الذاكرة على السحب والإفلات</system:String>
     <system:String x:Key="ClearStandByCache">تفرغة الذاكرة الخبيئة المعلقة</system:String>
     <system:String x:Key="ClearClipboard">تفرغة بيانات الحافظة</system:String>
     <system:String x:Key="Hotkey">اختصار:</system:String>

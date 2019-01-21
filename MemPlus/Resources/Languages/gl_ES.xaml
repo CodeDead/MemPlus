@@ -106,6 +106,7 @@
     <system:String x:Key="OptimizeAfter">Optimizar após</system:String>
     <system:String x:Key="Options">Opcións</system:String>
     <system:String x:Key="ClearMemoryOnStartup">Limpar a memoria ao iniciar o programa</system:String>
+    <system:String x:Key="DragDropClear">Limpar a memoria ao arrastrar e soltar</system:String>
     <system:String x:Key="ClearStandByCache">Limpar a memoria en suspensión</system:String>
     <system:String x:Key="ClearClipboard">Limpar os datos do portarretallos</system:String>
     <system:String x:Key="Hotkey">Atallo de teclado:</system:String>

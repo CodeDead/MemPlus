@@ -107,6 +107,7 @@
     <system:String x:Key="OptimizeAfter">Optimiser après</system:String>
     <system:String x:Key="Options">Options</system:String>
     <system:String x:Key="ClearMemoryOnStartup">Effacer la mémoire au démarrage de l'application</system:String>
+    <system:String x:Key="DragDropClear">Effacer la mémoire par glisser-déposer</system:String>
     <system:String x:Key="ClearStandByCache">Effacer le cache de secours</system:String>
     <system:String x:Key="ClearClipboard">Effacer les données du presse-papiers</system:String>
     <system:String x:Key="Hotkey">Touche de raccourci:</system:String>

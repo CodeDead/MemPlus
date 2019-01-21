@@ -11,7 +11,7 @@
     TitleTextAlignment="Center"
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
-    Title="{DynamicResource SettingsWindowTitle}" Height="400" Width="550"
+    Title="{DynamicResource SettingsWindowTitle}" Height="450" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -218,18 +218,20 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbStartupMemoryClear" Content="{DynamicResource ClearMemoryOnStartup}" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="0" x:Name="ChbEmptyWorkingSet" Content="{DynamicResource ClearWorkingSets}" Margin="3" />
-                            <CheckBox Grid.Row="1" Grid.Column="1" x:Name="ChbFileSystemCache" Content="{DynamicResource ClearFileSystemCache}" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbStandByCache" Content="{DynamicResource ClearStandByCache}" Margin="3" />
-                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbClearClipboard" Content="{DynamicResource ClearClipboard}" Margin="3" />
-                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbHotKey" Content="{DynamicResource Hotkey}" Margin="3" />
-                            <TextBox Grid.Row="3" Grid.Column="1" x:Name="TxtHotKey" Margin="3" HorizontalAlignment="Stretch" PreviewKeyDown="TxtHotKey_PreviewKeyDown"/>
+                            <CheckBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="ChbDragDropClear" Content="{DynamicResource DragDropClear}" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="0" x:Name="ChbEmptyWorkingSet" Content="{DynamicResource ClearWorkingSets}" Margin="3" />
+                            <CheckBox Grid.Row="2" Grid.Column="1" x:Name="ChbFileSystemCache" Content="{DynamicResource ClearFileSystemCache}" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="0" x:Name="ChbStandByCache" Content="{DynamicResource ClearStandByCache}" Margin="3" />
+                            <CheckBox Grid.Row="3" Grid.Column="1" x:Name="ChbClearClipboard" Content="{DynamicResource ClearClipboard}" Margin="3" />
+                            <CheckBox Grid.Row="4" Grid.Column="0" x:Name="ChbHotKey" Content="{DynamicResource Hotkey}" Margin="3" />
+                            <TextBox Grid.Row="4" Grid.Column="1" x:Name="TxtHotKey" Margin="3" HorizontalAlignment="Stretch" PreviewKeyDown="TxtHotKey_PreviewKeyDown"/>
                         </Grid>
                     </GroupBox>
                     <GroupBox Grid.Row="1" Header="{DynamicResource WorkingSetExclusions}" MinWidth="250" Margin="3">

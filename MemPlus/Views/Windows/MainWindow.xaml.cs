@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
@@ -14,6 +15,7 @@ using MemPlus.Business.UTILS;
 using Syncfusion.UI.Xaml.Gauges;
 using UpdateManager.Classes;
 using Application = System.Windows.Application;
+using DataFormats = System.Windows.DataFormats;
 using MessageBox = System.Windows.MessageBox;
 
 namespace MemPlus.Views.Windows
@@ -267,6 +269,17 @@ namespace MemPlus.Views.Windows
                 if (Properties.Settings.Default.RamMonitor)
                 {
                     _ramController.EnableMonitor();
+                }
+
+                if (Properties.Settings.Default.DragDropClear)
+                {
+                    AllowDrop = true;
+                    Drop += MainWindow_Drop;
+                }
+                else
+                {
+                    AllowDrop = false;
+                    Drop -= MainWindow_Drop;
                 }
 
                 TbiIcon.Visibility = !Properties.Settings.Default.NotifyIcon ? Visibility.Hidden : Visibility.Visible;
@@ -602,7 +615,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Opening CodeDead website"));
             try
             {
-                System.Diagnostics.Process.Start("https://codedead.com/");
+                Process.Start("https://codedead.com/");
             }
             catch (Exception ex)
             {
@@ -621,7 +634,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Opening donation website"));
             try
             {
-                System.Diagnostics.Process.Start("https://codedead.com/?page_id=302");
+                Process.Start("https://codedead.com/?page_id=302");
             }
             catch (Exception ex)
             {
@@ -855,7 +868,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Opening MemPlus license file"));
             try
             {
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\gpl.pdf");
             }
             catch (Exception ex)
             {
@@ -874,7 +887,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Opening MemPlus help file"));
             try
             {
-                System.Diagnostics.Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\help.pdf");
+                Process.Start(AppDomain.CurrentDomain.BaseDirectory + "\\help.pdf");
             }
             catch (Exception ex)
             {
@@ -950,7 +963,7 @@ namespace MemPlus.Views.Windows
         {
             try
             {
-                System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                Process.Start(Application.ResourceAssembly.Location);
                 Application.Current.Shutdown();
             }
             catch (Exception ex)
@@ -1043,6 +1056,37 @@ namespace MemPlus.Views.Windows
                 TbiIcon?.Dispose();
                 // Dispose of the LogController object gracefully
                 _logController.Dispose();
+            }
+        }
+
+        /// <summary>
+        /// Method that is called when a file is dropped on the MainWindow object
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The System.Windows.DragEventArgs</param>
+        private void MainWindow_Drop(object sender, System.Windows.DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files == null) return;
+            if (!System.IO.File.Exists(files[0])) return;
+
+            foreach (string s in files)
+            {
+                Process process = Utils.GetProcessForFile(s);
+                try
+                {
+                    if (process == null) continue;
+
+                    _logController.AddLog(new RamLog("Emptying working set for process: " + process.ProcessName));
+                    NativeMethods.EmptyWorkingSet(process.Handle);
+                    _logController.AddLog(new RamLog("Successfully emptied working set for process " + process.ProcessName));
+                }
+                catch (Exception ex)
+                {
+                    _logController.AddLog(new ApplicationLog(ex.Message));
+                    MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
     }

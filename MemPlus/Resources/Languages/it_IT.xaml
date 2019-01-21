@@ -106,6 +106,7 @@
     <system:String x:Key="OptimizeAfter">Ottimizza dopo</system:String>
     <system:String x:Key="Options">Opzioni</system:String>
     <system:String x:Key="ClearMemoryOnStartup">Svuota memoria ad avvio applicazione</system:String>
+    <system:String x:Key="DragDropClear">Cancella memoria su trascinamento</system:String>
     <system:String x:Key="ClearStandByCache">Svuota cache standby</system:String>
     <system:String x:Key="ClearClipboard">Svuota dati Appunti</system:String>
     <system:String x:Key="Hotkey">Tasti rapidi:</system:String>

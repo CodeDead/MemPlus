@@ -106,6 +106,7 @@
     <system:String x:Key="OptimizeAfter">Optimizar después de</system:String>
     <system:String x:Key="Options">Opciones</system:String>
     <system:String x:Key="ClearMemoryOnStartup">Limpiar la memoria al iniciar la aplicación</system:String>
+    <system:String x:Key="DragDropClear">Borrar memoria al arrastrar y soltar</system:String>
     <system:String x:Key="ClearStandByCache">Limpiar la caché en suspensión</system:String>
     <system:String x:Key="ClearClipboard">Limpiar los datos del portapapeles</system:String>
     <system:String x:Key="Hotkey">Atajo de teclado:</system:String>

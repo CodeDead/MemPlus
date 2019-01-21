@@ -106,6 +106,7 @@
     <system:String x:Key="OptimizeAfter">Optimiere danach</system:String>
     <system:String x:Key="Options">Optionen</system:String>
     <system:String x:Key="ClearMemoryOnStartup">Lösche Speicher beim Starten der Anwendung</system:String>
+    <system:String x:Key="DragDropClear">Löschen Sie den Speicher beim Ziehen und Ablegen</system:String>
     <system:String x:Key="ClearStandByCache">Lösche Ruhezustand cache</system:String>
     <system:String x:Key="ClearClipboard">Lösche Zwischenablagedaten</system:String>
     <system:String x:Key="Hotkey">Hotkey:</system:String>
@@ -127,7 +128,7 @@
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Protokollierung</system:String>
-    <system:String x:Key="AutoClearLogs">Alle Protokolle automatisch aus dem Speicher löschen</system:String>
+    <system:String x:Key="AutoClearLogs">Protokolle automatisch aus dem Speicher löschen jede</system:String>
     <system:String x:Key="LogFile">Protokolle automatisch in Datei speichern</system:String>
     <system:String x:Key="LogFilePath">Protokolldateipfad:</system:String>
 

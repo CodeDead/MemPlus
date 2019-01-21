@@ -84,7 +84,7 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                //General
+                // General
                 ChbAutoStart.IsChecked = Utils.AutoStartUp();
                 ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
                 ChbStartHidden.IsChecked = Properties.Settings.Default.HideOnStart;
@@ -122,7 +122,7 @@ namespace MemPlus.Views.Windows
 
                 CboLanguage.SelectedIndex = Properties.Settings.Default.SelectedLanguage;
 
-                //Logging
+                // Logging
                 ChbAutoClearLogs.IsChecked = Properties.Settings.Default.LogClearAuto;
                 int clearInterval = Properties.Settings.Default.LogClearInterval;
                 switch (Properties.Settings.Default.LogClearIntervalIndex)
@@ -145,7 +145,7 @@ namespace MemPlus.Views.Windows
                 ChbSaveLogsToFile.IsChecked = Properties.Settings.Default.SaveLogsToFile;
                 TxtLogFilePath.Text = Properties.Settings.Default.LogPath;
 
-                //RAM Monitor
+                // RAM Monitor
                 ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
                 ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
 
@@ -184,6 +184,7 @@ namespace MemPlus.Views.Windows
                 }
 
                 ChbStartupMemoryClear.IsChecked = Properties.Settings.Default.StartupMemoryClear;
+                ChbDragDropClear.IsChecked = Properties.Settings.Default.DragDropClear;
                 ChbEmptyWorkingSet.IsChecked = Properties.Settings.Default.EmptyWorkingSet;
                 ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
                 ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
@@ -243,7 +244,7 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Saving properties"));
             try
             {
-                //General
+                // General
                 if (ChbAutoStart.IsChecked != null && ChbAutoStart.IsChecked.Value)
                 {
                     Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", System.Reflection.Assembly.GetExecutingAssembly().Location);
@@ -272,7 +273,7 @@ namespace MemPlus.Views.Windows
                 if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
                 Properties.Settings.Default.SelectedLanguage = CboLanguage.SelectedIndex;
 
-                //Logging
+                // Logging
                 if (ChbAutoClearLogs.IsChecked != null)
                 {
                     Properties.Settings.Default.LogClearAuto = ChbAutoClearLogs.IsChecked.Value;
@@ -317,7 +318,7 @@ namespace MemPlus.Views.Windows
                     _logController.SetSaveToFile(ChbSaveLogsToFile.IsChecked.Value);
                 }
 
-                //RAM Monitor
+                // RAM Monitor
                 if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
                 if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
 
@@ -361,8 +362,9 @@ namespace MemPlus.Views.Windows
                     }
                 }
 
-                //RAM Optimizer
+                // RAM Optimizer
                 if (ChbStartupMemoryClear.IsChecked != null) Properties.Settings.Default.StartupMemoryClear = ChbStartupMemoryClear.IsChecked.Value;
+                if (ChbDragDropClear.IsChecked != null) Properties.Settings.Default.DragDropClear = ChbDragDropClear.IsChecked.Value;
                 if (ChbEmptyWorkingSet.IsChecked != null) Properties.Settings.Default.EmptyWorkingSet = ChbEmptyWorkingSet.IsChecked.Value;
                 if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
                 if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
@@ -372,9 +374,8 @@ namespace MemPlus.Views.Windows
                 if (ChbHotKey.IsChecked != null) Properties.Settings.Default.UseHotKey = ChbHotKey.IsChecked.Value;
                 Properties.Settings.Default.HotKey = _hotKey;
                 Properties.Settings.Default.HotKeyModifiers = _hotKeyModifiers;
-                
 
-                //Theme
+                // Theme
                 Properties.Settings.Default.VisualStyle = CboStyle.Text;
                 Properties.Settings.Default.MetroColor = CpMetroBrush.Color;
                 Properties.Settings.Default.BorderThickness = SldBorderThickness.Value;
@@ -602,7 +603,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when the user is pressing a key on the textbox
+        /// Method that is called when the user is pressing a key on the TextBox object
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The KeyEventArgs</param>
