@@ -46,8 +46,8 @@
     <!--MainWindow-->
     <system:String x:Key="TotalPhysicalMemory">Totale physikalischer Speicher:</system:String>
     <system:String x:Key="UsedPhysicalMemory">Gebrauchter physikalischer Speicher:</system:String>
-    <system:String x:Key="ClearWorkingSets">Lösche Working Sets</system:String>
-    <system:String x:Key="ClearFileSystemCache">Löschen Dateisystem-Cache</system:String>
+    <system:String x:Key="ClearWorkingSets">Working Sets löschen</system:String>
+    <system:String x:Key="ClearFileSystemCache">Dateisystem-Cache löschen</system:String>
     <system:String x:Key="AdministrativeRightsWarning">MemPlus wird ohne administrative Rechte wahrscheinlich nicht richtig funktionieren!</system:String>
     <system:String x:Key="GaugeRamUsage">Gebrauchter RAM (%)</system:String>
     <system:String x:Key="RamUsageIncreased">Es sieht so aus als ob Ihr RAM gebrauch sich um % MB erhöht hat!</system:String>
@@ -68,7 +68,7 @@
 
     <!--ProcessAnalyzerWindow-->
     <system:String x:Key="ProcessAnalyzerWindowTitle">MemPlus - Prozessanalysierer</system:String>
-    <system:String x:Key="ClearWorkingSet">Lösche Working Sets</system:String>
+    <system:String x:Key="ClearWorkingSet">Working Sets löschen</system:String>
     <system:String x:Key="KillProcess">Abbrechen</system:String>
     <system:String x:Key="Refresh">Erneuern</system:String>
     <system:String x:Key="ProcessId">Prozess ID</system:String>
@@ -88,7 +88,7 @@
     <system:String x:Key="StartMinimized">Starte MemPlus minimalisiert</system:String>
     <system:String x:Key="HideOnStart">Verstecke MemPlus beim starten</system:String>
     <system:String x:Key="HideInsteadOfClose">Verstecke MemPlus beim schließen</system:String>
-    <system:String x:Key="AutoRunAsAdministrator">Lass as als automatischer Administrator laufen</system:String>
+    <system:String x:Key="AutoRunAsAdministrator">Lass es als automatischer Administrator laufen</system:String>
     <system:String x:Key="Topmost">Oberste</system:String>
     <system:String x:Key="DisplayNotifyIcon">Zeige Notifikationssymbol</system:String>
     <system:String x:Key="DisplayAdminWarning">Zeige Warnung von administrativen Rechten an</system:String>
@@ -102,13 +102,13 @@
     <system:String x:Key="Minutes">Minuten</system:String>
     <system:String x:Key="Hours">Stunden</system:String>
     <system:String x:Key="RamOptimizer">RAM Optimierer</system:String>
-    <system:String x:Key="OptimizeWhenExceeds">Optimiere wenn RAM gebrach überschritten wird</system:String>
-    <system:String x:Key="OptimizeAfter">Optimiere danach</system:String>
+    <system:String x:Key="OptimizeWhenExceeds">Optimieren wenn RAM gebrauch überschritten wird ab</system:String>
+    <system:String x:Key="OptimizeAfter">Optimieren nach</system:String>
     <system:String x:Key="Options">Optionen</system:String>
-    <system:String x:Key="ClearMemoryOnStartup">Lösche Speicher beim Starten der Anwendung</system:String>
-    <system:String x:Key="DragDropClear">Löschen Sie den Speicher beim Ziehen und Ablegen</system:String>
-    <system:String x:Key="ClearStandByCache">Lösche Ruhezustand cache</system:String>
-    <system:String x:Key="ClearClipboard">Lösche Zwischenablagedaten</system:String>
+    <system:String x:Key="ClearMemoryOnStartup">Speicher beim Starten der Anwendung löschen</system:String>
+    <system:String x:Key="DragDropClear">Speicher beim drag and drop löschen</system:String>
+    <system:String x:Key="ClearStandByCache">Ruhezustand cache löschen</system:String>
+    <system:String x:Key="ClearClipboard">Zwischenablagedaten löschen</system:String>
     <system:String x:Key="Hotkey">Hotkey:</system:String>
     <system:String x:Key="WorkingSetExclusions">Working Set Ausschlüsse</system:String>
     <system:String x:Key="Add">Hinzufügen</system:String>
@@ -126,7 +126,6 @@
     <system:String x:Key="FileDoesNotExist">Die ausgewählte Datei existiert nicht!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Diese Option funktioniert nur wenn der RAM Überwacher aktiviert ist!</system:String>
 
-    <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Protokollierung</system:String>
     <system:String x:Key="AutoClearLogs">Protokolle automatisch aus dem Speicher löschen jede</system:String>
     <system:String x:Key="LogFile">Protokolle automatisch in Datei speichern</system:String>

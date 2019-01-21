@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Management;
 using System.Reflection;
 using System.Security.Principal;
@@ -121,7 +120,7 @@ namespace MemPlus.Business.UTILS
                 // ReSharper disable once SwitchStatementMissingSomeCases
                 switch (sfd.FilterIndex)
                 {
-                    //Filterindex starts at 1
+                    // Filter index starts at 1
                     case 1:
                         RamDataExporter.ExportText(sfd.FileName, ramSticks);
                         break;
