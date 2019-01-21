@@ -91,7 +91,6 @@ namespace MemPlus.Views.Windows
             Application app = Application.Current;
             app.Activated += Active;
             app.Deactivated += Passive;
-            if (app.MainWindow != null) app.MainWindow.Closing += MainWindow_Closing;
 
             LoadProperties();
 
@@ -137,17 +136,6 @@ namespace MemPlus.Views.Windows
             }
 
             _logController.AddLog(new ApplicationLog("Done initializing MainWindow"));
-        }
-
-        /// <summary>
-        /// Event that is called when the MainWindow is closing
-        /// </summary>
-        /// <param name="sender">The object that called this method</param>
-        /// <param name="e">The CancelEventArgs</param>
-        private void MainWindow_Closing(object sender, CancelEventArgs e)
-        {
-            // Dispose of the LogController object gracefully
-            _logController.Dispose();
         }
 
         /// <summary>
@@ -1048,11 +1036,13 @@ namespace MemPlus.Views.Windows
             }
             else
             {
-                // Unregister any hotkeys, if applicable
+                // De-register any hotkeys, if applicable
                 _hotKeyController?.Dispose();
                 // Disable the RAM Monitor to prevent exceptions from being thrown
                 _ramController?.DisableMonitor();
                 TbiIcon?.Dispose();
+                // Dispose of the LogController object gracefully
+                _logController.Dispose();
             }
         }
     }
