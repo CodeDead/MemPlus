@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CodeDead")]
 [assembly: AssemblyProduct("MemPlus")]
-[assembly: AssemblyCopyright("Copyright © CodeDead 2018")]
+[assembly: AssemblyCopyright("Copyright © CodeDead 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
