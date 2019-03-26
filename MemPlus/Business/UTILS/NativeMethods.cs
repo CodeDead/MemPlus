@@ -65,5 +65,24 @@ namespace MemPlus.Business.UTILS
         /// <returns>If the function succeeds, the return value is nonzero</returns>
         [DllImport("user32.dll")]
         internal static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        /// <summary>
+        /// Opens the clipboard for examination and prevents other applications from modifying the clipboard content
+        /// </summary>
+        /// <param name="hWnd">A handle to the window to be associated with the open clipboard. If this parameter is NULL, the open clipboard is associated with the current task</param>
+        /// <returns></returns>
+        [DllImport("user32.dll")]
+        internal static extern bool OpenClipboard(IntPtr hWnd);
+        /// <summary>
+        /// Empties the clipboard and frees handles to data in the clipboard. The function then assigns ownership of the clipboard to the window that currently has the clipboard open
+        /// </summary>
+        /// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero</returns>
+        [DllImport("user32.dll")]
+        internal static extern bool EmptyClipboard();
+        /// <summary>
+        /// Closes the clipboard
+        /// </summary>
+        /// <returns>If the function succeeds, the return value is nonzero. If the function fails, the return value is zero</returns>
+        [DllImport("user32.dll")]
+        internal static extern bool CloseClipboard();
     }
 }

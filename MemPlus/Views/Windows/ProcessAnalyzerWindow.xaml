@@ -56,7 +56,7 @@
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
-                <GridView x:Name="DynGrid">
+                <GridView>
                     <GridViewColumn Header="{DynamicResource ProcessId}" DisplayMemberBinding="{Binding ProcessId}" utils:GridViewSort.PropertyName="ProcessId" />
                     <GridViewColumn Header="{DynamicResource ProcessName}" DisplayMemberBinding="{Binding ProcessName}" utils:GridViewSort.PropertyName="ProcessName" />
                     <GridViewColumn Header="{DynamicResource ProcessLocation}" DisplayMemberBinding="{Binding ProcessLocation}" utils:GridViewSort.PropertyName="ProcessLocation" />

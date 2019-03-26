@@ -312,7 +312,7 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public double WindowOpacity {
             get {
                 return ((double)(this["WindowOpacity"]));
@@ -547,6 +547,18 @@ namespace MemPlus.Properties {
             }
             set {
                 this["DragDropClear"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool InvokeGarbageCollector {
+            get {
+                return ((bool)(this["InvokeGarbageCollector"]));
+            }
+            set {
+                this["InvokeGarbageCollector"] = value;
             }
         }
     }

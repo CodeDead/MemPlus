@@ -6,7 +6,7 @@ namespace MemPlus.Business.LOG
     /// <summary>
     /// A class that represent a change in the application
     /// </summary>
-    internal class ApplicationLog : Log
+    internal sealed class ApplicationLog : Log
     {
         /// <summary>
         /// Initialize a new ApplicationLog object

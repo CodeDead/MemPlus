@@ -63,9 +63,26 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Syncfusion.SfGauge.WPF" />
-    <Reference Include="Syncfusion.Shared.Wpf" />
-    <Reference Include="Syncfusion.Tools.Wpf" />
+    <Reference Include="Syncfusion.Licensing, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=632609b4d040f6b4">
+      <HintPath>..\packages\Syncfusion.Licensing.17.1.0.32-beta\lib\net46\Syncfusion.Licensing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.SfGauge.WPF, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.SfGauge.WPF.17.1.0.32-beta\lib\net46\Syncfusion.SfGauge.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.SfShared.Wpf, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.SfShared.WPF.17.1.0.32-beta\lib\net46\Syncfusion.SfShared.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.Wpf, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.17.1.0.32-beta\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Syncfusion.Tools.Wpf, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
+      <HintPath>..\packages\Syncfusion.Tools.WPF.17.1.0.32-beta\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -74,8 +91,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UpdateManager">
-      <HintPath>..\..\UpdateManager\UpdateManager\bin\Release\UpdateManager.dll</HintPath>
+    <Reference Include="UpdateManager, Version=1.4.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CodeDead.UpdateManager.1.4.3\lib\net472\UpdateManager.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -87,6 +105,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\EXPORT\ExportTypes.cs" />
+    <Compile Include="Business\LOG\LogType.cs" />
     <Compile Include="Business\LOG\ProcessLog.cs" />
     <Compile Include="Business\PROCESS\ProcessDetail.cs" />
     <Compile Include="Business\EXPORT\ProcessDetailExporter.cs" />
@@ -96,6 +115,7 @@
     <Compile Include="Business\UTILS\GridViewSort.cs" />
     <Compile Include="Business\UTILS\HotKeyController.cs" />
     <Compile Include="Business\UTILS\NativeMethods.cs" />
+    <Compile Include="Business\UTILS\SettingsBinder.cs" />
     <Compile Include="Business\UTILS\Utils.cs" />
     <Compile Include="Views\Windows\RamAnalyzerWindow.xaml.cs">
       <DependentUpon>RamAnalyzerWindow.xaml</DependentUpon>

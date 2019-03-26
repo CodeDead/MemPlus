@@ -31,7 +31,6 @@
     <system:String x:Key="ProcessAnalyzer">محلل العمليات</system:String>
     <system:String x:Key="Clear">تفرغة</system:String>
     <system:String x:Key="Gui">واجهة المستخدم</system:String>
-    <system:String x:Key="AlwaysOnTop">دائما في الاعلي</system:String>
     <system:String x:Key="DisableWhenInactive">الايقاف عند عدم الاستخدام</system:String>
     <system:String x:Key="WindowDraggable">النافذة قابلة للتحريك</system:String>
     <system:String x:Key="DisplayRamStatistics">عرض احصائيات الرام</system:String>
@@ -131,5 +130,6 @@
     <system:String x:Key="AutoClearLogs">مسح السجلات تلقائيا من الذاكرة كل</system:String>
     <system:String x:Key="LogFile">حفظ سجلات تلقائيا إلى ملف</system:String>
     <system:String x:Key="LogFilePath">مسار ملف السجل:</system:String>
+    <system:String x:Key="InvokeGarbageCollector">استدعاء .NET أداة تجميع مجمعي البيانات المهملة</system:String>
 
 </ResourceDictionary>

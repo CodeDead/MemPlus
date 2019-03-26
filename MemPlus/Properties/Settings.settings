@@ -75,7 +75,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="WindowOpacity" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">100</Value>
     </Setting>
     <Setting Name="WindowResizeBorder" Type="System.Double" Scope="User">
       <Value Profile="(Default)">3</Value>
@@ -133,6 +133,9 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="DragDropClear" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="InvokeGarbageCollector" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

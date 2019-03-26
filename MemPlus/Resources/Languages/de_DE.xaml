@@ -31,7 +31,6 @@
     <system:String x:Key="ProcessAnalyzer">Prozessanalysierer</system:String>
     <system:String x:Key="Clear">Löschen</system:String>
     <system:String x:Key="Gui">GUI</system:String>
-    <system:String x:Key="AlwaysOnTop">Immer im Vordergrund</system:String>
     <system:String x:Key="DisableWhenInactive">Deaktivieren wenn inaktiv</system:String>
     <system:String x:Key="WindowDraggable">Fenster beweglich</system:String>
     <system:String x:Key="DisplayRamStatistics">Zeige RAM Statistiken an</system:String>
@@ -125,6 +124,7 @@
     <system:String x:Key="ResetAllSettings">All Einstellungen wurden zurückgesetzt!</system:String>
     <system:String x:Key="FileDoesNotExist">Die ausgewählte Datei existiert nicht!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Diese Option funktioniert nur wenn der RAM Überwacher aktiviert ist!</system:String>
+    <system:String x:Key="InvokeGarbageCollector">.NET-Garbage-Collector aufrufen</system:String>
 
     <system:String x:Key="LogSettings">Protokollierung</system:String>
     <system:String x:Key="AutoClearLogs">Protokolle automatisch aus dem Speicher löschen jede</system:String>

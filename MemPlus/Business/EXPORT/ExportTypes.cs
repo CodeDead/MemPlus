@@ -1,19 +1,13 @@
 ﻿namespace MemPlus.Business.EXPORT
 {
     /// <summary>
-    /// Sealed class containing all different export types that MemPlus supports
+    /// Enumeration containing all the different export types
     /// </summary>
-    internal sealed class ExportTypes
+    internal enum ExportType
     {
-        /// <summary>
-        /// Enumeration containing all the different export types
-        /// </summary>
-        internal enum ExportType
-        {
-            Html,
-            Text,
-            Csv,
-            Excel
-        }
+        Html,
+        Text,
+        Csv,
+        Excel
     }
 }

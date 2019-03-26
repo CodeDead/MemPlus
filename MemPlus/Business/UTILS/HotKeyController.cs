@@ -84,11 +84,9 @@ namespace MemPlus.Business.UTILS
         private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             const int wmHotkey = 0x0312;
-            if (msg == wmHotkey)
-            {
-                HotKeyPressedEvent?.Invoke();
-                handled = true;
-            }
+            if (msg != wmHotkey) return IntPtr.Zero;
+            HotKeyPressedEvent?.Invoke();
+            handled = true;
             return IntPtr.Zero;
         }
 

@@ -31,7 +31,6 @@
     <system:String x:Key="ProcessAnalyzer">Proces Analyseerder</system:String>
     <system:String x:Key="Clear">Wissen</system:String>
     <system:String x:Key="Gui">GUI</system:String>
-    <system:String x:Key="AlwaysOnTop">Altijd bovenop</system:String>
     <system:String x:Key="DisableWhenInactive">Uitschakelen wanneer inactief</system:String>
     <system:String x:Key="WindowDraggable">Venster verschuifbaar</system:String>
     <system:String x:Key="DisplayRamStatistics">Toon RAM statistieken</system:String>
@@ -125,6 +124,7 @@
     <system:String x:Key="ResetAllSettings">Alle instellingen zijn gereset!</system:String>
     <system:String x:Key="FileDoesNotExist">Het geselecteerde bestand bestaat niet!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Deze optie werkt alleen als de RAM Monitor is ingeschakeld!</system:String>
+    <system:String x:Key="InvokeGarbageCollector">Roep de .NET garbage collector aan</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Logging</system:String>

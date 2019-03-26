@@ -10,10 +10,10 @@ namespace MemPlus.Business.LOG
 {
     /// <inheritdoc />
     /// <summary>
-    /// Class containing methods to control logs
+    /// Internal class containing methods to control logs
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    public class LogController : IDisposable
+    internal sealed class LogController : IDisposable
     {
         #region Variables
         /// <summary>
@@ -159,7 +159,8 @@ namespace MemPlus.Business.LOG
         /// <param name="saveToFile">True if logs should be saved to a file, otherwise false</param>
         internal void SetSaveToFile(bool saveToFile)
         {
-            if (_saveToFile)
+            if (_saveToFile == saveToFile) return;
+            if (_saveToFile && !saveToFile)
             {
                 // Make sure the contents of the log file is written before disabling this function
                 DisposeFileResources();
@@ -169,7 +170,7 @@ namespace MemPlus.Business.LOG
             {
                 // Generate a new FileStream that allows other handles to access the file
                 _fileStream = new FileStream(_logPath,
-                    FileMode.OpenOrCreate,
+                    FileMode.Append,
                     FileAccess.Write,
                     FileShare.ReadWrite);
                 _streamWriter = new StreamWriter(_fileStream) {AutoFlush = true};
@@ -194,8 +195,8 @@ namespace MemPlus.Business.LOG
 
             // Generate a new file path for the logs using the starting time of the LogController instance
             // ReSharper disable once StringLiteralTypo
-            _logPath = saveDirectory + "memplus_" + _startTime.Year + _startTime.Month + _startTime.Day + "_" +
-                       _startTime.Hour + _startTime.Minute + _startTime.Second + ".log";
+            _logPath = saveDirectory + "memplus_" + _startTime.Year + "-" + _startTime.Month + "-" + _startTime.Day + "_" +
+                       _startTime.Hour + "-" + _startTime.Minute + "-" + _startTime.Second + ".log";
         }
 
         /// <summary>
@@ -251,8 +252,14 @@ namespace MemPlus.Business.LOG
         /// Clear all Log objects that have a specific LogType
         /// </summary>
         /// <param name="logType">The LogType that Log objects need to contain in order to be removed</param>
-        internal void ClearLogs(LogType logType)
+        internal void ClearLogs(LogType? logType)
         {
+            if (logType == null)
+            {
+                ClearLogs();
+                return;
+            }
+
             List<Log> deleted = new List<Log>();
 
             for (int i = _logList.Count - 1; i >= 0; i--)
@@ -302,7 +309,7 @@ namespace MemPlus.Business.LOG
         /// <param name="path">The path where logs should be stored</param>
         /// <param name="logType">The type of logs that should be saved. Can be null if all logs should be saved</param>
         /// <param name="exportType">The type of export that should be performed</param>
-        internal void Export(string path, LogType? logType, ExportTypes.ExportType exportType)
+        internal void Export(string path, LogType? logType, ExportType exportType)
         {
             List<Log> exportList;
 
@@ -327,16 +334,16 @@ namespace MemPlus.Business.LOG
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (exportType)
             {
-                case ExportTypes.ExportType.Html:
+                case ExportType.Html:
                     LogExporter.ExportHtml(path, exportList);
                     break;
                 default:
                     LogExporter.ExportTxt(path, exportList);
                     break;
-                case ExportTypes.ExportType.Csv:
+                case ExportType.Csv:
                     LogExporter.ExportCsv(path, exportList);
                     break;
-                case ExportTypes.ExportType.Excel:
+                case ExportType.Excel:
                     LogExporter.ExportExcel(path, exportList);
                     break;
             }

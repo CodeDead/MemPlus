@@ -6,7 +6,7 @@ namespace MemPlus.Business.LOG
     /// <summary>
     /// A class that represent a change in the RAM Optimizer
     /// </summary>
-    internal class RamLog : Log
+    internal sealed class RamLog : Log
     {
         /// <summary>
         /// Initialize a new RamLog object

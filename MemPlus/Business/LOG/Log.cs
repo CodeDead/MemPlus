@@ -6,7 +6,7 @@ namespace MemPlus.Business.LOG
     /// <summary>
     /// Abstract class containing logging information
     /// </summary>
-    public abstract class Log
+    internal abstract class Log
     {
         /// <summary>
         /// The type of log
@@ -20,15 +20,5 @@ namespace MemPlus.Business.LOG
         /// The data inside the Log object
         /// </summary>
         public string Data { get; set; }
-    }
-
-    /// <summary>
-    /// An enumeration of all available log types
-    /// </summary>
-    public enum LogType
-    {
-        Application,
-        Ram,
-        Process
     }
 }

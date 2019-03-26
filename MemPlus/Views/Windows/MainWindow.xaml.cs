@@ -254,6 +254,7 @@ namespace MemPlus.Views.Windows
                 _ramController.EmptyWorkingSets = Properties.Settings.Default.EmptyWorkingSet;
                 _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
                 _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
+                _ramController.InvokeGarbageCollector = Properties.Settings.Default.InvokeGarbageCollector;
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
 
@@ -553,6 +554,16 @@ namespace MemPlus.Views.Windows
         private void ExitMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        /// <summary>
+        /// Method that is called when all the logs should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void AllMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new LogWindow(_logController, null).Show();
         }
 
         /// <summary>

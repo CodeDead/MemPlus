@@ -25,7 +25,7 @@ namespace MemPlus.Views.Windows
         /// <summary>
         /// The LogType that is currently being monitored
         /// </summary>
-        private readonly LogType _logType;
+        private readonly LogType? _logType;
         /// <summary>
         /// A boolean to indicate whether automatic scrolling is enabled or not
         /// </summary>
@@ -37,8 +37,8 @@ namespace MemPlus.Views.Windows
         /// Initialize a new LogWindow object
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add and view logs</param>
-        /// <param name="logType">The LogType that is currently being monitored</param>
-        public LogWindow(LogController logController, LogType logType)
+        /// <param name="logType">The LogType that is currently being monitored. Can be null if all logs should be monitored</param>
+        internal LogWindow(LogController logController, LogType? logType)
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing LogWindow"));
@@ -134,7 +134,7 @@ namespace MemPlus.Views.Windows
         // ReSharper disable once InconsistentNaming
         private void LogDeletedEvent(Log log)
         {
-            if (log.LogType != _logType) return;
+            if (_logType != null && log.LogType != _logType) return;
             Dispatcher.Invoke(() =>
             {
                 LsvLogs.Items.Remove(log);
@@ -159,7 +159,7 @@ namespace MemPlus.Views.Windows
         // ReSharper disable once InconsistentNaming
         private void LogAddedEvent(Log log)
         {
-            if (log.LogType != _logType) return;
+            if (_logType != null && log.LogType != _logType) return;
             Dispatcher.Invoke(() =>
             {
                 LsvLogs.Items.Add(log);

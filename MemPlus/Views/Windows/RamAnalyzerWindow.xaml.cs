@@ -28,7 +28,7 @@ namespace MemPlus.Views.Windows
         /// Initialize a new AnalyzerWindow object
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        public RamAnalyzerWindow(LogController logController)
+        internal RamAnalyzerWindow(LogController logController)
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing AnalyzerWindow"));
@@ -65,7 +65,7 @@ namespace MemPlus.Views.Windows
 
                     foreach (RamData data in s.GetRamData())
                     {
-                        treeItem.Items.Add(new TreeViewItem() { Header = data.Key + ": " + data.Value });
+                        treeItem.Items.Add(new TreeViewItem { Header = data.Key + ": " + data.Value });
                     }
 
                     TrvRam.Items.Add(treeItem);

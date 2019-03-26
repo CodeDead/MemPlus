@@ -165,20 +165,20 @@ namespace MemPlus.Business.UTILS
             };
 
             if (sfd.ShowDialog() != true) return false;
-            ExportTypes.ExportType type;
+            ExportType type;
             switch (sfd.FilterIndex)
             {
                 default:
-                    type = ExportTypes.ExportType.Text;
+                    type = ExportType.Text;
                     break;
                 case 2:
-                    type = ExportTypes.ExportType.Html;
+                    type = ExportType.Html;
                     break;
                 case 3:
-                    type = ExportTypes.ExportType.Csv;
+                    type = ExportType.Csv;
                     break;
                 case 4:
-                    type = ExportTypes.ExportType.Excel;
+                    type = ExportType.Excel;
                     break;
             }
 
@@ -259,8 +259,7 @@ namespace MemPlus.Business.UTILS
                             ProcessId = p.Id,
                             ProcessName = p.ProcessName,
                             ProcessLocation = p.MainModule.FileName,
-                            MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB",
-                            MemoryUsageLong = p.WorkingSet64
+                            MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB"
                         };
                         processDetailsList.Add(pd);
                     }

@@ -123,6 +123,8 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/log.png" />
                     </MenuItem.Icon>
+                    <MenuItem Header="{DynamicResource AllLogs}" Click="AllMenuItem_OnClick" />
+                    <Separator />
                     <MenuItem Header="{DynamicResource RamLogs}" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="{DynamicResource ProcessLogs}" Click="ProcessLogsMenuItem_OnClick" />
                     <MenuItem Header="{DynamicResource ApplicationLogs}" Click="ApplicationLogsMenuItem_OnClick" />
@@ -134,7 +136,7 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/monitor.png" />
                     </MenuItem.Icon>
-                    <MenuItem x:Name="MniOnTop" Header="{DynamicResource AlwaysOnTop}" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
+                    <MenuItem x:Name="MniOnTop" Header="{DynamicResource Topmost}" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniDisableInactive" Header="{DynamicResource DisableWhenInactive}" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniWindowDraggable" Header="{DynamicResource WindowDraggable}" IsCheckable="True" Checked="WindowDraggableMenuItem_OnCheckedChanged" Unchecked="WindowDraggableMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniRamStatistics" Header="{DynamicResource DisplayRamStatistics}" IsCheckable="True" Checked="RamStatisticsMenuItem_OnCheckedChanged" Unchecked="RamStatisticsMenuItem_OnCheckedChanged" />
@@ -190,7 +192,6 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-
             <syncfusion:SfCircularGauge Visibility="Visible" Grid.Row="0" x:Name="CgRamUsage" GaugeHeader="RAM usage (%)"
                                         FontSize="14"  HeaderAlignment="Bottom" FontWeight="Bold"
                                         Margin="5" MaxHeight="350" MaxWidth="350">

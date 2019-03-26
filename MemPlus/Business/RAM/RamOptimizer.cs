@@ -139,6 +139,31 @@ namespace MemPlus.Business.RAM
         }
 
         /// <summary>
+        /// Clear the clipboard using the native Windows API
+        /// </summary>
+        internal void ClearClipboard()
+        {
+            _logController.AddLog(new RamLog("Clearing clipboard"));
+            try
+            {
+                // Attempt to open the clipboard first and set associate its handle to the current task
+                if (!NativeMethods.OpenClipboard(IntPtr.Zero))
+                {
+                    throw new Exception("OpenClipboard: ", new Win32Exception(Marshal.GetLastWin32Error()));
+                }
+
+                NativeMethods.EmptyClipboard();
+                NativeMethods.CloseClipboard();
+
+                _logController.AddLog(new RamLog("Successfully cleared all clipboard data"));
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new RamLog(ex.ToString()));
+            }
+        }
+
+        /// <summary>
         /// Check whether the system is running a x86 or x64 working set
         /// </summary>
         /// <returns>A boolean to indicate whether or not the system is 64 bit</returns>
@@ -232,13 +257,13 @@ namespace MemPlus.Business.RAM
         }
         
         /// <summary>
-        /// Increase the Privilege using a provilege name
+        /// Increase the Privilege using a privilege name
         /// </summary>
         /// <param name="privilegeName">The name of the privilege that needs to be increased</param>
         /// <returns>A boolean value indicating whether or not the operation was successful</returns>
         private bool SetIncreasePrivilege(string privilegeName)
         {
-            _logController.AddLog(new RamLog("Increasing privilage: " + privilegeName));
+            _logController.AddLog(new RamLog("Increasing privilege: " + privilegeName));
 
             using (WindowsIdentity current = WindowsIdentity.GetCurrent(TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges))
             {
@@ -247,18 +272,18 @@ namespace MemPlus.Business.RAM
                 newst.Luid = 0L;
                 newst.Attr = PrivilegeEnabled;
 
-                _logController.AddLog(new RamLog("Looking up privilage value"));
+                _logController.AddLog(new RamLog("Looking up privilege value"));
                 // If we can't look up the privilege value, we can't function properly
                 if (!NativeMethods.LookupPrivilegeValue(null, privilegeName, ref newst.Luid)) throw new Exception("LookupPrivilegeValue: ", new Win32Exception(Marshal.GetLastWin32Error()));
-                _logController.AddLog(new RamLog("Done looking up privilage value"));
+                _logController.AddLog(new RamLog("Done looking up privilege value"));
 
 
-                _logController.AddLog(new RamLog("Adjusting token privilages"));
+                _logController.AddLog(new RamLog("Adjusting token privileges"));
                 // Enables or disables privileges in a specified access token
                 int adjustTokenPrivilegesRet = NativeMethods.AdjustTokenPrivileges(current.Token, false, ref newst, 0, IntPtr.Zero, IntPtr.Zero) ? 1 : 0;
                 // Return value of zero indicates an error
                 if (adjustTokenPrivilegesRet == 0) throw new Exception("AdjustTokenPrivileges: ", new Win32Exception(Marshal.GetLastWin32Error()));
-                _logController.AddLog(new RamLog("Done adjusting token privilages"));
+                _logController.AddLog(new RamLog("Done adjusting token privileges"));
                 return adjustTokenPrivilegesRet != 0;
             }
         }

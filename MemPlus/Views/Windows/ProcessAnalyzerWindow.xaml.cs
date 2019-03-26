@@ -28,7 +28,7 @@ namespace MemPlus.Views.Windows
         /// Initialize a new ProcessAnalyzerWindow object
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        public ProcessAnalyzerWindow(LogController logController)
+        internal ProcessAnalyzerWindow(LogController logController)
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing ProcessAnalyzerWindow"));

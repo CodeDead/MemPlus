@@ -7,7 +7,7 @@ namespace MemPlus.Business.LOG
     /// A class that represent a change in the ProcessAnalyzer
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    internal class ProcessLog : Log
+    internal sealed class ProcessLog : Log
     {
         /// <summary>
         /// Initialize a new ProcessLog object

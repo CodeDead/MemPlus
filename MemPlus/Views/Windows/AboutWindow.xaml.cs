@@ -25,7 +25,7 @@ namespace MemPlus.Views.Windows
         /// Initialize a new AboutWindow
         /// </summary>
         /// <param name="logController">The LogController that can be used to add logs</param>
-        public AboutWindow(LogController logController)
+        internal AboutWindow(LogController logController)
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing AboutWindow"));

@@ -32,9 +32,9 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Margin="5" x:Name="BtnClose" Content="{DynamicResource Close}" Click="BtnClose_OnClick" />
-            <Button Margin="5"  Grid.Column="1" x:Name="BtnLicense" Content="{DynamicResource License}" Click="BtnLicense_OnClick" />
-            <Button Margin="5" Grid.Column="2" x:Name="BtnCodeDead" Content="CodeDead" Click="BtnCodeDead_OnClick" />
+            <Button Margin="5" Content="{DynamicResource Close}" Click="BtnClose_OnClick" />
+            <Button Margin="5"  Grid.Column="1" Content="{DynamicResource License}" Click="BtnLicense_OnClick" />
+            <Button Margin="5" Grid.Column="2" Content="CodeDead" Click="BtnCodeDead_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

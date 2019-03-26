@@ -91,6 +91,10 @@ namespace MemPlus.Business.RAM
         /// Property displaying whether the clipboard should be cleared during memory cleaning
         /// </summary>
         internal bool ClearClipboard { get; set; }
+        /// <summary>
+        /// Property displaying whether the .NET garbage collector should be invoked or not
+        /// </summary>
+        internal bool InvokeGarbageCollector { get; set; }
         #endregion
 
         #region Delegates
@@ -268,8 +272,11 @@ namespace MemPlus.Business.RAM
                     _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
                 }
 
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
+                if (InvokeGarbageCollector)
+                {
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                }
 
                 UpdateRamUsage();
                 UpdateGuiStatisticsEvent.Invoke();
@@ -281,7 +288,7 @@ namespace MemPlus.Business.RAM
 
             if (ClearClipboard)
             {
-                Clipboard.Clear();
+                _ramOptimizer.ClearClipboard();
             }
 
             RamClearingCompletedEvent.Invoke();

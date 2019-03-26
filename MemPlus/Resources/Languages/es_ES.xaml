@@ -31,7 +31,6 @@
     <system:String x:Key="ProcessAnalyzer">Analizador de Procesos</system:String>
     <system:String x:Key="Clear">Limpiar</system:String>
     <system:String x:Key="Gui">GUI</system:String>
-    <system:String x:Key="AlwaysOnTop">Siempre encima</system:String>
     <system:String x:Key="DisableWhenInactive">Desactivar cuando esté inactivo</system:String>
     <system:String x:Key="WindowDraggable">Arrastrable</system:String>
     <system:String x:Key="DisplayRamStatistics">Mostrar estadísticas de la RAM</system:String>
@@ -125,6 +124,7 @@
     <system:String x:Key="ResetAllSettings">¡Se han restaurado todas las opciones!</system:String>
     <system:String x:Key="FileDoesNotExist">¡El fichero seleccionado no existe!</system:String>
     <system:String x:Key="AutoOptimizeWarning">¡Esta opción solo funciona si el Monitor de RAM está activado!</system:String>
+    <system:String x:Key="InvokeGarbageCollector">Invocar recolector de basura .NET</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">El registro</system:String>

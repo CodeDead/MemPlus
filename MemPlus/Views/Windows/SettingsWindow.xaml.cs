@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
@@ -51,7 +53,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         /// <param name="mainWindow">The MainWindow object that can be used to change the properties</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        public SettingsWindow(MainWindow mainWindow, LogController logController)
+        internal SettingsWindow(MainWindow mainWindow, LogController logController)
         {
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing SettingsWindow"));
@@ -86,44 +88,20 @@ namespace MemPlus.Views.Windows
             {
                 // General
                 ChbAutoStart.IsChecked = Utils.AutoStartUp();
-                ChbAutoUpdate.IsChecked = Properties.Settings.Default.AutoUpdate;
-                ChbStartHidden.IsChecked = Properties.Settings.Default.HideOnStart;
-                ChbHideOnClose.IsChecked = Properties.Settings.Default.HideOnClose;
-                ChbRunAsAdmin.IsChecked = Properties.Settings.Default.RunAsAdministrator;
-                ChbStartMinimized.IsChecked = Properties.Settings.Default.StartMinimized;
-                if (Properties.Settings.Default.Topmost)
-                {
-                    ChbTopmost.IsChecked = Properties.Settings.Default.Topmost;
-                    Topmost = true;
-                }
-                else
-                {
-                    Topmost = false;
-                }
+                Topmost = Properties.Settings.Default.Topmost;
 
-                ChbNotifyIcon.IsChecked = Properties.Settings.Default.NotifyIcon;
                 if (Properties.Settings.Default.WindowDragging)
                 {
                     // Remove previously added event handler if applicable
                     MouseDown -= OnMouseDown;
                     MouseDown += OnMouseDown;
-                    ChbWindowDraggable.IsChecked = true;
                 }
                 else
                 {
                     MouseDown -= OnMouseDown;
-                    ChbWindowDraggable.IsChecked = false;
                 }
-                ChbAdminWarning.IsChecked = Properties.Settings.Default.AdministrativeWarning;
-                ChbRamClearingMessage.IsChecked = Properties.Settings.Default.RamCleaningMessage;
-                ChbNotifyIconStatistics.IsChecked = Properties.Settings.Default.NotifyIconStatistics;
-                ChbDisplayGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
-                ChbWindowRamStatistics.IsChecked = Properties.Settings.Default.WindowRamStatistics;
-
-                CboLanguage.SelectedIndex = Properties.Settings.Default.SelectedLanguage;
 
                 // Logging
-                ChbAutoClearLogs.IsChecked = Properties.Settings.Default.LogClearAuto;
                 int clearInterval = Properties.Settings.Default.LogClearInterval;
                 switch (Properties.Settings.Default.LogClearIntervalIndex)
                 {
@@ -142,12 +120,7 @@ namespace MemPlus.Views.Windows
                 }
                 CboLogClearInterval.SelectedIndex = Properties.Settings.Default.LogClearIntervalIndex;
 
-                ChbSaveLogsToFile.IsChecked = Properties.Settings.Default.SaveLogsToFile;
-                TxtLogFilePath.Text = Properties.Settings.Default.LogPath;
-
                 // RAM Monitor
-                ChbRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
-                ChbDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
 
                 int ramInterval = Properties.Settings.Default.RamMonitorInterval;
                 switch (Properties.Settings.Default.RamMonitorIntervalIndex)
@@ -167,11 +140,6 @@ namespace MemPlus.Views.Windows
                 }
                 CboRamMonitorInterval.SelectedIndex = Properties.Settings.Default.RamMonitorIntervalIndex;
 
-                ChbAutoOptimizePercentage.IsChecked = Properties.Settings.Default.AutoOptimizePercentage;
-                ItbAutoOptimizePercentage.Value = Properties.Settings.Default.AutoOptimizePercentageThreshold;
-
-                ChbAutoOptimizeTimed.IsChecked = Properties.Settings.Default.AutoOptimizeTimed;
-
                 CboAutoOptimizeTimedIndex.SelectedIndex = Properties.Settings.Default.AutoOptimizeTimedIntervalIndex;
                 switch (Properties.Settings.Default.AutoOptimizeTimedIntervalIndex)
                 {
@@ -183,12 +151,6 @@ namespace MemPlus.Views.Windows
                         break;
                 }
 
-                ChbStartupMemoryClear.IsChecked = Properties.Settings.Default.StartupMemoryClear;
-                ChbDragDropClear.IsChecked = Properties.Settings.Default.DragDropClear;
-                ChbEmptyWorkingSet.IsChecked = Properties.Settings.Default.EmptyWorkingSet;
-                ChbFileSystemCache.IsChecked = Properties.Settings.Default.FileSystemCache;
-                ChbStandByCache.IsChecked = Properties.Settings.Default.StandByCache;
-                ChbClearClipboard.IsChecked = Properties.Settings.Default.ClearClipboard;
                 if (Properties.Settings.Default.ProcessExceptions != null)
                 {
                     foreach (string s in Properties.Settings.Default.ProcessExceptions)
@@ -201,18 +163,9 @@ namespace MemPlus.Views.Windows
                     LsvExclusions.Items.Clear();
                 }
 
-                ChbHotKey.IsChecked = Properties.Settings.Default.UseHotKey;
                 _hotKey = Properties.Settings.Default.HotKey;
                 _hotKeyModifiers = Properties.Settings.Default.HotKeyModifiers;
                 TxtHotKey.Text = _hotKeyModifiers + _hotKey;
-
-                //Theme
-                CboStyle.Text = Properties.Settings.Default.VisualStyle;
-                CpMetroBrush.Color = Properties.Settings.Default.MetroColor;
-                SldBorderThickness.Value = Properties.Settings.Default.BorderThickness;
-                SldOpacity.Value = Properties.Settings.Default.WindowOpacity * 100;
-                SldWindowResize.Value = Properties.Settings.Default.WindowResizeBorder;
-                ItbWarningLevel.Value = Properties.Settings.Default.WarningLevel;
             }
             catch (Exception ex)
             {
@@ -248,9 +201,10 @@ namespace MemPlus.Views.Windows
                 if (ChbAutoStart.IsChecked != null && ChbAutoStart.IsChecked.Value)
                 {
                     Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", System.Reflection.Assembly.GetExecutingAssembly().Location);
-                } else if (ChbAutoStart.IsChecked != null && !ChbAutoStart.IsChecked.Value)
+                }
+                else if (ChbAutoStart.IsChecked != null && !ChbAutoStart.IsChecked.Value)
                 {
-                    if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus","").ToString() != "")
+                    if (Registry.GetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run", "MemPlus", "").ToString() != "")
                     {
                         using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
                         {
@@ -258,33 +212,16 @@ namespace MemPlus.Views.Windows
                         }
                     }
                 }
-                if (ChbAutoUpdate.IsChecked != null) Properties.Settings.Default.AutoUpdate = ChbAutoUpdate.IsChecked.Value;
-                if (ChbTopmost.IsChecked != null) Properties.Settings.Default.Topmost = ChbTopmost.IsChecked.Value;
-                if (ChbNotifyIcon.IsChecked != null) Properties.Settings.Default.NotifyIcon = ChbNotifyIcon.IsChecked.Value;
-                if (ChbWindowDraggable.IsChecked != null) Properties.Settings.Default.WindowDragging = ChbWindowDraggable.IsChecked.Value;
-                if (ChbAdminWarning.IsChecked != null) Properties.Settings.Default.AdministrativeWarning = ChbAdminWarning.IsChecked.Value;
-                if (ChbRamClearingMessage.IsChecked != null) Properties.Settings.Default.RamCleaningMessage = ChbRamClearingMessage.IsChecked.Value;
-                if (ChbNotifyIconStatistics.IsChecked != null) Properties.Settings.Default.NotifyIconStatistics = ChbNotifyIconStatistics.IsChecked.Value;
-                if (ChbDisplayGauge.IsChecked != null) Properties.Settings.Default.DisplayGauge = ChbDisplayGauge.IsChecked.Value;
-                if (ChbWindowRamStatistics.IsChecked != null) Properties.Settings.Default.WindowRamStatistics = ChbWindowRamStatistics.IsChecked.Value;
-                if (ChbStartHidden.IsChecked != null) Properties.Settings.Default.HideOnStart = ChbStartHidden.IsChecked.Value;
-                if (ChbHideOnClose.IsChecked != null) Properties.Settings.Default.HideOnClose = ChbHideOnClose.IsChecked.Value;
-                if (ChbRunAsAdmin.IsChecked != null) Properties.Settings.Default.RunAsAdministrator = ChbRunAsAdmin.IsChecked.Value;
-                if (ChbStartMinimized.IsChecked != null) Properties.Settings.Default.StartMinimized = ChbStartMinimized.IsChecked.Value;
-                Properties.Settings.Default.SelectedLanguage = CboLanguage.SelectedIndex;
 
                 // Logging
-                if (ChbAutoClearLogs.IsChecked != null)
-                {
-                    Properties.Settings.Default.LogClearAuto = ChbAutoClearLogs.IsChecked.Value;
-                    _logController.SetAutoClear(ChbAutoClearLogs.IsChecked.Value);
-                }
+                _logController.SetAutoClear(Properties.Settings.Default.LogClearAuto);
 
                 Properties.Settings.Default.LogClearIntervalIndex = CboLogClearInterval.SelectedIndex;
 
                 if (ItbAutoClearLogsInterval.Value != null)
                 {
-                    int logInterval = (int)ItbAutoClearLogsInterval.Value;
+                    int logInterval = (int) ItbAutoClearLogsInterval.Value;
+                    // ReSharper disable once SwitchStatementMissingSomeCases
                     switch (CboLogClearInterval.SelectedIndex)
                     {
                         case 1:
@@ -301,27 +238,24 @@ namespace MemPlus.Views.Windows
                     _logController.SetAutoClearInterval(logInterval);
                 }
 
-                Properties.Settings.Default.LogPath = TxtLogFilePath.Text;
-                if (TxtLogFilePath.Text.Length > 0)
+                if (Properties.Settings.Default.SaveLogsToFile && Properties.Settings.Default.LogPath.Length == 0)
                 {
-                    _logController.SetSaveDirectory(TxtLogFilePath.Text);
+                    Properties.Settings.Default.SaveLogsToFile = false;
                 }
 
-                if (ChbSaveLogsToFile.IsChecked != null)
+                if (Properties.Settings.Default.LogPath.Length > 0)
                 {
-                    Properties.Settings.Default.SaveLogsToFile = ChbSaveLogsToFile.IsChecked.Value;
-                    /*
-                     * Make sure this is the last LogController method that is called when saving the settings
-                     * because this will only work properly when all other settings (especially the directory)
-                     * have been set correctly
-                     */
-                    _logController.SetSaveToFile(ChbSaveLogsToFile.IsChecked.Value);
+                    _logController.SetSaveDirectory(Properties.Settings.Default.LogPath);
                 }
+
+                /*
+                 * Make sure this is the last LogController method that is called when saving the settings
+                 * because this will only work properly when all other settings (especially the directory)
+                 * have been set correctly
+                 */
+                _logController.SetSaveToFile(Properties.Settings.Default.SaveLogsToFile);
 
                 // RAM Monitor
-                if (ChbRamMonitor.IsChecked != null) Properties.Settings.Default.RamMonitor = ChbRamMonitor.IsChecked.Value;
-                if (ChbDisableInactive.IsChecked != null) Properties.Settings.Default.DisableOnInactive = ChbDisableInactive.IsChecked.Value;
-
                 Properties.Settings.Default.RamMonitorIntervalIndex = CboRamMonitorInterval.SelectedIndex;
                 if (ItbRamMonitorTimeout.Value != null)
                 {
@@ -343,11 +277,6 @@ namespace MemPlus.Views.Windows
                     Properties.Settings.Default.RamMonitorInterval = ramInterval;
                 }
 
-                if (ChbAutoOptimizePercentage.IsChecked != null) Properties.Settings.Default.AutoOptimizePercentage = ChbAutoOptimizePercentage.IsChecked.Value;
-                if (ItbAutoOptimizePercentage.Value != null) Properties.Settings.Default.AutoOptimizePercentageThreshold = (int)ItbAutoOptimizePercentage.Value;
-
-                if (ChbAutoOptimizeTimed.IsChecked != null) Properties.Settings.Default.AutoOptimizeTimed = ChbAutoOptimizeTimed.IsChecked.Value;
-
                 Properties.Settings.Default.AutoOptimizeTimedIntervalIndex = CboAutoOptimizeTimedIndex.SelectedIndex;
                 if (ItbAutoOptimizeTimed.Value != null)
                 {
@@ -363,26 +292,12 @@ namespace MemPlus.Views.Windows
                 }
 
                 // RAM Optimizer
-                if (ChbStartupMemoryClear.IsChecked != null) Properties.Settings.Default.StartupMemoryClear = ChbStartupMemoryClear.IsChecked.Value;
-                if (ChbDragDropClear.IsChecked != null) Properties.Settings.Default.DragDropClear = ChbDragDropClear.IsChecked.Value;
-                if (ChbEmptyWorkingSet.IsChecked != null) Properties.Settings.Default.EmptyWorkingSet = ChbEmptyWorkingSet.IsChecked.Value;
-                if (ChbFileSystemCache.IsChecked != null) Properties.Settings.Default.FileSystemCache = ChbFileSystemCache.IsChecked.Value;
-                if (ChbStandByCache.IsChecked != null) Properties.Settings.Default.StandByCache = ChbStandByCache.IsChecked.Value;
-                if (ChbClearClipboard.IsChecked != null) Properties.Settings.Default.ClearClipboard = ChbClearClipboard.IsChecked.Value;
                 List<string> exclusionList = LsvExclusions.Items.Cast<string>().ToList();
                 Properties.Settings.Default.ProcessExceptions = exclusionList;
-                if (ChbHotKey.IsChecked != null) Properties.Settings.Default.UseHotKey = ChbHotKey.IsChecked.Value;
                 Properties.Settings.Default.HotKey = _hotKey;
                 Properties.Settings.Default.HotKeyModifiers = _hotKeyModifiers;
 
                 // Theme
-                Properties.Settings.Default.VisualStyle = CboStyle.Text;
-                Properties.Settings.Default.MetroColor = CpMetroBrush.Color;
-                Properties.Settings.Default.BorderThickness = SldBorderThickness.Value;
-                Properties.Settings.Default.WindowOpacity = SldOpacity.Value / 100;
-                Properties.Settings.Default.WindowResizeBorder = SldWindowResize.Value;
-                if (ItbWarningLevel.Value != null) Properties.Settings.Default.WarningLevel = ItbWarningLevel.Value.Value;
-
                 Properties.Settings.Default.Save();
 
                 _mainWindow.ChangeVisualStyle();
@@ -548,9 +463,9 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ChbAutoOptimizePercentage_OnChecked(object sender, RoutedEventArgs e)
         {
-            if (ChbRamMonitor.IsChecked == null || ChbRamMonitor.IsChecked.Value) return;
+            if (Properties.Settings.Default.RamMonitor) return;
             MessageBox.Show((string)Application.Current.FindResource("AutoOptimizeWarning"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            ChbRamMonitor.IsChecked = true;
+            Properties.Settings.Default.RamMonitor = true;
         }
 
         /// <summary>
@@ -579,7 +494,14 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedPropertyChangedEventArgs</param>
         private void SldBorderThickness_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            BorderThickness = new Thickness(SldBorderThickness.Value);
+            try
+            {
+                BorderThickness = new Thickness(Properties.Settings.Default.BorderThickness);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -589,7 +511,14 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedPropertyChangedEventArgs</param>
         private void SldOpacity_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            Opacity = SldOpacity.Value / 100;
+            try
+            {
+                Opacity = Properties.Settings.Default.WindowOpacity / 100;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -599,7 +528,14 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedPropertyChangedEventArgs</param>
         private void SldWindowResize_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            ResizeBorderThickness = new Thickness(SldWindowResize.Value);
+            try
+            {
+                ResizeBorderThickness = new Thickness(Properties.Settings.Default.WindowResizeBorder);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -650,10 +586,37 @@ namespace MemPlus.Views.Windows
         private void BtnSelectLogFilePath(object sender, RoutedEventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (fbd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+
+            TxtLogFilePath.Text = fbd.SelectedPath;
+            Properties.Settings.Default.LogPath = TxtLogFilePath.Text;
+        }
+
+        /// <summary>
+        /// Method that is called when the Window is closing
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The CancelEventArgs</param>
+        private void SettingsWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            try
             {
-                TxtLogFilePath.Text = fbd.SelectedPath;
+                Properties.Settings.Default.Reload();
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
+        /// Method that is called when the Theme has changed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The SelectionChangedEventArgs</param>
+        private void ThemeSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ChangeVisualStyle();
         }
     }
 }

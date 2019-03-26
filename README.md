@@ -5,8 +5,7 @@ MemPlus is an entirely free, completely functional 'memory optimizer' that will 
 For more information, please visit:  
 https://codedead.com/?page_id=1736
 
-# Requirements in order to build
-* [Visual Studio](https://visualstudio.com)
+# Requirements
 * [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework-runtime)
 * [Syncfusion](https://syncfusion.com) ([Community edition available](https://www.syncfusion.com/products/communitylicense))
 * [Paomedia small-n-flat](https://github.com/paomedia/small-n-flat) (Images)
@@ -28,6 +27,6 @@ This application was created so people would stop buying those paid alternatives
 [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 # About
-Brought to you by CodeDead:  
+Brought to you by CodeDead  
 https://codedead.com/  
 admin(at)codedead.com
