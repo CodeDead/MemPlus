@@ -131,7 +131,7 @@ namespace MemPlus.Business.RAM
                 }
                 catch (Exception ex)
                 {
-                    _logController.AddLog(new RamLog("Could not empty working set for process " + process.ProcessName + ": " + ex.Message));
+                    _logController.AddLog(new ErrorLog("Could not empty working set for process " + process.ProcessName + ": " + ex.Message));
                 }
             }
 
@@ -159,7 +159,7 @@ namespace MemPlus.Business.RAM
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new RamLog(ex.ToString()));
+                _logController.AddLog(new ErrorLog(ex.ToString()));
             }
         }
 
@@ -252,7 +252,7 @@ namespace MemPlus.Business.RAM
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new RamLog(ex.ToString()));
+                _logController.AddLog(new ErrorLog(ex.ToString()));
             }
         }
         

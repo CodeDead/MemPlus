@@ -21,6 +21,7 @@
     <system:String x:Key="Logs">Protokolle</system:String>
     <system:String x:Key="AllLogs">Alle Protokolle</system:String>
     <system:String x:Key="RamLogs">RAM Protokolle</system:String>
+    <system:String x:Key="ErrorLogs">Fehlerprotokolle</system:String>
     <system:String x:Key="ProcessLogs">Prozess Protokolle</system:String>
     <system:String x:Key="ApplicationLogs">Bewerbungsprotokolle</system:String>
     <system:String x:Key="RamAnalyzerData">RAM Analysierungsdaten</system:String>

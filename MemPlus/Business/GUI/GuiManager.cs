@@ -76,7 +76,7 @@ namespace MemPlus.Business.GUI
             catch (Exception ex)
             {
                 langUri = new Uri("..\\Resources\\Languages\\en.xaml", UriKind.Relative);
-                logController.AddLog(new ApplicationLog(ex.Message));
+                logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 

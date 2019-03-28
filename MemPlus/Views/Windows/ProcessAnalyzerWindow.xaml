@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
+    xmlns:process="clr-namespace:MemPlus.Business.PROCESS"
     mc:Ignorable="d" UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen" AllowsTransparency="True"
     TitleTextAlignment="Center" UseNativeChrome="True"
@@ -18,7 +19,7 @@
         <ListView x:Name="LsvProcessList"
                   SelectionMode="Single"
                   IsSynchronizedWithCurrentItem="True"
-                  utils:GridViewSort.Enabled="True">
+                  utils:GridViewSort.Enabled="True" d:DataContext="{d:DesignInstance process:ProcessDetail}">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource ClearWorkingSet}" Click="EmptyWorkingSetMenuItem_OnClick">

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
-using System.Windows;
 using MemPlus.Business.LOG;
 using Microsoft.VisualBasic.Devices;
 // ReSharper disable PossibleNullReferenceException
@@ -82,11 +81,11 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Property displaying whether the standby cache should be cleared or not during memory optimization
         /// </summary>
-        internal bool ClearStandbyCache { get; set; }
+        internal bool ClearStandbyCache { private get; set; }
         /// <summary>
         /// Property displaying whether automatic RAM optimization should occur after a certain RAM usage percentage was reached
         /// </summary>
-        internal bool AutoOptimizePercentage { get; set; }
+        internal bool AutoOptimizePercentage { private get; set; }
         /// <summary>
         /// Property displaying whether the clipboard should be cleared during memory cleaning
         /// </summary>
@@ -94,7 +93,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Property displaying whether the .NET garbage collector should be invoked or not
         /// </summary>
-        internal bool InvokeGarbageCollector { get; set; }
+        internal bool InvokeGarbageCollector { private get; set; }
         #endregion
 
         #region Delegates

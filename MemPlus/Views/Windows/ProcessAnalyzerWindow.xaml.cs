@@ -71,7 +71,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _logController.AddLog(new ApplicationLog("Done loading ProcessAnalyzerWindow properties"));
@@ -152,7 +152,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -176,7 +176,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -199,7 +199,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

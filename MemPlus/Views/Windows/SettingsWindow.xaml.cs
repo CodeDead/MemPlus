@@ -169,7 +169,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -313,7 +313,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -356,7 +356,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -430,7 +430,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -463,9 +463,17 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void ChbAutoOptimizePercentage_OnChecked(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.RamMonitor) return;
-            MessageBox.Show((string)Application.Current.FindResource("AutoOptimizeWarning"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-            Properties.Settings.Default.RamMonitor = true;
+            try
+            {
+                if (Properties.Settings.Default.RamMonitor) return;
+                MessageBox.Show((string)Application.Current.FindResource("AutoOptimizeWarning"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                Properties.Settings.Default.RamMonitor = true;
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ErrorLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -500,6 +508,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -517,6 +526,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -534,6 +544,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -589,7 +600,16 @@ namespace MemPlus.Views.Windows
             if (fbd.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
 
             TxtLogFilePath.Text = fbd.SelectedPath;
-            Properties.Settings.Default.LogPath = TxtLogFilePath.Text;
+
+            try
+            {
+                Properties.Settings.Default.LogPath = TxtLogFilePath.Text;
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ErrorLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         /// <summary>
@@ -605,6 +625,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

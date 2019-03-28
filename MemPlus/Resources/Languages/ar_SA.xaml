@@ -21,6 +21,7 @@
     <system:String x:Key="Logs">سجلات</system:String>
     <system:String x:Key="AllLogs">كل السجلات</system:String>
     <system:String x:Key="RamLogs">سجلات الرام</system:String>
+    <system:String x:Key="ErrorLogs">سجلات الأخطاء</system:String>
     <system:String x:Key="ProcessLogs">سجلات العمليات</system:String>
     <system:String x:Key="ApplicationLogs">سجلات البرنامج</system:String>
     <system:String x:Key="RamAnalyzerData">بيانات محلل الرام</system:String>

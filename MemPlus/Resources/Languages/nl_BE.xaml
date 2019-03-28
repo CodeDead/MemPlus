@@ -21,6 +21,7 @@
     <system:String x:Key="Logs">Logs</system:String>
     <system:String x:Key="AllLogs">Alle logs</system:String>
     <system:String x:Key="RamLogs">RAM logs</system:String>
+    <system:String x:Key="ErrorLogs">Fout logs</system:String>
     <system:String x:Key="ProcessLogs">Proces logs</system:String>
     <system:String x:Key="ApplicationLogs">Applicatie logs</system:String>
     <system:String x:Key="RamAnalyzerData">RAM Analyzer data</system:String>

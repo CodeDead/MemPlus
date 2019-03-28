@@ -105,6 +105,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\EXPORT\ExportTypes.cs" />
+    <Compile Include="Business\LOG\ErrorLog.cs" />
     <Compile Include="Business\LOG\LogType.cs" />
     <Compile Include="Business\LOG\ProcessLog.cs" />
     <Compile Include="Business\PROCESS\ProcessDetail.cs" />

@@ -80,6 +80,7 @@
                         <MenuItem Header="{DynamicResource RamLogs}" Click="RamExportMenuItem_OnClick" />
                         <MenuItem Header="{DynamicResource ProcessLogs}" Click="ProcessExportMenuItem_OnClick" />
                         <MenuItem Header="{DynamicResource ApplicationLogs}" Click="ApplicationExportMenuItem_OnClick"/>
+                        <MenuItem Header="{DynamicResource ErrorLogs}" Click="ErrorExportMenuItem_OnClick"/>
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="{DynamicResource RamAnalyzerData}" Click="ExportRamAnalyzerDataMenuItem_OnClick">
@@ -128,6 +129,7 @@
                     <MenuItem Header="{DynamicResource RamLogs}" Click="RamLogsMenuItem_OnClick" />
                     <MenuItem Header="{DynamicResource ProcessLogs}" Click="ProcessLogsMenuItem_OnClick" />
                     <MenuItem Header="{DynamicResource ApplicationLogs}" Click="ApplicationLogsMenuItem_OnClick" />
+                    <MenuItem Header="{DynamicResource ErrorLogs}" Click="ErrorLogsMenuItem_OnClick" />
                     <Separator />
                     <MenuItem Header="{DynamicResource Clear}" Click="ClearLogsMenuItem_OnClick" />
                 </MenuItem>

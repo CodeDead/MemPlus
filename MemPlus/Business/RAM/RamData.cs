@@ -8,11 +8,11 @@
         /// <summary>
         /// A key value
         /// </summary>
-        public string Key { get; set; }
+        public string Key { get; }
         /// <summary>
         /// The value that is linked to the specific key
         /// </summary>
-        public string Value { get; set; }
+        public string Value { get; }
 
         /// <summary>
         /// Initialize a new RamData object

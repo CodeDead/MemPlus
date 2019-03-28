@@ -21,6 +21,7 @@
     <system:String x:Key="Logs">Registri</system:String>
     <system:String x:Key="AllLogs">Tutti i registri</system:String>
     <system:String x:Key="RamLogs">Registri RAM</system:String>
+    <system:String x:Key="ErrorLogs">Log degli errori</system:String>
     <system:String x:Key="ProcessLogs">Registri elaborazione</system:String>
     <system:String x:Key="ApplicationLogs">Registri applicazione</system:String>
     <system:String x:Key="RamAnalyzerData">Dati analisi RAM</system:String>

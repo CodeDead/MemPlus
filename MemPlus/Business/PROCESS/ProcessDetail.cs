@@ -22,5 +22,10 @@
         /// The current memory usage of the Process in MB
         /// </summary>
         public string MemoryUsage { get; set; }
+        /// <summary>
+        /// The current memory usage of the Process
+        /// </summary>
+        // ReSharper disable once UnusedAutoPropertyAccessor.Global
+        public long MemoryUsageLong { get; set; }
     }
 }

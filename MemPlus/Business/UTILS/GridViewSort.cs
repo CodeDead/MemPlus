@@ -117,7 +117,7 @@ namespace MemPlus.Business.UTILS
         /// <typeparam name="T">DependencyObject</typeparam>
         /// <param name="reference">A DependencyObject</param>
         /// <returns>The parent of a DependencyObject</returns>
-        internal static T GetAncestor<T>(DependencyObject reference) where T : DependencyObject
+        private static T GetAncestor<T>(DependencyObject reference) where T : DependencyObject
         {
             DependencyObject parent = VisualTreeHelper.GetParent(reference);
             while (!(parent is T))
@@ -132,7 +132,7 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         /// <param name="view">The ICollectionView</param>
         /// <param name="propertyName">The name of the property</param>
-        internal static void ApplySort(ICollectionView view, string propertyName)
+        private static void ApplySort(ICollectionView view, string propertyName)
         {
             ListSortDirection direction = ListSortDirection.Ascending;
             if (view.SortDescriptions.Count > 0)

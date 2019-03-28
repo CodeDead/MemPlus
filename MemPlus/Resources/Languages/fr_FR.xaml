@@ -22,6 +22,7 @@
     <system:String x:Key="Logs">Journaux</system:String>
     <system:String x:Key="AllLogs">Tous les journaux</system:String>
     <system:String x:Key="RamLogs">Journaux de RAM</system:String>
+    <system:String x:Key="ErrorLogs">Journaux d'erreur</system:String>
     <system:String x:Key="ProcessLogs">Journaux de processus</system:String>
     <system:String x:Key="ApplicationLogs">Journaux d'application</system:String>
     <system:String x:Key="RamAnalyzerData">Données RAM Analyzer</system:String>

@@ -60,7 +60,7 @@ namespace MemPlus.Business.UTILS
             }
             catch (Exception ex)
             {
-                logController.AddLog(new ApplicationLog(ex.Message));
+                logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -139,7 +139,7 @@ namespace MemPlus.Business.UTILS
             }
             catch (Exception ex)
             {
-                logController.AddLog(new ApplicationLog(ex.Message));
+                logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -189,7 +189,7 @@ namespace MemPlus.Business.UTILS
             }
             catch (Exception ex)
             {
-                logController.AddLog(new ApplicationLog(ex.Message));
+                logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             return false;
@@ -231,7 +231,7 @@ namespace MemPlus.Business.UTILS
             }
             catch (Exception ex)
             {
-                logController.AddLog(new ApplicationLog(ex.Message));
+                logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -259,13 +259,14 @@ namespace MemPlus.Business.UTILS
                             ProcessId = p.Id,
                             ProcessName = p.ProcessName,
                             ProcessLocation = p.MainModule.FileName,
-                            MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB"
+                            MemoryUsage = (p.WorkingSet64 / (1024 * 1024)).ToString("F2") + " MB",
+                            MemoryUsageLong = p.WorkingSet64
                         };
                         processDetailsList.Add(pd);
                     }
                     catch (Exception ex)
                     {
-                        logController.AddLog(new ProcessLog(p.ProcessName + ": " + ex.Message));
+                        logController.AddLog(new ErrorLog(p.ProcessName + ": " + ex.Message));
                     }
                 }
             });

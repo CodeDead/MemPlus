@@ -68,7 +68,7 @@ namespace MemPlus.Views.Windows
             catch (Exception ex)
             {
                 _logController = new LogController();
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
             }
 
             _logController.AddLog(new ApplicationLog("Initializing MainWindow"));
@@ -87,7 +87,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
             }
 
             Application app = Application.Current;
@@ -133,7 +133,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -172,8 +172,8 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-                _logController.AddLog(new ApplicationLog(ex.Message));
             }
         }
 
@@ -221,16 +221,24 @@ namespace MemPlus.Views.Windows
                 message = ((string)Application.Current.FindResource("RamUsageSaved"))?.Replace("%", ramSavings.ToString("F2"));
             }
 
-            if (!Properties.Settings.Default.RamCleaningMessage) return;
-            // ReSharper disable once SwitchStatementMissingSomeCases
-            switch (Visibility)
+            try
             {
-                default:
-                    MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
-                    break;
-                case Visibility.Hidden when TbiIcon.Visibility == Visibility.Visible:
-                    TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
-                    break;
+                if (!Properties.Settings.Default.RamCleaningMessage) return;
+                // ReSharper disable once SwitchStatementMissingSomeCases
+                switch (Visibility)
+                {
+                    default:
+                        MessageBox.Show(message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+                        break;
+                    case Visibility.Hidden when TbiIcon.Visibility == Visibility.Visible:
+                        TbiIcon.ShowBalloonTip("MemPlus", message, BalloonIcon.Info);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ErrorLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -287,7 +295,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -353,7 +361,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController?.AddLog(new ApplicationLog(ex.Message));
+                _logController?.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _logController?.AddLog(new ApplicationLog("Done initializing hotkey hook"));
@@ -387,7 +395,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -403,7 +411,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -428,7 +436,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -464,7 +472,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -486,7 +494,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -519,8 +527,8 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-                _logController.AddLog(new ApplicationLog(ex.Message));
             }
 
             _logController.AddLog(new ApplicationLog("Done changing MainWindow theme style"));
@@ -557,7 +565,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when all the logs should be displayed
+        /// Method that is called when all the Log objects should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -567,7 +575,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when the RAM Optimizer logs should be displayed
+        /// Method that is called when the RamLogs should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -577,7 +585,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when the Process logs should be displayed
+        /// Method that is called when the ProcessLog objects should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -587,13 +595,23 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when the Application logs should be displayed
+        /// Method that is called when the ApplicationLog objects should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             new LogWindow(_logController, LogType.Application).Show();
+        }
+        
+        /// <summary>
+        /// Method that is called when the ErrorLog objects should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ErrorLogsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new LogWindow(_logController, LogType.Error).Show();
         }
 
         /// <summary>
@@ -611,7 +629,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -630,7 +648,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -649,7 +667,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -665,7 +683,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when all RAM Optimizer logs should be exported
+        /// Method that is called when all RamLog objects should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -675,7 +693,7 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when all Process logs should be exported
+        /// Method that is called when all ProcessLog objects should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
@@ -685,13 +703,23 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when all Application logs should be exported
+        /// Method that is called when all ApplicationLog objects should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
         private void ApplicationExportMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             ExportLogs(LogType.Application);
+        }
+        
+        /// <summary>
+        /// Method that is called when all ErrorLog objects should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ErrorExportMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ExportLogs(LogType.Error);
         }
 
         /// <summary>
@@ -746,8 +774,8 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-                _logController.AddLog(new ApplicationLog(ex.Message));
             }
         }
 
@@ -765,7 +793,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -784,7 +812,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             WindowDraggable();
@@ -804,7 +832,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             RamStatisticsVisibility();
@@ -824,7 +852,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             RamGaugeVisibility();
@@ -864,7 +892,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -883,7 +911,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -902,7 +930,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -979,7 +1007,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -1036,7 +1064,7 @@ namespace MemPlus.Views.Windows
             }
             catch (Exception ex)
             {
-                _logController.AddLog(new ApplicationLog(ex.Message));
+                _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -1053,20 +1081,28 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The CancelEventArgs</param>
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            if (Properties.Settings.Default.HideOnClose && Visibility == Visibility.Visible)
+            try
             {
-                Hide();
-                e.Cancel = true;
+                if (Properties.Settings.Default.HideOnClose && Visibility == Visibility.Visible)
+                {
+                    Hide();
+                    e.Cancel = true;
+                }
+                else
+                {
+                    // De-register any hotkeys, if applicable
+                    _hotKeyController?.Dispose();
+                    // Disable the RAM Monitor to prevent exceptions from being thrown
+                    _ramController?.DisableMonitor();
+                    TbiIcon?.Dispose();
+                    // Dispose of the LogController object gracefully
+                    _logController.Dispose();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // De-register any hotkeys, if applicable
-                _hotKeyController?.Dispose();
-                // Disable the RAM Monitor to prevent exceptions from being thrown
-                _ramController?.DisableMonitor();
-                TbiIcon?.Dispose();
-                // Dispose of the LogController object gracefully
-                _logController.Dispose();
+                _logController.AddLog(new ErrorLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -1095,7 +1131,7 @@ namespace MemPlus.Views.Windows
                 }
                 catch (Exception ex)
                 {
-                    _logController.AddLog(new ApplicationLog(ex.Message));
+                    _logController.AddLog(new ErrorLog(ex.Message));
                     MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

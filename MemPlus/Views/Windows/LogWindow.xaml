@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:log="clr-namespace:MemPlus.Business.LOG"
+    xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
     mc:Ignorable="d"
     UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen"
@@ -16,7 +18,8 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvLogs_MouseWheel">
+        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvLogs_MouseWheel"
+                  utils:GridViewSort.Enabled="True" d:DataContext="{d:DesignInstance log:Log}">
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource Copy}" Click="CopyMenuItem_OnClick">
@@ -44,9 +47,9 @@
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
-                <GridView x:Name="DynGrid">
-                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding Time}" />
-                    <GridViewColumn Header="{DynamicResource Content}" DisplayMemberBinding="{Binding Data}" />
+                <GridView>
+                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding Time}" utils:GridViewSort.PropertyName="Time" />
+                    <GridViewColumn Header="{DynamicResource Content}" DisplayMemberBinding="{Binding Data}" utils:GridViewSort.PropertyName="Data" />
                 </GridView>
             </ListView.View>
         </ListView>
