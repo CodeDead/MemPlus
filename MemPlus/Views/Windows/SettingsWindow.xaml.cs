@@ -345,7 +345,6 @@ namespace MemPlus.Views.Windows
 
                 _logController.SetAutoClear(Properties.Settings.Default.LogClearAuto);
                 _logController.SetAutoClearInterval(Properties.Settings.Default.LogClearInterval);
-                _logController.SetSaveDirectory(Properties.Settings.Default.LogPath);
                 _logController.SetSaveToFile(Properties.Settings.Default.SaveLogsToFile);
 
                 ChangeVisualStyle();

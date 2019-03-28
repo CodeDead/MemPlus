@@ -468,18 +468,6 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int SelectedLanguage {
-            get {
-                return ((int)(this["SelectedLanguage"]));
-            }
-            set {
-                this["SelectedLanguage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SaveLogsToFile {
             get {
@@ -571,6 +559,18 @@ namespace MemPlus.Properties {
             }
             set {
                 this["LoggingEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int SelectedLanguage {
+            get {
+                return ((int)(this["SelectedLanguage"]));
+            }
+            set {
+                this["SelectedLanguage"] = value;
             }
         }
     }

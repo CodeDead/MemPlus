@@ -75,6 +75,7 @@
                             <Label Grid.Column="0" Content="{DynamicResource LanguageSetting}" Margin="3" />
                             <ComboBox Grid.Column="1" Margin="3" SelectedIndex="{bind:SettingsBinder SelectedLanguage}">
                                 <ComboBox.Items>
+                                    <ComboBoxItem Content="عربى" />
                                     <ComboBoxItem Content="Deutsch" />
                                     <ComboBoxItem Content="English" />
                                     <ComboBoxItem Content="Español" />

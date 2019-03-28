@@ -154,7 +154,7 @@
             </MenuItem>
 
             <MenuItem Header="{DynamicResource Help}">
-                <MenuItem Header="Help" Click="HelpMenuItem_OnClick">
+                <MenuItem Header="{DynamicResource Help}" Click="HelpMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/help.png" />
                     </MenuItem.Icon>

@@ -49,14 +49,14 @@
     <system:String x:Key="ClearWorkingSets">تفرغة الاطقم العاملة</system:String>
     <system:String x:Key="ClearFileSystemCache">تفرغة الذاكرة الخبيئة لنظام الملفات</system:String>
     <system:String x:Key="AdministrativeRightsWarning">ميم بلس قد لا يعمل بشكل صحيح بدون اذن حساب مسؤول.</system:String>
-    <system:String x:Key="GaugeRamUsage">استخدام الرام (%)</system:String>
+    <system:String x:Key="GaugeRamUsage">(%) استخدام الرام</system:String>
     <system:String x:Key="RamUsageIncreased">يبدو ان استخدامك للرام قد ازداد % ميجابايت</system:String>
     <system:String x:Key="RamUsageSaved">لقد أفرغت % ميجابايت من الرام</system:String>
 
     <!--AboutWindow-->
     <system:String x:Key="AboutWindowTitle">ميم بلس - نبذة</system:String>
     <system:String x:Key="Close">اغلق</system:String>
-    <system:String x:Key="AboutInfo">ميم بلس تم عمله بواسطة ديدلاين.\n\nالصور: صغير ومسطح بواسطة باوميديا\nالمظهر: سينفيوجن\nالاصدار: %\n\nحقوق النشر © كودديد 2019</system:String>
+    <system:String x:Key="AboutInfo">ميم بلس تم عمله بواسطة ديدلاين.\n\nالصور: صغير ومسطح بواسطة باوميديا\nالمظهر: سينفيوجن\nالاصدار: %\n\n2019 CodeDead © حقوق النشر</system:String>
 
     <!--LogWindow-->
     <system:String x:Key="LogWindowTitle">ميم بلس - السجلات</system:String>
