@@ -132,8 +132,12 @@ namespace MemPlus.Business.LOG
             SetAutoClear(autoClear);
 
             _startTime = DateTime.Now;
-            // Set this after the DateTime has been established
-            SetSaveDirectory(saveDirectory);
+
+            if (saveToFile)
+            {
+                // Set this after the DateTime has been established
+                SetSaveDirectory(saveDirectory);
+            }
             /*
              * Make sure this is the last LogController method that is called
              * because this will only work properly when all other settings (especially the directory)
