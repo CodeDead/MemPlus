@@ -186,7 +186,7 @@ namespace MemPlus.Business.LOG
                 DisposeFileResources();
             }
 
-            if (saveToFile)
+            if (_logPath != null && saveToFile && _logPath.Length > 0)
             {
                 // Generate a new FileStream that allows other handles to access the file
                 _fileStream = new FileStream(_logPath,
@@ -194,9 +194,12 @@ namespace MemPlus.Business.LOG
                     FileAccess.Write,
                     FileShare.ReadWrite);
                 _streamWriter = new StreamWriter(_fileStream) {AutoFlush = true};
+                _saveToFile = true;
             }
-
-            _saveToFile = saveToFile;
+            else
+            {
+                _saveToFile = false;
+            }
         }
 
         /// <summary>
@@ -205,6 +208,7 @@ namespace MemPlus.Business.LOG
         /// <param name="saveDirectory">The directory to which logs can be saved</param>
         internal void SetSaveDirectory(string saveDirectory)
         {
+            if (string.IsNullOrEmpty(saveDirectory)) throw new ArgumentNullException(nameof(saveDirectory));
             if (!Directory.Exists(saveDirectory)) throw new IOException("The selected log directory (" + saveDirectory + ") does not exist!");
 
             // Format the directory string

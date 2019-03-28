@@ -286,20 +286,21 @@ namespace MemPlus.Business.UTILS
         /// </summary>
         /// <param name="file">The file for which the Process object should be retrieved</param>
         /// <returns></returns>
-        internal static Process GetProcessForFile(string file)
+        internal static List<Process> GetProcessesForFile(string file)
         {
+            List<Process> processes = new List<Process>();
             foreach (Process p in Process.GetProcesses())
             {
                 try
                 {
-                    if (p.MainModule.FileName == file) return p;
+                    if (p.MainModule.FileName == file) processes.Add(p);
                 }
                 catch (Exception)
                 {
                     // ignored
                 }
             }
-            return null;
+            return processes;
         }
     }
 }
