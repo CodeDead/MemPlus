@@ -59,6 +59,7 @@ namespace MemPlus.Views.Windows
             {
                 _logController = new LogController
                 (
+                    Properties.Settings.Default.LoggingEnabled,
                     Properties.Settings.Default.LogClearAuto,
                     Properties.Settings.Default.LogClearInterval,
                     Properties.Settings.Default.SaveLogsToFile,
@@ -339,6 +340,7 @@ namespace MemPlus.Views.Windows
                     uint values = 0;
                     foreach (string s in mods)
                     {
+                        // ReSharper disable once SwitchStatementMissingSomeCases
                         switch (s)
                         {
                             case "Ctrl":

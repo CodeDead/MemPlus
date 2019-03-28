@@ -129,6 +129,7 @@
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Registrazione</system:String>
+    <system:String x:Key="LoggingEnabled">Registrazione abilitata</system:String>
     <system:String x:Key="AutoClearLogs">Cancella automaticamente i log dalla memoria ogni</system:String>
     <system:String x:Key="LogFile">Salva automaticamente i registri nel file</system:String>
     <system:String x:Key="LogFilePath">Percorso del file di registro:</system:String>

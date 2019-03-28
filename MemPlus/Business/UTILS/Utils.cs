@@ -154,14 +154,11 @@ namespace MemPlus.Business.UTILS
         /// <returns>True if the operation completed successfully, otherwise false</returns>
         internal static bool ExportLogs(LogType? logType, LogController logController)
         {
-            if (logType != null)
-            {
-                if (logController.GetLogs(logType).Count == 0) return false;
-            }
+            if (logController.GetLogs(logType).Count == 0) return false;
 
             SaveFileDialog sfd = new SaveFileDialog
             {
-                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+                Filter = "Log file (*.log)|*.log|Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
             };
 
             if (sfd.ShowDialog() != true) return false;

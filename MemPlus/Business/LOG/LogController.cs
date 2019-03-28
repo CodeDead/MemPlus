@@ -17,6 +17,10 @@ namespace MemPlus.Business.LOG
     {
         #region Variables
         /// <summary>
+        /// True if logging is enabled, otherwise false
+        /// </summary>
+        private bool _loggingEnabled;
+        /// <summary>
         /// The list of available Log objects
         /// </summary>
         private readonly List<Log> _logList;
@@ -96,6 +100,7 @@ namespace MemPlus.Business.LOG
         /// </summary>
         internal LogController()
         {
+            _loggingEnabled = true;
             _logList = new List<Log>();
 
             _autoClearTimer = new Timer();
@@ -111,18 +116,20 @@ namespace MemPlus.Business.LOG
         /// <summary>
         /// Initialize a new LogController object
         /// </summary>
+        /// <param name="enabled">True if logging is enabled, otherwise false</param>
         /// <param name="autoClear">True if the logs should be cleared automatically</param>
         /// <param name="clearInterval">The interval for when ApplicationLog objects should automatically be cleared</param>
         /// <param name="saveToFile">True if logs should be written to a file</param>
         /// <param name="saveDirectory">The directory to which the logs should be written</param>
-        internal LogController(bool autoClear, int clearInterval, bool saveToFile, string saveDirectory)
+        internal LogController(bool enabled, bool autoClear, int clearInterval, bool saveToFile, string saveDirectory)
         {
+            _loggingEnabled = enabled;
             _logList = new List<Log>();
 
             _autoClearTimer = new Timer();
             _autoClearTimer.Elapsed += OnTimedEvent;
             _autoClearTimer.Interval = clearInterval;
-            _autoClearTimer.Enabled = autoClear;
+            SetAutoClear(autoClear);
 
             _startTime = DateTime.Now;
             // Set this after the DateTime has been established
@@ -135,13 +142,20 @@ namespace MemPlus.Business.LOG
             SetSaveToFile(saveToFile);
         }
 
+        internal void SetLoggingEnabled(bool enabled)
+        {
+            _loggingEnabled = enabled;
+        }
+
         /// <summary>
         /// Set whether logs should be cleared automatically or not
         /// </summary>
         /// <param name="autoClear">True if logs should be cleared automatically, otherwise false</param>
         internal void SetAutoClear(bool autoClear)
         {
-            _autoClearTimer.Enabled = autoClear;
+            bool timerEnabled = autoClear;
+            if (!_loggingEnabled) timerEnabled = false;
+            _autoClearTimer.Enabled = timerEnabled;
         }
 
         /// <summary>
@@ -159,7 +173,13 @@ namespace MemPlus.Business.LOG
         /// <param name="saveToFile">True if logs should be saved to a file, otherwise false</param>
         internal void SetSaveToFile(bool saveToFile)
         {
-            if (_saveToFile == saveToFile) return;
+            if (!_loggingEnabled && (_saveToFile || saveToFile))
+            {
+                DisposeFileResources();
+                _saveToFile = saveToFile;
+                return;
+            }
+            
             if (_saveToFile && !saveToFile)
             {
                 // Make sure the contents of the log file is written before disabling this function
@@ -215,6 +235,8 @@ namespace MemPlus.Business.LOG
         /// <param name="l">The Log object that needs to be added</param>
         internal void AddLog(Log l)
         {
+            if (!_loggingEnabled) return;
+            
             _logList.Add(l);
             LogAddedEvent?.Invoke(l);
             if (_saveToFile) WriteLogToFile(l);
@@ -311,6 +333,7 @@ namespace MemPlus.Business.LOG
         /// <param name="exportType">The type of export that should be performed</param>
         internal void Export(string path, LogType? logType, ExportType exportType)
         {
+            if (_logList.Count == 0) return;
             List<Log> exportList;
 
             if (logType != null)

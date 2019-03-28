@@ -101,6 +101,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -109,19 +110,20 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <CheckBox Grid.Row="0" Grid.Column="0" Margin="3" Content="{DynamicResource AutoClearLogs}" IsChecked="{bind:SettingsBinder LogClearAuto}" />
-                    <syncfusion:IntegerTextBox x:Name="ItbAutoClearLogsInterval" Margin="3" Grid.Row="0" Grid.Column="1" MinValue="1" />
+                    <CheckBox Grid.Row="0" Grid.Column="0" Margin="3" Content="{DynamicResource LoggingEnabled}" IsChecked="{bind:SettingsBinder LoggingEnabled}" />
+                    <CheckBox Grid.Row="1" Grid.Column="0" Margin="3" Content="{DynamicResource AutoClearLogs}" IsChecked="{bind:SettingsBinder LogClearAuto}" />
+                    <syncfusion:IntegerTextBox x:Name="ItbAutoClearLogsInterval" Margin="3" Grid.Row="1" Grid.Column="1" MinValue="1" />
 
-                    <ComboBox x:Name="CboLogClearInterval" Grid.Row="0" Grid.Column="2" Margin="3" SelectedIndex="0">
+                    <ComboBox x:Name="CboLogClearInterval" Grid.Row="1" Grid.Column="2" Margin="3" SelectedIndex="0">
                         <ComboBoxItem Content="{DynamicResource Milliseconds}" />
                         <ComboBoxItem Content="{DynamicResource Seconds}" />
                         <ComboBoxItem Content="{DynamicResource Minutes}" />
                         <ComboBoxItem Content="{DynamicResource Hours}" />
                     </ComboBox>
 
-                    <CheckBox Margin="3" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Content="{DynamicResource LogFile}" IsChecked="{bind:SettingsBinder SaveLogsToFile}" />
+                    <CheckBox Margin="3" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Content="{DynamicResource LogFile}" IsChecked="{bind:SettingsBinder SaveLogsToFile}" />
 
-                    <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>

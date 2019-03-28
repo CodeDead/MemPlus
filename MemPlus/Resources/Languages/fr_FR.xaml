@@ -130,6 +130,7 @@
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Enregistrement</system:String>
+    <system:String x:Key="LoggingEnabled">Enregistrement activé</system:String>
     <system:String x:Key="AutoClearLogs">Effacer automatiquement les journaux de la mémoire tous les</system:String>
     <system:String x:Key="LogFile">Enregistrer automatiquement les journaux dans un fichier</system:String>
     <system:String x:Key="LogFilePath">Chemin du fichier journal:</system:String>

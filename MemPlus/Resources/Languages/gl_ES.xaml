@@ -129,6 +129,7 @@
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Rexistro</system:String>
+    <system:String x:Key="LoggingEnabled">Rexistro activado</system:String>
     <system:String x:Key="AutoClearLogs">Elimina automaticamente os rexistros da memoria cada</system:String>
     <system:String x:Key="LogFile">Garda automaticamente rexistros no ficheiro</system:String>
     <system:String x:Key="LogFilePath">Ruta do ficheiro de rexistro:</system:String>

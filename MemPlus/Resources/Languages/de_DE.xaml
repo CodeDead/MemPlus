@@ -128,6 +128,7 @@
     <system:String x:Key="InvokeGarbageCollector">.NET-Garbage-Collector aufrufen</system:String>
 
     <system:String x:Key="LogSettings">Protokollierung</system:String>
+    <system:String x:Key="LoggingEnabled">Protokollierung aktiviert</system:String>
     <system:String x:Key="AutoClearLogs">Protokolle automatisch aus dem Speicher löschen jede</system:String>
     <system:String x:Key="LogFile">Protokolle automatisch in Datei speichern</system:String>
     <system:String x:Key="LogFilePath">Protokolldateipfad:</system:String>

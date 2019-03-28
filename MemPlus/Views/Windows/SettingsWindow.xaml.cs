@@ -214,6 +214,7 @@ namespace MemPlus.Views.Windows
                 }
 
                 // Logging
+                _logController.SetLoggingEnabled(Properties.Settings.Default.LoggingEnabled);
                 _logController.SetAutoClear(Properties.Settings.Default.LogClearAuto);
 
                 Properties.Settings.Default.LogClearIntervalIndex = CboLogClearInterval.SelectedIndex;
