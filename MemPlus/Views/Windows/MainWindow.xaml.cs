@@ -252,8 +252,6 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                MniDisableInactive.IsChecked = Properties.Settings.Default.DisableOnInactive;
-                MniOnTop.IsChecked = Properties.Settings.Default.Topmost;
                 MniWindowDraggable.IsChecked = Properties.Settings.Default.WindowDragging;
                 MniRamStatistics.IsChecked = Properties.Settings.Default.WindowRamStatistics;
                 MniRamGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
@@ -617,26 +615,6 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when the Topmost property should be changed
-        /// </summary>
-        /// <param name="sender">The object that called this method</param>
-        /// <param name="e">The RoutedEventArgs</param>
-        private void TopMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Topmost = MniOnTop.IsChecked;
-                Properties.Settings.Default.Topmost = Topmost;
-                Properties.Settings.Default.Save();
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ErrorLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        /// <summary>
         /// Method that is called when the CodeDead homepage should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
@@ -773,25 +751,6 @@ namespace MemPlus.Views.Windows
                     }
                     _logController.AddLog(new ApplicationLog("MainWindow is now visible"));
                 }
-            }
-            catch (Exception ex)
-            {
-                _logController.AddLog(new ErrorLog(ex.Message));
-                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        /// <summary>
-        /// Method that is called when the RAM Monitor should be disabled or not when the Application is inactive
-        /// </summary>
-        /// <param name="sender">The object that called this method</param>
-        /// <param name="e">The RoutedEventArgs</param>
-        private void DisableInactiveMenuItem_OnCheckedChanged(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                Properties.Settings.Default.DisableOnInactive = MniDisableInactive.IsChecked;
-                Properties.Settings.Default.Save();
             }
             catch (Exception ex)
             {
@@ -1092,6 +1051,8 @@ namespace MemPlus.Views.Windows
                 }
                 else
                 {
+                    // Save properties
+                    Properties.Settings.Default.Save();
                     // De-register any hotkeys, if applicable
                     _hotKeyController?.Dispose();
                     // Disable the RAM Monitor to prevent exceptions from being thrown

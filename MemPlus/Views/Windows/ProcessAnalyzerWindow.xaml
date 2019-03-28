@@ -7,9 +7,11 @@
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
     xmlns:process="clr-namespace:MemPlus.Business.PROCESS"
+    xmlns:bind="clr-namespace:MemPlus.Business.UTILS"
     mc:Ignorable="d" UseLayoutRounding="True"
     WindowStartupLocation="CenterScreen" AllowsTransparency="True"
     TitleTextAlignment="Center" UseNativeChrome="True"
+    Topmost="{bind:SettingsBinder Topmost}"
     Title="{DynamicResource ProcessAnalyzerWindowTitle}" Height="350" Width="550" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>

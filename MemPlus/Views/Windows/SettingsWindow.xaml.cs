@@ -88,7 +88,6 @@ namespace MemPlus.Views.Windows
             {
                 // General
                 ChbAutoStart.IsChecked = Utils.AutoStartUp();
-                Topmost = Properties.Settings.Default.Topmost;
 
                 if (Properties.Settings.Default.WindowDragging)
                 {

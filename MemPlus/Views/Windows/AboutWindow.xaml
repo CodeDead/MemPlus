@@ -5,11 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
     mc:Ignorable="d"
     TitleTextAlignment="Center"
     WindowStartupLocation="CenterScreen"
     UseLayoutRounding="True"
     AllowsTransparency="True" UseNativeChrome="True"
+    Topmost="{utils:SettingsBinder Topmost}"
     Title="{DynamicResource AboutWindowTitle}" Height="200" Width="350" Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>

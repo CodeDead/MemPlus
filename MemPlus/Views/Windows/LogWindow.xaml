@@ -12,6 +12,7 @@
     WindowStartupLocation="CenterScreen"
     AllowsTransparency="True"
     TitleTextAlignment="Center" UseNativeChrome="True"
+    Topmost="{utils:SettingsBinder Topmost}"
     Title="{DynamicResource LogWindowTitle}" Height="300" Width="450" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>

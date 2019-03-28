@@ -12,7 +12,7 @@
     TitleTextAlignment="Center"
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
-    Closing="SettingsWindow_OnClosing"
+    Closing="SettingsWindow_OnClosing" Topmost="{bind:SettingsBinder Topmost}"
     Title="{DynamicResource SettingsWindowTitle}" Height="450" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>

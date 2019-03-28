@@ -97,7 +97,6 @@ namespace MemPlus.Views.Windows
             _logController.AddLog(new ApplicationLog("Loading AnalyzerWindow properties"));
             try
             {
-                Topmost = Properties.Settings.Default.Topmost;
                 if (Properties.Settings.Default.WindowDragging)
                 {
                     MouseDown += OnMouseDown;

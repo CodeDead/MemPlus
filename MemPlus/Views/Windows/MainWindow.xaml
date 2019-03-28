@@ -6,11 +6,13 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
     xmlns:tb="http://www.hardcodet.net/taskbar"
+    xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
     mc:Ignorable="d"
     UseLayoutRounding="True"
     TitleTextAlignment="Center"
     Closing="MainWindow_OnClosing"
     AllowsTransparency="True" UseNativeChrome="True"
+    Topmost="{utils:SettingsBinder Topmost}"
     Title="MemPlus" Height="300" Width="500" WindowStartupLocation="CenterScreen" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -138,8 +140,8 @@
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/monitor.png" />
                     </MenuItem.Icon>
-                    <MenuItem x:Name="MniOnTop" Header="{DynamicResource Topmost}" IsCheckable="True" Checked="TopMenuItem_OnCheckedChanged" Unchecked="TopMenuItem_OnCheckedChanged" />
-                    <MenuItem x:Name="MniDisableInactive" Header="{DynamicResource DisableWhenInactive}" IsCheckable="True" Checked="DisableInactiveMenuItem_OnCheckedChanged" Unchecked="DisableInactiveMenuItem_OnCheckedChanged" />
+                    <MenuItem Header="{DynamicResource Topmost}" IsCheckable="true" IsChecked="{utils:SettingsBinder Topmost}" />
+                    <MenuItem Header="{DynamicResource DisableWhenInactive}" IsCheckable="True" IsChecked="{utils:SettingsBinder DisableOnInactive}" />
                     <MenuItem x:Name="MniWindowDraggable" Header="{DynamicResource WindowDraggable}" IsCheckable="True" Checked="WindowDraggableMenuItem_OnCheckedChanged" Unchecked="WindowDraggableMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniRamStatistics" Header="{DynamicResource DisplayRamStatistics}" IsCheckable="True" Checked="RamStatisticsMenuItem_OnCheckedChanged" Unchecked="RamStatisticsMenuItem_OnCheckedChanged" />
                     <MenuItem x:Name="MniRamGauge" Header="{DynamicResource DisplayRamGauge}" IsCheckable="True" Checked="RamGaugeMenuItem_OnCheckedChanged" Unchecked="RamGaugeMenuItem_OnCheckedChanged" />
