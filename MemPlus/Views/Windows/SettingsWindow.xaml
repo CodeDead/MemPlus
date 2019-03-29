@@ -158,20 +158,37 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <CheckBox Content="{DynamicResource RamMonitor}" Margin="3" IsChecked="{bind:SettingsBinder RamMonitor}" />
+                            <CheckBox Grid.Row="0" Content="{DynamicResource RamMonitor}" Margin="3" IsChecked="{bind:SettingsBinder RamMonitor}" />
                             <CheckBox Grid.Row="1" Content="{DynamicResource DisableWhenInactive}" Margin="3" IsChecked="{bind:SettingsBinder DisableOnInactive}" />
-                            <Grid Grid.Row="2">
+                            <CheckBox Grid.Row="2" Content="{DynamicResource EnableRamStatistics}" Margin="3" IsChecked="{bind:SettingsBinder EnableRamStatistics}" />
+                            <Grid Grid.Row="3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <Label Content="{DynamicResource UpdateInterval}"  Margin="3" />
-                                <syncfusion:IntegerTextBox Grid.Column="1" x:Name="ItbRamMonitorTimeout" MinValue="1" Margin="3" />
-                                <ComboBox x:Name="CboRamMonitorInterval" Grid.Column="2" Margin="3" SelectedIndex="0">
+                                <Label Grid.Row="0" Grid.Column="0" Margin="3" Content="{DynamicResource RamStatisticsCount}" />
+                                <syncfusion:IntegerTextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" MinValue="0" Margin="3" Value="{bind:SettingsBinder RamMaxUsageHistoryCount}">
+                                    <syncfusion:IntegerTextBox.ToolTip>
+                                        <ToolTip>
+                                            <StackPanel>
+                                                <TextBlock Text="{DynamicResource RamStatisticsCountHint}" />
+                                            </StackPanel>
+                                        </ToolTip>
+                                    </syncfusion:IntegerTextBox.ToolTip>
+                                </syncfusion:IntegerTextBox>
+
+                                <Label Grid.Row="1" Grid.Column="0"  Content="{DynamicResource UpdateInterval}"  Margin="3" />
+                                <syncfusion:IntegerTextBox Grid.Row="1" Grid.Column="1" x:Name="ItbRamMonitorTimeout" MinValue="1" Margin="3" />
+                                <ComboBox x:Name="CboRamMonitorInterval" Grid.Row="1" Grid.Column="2" Margin="3" SelectedIndex="0">
                                     <ComboBoxItem Content="{DynamicResource Milliseconds}" />
                                     <ComboBoxItem Content="{DynamicResource Seconds}" />
                                     <ComboBoxItem Content="{DynamicResource Minutes}" />

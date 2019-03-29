@@ -63,25 +63,20 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="Syncfusion.Licensing, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=632609b4d040f6b4">
-      <HintPath>..\packages\Syncfusion.Licensing.17.1.0.32-beta\lib\net46\Syncfusion.Licensing.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Syncfusion.Licensing, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.17.1.0.38\lib\net46\Syncfusion.Licensing.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfGauge.WPF, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.SfGauge.WPF.17.1.0.32-beta\lib\net46\Syncfusion.SfGauge.WPF.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Syncfusion.SfGauge.WPF, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfGauge.WPF.17.1.0.38\lib\net46\Syncfusion.SfGauge.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfShared.Wpf, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.SfShared.WPF.17.1.0.32-beta\lib\net46\Syncfusion.SfShared.WPF.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Syncfusion.SfShared.WPF, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.SfShared.WPF.17.1.0.38\lib\net46\Syncfusion.SfShared.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Shared.Wpf, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.Shared.WPF.17.1.0.32-beta\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Syncfusion.Shared.WPF, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.17.1.0.38\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Tools.Wpf, Version=17.1460.0.32, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89">
-      <HintPath>..\packages\Syncfusion.Tools.WPF.17.1.0.32-beta\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Syncfusion.Tools.WPF, Version=17.1460.0.38, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Tools.WPF.17.1.0.38\lib\net46\Syncfusion.Tools.WPF.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -128,6 +128,9 @@
     <system:String x:Key="FileDoesNotExist">¡El fichero seleccionado no existe!</system:String>
     <system:String x:Key="AutoOptimizeWarning">¡Esta opción solo funciona si el Monitor de RAM está activado!</system:String>
     <system:String x:Key="InvokeGarbageCollector">Invocar recolector de basura .NET</system:String>
+    <system:String x:Key="EnableRamStatistics">Habilitar estadísticas de RAM</system:String>
+    <system:String x:Key="RamStatisticsCount">Estadísticas RAM máximo conteo:</system:String>
+    <system:String x:Key="RamStatisticsCountHint">Se establece en cero si las estadísticas de RAM nunca deben eliminarse</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">El registro</system:String>
@@ -139,7 +142,7 @@
     <!-- RamStatistics Window -->
     <system:String x:Key="RamStatisticsWindowTitle">MemPlus - Estadísticas RAM</system:String>
     <system:String x:Key="RamTotalUsed">Total utilizado</system:String>
-    <system:String x:Key="RamTotal">Total</system:String>
+    <system:String x:Key="RamTotal">Total disponible</system:String>
     <system:String x:Key="RamUsagePercentage">Porcentaje</system:String>
 
 </ResourceDictionary>

@@ -13,7 +13,7 @@
     AllowsTransparency="True"
     TitleTextAlignment="Center" UseNativeChrome="True"
     Topmost="{utils:SettingsBinder Topmost}"
-    Title="{DynamicResource RamStatisticsWindowTitle}" Height="300" Width="450" Icon="/Resources/Images/ram.png">
+    Title="{DynamicResource RamStatisticsWindowTitle}" Height="300" Width="500" Icon="/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />

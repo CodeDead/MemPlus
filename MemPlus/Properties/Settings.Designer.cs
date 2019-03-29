@@ -576,7 +576,19 @@ namespace MemPlus.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool EnableRamStatistics {
+            get {
+                return ((bool)(this["EnableRamStatistics"]));
+            }
+            set {
+                this["EnableRamStatistics"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public int RamMaxUsageHistoryCount {
             get {
                 return ((int)(this["RamMaxUsageHistoryCount"]));

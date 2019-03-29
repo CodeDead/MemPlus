@@ -128,6 +128,9 @@
     <system:String x:Key="FileDoesNotExist">Die ausgewählte Datei existiert nicht!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Diese Option funktioniert nur wenn der RAM Überwacher aktiviert ist!</system:String>
     <system:String x:Key="InvokeGarbageCollector">.NET-Garbage-Collector aufrufen</system:String>
+    <system:String x:Key="EnableRamStatistics">Aktivieren Sie die RAM-Statistik</system:String>
+    <system:String x:Key="RamStatisticsCount">RAM Statistik maximale Anzahl:</system:String>
+    <system:String x:Key="RamStatisticsCountHint">Auf null setzen, wenn RAM-Statistiken niemals entfernt werden sollen</system:String>
 
     <system:String x:Key="LogSettings">Protokollierung</system:String>
     <system:String x:Key="LoggingEnabled">Protokollierung aktiviert</system:String>
@@ -138,7 +141,7 @@
     <!-- RamStatistics Window -->
     <system:String x:Key="RamStatisticsWindowTitle">MemPlus - RAM-Statistiken</system:String>
     <system:String x:Key="RamTotalUsed">Insgesamt verwendet</system:String>
-    <system:String x:Key="RamTotal">Gesamt</system:String>
+    <system:String x:Key="RamTotal">Insgesamt verfügbar</system:String>
     <system:String x:Key="RamUsagePercentage">Prozentsatz</system:String>
 
 </ResourceDictionary>

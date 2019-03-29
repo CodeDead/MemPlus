@@ -127,6 +127,9 @@
     <system:String x:Key="ResetAllSettings">تمت اعادة ضبظ جميع الخصائص.</system:String>
     <system:String x:Key="FileDoesNotExist">الملف المحدد غير موجود.</system:String>
     <system:String x:Key="AutoOptimizeWarning">هذة الخاصية لن تعمل الا اذا كان مراقب الرام منشط.</system:String>
+    <system:String x:Key="EnableRamStatistics">RAM تمكين إحصائيات</system:String>
+    <system:String x:Key="RamStatisticsCount">إحصائيات RAM الحد الأقصى لعدد</system:String>
+    <system:String x:Key="RamStatisticsCountHint">RAM اضبط على الصفر في حالة عدم إزالة إحصائيات</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">تسجيل</system:String>
@@ -139,7 +142,7 @@
     <!-- RamStatistics Window -->
     <system:String x:Key="RamStatisticsWindowTitle">RAM إحصائيات - MemPlus</system:String>
     <system:String x:Key="RamTotalUsed">مجموع المستخدمة</system:String>
-    <system:String x:Key="RamTotal">مجموع</system:String>
+    <system:String x:Key="RamTotal">مجموعه متاحة</system:String>
     <system:String x:Key="RamUsagePercentage">النسبة المئوية</system:String>
 
 </ResourceDictionary>

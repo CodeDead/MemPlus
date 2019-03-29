@@ -55,9 +55,13 @@ namespace MemPlus.Business.RAM
 
         #region Properties
         /// <summary>
+        /// Property containing whether or not RamUsage objects should be kept in memory
+        /// </summary>
+        internal bool EnableRamStatistics { private get; set; }
+        /// <summary>
         /// The maximum amount of RamUsage objects that should be stored
         /// </summary>
-        internal int MaxUsageHistoryCount { get; set; }
+        internal int MaxUsageHistoryCount { private get; set; }
         /// <summary>
         /// Property containing how much RAM was saved during the last optimization
         /// </summary>
@@ -135,9 +139,10 @@ namespace MemPlus.Business.RAM
         /// <param name="ramUsageAddedEvent">An event to indicate that RamUsage object has been added</param>
         /// <param name="ramClearingCompletedEvent">An event to indicate that the RAM has been cleared</param>
         /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
+        /// <param name="enableRamStatistics">True if RamUsage objects should be kept in memory, otherwise false</param>
         /// <param name="maxUsageHistory">The total amount of RamUsage objects that should be stored for historical reasons</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(RamUsageAdded ramUsageAddedEvent, RamClearingCompleted ramClearingCompletedEvent, int ramUpdateTimerInterval, int maxUsageHistory, LogController logController)
+        internal RamController(RamUsageAdded ramUsageAddedEvent, RamClearingCompleted ramClearingCompletedEvent, int ramUpdateTimerInterval, bool enableRamStatistics, int maxUsageHistory, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
@@ -150,6 +155,7 @@ namespace MemPlus.Business.RAM
 
             _info = new ComputerInfo();
             _ramUsageHistory = new List<RamUsage>();
+            EnableRamStatistics = enableRamStatistics;
             MaxUsageHistoryCount = maxUsageHistory;
             _ramOptimizer = new RamOptimizer(_logController);
             EmptyWorkingSets = true;
@@ -377,14 +383,21 @@ namespace MemPlus.Business.RAM
             double usage = total - Convert.ToDouble(_info.AvailablePhysicalMemory);
             double percentage = usage / total * 100;
 
-            if (MaxUsageHistoryCount != 0 && _ramUsageHistory.Count + 1 > MaxUsageHistoryCount)
+            RamUsage newUsage = new RamUsage(usage, total, percentage);
+            if (EnableRamStatistics)
             {
-                RamUsage removed = _ramUsageHistory[_ramUsageHistory.Count - 1];
-                _ramUsageHistory.Remove(removed);
-                RamUsageRemovedEvent?.Invoke(removed);
+                if (MaxUsageHistoryCount != 0 && _ramUsageHistory.Count + 1 > MaxUsageHistoryCount)
+                {
+                    RamUsage removed = _ramUsageHistory[0];
+                    _ramUsageHistory.Remove(removed);
+                    RamUsageRemovedEvent?.Invoke(removed);
+                }
+            }
+            else
+            {
+                ClearRamUsageHistory();
             }
 
-            RamUsage newUsage = new RamUsage(usage, total, percentage);
             _ramUsageHistory.Add(newUsage);
             RamUsageAddedEvent?.Invoke(newUsage);
 

@@ -94,7 +94,15 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                _ramController = new RamController(UpdateGuiStatistics, RamClearingCompleted, Properties.Settings.Default.RamMonitorInterval, Properties.Settings.Default.RamMaxUsageHistoryCount, _logController);
+                _ramController = new RamController
+                (
+                    UpdateGuiStatistics,
+                    RamClearingCompleted,
+                    Properties.Settings.Default.RamMonitorInterval,
+                    Properties.Settings.Default.EnableRamStatistics,
+                    Properties.Settings.Default.RamMaxUsageHistoryCount,
+                    _logController
+                );
             }
             catch (Exception ex)
             {
@@ -202,8 +210,6 @@ namespace MemPlus.Views.Windows
                 LblTotalPhysicalMemory.Content = ramTotal;
                 LblAvailablePhysicalMemory.Content = ramAvailable;
 
-                Console.WriteLine(_ramController.GetRamUsageHistory().Count);
-
                 if (!Properties.Settings.Default.NotifyIconStatistics) return;
                 string tooltipText = "MemPlus";
                 tooltipText += Environment.NewLine;
@@ -269,6 +275,8 @@ namespace MemPlus.Views.Windows
                 MniRamGauge.IsChecked = Properties.Settings.Default.DisplayGauge;
                 MniRamMonitor.IsChecked = Properties.Settings.Default.RamMonitor;
 
+                _ramController.EnableRamStatistics = Properties.Settings.Default.EnableRamStatistics;
+                _ramController.MaxUsageHistoryCount = Properties.Settings.Default.RamMaxUsageHistoryCount;
                 _ramController.SetProcessExceptionList(Properties.Settings.Default.ProcessExceptions);
                 _ramController.EmptyWorkingSets = Properties.Settings.Default.EmptyWorkingSet;
                 _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
@@ -276,6 +284,11 @@ namespace MemPlus.Views.Windows
                 _ramController.InvokeGarbageCollector = Properties.Settings.Default.InvokeGarbageCollector;
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
+
+                if (!Properties.Settings.Default.EnableRamStatistics)
+                {
+                    _ramController.ClearRamUsageHistory();
+                }
 
                 if (!Properties.Settings.Default.NotifyIconStatistics)
                 {
