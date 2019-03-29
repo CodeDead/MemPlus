@@ -90,6 +90,11 @@
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram_tab.png" />
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="{DynamicResource RamStatistics}" Click="ExportRamStatisticsMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/ram_tab.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="{DynamicResource ProcessAnalyzerData}" Click="ExportProcessAnalyzerDataMenuItem_OnClick">
                         <MenuItem.Icon>
                             <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />
@@ -110,12 +115,25 @@
             </MenuItem>
 
             <MenuItem Header="{DynamicResource Tools}">
-                <MenuItem x:Name="MniRamMonitor" Header="{DynamicResource RamMonitor}" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
-                <MenuItem Header="{DynamicResource RamAnalyzer}" Click="RamAnalyzerMenuItem_OnClick">
+
+                <MenuItem Header="{DynamicResource RamMenu}">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png" />
                     </MenuItem.Icon>
+                    <MenuItem x:Name="MniRamMonitor" Header="{DynamicResource RamMonitor}" IsCheckable="True" Checked="RamMonitorMenuItem_OnCheckedChanged" Unchecked="RamMonitorMenuItem_OnCheckedChanged" />
+                    <Separator />
+                    <MenuItem Header="{DynamicResource RamAnalyzer}" Click="RamAnalyzerMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource RamStatistics}" Click="RamStatisticsMenuitem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/Resources/Images/ram_tab.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
+                
                 <MenuItem Header="{DynamicResource ProcessAnalyzer}" Click="ProcessAnalyzerMenuItem_OnClick">
                     <MenuItem.Icon>
                         <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />

@@ -23,11 +23,13 @@
     <system:String x:Key="RamLogs">RAM logs</system:String>
     <system:String x:Key="ErrorLogs">Fout logs</system:String>
     <system:String x:Key="ProcessLogs">Proces logs</system:String>
+    <system:String x:Key="RamMenu">RAM</system:String>
     <system:String x:Key="ApplicationLogs">Applicatie logs</system:String>
     <system:String x:Key="RamAnalyzerData">RAM Analyseerder data</system:String>
     <system:String x:Key="ProcessAnalyzerData">Proces Analyseerder data</system:String>
     <system:String x:Key="Tools">_Gereedschap</system:String>
     <system:String x:Key="RamMonitor">RAM Monitor</system:String>
+    <system:String x:Key="RamStatistics">RAM Statistieken</system:String>
     <system:String x:Key="RamAnalyzer">RAM Analyseerder</system:String>
     <system:String x:Key="ProcessAnalyzer">Proces Analyseerder</system:String>
     <system:String x:Key="Clear">Wissen</system:String>
@@ -133,5 +135,11 @@
     <system:String x:Key="AutoClearLogs">Automatisch logs uit het geheugen wissen elke</system:String>
     <system:String x:Key="LogFile">Automatisch logs in een bestand opslaan</system:String>
     <system:String x:Key="LogFilePath">Logbestand pad:</system:String>
+
+    <!-- RamStatistics Window -->
+    <system:String x:Key="RamStatisticsWindowTitle">MemPlus - RAM Statistieken</system:String>
+    <system:String x:Key="RamTotalUsed">Total used</system:String>
+    <system:String x:Key="RamTotal">Total</system:String>
+    <system:String x:Key="RamUsagePercentage">Percentage</system:String>
 
 </ResourceDictionary>    

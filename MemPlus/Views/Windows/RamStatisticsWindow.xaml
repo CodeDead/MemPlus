@@ -1,0 +1,69 @@
+﻿<syncfusion:ChromelessWindow
+    x:Class="MemPlus.Views.Windows.RamStatisticsWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+    xmlns:ram="clr-namespace:MemPlus.Business.RAM"
+    xmlns:utils="clr-namespace:MemPlus.Business.UTILS"
+    mc:Ignorable="d"
+    UseLayoutRounding="True"
+    WindowStartupLocation="CenterScreen"
+    AllowsTransparency="True"
+    TitleTextAlignment="Center" UseNativeChrome="True"
+    Topmost="{utils:SettingsBinder Topmost}"
+    Title="{DynamicResource RamStatisticsWindowTitle}" Height="300" Width="450" Icon="/Resources/Images/ram.png">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView x:Name="LsvStatistics" ScrollBar.Scroll="LsvStatistics_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvStatistics_MouseWheel"
+                  utils:GridViewSort.Enabled="True" d:DataContext="{d:DesignInstance ram:RamUsage}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{DynamicResource Copy}" Click="CopyMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/log.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="{DynamicResource Delete}" Click="DeleteMenuItem_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="{DynamicResource Clear}" Click="BtnClear_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/exit.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Header="{DynamicResource Export}" Click="BtnExport_OnClick">
+                        <MenuItem.Icon>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/export.png" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding RecordedDate}" utils:GridViewSort.PropertyName="RecordedDate" />
+                    <GridViewColumn Header="{DynamicResource RamTotalUsed}" DisplayMemberBinding="{Binding TotalUsed}" utils:GridViewSort.PropertyName="TotalUsed" />
+                    <GridViewColumn Header="{DynamicResource RamTotal}" DisplayMemberBinding="{Binding RamTotal}" utils:GridViewSort.PropertyName="RamTotal" />
+                    <GridViewColumn Header="{DynamicResource RamUsagePercentage}" DisplayMemberBinding="{Binding UsagePercentage}" utils:GridViewSort.PropertyName="UsagePercentage" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="{DynamicResource Export}" Click="BtnExport_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="{DynamicResource Clear}" Click="BtnClear_OnClick" />
+        </Grid>
+    </Grid>
+</syncfusion:ChromelessWindow>

@@ -24,10 +24,12 @@
     <system:String x:Key="ErrorLogs">Rexistros de erros</system:String>
     <system:String x:Key="ProcessLogs">Rexistros de procesos</system:String>
     <system:String x:Key="ApplicationLogs">Rexistros de aplicativos</system:String>
+    <system:String x:Key="RamMenu">RAM</system:String>
     <system:String x:Key="RamAnalyzerData">Datos do Analizador de RAM</system:String>
     <system:String x:Key="ProcessAnalyzerData">Datos do Analizador de Procesos</system:String>
     <system:String x:Key="Tools">Fe_rramentas</system:String>
     <system:String x:Key="RamMonitor">Monitor de RAM</system:String>
+    <system:String x:Key="RamStatistics">Estatísticas RAM</system:String>
     <system:String x:Key="RamAnalyzer">Analizador de RAM</system:String>
     <system:String x:Key="ProcessAnalyzer">Analizador de Procesos</system:String>
     <system:String x:Key="Clear">Limpar</system:String>
@@ -133,5 +135,11 @@
     <system:String x:Key="AutoClearLogs">Elimina automaticamente os rexistros da memoria cada</system:String>
     <system:String x:Key="LogFile">Garda automaticamente rexistros no ficheiro</system:String>
     <system:String x:Key="LogFilePath">Ruta do ficheiro de rexistro:</system:String>
+
+    <!-- RamStatistics Window -->
+    <system:String x:Key="RamStatisticsWindowTitle">MemPlus - Estatísticas de RAM</system:String>
+    <system:String x:Key="RamTotalUsed">Total usado</system:String>
+    <system:String x:Key="RamTotal">Total</system:String>
+    <system:String x:Key="RamUsagePercentage">Porcentaxe</system:String>
 
 </ResourceDictionary>

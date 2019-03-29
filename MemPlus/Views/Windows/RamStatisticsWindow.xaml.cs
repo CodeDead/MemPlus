@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
+using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 
 namespace MemPlus.Views.Windows
 {
     /// <inheritdoc cref="Syncfusion.Windows.Shared.ChromelessWindow" />
     /// <summary>
-    /// Interaction logic for LogWindow.xaml
+    /// Interaction logic for RamStatisticsWindow.xaml
     /// </summary>
-    // ReSharper disable once InconsistentNaming
-    public partial class LogWindow
+    public partial class RamStatisticsWindow
     {
         #region Variables
         /// <summary>
@@ -23,9 +22,9 @@ namespace MemPlus.Views.Windows
         /// </summary>
         private readonly LogController _logController;
         /// <summary>
-        /// The LogType that is currently being monitored
+        /// The RamController object that can be used to display RAM usage statistics
         /// </summary>
-        private readonly LogType? _logType;
+        private readonly RamController _ramController;
         /// <summary>
         /// A boolean to indicate whether automatic scrolling is enabled or not
         /// </summary>
@@ -36,29 +35,29 @@ namespace MemPlus.Views.Windows
         /// <summary>
         /// Initialize a new LogWindow object
         /// </summary>
-        /// <param name="logController">The LogController object that can be used to add and view logs</param>
-        /// <param name="logType">The LogType that is currently being monitored. Can be null if all logs should be monitored</param>
-        internal LogWindow(LogController logController, LogType? logType)
+        /// /// <param name="ramController">The RamController object that can be used to view RamUsage objects</param>
+        /// <param name="logController">The LogController object that can be used to add logs</param>
+        internal RamStatisticsWindow(RamController ramController, LogController logController)
         {
             _logController = logController;
-            _logController.AddLog(new ApplicationLog("Initializing LogWindow"));
+            _logController.AddLog(new ApplicationLog("Initializing RamStatisticsWindow"));
 
-            _logType = logType;
 
             InitializeComponent();
             ChangeVisualStyle();
             LoadProperties();
 
+            _ramController = ramController;
+
             FillLogView();
 
-            _logController.LogAddedEvent += LogAddedEvent;
-            _logController.LogsClearedEvent += LogsClearedEvent;
-            _logController.LogDeletedEvent += LogDeletedEvent;
-            _logController.LogTypeClearedEvent += LogTypeClearedEvent;
+            _ramController.RamUsageAddedEvent += RamUsageAddedEvent;
+            _ramController.RamUsageRemovedEvent += RamUsageRemovedEvent;
+            _ramController.RamUsageClearedEvent += RamUsageClearedEvent;
 
             _autoScroll = true;
 
-            _logController.AddLog(new ApplicationLog("Done initializing LogWindow"));
+            _logController.AddLog(new ApplicationLog("Done initializing RamStatisticsWindow"));
         }
 
         /// <summary>
@@ -66,7 +65,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         private void LoadProperties()
         {
-            _logController.AddLog(new ApplicationLog("Loading LogWindow properties"));
+            _logController.AddLog(new ApplicationLog("Loading RamStatisticsWindow properties"));
             try
             {
                 if (Properties.Settings.Default.WindowDragging)
@@ -83,7 +82,7 @@ namespace MemPlus.Views.Windows
                 _logController.AddLog(new ErrorLog(ex.Message));
                 MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            _logController.AddLog(new ApplicationLog("Done loading LogWindow properties"));
+            _logController.AddLog(new ApplicationLog("Done loading RamStatisticsWindow properties"));
         }
 
         /// <summary>
@@ -100,68 +99,51 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when all Log objects of a certain type have been cleared
+        /// Method that is called when all RamUsage objects were cleared
         /// </summary>
-        /// <param name="clearedList">The list of Log objects that were removed</param>
-        private void LogTypeClearedEvent(List<Log> clearedList)
+        private void RamUsageClearedEvent()
         {
             Dispatcher.Invoke(() =>
             {
-                foreach (Log l in clearedList)
-                {
-                    LsvLogs.Items.Remove(l);
-                }
+                LsvStatistics.Items.Clear();
             });
         }
 
         /// <summary>
-        /// Fill the ListView will all current Log objects
+        /// Fill the ListView with all current RamUsage objects
         /// </summary>
         private void FillLogView()
         {
-            foreach (Log l in _logController.GetLogs(_logType))
+            foreach (RamUsage usage in _ramController.GetRamUsageHistory())
             {
-                LsvLogs.Items.Add(l);
+                LsvStatistics.Items.Add(usage);
             }
         }
 
         /// <summary>
-        /// Method that is called when a Log object was removed
+        /// Method that is called when a RamUsage object was removed
         /// </summary>
-        /// <param name="log">The Log object that was removed</param>
-        private void LogDeletedEvent(Log log)
+        /// <param name="ramUsage">The RamUsage object that was removed</param>
+        private void RamUsageRemovedEvent(RamUsage ramUsage)
         {
-            if (_logType != null && log.LogType != _logType) return;
             Dispatcher.Invoke(() =>
             {
-                LsvLogs.Items.Remove(log);
+                LsvStatistics.Items.Remove(ramUsage);
             });
         }
 
         /// <summary>
-        /// Method that is called when all logs were removed
+        /// Method that is called when a RamUsage object was added
         /// </summary>
-        private void LogsClearedEvent()
+        /// <param name="ramUsage">The RamUsage object that was added</param>
+        private void RamUsageAddedEvent(RamUsage ramUsage)
         {
             Dispatcher.Invoke(() =>
             {
-                LsvLogs.Items.Clear();
-            });
-        }
-
-        /// <summary>
-        /// Method that is called when a Log object was added
-        /// </summary>
-        /// <param name="log">The Log object that was added</param>
-        private void LogAddedEvent(Log log)
-        {
-            if (_logType != null && log.LogType != _logType) return;
-            Dispatcher.Invoke(() =>
-            {
-                LsvLogs.Items.Add(log);
+                LsvStatistics.Items.Add(ramUsage);
 
                 if (!_autoScroll) return;
-                LsvLogs.ScrollIntoView(LsvLogs.Items[LsvLogs.Items.Count - 1]);
+                LsvStatistics.ScrollIntoView(LsvStatistics.Items[LsvStatistics.Items.Count - 1]);
             });
         }
 
@@ -170,9 +152,9 @@ namespace MemPlus.Views.Windows
         /// </summary>
         private void ChangeVisualStyle()
         {
-            _logController.AddLog(new ApplicationLog("Changing LogWindow theme style"));
+            _logController.AddLog(new ApplicationLog("Changing RamStatisticsWindow theme style"));
             GuiManager.ChangeStyle(this);
-            _logController.AddLog(new ApplicationLog("Done changing LogWindow theme style"));
+            _logController.AddLog(new ApplicationLog("Done changing RamStatisticsWindow theme style"));
         }
 
         /// <summary>
@@ -180,7 +162,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The ScrollEventArgs</param>
-        private void LsvLogs_OnScroll(object sender, ScrollEventArgs e)
+        private void LsvStatistics_OnScroll(object sender, ScrollEventArgs e)
         {
             if (!(e.OriginalSource is ScrollBar sb)) return;
             if (sb.Orientation == Orientation.Horizontal) return;
@@ -189,37 +171,37 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
-        /// Method that is called when all Log objects of a certain type should be cleared
+        /// Method that is called when all RamUsage objects should be cleared
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnClear_OnClick(object sender, RoutedEventArgs e)
         {
-            _logController.ClearLogs(_logType);
+            _ramController.ClearRamUsageHistory();
         }
 
         /// <summary>
-        /// Method that is called when all Log objects of a certain type should be exported
+        /// Method that is called when all RamUsage objects should be exported
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
         private void BtnExport_OnClick(object sender, RoutedEventArgs e)
         {
-            if (Utils.ExportLogs(_logType, _logController))
+            if (Utils.ExportRamUsage(_ramController, _logController))
             {
                 MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         /// <summary>
-        /// Method that is called when a Log object should be removed
+        /// Method that is called when a RamUsage object should be removed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The RoutedEventArgs</param>
         private void DeleteMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (LsvLogs.SelectedItems.Count == 0) return;
-            _logController.RemoveLog(LsvLogs.SelectedItem as Log);
+            if (LsvStatistics.SelectedItems.Count == 0) return;
+            _ramController.RemoveRamUsage(LsvStatistics.SelectedItem as RamUsage);
         }
 
         /// <summary>
@@ -229,12 +211,12 @@ namespace MemPlus.Views.Windows
         /// <param name="e">The RoutedEventArgs</param>
         private void CopyMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (LsvLogs.SelectedItems.Count == 0) return;
-            if (!(LsvLogs.SelectedItem is Log selectedLog)) return;
+            if (LsvStatistics.SelectedItems.Count == 0) return;
+            if (!(LsvStatistics.SelectedItem is RamUsage selectedUsage)) return;
 
             try
             {
-                Clipboard.SetText(selectedLog.Time + "\t" + selectedLog.Data);
+                Clipboard.SetText(selectedUsage.RecordedDate + "\t" + selectedUsage.TotalUsed + "\t" + selectedUsage.RamTotal + "\t" + selectedUsage.UsagePercentage);
             }
             catch (Exception ex)
             {
@@ -248,7 +230,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         /// <param name="sender">The object that called this method</param>
         /// <param name="e">The MouseWheelEventArgs</param>
-        private void LsvLogs_MouseWheel(object sender, MouseWheelEventArgs e)
+        private void LsvStatistics_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             _autoScroll = false;
         }

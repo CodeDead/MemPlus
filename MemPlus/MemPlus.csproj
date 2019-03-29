@@ -105,6 +105,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Business\EXPORT\ExportTypes.cs" />
+    <Compile Include="Business\EXPORT\RamUsageExporter.cs" />
     <Compile Include="Business\LOG\ErrorLog.cs" />
     <Compile Include="Business\LOG\LogType.cs" />
     <Compile Include="Business\LOG\ProcessLog.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="Business\RAM\RamData.cs" />
     <Compile Include="Business\EXPORT\RamSticksExporter.cs" />
     <Compile Include="Business\RAM\RamStick.cs" />
+    <Compile Include="Business\RAM\RamUsage.cs" />
     <Compile Include="Business\UTILS\GridViewSort.cs" />
     <Compile Include="Business\UTILS\HotKeyController.cs" />
     <Compile Include="Business\UTILS\NativeMethods.cs" />
@@ -123,6 +125,9 @@
     </Compile>
     <Compile Include="Views\Windows\ProcessAnalyzerWindow.xaml.cs">
       <DependentUpon>ProcessAnalyzerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\RamStatisticsWindow.xaml.cs">
+      <DependentUpon>RamStatisticsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
@@ -205,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Windows\RamStatisticsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -227,6 +236,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

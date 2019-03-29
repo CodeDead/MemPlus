@@ -7,15 +7,15 @@ using MemPlus.Business.LOG;
 namespace MemPlus.Business.EXPORT
 {
     /// <summary>
-    /// Static class containing the logic for exporting logs
+    /// Internal static class containing the logic for exporting logs
     /// </summary>
     // ReSharper disable once InconsistentNaming
     internal static class LogExporter
     {
         /// <summary>
-        /// Export a list of logs in HTML format to the disk
+        /// Export a list of Log objects in HTML format to the disk
         /// </summary>
-        /// <param name="path">The path where the logs should be stored</param>
+        /// <param name="path">The path where the Log objects should be stored</param>
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportHtml(string path, List<Log> logList)
         {
@@ -34,9 +34,9 @@ namespace MemPlus.Business.EXPORT
         }
 
         /// <summary>
-        /// Export a list of logs in TEXT format to the disk
+        /// Export a list of Log objects in TEXT format to the disk
         /// </summary>
-        /// <param name="path">The path where the logs should be stored</param>
+        /// <param name="path">The path where the Log objects should be stored</param>
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportTxt(string path, List<Log> logList)
         {
@@ -55,9 +55,9 @@ namespace MemPlus.Business.EXPORT
         }
 
         /// <summary>
-        /// Export a list of logs in CSV format to the disk
+        /// Export a list of Log objects in CSV format to the disk
         /// </summary>
-        /// <param name="path">The path where the logs should be stored</param>
+        /// <param name="path">The path where the Log objects should be stored</param>
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportCsv(string path, List<Log> logList)
         {
@@ -66,9 +66,9 @@ namespace MemPlus.Business.EXPORT
         }
 
         /// <summary>
-        /// Export a list of logs in Excel format to the disk
+        /// Export a list of Log objects in Excel format to the disk
         /// </summary>
-        /// <param name="path">The path where the logs should be stored</param>
+        /// <param name="path">The path where the Log objects should be stored</param>
         /// <param name="logList">The list of Log objects that should be exported</param>
         internal static void ExportExcel(string path, List<Log> logList)
         {
@@ -77,9 +77,9 @@ namespace MemPlus.Business.EXPORT
         }
 
         /// <summary>
-        /// Export a list of logs using a delimiter character to disk
+        /// Export a list of Log objects using a delimiter character to disk
         /// </summary>
-        /// <param name="path">The path where the logs should be stored</param>
+        /// <param name="path">The path where the Log objects should be stored</param>
         /// <param name="logList">The list of Log objects that should be exported</param>
         /// <param name="delimiter">The delimiter character that should be used</param>
         private static void ExportDelimiter(string path, IReadOnlyList<Log> logList, string delimiter)

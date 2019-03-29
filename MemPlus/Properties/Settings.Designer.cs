@@ -573,5 +573,17 @@ namespace MemPlus.Properties {
                 this["SelectedLanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public int RamMaxUsageHistoryCount {
+            get {
+                return ((int)(this["RamMaxUsageHistoryCount"]));
+            }
+            set {
+                this["RamMaxUsageHistoryCount"] = value;
+            }
+        }
     }
 }

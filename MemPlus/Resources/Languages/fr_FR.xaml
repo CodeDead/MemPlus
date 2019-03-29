@@ -25,10 +25,12 @@
     <system:String x:Key="ErrorLogs">Journaux d'erreur</system:String>
     <system:String x:Key="ProcessLogs">Journaux de processus</system:String>
     <system:String x:Key="ApplicationLogs">Journaux d'application</system:String>
+    <system:String x:Key="RamMenu">RAM</system:String>
     <system:String x:Key="RamAnalyzerData">Données RAM Analyzer</system:String>
     <system:String x:Key="ProcessAnalyzerData">Données de l'analyseur de processus</system:String>
     <system:String x:Key="Tools">_Outils</system:String>
     <system:String x:Key="RamMonitor">Moniteur de RAM</system:String>
+    <system:String x:Key="RamStatistics">Statistiques RAM</system:String>
     <system:String x:Key="RamAnalyzer">Analyseur de RAM</system:String>
     <system:String x:Key="ProcessAnalyzer">Analyseur de processus</system:String>
     <system:String x:Key="Clear">Nettoyer</system:String>
@@ -134,5 +136,11 @@
     <system:String x:Key="AutoClearLogs">Effacer automatiquement les journaux de la mémoire tous les</system:String>
     <system:String x:Key="LogFile">Enregistrer automatiquement les journaux dans un fichier</system:String>
     <system:String x:Key="LogFilePath">Chemin du fichier journal:</system:String>
+
+    <!-- RamStatistics Window -->
+    <system:String x:Key="RamStatisticsWindowTitle">MemPlus - Statistiques RAM</system:String>
+    <system:String x:Key="RamTotalUsed">Total utilisé</system:String>
+    <system:String x:Key="RamTotal">Total</system:String>
+    <system:String x:Key="RamUsagePercentage">Pourcentage</system:String>
 
 </ResourceDictionary>

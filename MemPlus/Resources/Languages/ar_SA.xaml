@@ -24,10 +24,12 @@
     <system:String x:Key="ErrorLogs">سجلات الأخطاء</system:String>
     <system:String x:Key="ProcessLogs">سجلات العمليات</system:String>
     <system:String x:Key="ApplicationLogs">سجلات البرنامج</system:String>
+    <system:String x:Key="RamMenu">ذاكرة وصول العشوائي</system:String>
     <system:String x:Key="RamAnalyzerData">بيانات محلل الرام</system:String>
     <system:String x:Key="ProcessAnalyzerData">بيانات محلل العمليات</system:String>
     <system:String x:Key="Tools">_أدوات</system:String>
     <system:String x:Key="RamMonitor">مراقب الرام</system:String>
+    <system:String x:Key="RamStatistics">RAM إحصائيات</system:String>
     <system:String x:Key="RamAnalyzer">محلل الرام</system:String>
     <system:String x:Key="ProcessAnalyzer">محلل العمليات</system:String>
     <system:String x:Key="Clear">تفرغة</system:String>
@@ -133,5 +135,11 @@
     <system:String x:Key="LogFile">حفظ سجلات تلقائيا إلى ملف</system:String>
     <system:String x:Key="LogFilePath">مسار ملف السجل:</system:String>
     <system:String x:Key="InvokeGarbageCollector">استدعاء .NET أداة تجميع مجمعي البيانات المهملة</system:String>
+
+    <!-- RamStatistics Window -->
+    <system:String x:Key="RamStatisticsWindowTitle">RAM إحصائيات - MemPlus</system:String>
+    <system:String x:Key="RamTotalUsed">مجموع المستخدمة</system:String>
+    <system:String x:Key="RamTotal">مجموع</system:String>
+    <system:String x:Key="RamUsagePercentage">النسبة المئوية</system:String>
 
 </ResourceDictionary>

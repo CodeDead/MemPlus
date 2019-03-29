@@ -193,6 +193,52 @@ namespace MemPlus.Business.UTILS
         }
 
         /// <summary>
+        /// Export all RamUsage objects to the disk
+        /// </summary>
+        /// <param name="ramController">The RamController object that can be used to retrieve the RamUsage objects</param>
+        /// <param name="logController">The LogController object that can be used to add logs</param>
+        /// <returns>True if the operation completed successfully, otherwise false</returns>
+        internal static bool ExportRamUsage(RamController ramController, LogController logController)
+        {
+            if (ramController.GetRamUsageHistory().Count == 0) return false;
+
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "Text file (*.txt)|*.txt|HTML file (*.html)|*.html|CSV file (*.csv)|*.csv|Excel file (*.csv)|*.csv"
+            };
+
+            if (sfd.ShowDialog() != true) return false;
+            ExportType type;
+            switch (sfd.FilterIndex)
+            {
+                default:
+                    type = ExportType.Text;
+                    break;
+                case 2:
+                    type = ExportType.Html;
+                    break;
+                case 3:
+                    type = ExportType.Csv;
+                    break;
+                case 4:
+                    type = ExportType.Excel;
+                    break;
+            }
+
+            try
+            {
+                ramController.Export(sfd.FileName, type);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logController.AddLog(new ErrorLog(ex.Message));
+                MessageBox.Show(ex.Message, "MemPlus", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            return false;
+        } 
+
+        /// <summary>
         /// Export all ProcessDetail objects
         /// </summary>
         /// <param name="logController">The LogController object that can be used to add logs</param>

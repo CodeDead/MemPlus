@@ -66,7 +66,7 @@ namespace MemPlus.Views.Windows
                         Properties.Settings.Default.Save();
                     }
                 }
-                
+
                 _logController = new LogController
                 (
                     Properties.Settings.Default.LoggingEnabled,
@@ -94,7 +94,7 @@ namespace MemPlus.Views.Windows
 
             try
             {
-                _ramController = new RamController(UpdateGuiStatistics, RamClearingCompleted, Properties.Settings.Default.RamMonitorInterval, _logController);
+                _ramController = new RamController(UpdateGuiStatistics, RamClearingCompleted, Properties.Settings.Default.RamMonitorInterval, Properties.Settings.Default.RamMaxUsageHistoryCount, _logController);
             }
             catch (Exception ex)
             {
@@ -191,16 +191,18 @@ namespace MemPlus.Views.Windows
         /// <summary>
         /// Method that is called when the GUI statistics should be updated
         /// </summary>
-        private void UpdateGuiStatistics()
+        private void UpdateGuiStatistics(RamUsage ramUsage)
         {
             Dispatcher.Invoke(() =>
             {
-                string ramTotal = (_ramController.RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                string ramAvailable = (_ramController.RamUsage / 1024 / 1024 / 1024).ToString("F2") + " GB";
-                CgRamUsage.Scales[0].Pointers[0].Value = _ramController.RamUsagePercentage;
-                CgRamUsage.GaugeHeader = ((string)Application.Current.FindResource("GaugeRamUsage"))?.Replace("%", _ramController.RamUsagePercentage.ToString("F2") + "%");
+                string ramTotal = (ramUsage.RamTotal / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                string ramAvailable = (ramUsage.TotalUsed / 1024 / 1024 / 1024).ToString("F2") + " GB";
+                CgRamUsage.Scales[0].Pointers[0].Value = ramUsage.UsagePercentage;
+                CgRamUsage.GaugeHeader = ((string)Application.Current.FindResource("GaugeRamUsage"))?.Replace("%", ramUsage.UsagePercentage.ToString("F2") + "%");
                 LblTotalPhysicalMemory.Content = ramTotal;
                 LblAvailablePhysicalMemory.Content = ramAvailable;
+
+                Console.WriteLine(_ramController.GetRamUsageHistory().Count);
 
                 if (!Properties.Settings.Default.NotifyIconStatistics) return;
                 string tooltipText = "MemPlus";
@@ -613,7 +615,7 @@ namespace MemPlus.Views.Windows
         {
             new LogWindow(_logController, LogType.Application).Show();
         }
-        
+
         /// <summary>
         /// Method that is called when the ErrorLog objects should be displayed
         /// </summary>
@@ -701,7 +703,7 @@ namespace MemPlus.Views.Windows
         {
             ExportLogs(LogType.Application);
         }
-        
+
         /// <summary>
         /// Method that is called when all ErrorLog objects should be exported
         /// </summary>
@@ -929,6 +931,16 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Method that is called when the RamStatisticsWindow should be displayed
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The </param>
+        private void RamStatisticsMenuitem_OnClick(object sender, RoutedEventArgs e)
+        {
+            new RamStatisticsWindow(_ramController, _logController).Show();
+        }
+
+        /// <summary>
         /// Method that is called when the ProcessAnalyzer window should be displayed
         /// </summary>
         /// <param name="sender">The object that called this method</param>
@@ -946,6 +958,19 @@ namespace MemPlus.Views.Windows
         private void ExportRamAnalyzerDataMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             if (Utils.ExportRamSticks(_logController))
+            {
+                MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        /// <summary>
+        /// Method that is called when the RamUsage objects should be exported
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void ExportRamStatisticsMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (Utils.ExportRamUsage(_ramController, _logController))
             {
                 MessageBox.Show((string)Application.Current.FindResource("ExportedAllData"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -1065,8 +1090,8 @@ namespace MemPlus.Views.Windows
                     Properties.Settings.Default.Save();
                     // De-register any hotkeys, if applicable
                     _hotKeyController?.Dispose();
-                    // Disable the RAM Monitor to prevent exceptions from being thrown
-                    _ramController?.DisableMonitor();
+                    // Dispose the RamController object gracefully
+                    _ramController?.Dispose();
                     TbiIcon?.Dispose();
                     // Dispose of the LogController object gracefully
                     _logController.Dispose();

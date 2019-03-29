@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Timers;
+using MemPlus.Business.EXPORT;
 using MemPlus.Business.LOG;
 using Microsoft.VisualBasic.Devices;
-// ReSharper disable PossibleNullReferenceException
 
 namespace MemPlus.Business.RAM
 {
@@ -47,21 +47,17 @@ namespace MemPlus.Business.RAM
         /// The last time automatic RAM optimization was called in terms of RAM percentage threshold settings
         /// </summary>
         private DateTime _lastAutoOptimizeTime;
+        /// <summary>
+        /// A list of RamUsage objects that have been recorded over time
+        /// </summary>
+        private readonly List<RamUsage> _ramUsageHistory;
         #endregion
 
         #region Properties
         /// <summary>
-        /// Property containing how much RAM is being used
+        /// The maximum amount of RamUsage objects that should be stored
         /// </summary>
-        internal double RamUsage { get; private set; }
-        /// <summary>
-        /// Property containing the percentage of RAM that is being used
-        /// </summary>
-        internal double RamUsagePercentage { get; private set; }
-        /// <summary>
-        /// Property containing the total amount of RAM available
-        /// </summary>
-        internal double RamTotal { get; private set; }
+        internal int MaxUsageHistoryCount { get; set; }
         /// <summary>
         /// Property containing how much RAM was saved during the last optimization
         /// </summary>
@@ -98,43 +94,63 @@ namespace MemPlus.Business.RAM
 
         #region Delegates
         /// <summary>
-        /// Event that is called when the GUI should be updated with new RAM statistics
+        /// Event that is called when a RamUsage object has been added
         /// </summary>
-        private event UpdateGuiStatistics UpdateGuiStatisticsEvent;
+        internal event RamUsageAdded RamUsageAddedEvent;
+        /// <summary>
+        /// Event that is called when a RamUsage object was removed
+        /// </summary>
+        internal event RamUsageRemoved RamUsageRemovedEvent;
+        /// <summary>
+        /// Event that is called when all RamUsage objects were cleared
+        /// </summary>
+        internal event RamUsageCleared RamUsageClearedEvent;
         /// <summary>
         /// Event that is called when RAM clearing has occurred
         /// </summary>
         private event RamClearingCompleted RamClearingCompletedEvent;
         /// <summary>
-        /// Delegate void that indicates that a GUI update should occur when called
-        /// </summary>
-        internal delegate void UpdateGuiStatistics();
-        /// <summary>
         /// Delegate void that indicates that a RAM clearing has occured
         /// </summary>
         internal delegate void RamClearingCompleted();
+        /// <summary>
+        /// Delegate that indicates that a RamUsage object has been added
+        /// </summary>
+        /// <param name="ramUsage">The RamUsage object that was added</param>
+        internal delegate void RamUsageAdded(RamUsage ramUsage);
+        /// <summary>
+        /// Delegate that indicates that a RamUsage object was removed
+        /// </summary>
+        /// <param name="ramUsage">The RamUsage object that was removed</param>
+        internal delegate void RamUsageRemoved(RamUsage ramUsage);
+        /// <summary>
+        /// Delegate that indicates that all RamUsage objects were cleared
+        /// </summary>
+        internal delegate void RamUsageCleared();
         #endregion
 
         /// <summary>
         /// Initialize a new RamController object
         /// </summary>
-        /// <param name="updateGuiStatisticsEvent">An event to indicate that a GUI update should occur</param>
+        /// <param name="ramUsageAddedEvent">An event to indicate that RamUsage object has been added</param>
         /// <param name="ramClearingCompletedEvent">An event to indicate that the RAM has been cleared</param>
         /// <param name="ramUpdateTimerInterval">The interval for which RAM usage statistics should be updated</param>
+        /// <param name="maxUsageHistory">The total amount of RamUsage objects that should be stored for historical reasons</param>
         /// <param name="logController">The LogController object that can be used to add logs</param>
-        internal RamController(UpdateGuiStatistics updateGuiStatisticsEvent, RamClearingCompleted ramClearingCompletedEvent, int ramUpdateTimerInterval, LogController logController)
+        internal RamController(RamUsageAdded ramUsageAddedEvent, RamClearingCompleted ramClearingCompletedEvent, int ramUpdateTimerInterval, int maxUsageHistory, LogController logController)
         {
             _logController = logController ?? throw new ArgumentNullException(nameof(logController));
             _logController.AddLog(new ApplicationLog("Initializing RamController"));
 
             if (ramUpdateTimerInterval <= 0) throw new ArgumentException("Timer interval cannot be less than or equal to zero!");
-            UpdateGuiStatisticsEvent = updateGuiStatisticsEvent ?? throw new ArgumentNullException(nameof(updateGuiStatisticsEvent));
-            RamClearingCompletedEvent = ramClearingCompletedEvent ?? throw new ArgumentNullException(nameof(ramClearingCompletedEvent));
+            RamUsageAddedEvent = ramUsageAddedEvent;
+            RamClearingCompletedEvent = ramClearingCompletedEvent;
 
             RamSavings = 0;
 
             _info = new ComputerInfo();
-
+            _ramUsageHistory = new List<RamUsage>();
+            MaxUsageHistoryCount = maxUsageHistory;
             _ramOptimizer = new RamOptimizer(_logController);
             EmptyWorkingSets = true;
             ClearStandbyCache = true;
@@ -214,7 +230,6 @@ namespace MemPlus.Business.RAM
             RamMonitorEnabled = true;
 
             UpdateRamUsage();
-            UpdateGuiStatisticsEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("The RAM monitor has been enabled"));
         }
@@ -240,7 +255,6 @@ namespace MemPlus.Business.RAM
             _logController.AddLog(new ApplicationLog("RAM monitor timer has been called"));
 
             UpdateRamUsage();
-            UpdateGuiStatisticsEvent.Invoke();
 
             _logController.AddLog(new ApplicationLog("Finished RAM monitor timer"));
         }
@@ -258,7 +272,7 @@ namespace MemPlus.Business.RAM
             {
                 UpdateRamUsage();
 
-                double oldUsage = RamUsage;
+                double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
                 if (EmptyWorkingSets)
                 {
@@ -278,9 +292,8 @@ namespace MemPlus.Business.RAM
                 }
 
                 UpdateRamUsage();
-                UpdateGuiStatisticsEvent.Invoke();
 
-                double newUsage = RamUsage;
+                double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
                 RamSavings = oldUsage - newUsage;
             });
@@ -290,7 +303,7 @@ namespace MemPlus.Business.RAM
                 _ramOptimizer.ClearClipboard();
             }
 
-            RamClearingCompletedEvent.Invoke();
+            RamClearingCompletedEvent?.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing RAM memory"));
         }
@@ -307,21 +320,20 @@ namespace MemPlus.Business.RAM
             {
                 UpdateRamUsage();
 
-                double oldUsage = RamUsage;
+                double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
                 _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
 
                 await Task.Delay(10000);
 
                 UpdateRamUsage();
-                UpdateGuiStatisticsEvent.Invoke();
 
-                double newUsage = RamUsage;
+                double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
                 RamSavings = oldUsage - newUsage;
             });
 
-            RamClearingCompletedEvent.Invoke();
+            RamClearingCompletedEvent?.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing process working sets"));
         }
@@ -338,19 +350,18 @@ namespace MemPlus.Business.RAM
             {
                 UpdateRamUsage();
 
-                double oldUsage = RamUsage;
+                double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
                 _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
 
                 UpdateRamUsage();
-                UpdateGuiStatisticsEvent.Invoke();
 
-                double newUsage = RamUsage;
+                double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
                 RamSavings = oldUsage - newUsage;
             });
 
-            RamClearingCompletedEvent.Invoke();
+            RamClearingCompletedEvent?.Invoke();
 
             _logController.AddLog(new ApplicationLog("Done clearing FileSystem cache"));
         }
@@ -366,11 +377,18 @@ namespace MemPlus.Business.RAM
             double usage = total - Convert.ToDouble(_info.AvailablePhysicalMemory);
             double percentage = usage / total * 100;
 
-            RamUsage = usage;
-            RamUsagePercentage = percentage;
-            RamTotal = total;
+            if (MaxUsageHistoryCount != 0 && _ramUsageHistory.Count + 1 > MaxUsageHistoryCount)
+            {
+                RamUsage removed = _ramUsageHistory[_ramUsageHistory.Count - 1];
+                _ramUsageHistory.Remove(removed);
+                RamUsageRemovedEvent?.Invoke(removed);
+            }
 
-            if (RamUsagePercentage >= _autoOptimizeRamThreshold && AutoOptimizePercentage)
+            RamUsage newUsage = new RamUsage(usage, total, percentage);
+            _ramUsageHistory.Add(newUsage);
+            RamUsageAddedEvent?.Invoke(newUsage);
+
+            if (percentage >= _autoOptimizeRamThreshold && AutoOptimizePercentage)
             {
                 double diff = (DateTime.Now - _lastAutoOptimizeTime).TotalSeconds;
                 if (diff > 10)
@@ -384,14 +402,76 @@ namespace MemPlus.Business.RAM
             _logController.AddLog(new ApplicationLog("Finished updating RAM usage"));
         }
 
+        /// <summary>
+        /// Get the list of RamUsage objects that were recorded
+        /// </summary>
+        /// <returns>The list of RamUsage objects that were recorded</returns>
+        internal List<RamUsage> GetRamUsageHistory()
+        {
+            return _ramUsageHistory;
+        }
+
+        /// <summary>
+        /// Clear the list of RamUsage objects
+        /// </summary>
+        internal void ClearRamUsageHistory()
+        {
+            _ramUsageHistory.Clear();
+            RamUsageClearedEvent?.Invoke();
+        }
+
+        /// <summary>
+        /// Remove a RamUsage object from the list of RamUsage objects
+        /// </summary>
+        /// <param name="ramUsage">The RamUsage object that should be removed</param>
+        internal void RemoveRamUsage(RamUsage ramUsage)
+        {
+            _ramUsageHistory.Remove(ramUsage);
+            RamUsageRemovedEvent?.Invoke(ramUsage);
+        }
+
+        /// <summary>
+        /// Export the RamUsage objects to the disk
+        /// </summary>
+        /// <param name="path">The path where the RamUsage objects should be stored</param>
+        /// <param name="type">The type of export that should be performed</param>
+        internal void Export(string path, ExportType type)
+        {
+            if (_ramUsageHistory.Count == 0) return;
+            
+
+            // ReSharper disable once SwitchStatementMissingSomeCases
+            switch (type)
+            {
+                case ExportType.Html:
+                    RamUsageExporter.ExportHtml(path, _ramUsageHistory);
+                    break;
+                default:
+                    RamUsageExporter.ExportTxt(path, _ramUsageHistory);
+                    break;
+                case ExportType.Csv:
+                    RamUsageExporter.ExportCsv(path, _ramUsageHistory);
+                    break;
+                case ExportType.Excel:
+                    RamUsageExporter.ExportExcel(path, _ramUsageHistory);
+                    break;
+            }
+        }
+
         /// <inheritdoc />
         /// <summary>
         /// Dispose all disposable objects
         /// </summary>
         public void Dispose()
         {
+            DisableMonitor();
             _ramTimer?.Dispose();
             _ramAutoOptimizeTimer?.Dispose();
+
+            RamUsageAddedEvent = null;
+            RamUsageRemovedEvent = null;
+            RamClearingCompletedEvent = null;
+            _ramUsageHistory.Clear();
         }
     }
 }
