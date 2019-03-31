@@ -42,7 +42,6 @@ namespace MemPlus.Views.Windows
             _logController = logController;
             _logController.AddLog(new ApplicationLog("Initializing RamStatisticsWindow"));
 
-
             InitializeComponent();
             ChangeVisualStyle();
             LoadProperties();
