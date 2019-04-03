@@ -78,7 +78,7 @@ namespace MemPlus.Business.UTILS
             ManagementScope scope = new ManagementScope("\\root\\CIMV2", connection);
             scope.Connect();
 
-            ObjectQuery query = new ObjectQuery("SELECT * FROM Win32_PhysicalMemory");
+            ObjectQuery query = new ObjectQuery(@"SELECT * FROM Win32_PhysicalMemory");
 
             ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
 

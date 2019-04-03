@@ -12,7 +12,8 @@
     UseLayoutRounding="True"
     AllowsTransparency="True" UseNativeChrome="True"
     Topmost="{utils:SettingsBinder Topmost}"
-    Title="{DynamicResource AboutWindowTitle}" Height="200" Width="350" Icon="/MemPlus;component/Resources/Images/ram.png">
+    Title="{DynamicResource AboutWindowTitle}" Height="200" Width="350"
+    Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -35,7 +36,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button Margin="5" Content="{DynamicResource Close}" Click="BtnClose_OnClick" />
-            <Button Margin="5"  Grid.Column="1" Content="{DynamicResource License}" Click="BtnLicense_OnClick" />
+            <Button Margin="5" Grid.Column="1" Content="{DynamicResource License}" Click="BtnLicense_OnClick" />
             <Button Margin="5" Grid.Column="2" Content="CodeDead" Click="BtnCodeDead_OnClick" />
         </Grid>
     </Grid>

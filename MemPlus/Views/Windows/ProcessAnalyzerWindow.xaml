@@ -26,12 +26,12 @@
                 <ContextMenu>
                     <MenuItem Header="{DynamicResource ClearWorkingSet}" Click="EmptyWorkingSetMenuItem_OnClick">
                         <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png"></Image>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/process.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource KillProcess}" Click="KillMenuItem_OnClick">
                         <MenuItem.Icon>
-                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png"></Image>
+                            <Image Width="16" Height="16" Source="/MemPlus;component/Resources/Images/delete.png" />
                         </MenuItem.Icon>
                     </MenuItem>
                     <Separator />
@@ -60,10 +60,15 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="{DynamicResource ProcessId}" DisplayMemberBinding="{Binding ProcessId}" utils:GridViewSort.PropertyName="ProcessId" />
-                    <GridViewColumn Header="{DynamicResource ProcessName}" DisplayMemberBinding="{Binding ProcessName}" utils:GridViewSort.PropertyName="ProcessName" />
-                    <GridViewColumn Header="{DynamicResource ProcessLocation}" DisplayMemberBinding="{Binding ProcessLocation}" utils:GridViewSort.PropertyName="ProcessLocation" />
-                    <GridViewColumn Header="{DynamicResource MemoryUsage}" DisplayMemberBinding="{Binding MemoryUsage}" utils:GridViewSort.PropertyName="MemoryUsageLong" />
+                    <GridViewColumn Header="{DynamicResource ProcessId}" DisplayMemberBinding="{Binding ProcessId}"
+                                    utils:GridViewSort.PropertyName="ProcessId" />
+                    <GridViewColumn Header="{DynamicResource ProcessName}" DisplayMemberBinding="{Binding ProcessName}"
+                                    utils:GridViewSort.PropertyName="ProcessName" />
+                    <GridViewColumn Header="{DynamicResource ProcessLocation}"
+                                    DisplayMemberBinding="{Binding ProcessLocation}"
+                                    utils:GridViewSort.PropertyName="ProcessLocation" />
+                    <GridViewColumn Header="{DynamicResource MemoryUsage}" DisplayMemberBinding="{Binding MemoryUsage}"
+                                    utils:GridViewSort.PropertyName="MemoryUsageLong" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -73,8 +78,10 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Content="{DynamicResource Refresh}" Margin="3" Click="BtnRefresh_OnClick"/>
-            <Button Grid.Column="1" MinHeight="25" Content="{DynamicResource Export}" Margin="3" Click="BtnExport_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Content="{DynamicResource Refresh}" Margin="3"
+                    Click="BtnRefresh_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Content="{DynamicResource Export}" Margin="3"
+                    Click="BtnExport_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

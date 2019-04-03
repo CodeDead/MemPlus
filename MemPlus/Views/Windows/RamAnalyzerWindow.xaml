@@ -47,8 +47,10 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Content="{DynamicResource Refresh}" Margin="3" Click="BtnRefresh_OnClick"/>
-            <Button Grid.Column="1" MinHeight="25" Content="{DynamicResource Export}" Margin="3" Click="BtnExport_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Content="{DynamicResource Refresh}" Margin="3"
+                    Click="BtnRefresh_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Content="{DynamicResource Export}" Margin="3"
+                    Click="BtnExport_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

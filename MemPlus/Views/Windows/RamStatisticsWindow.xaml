@@ -19,7 +19,8 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvStatistics" ScrollBar.Scroll="LsvStatistics_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvStatistics_MouseWheel"
+        <ListView x:Name="LsvStatistics" ScrollBar.Scroll="LsvStatistics_OnScroll" SelectionMode="Single"
+                  PreviewMouseWheel="LsvStatistics_MouseWheel"
                   utils:GridViewSort.Enabled="True" d:DataContext="{d:DesignInstance ram:RamUsage}">
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -49,10 +50,15 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding RecordedDate}" utils:GridViewSort.PropertyName="RecordedDate" />
-                    <GridViewColumn Header="{DynamicResource RamTotalUsed}" DisplayMemberBinding="{Binding TotalUsed}" utils:GridViewSort.PropertyName="TotalUsed" />
-                    <GridViewColumn Header="{DynamicResource RamTotal}" DisplayMemberBinding="{Binding RamTotal}" utils:GridViewSort.PropertyName="RamTotal" />
-                    <GridViewColumn Header="{DynamicResource RamUsagePercentage}" DisplayMemberBinding="{Binding UsagePercentage}" utils:GridViewSort.PropertyName="UsagePercentage" />
+                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding RecordedDate}"
+                                    utils:GridViewSort.PropertyName="RecordedDate" />
+                    <GridViewColumn Header="{DynamicResource RamTotalUsed}" DisplayMemberBinding="{Binding TotalUsed}"
+                                    utils:GridViewSort.PropertyName="TotalUsed" />
+                    <GridViewColumn Header="{DynamicResource RamTotal}" DisplayMemberBinding="{Binding RamTotal}"
+                                    utils:GridViewSort.PropertyName="RamTotal" />
+                    <GridViewColumn Header="{DynamicResource RamUsagePercentage}"
+                                    DisplayMemberBinding="{Binding UsagePercentage}"
+                                    utils:GridViewSort.PropertyName="UsagePercentage" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -62,8 +68,10 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="{DynamicResource Export}" Click="BtnExport_OnClick" />
-            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="{DynamicResource Clear}" Click="BtnClear_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="{DynamicResource Export}"
+                    Click="BtnExport_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="{DynamicResource Clear}"
+                    Click="BtnClear_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

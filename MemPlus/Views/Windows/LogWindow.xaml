@@ -19,7 +19,8 @@
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single" PreviewMouseWheel="LsvLogs_MouseWheel"
+        <ListView x:Name="LsvLogs" ScrollBar.Scroll="LsvLogs_OnScroll" SelectionMode="Single"
+                  PreviewMouseWheel="LsvLogs_MouseWheel"
                   utils:GridViewSort.Enabled="True" d:DataContext="{d:DesignInstance log:Log}">
             <ListView.ContextMenu>
                 <ContextMenu>
@@ -49,8 +50,10 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding Time}" utils:GridViewSort.PropertyName="Time" />
-                    <GridViewColumn Header="{DynamicResource Content}" DisplayMemberBinding="{Binding Data}" utils:GridViewSort.PropertyName="Data" />
+                    <GridViewColumn Header="{DynamicResource Date}" DisplayMemberBinding="{Binding Time}"
+                                    utils:GridViewSort.PropertyName="Time" />
+                    <GridViewColumn Header="{DynamicResource Content}" DisplayMemberBinding="{Binding Data}"
+                                    utils:GridViewSort.PropertyName="Data" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -60,8 +63,10 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="{DynamicResource Export}" Click="BtnExport_OnClick" />
-            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="{DynamicResource ClearLogs}" Click="BtnClear_OnClick" />
+            <Button Grid.Column="0" MinHeight="25" Margin="3" Content="{DynamicResource Export}"
+                    Click="BtnExport_OnClick" />
+            <Button Grid.Column="1" MinHeight="25" Margin="3" Content="{DynamicResource ClearLogs}"
+                    Click="BtnClear_OnClick" />
         </Grid>
     </Grid>
 </syncfusion:ChromelessWindow>

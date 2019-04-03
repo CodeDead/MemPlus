@@ -10,7 +10,7 @@ namespace MemPlus.Business.UTILS
     /// <summary>
     /// Internal logic for sorting a GridView
     /// </summary>
-    internal class GridViewSort
+    internal static class GridViewSort
     {
         #region Properties
         /// <summary>
