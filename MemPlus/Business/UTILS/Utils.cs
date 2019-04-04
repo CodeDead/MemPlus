@@ -90,7 +90,7 @@ namespace MemPlus.Business.UTILS
                 {
                     if (data.Value != null)
                     {
-                        stick.AddRamData(new RamData(data.Name, data.Value.ToString()));
+                        stick.AddRamData(new RamData(data.Name.Trim(), data.Value.ToString().Trim()));
                     }
                 }
 

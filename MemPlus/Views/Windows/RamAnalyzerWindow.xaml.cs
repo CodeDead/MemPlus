@@ -65,7 +65,9 @@ namespace MemPlus.Views.Windows
 
                     foreach (RamData data in s.GetRamData())
                     {
-                        treeItem.Items.Add(new TreeViewItem { Header = data.Key + ": " + data.Value });
+                        TreeViewItem headerItem = new TreeViewItem {Header = data.Key};
+                        headerItem.Items.Add(new TreeViewItem {Header = data.Value});
+                        treeItem.Items.Add(headerItem);
                     }
 
                     TrvRam.Items.Add(treeItem);
