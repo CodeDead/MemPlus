@@ -290,7 +290,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Clear all non-essential RAM
         /// </summary>
-        /// <returns>A Task</returns>
+        /// <returns>A Task object</returns>
         internal async Task ClearMemory()
         {
             _lastAutoOptimizeTime = DateTime.Now;
@@ -349,9 +349,44 @@ namespace MemPlus.Business.RAM
         }
 
         /// <summary>
+        /// Fill the RAM
+        /// </summary>
+        /// <returns>A Task object</returns>
+        internal async Task FillRamData()
+        {
+            _logController.AddLog(new ApplicationLog("Filling RAM"));
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    UpdateRamUsage();
+
+                    double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+
+                    _ramOptimizer.FillRam(_info, FillRamMaxRuns);
+
+                    UpdateRamUsage();
+
+                    double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+
+                    RamSavings = oldUsage - newUsage;
+                }
+                catch (Exception ex)
+                {
+                    _logController.AddLog(new ErrorLog(ex.Message));
+                }
+            });
+
+            RamClearingCompletedEvent?.Invoke();
+
+            _logController.AddLog(new ApplicationLog("Done filling RAM"));
+        }
+
+        /// <summary>
         /// Clear the working set of all processes, excluding the exclusion list
         /// </summary>
-        /// <returns>A Task</returns>
+        /// <returns>A Task object</returns>
         internal async Task ClearWorkingSets()
         {
             _logController.AddLog(new ApplicationLog("Clearing process working sets"));
@@ -388,7 +423,7 @@ namespace MemPlus.Business.RAM
         /// <summary>
         /// Clear the FileSystem cache
         /// </summary>
-        /// <returns>A Task</returns>
+        /// <returns>A Task object</returns>
         internal async Task ClearFileSystemCaches()
         {
             _logController.AddLog(new ApplicationLog("Clearing FileSystem cache"));

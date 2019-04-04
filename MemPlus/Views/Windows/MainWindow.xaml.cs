@@ -1044,6 +1044,16 @@ namespace MemPlus.Views.Windows
         }
 
         /// <summary>
+        /// Method that is called when the RAM should be filled
+        /// </summary>
+        /// <param name="sender">The object that called this method</param>
+        /// <param name="e">The RoutedEventArgs</param>
+        private void FillRamDropDownMenuItem_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMemory(3);
+        }
+
+        /// <summary>
         /// Clear the memory
         /// </summary>
         /// <param name="index">The type of memory that needs to be cleared</param>
@@ -1070,6 +1080,9 @@ namespace MemPlus.Views.Windows
                         break;
                     case 2:
                         await _ramController.ClearFileSystemCaches();
+                        break;
+                    case 3:
+                        await _ramController.FillRamData();
                         break;
                 }
             }

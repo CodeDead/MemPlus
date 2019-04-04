@@ -274,6 +274,8 @@
                                                      Click="ClearWorkingSetsDropDownMenuItem_OnClick" />
                         <syncfusion:DropDownMenuItem Header="{DynamicResource ClearFileSystemCache}"
                                                      Click="ClearFileSystemCacheDropDownMenuItem_OnClick" />
+                        <syncfusion:DropDownMenuItem Header="{DynamicResource FillRam}"
+                                                     Click="FillRamDropDownMenuItem_OnClick" />
                     </syncfusion:DropDownMenuGroup>
                 </syncfusion:SplitButtonAdv>
             </Grid>
