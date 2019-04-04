@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using MemPlus.Business.LOG;
 using MemPlus.Business.UTILS;
+using Microsoft.VisualBasic.Devices;
 
 namespace MemPlus.Business.RAM
 {
@@ -255,7 +256,7 @@ namespace MemPlus.Business.RAM
                 _logController.AddLog(new ErrorLog(ex.ToString()));
             }
         }
-        
+
         /// <summary>
         /// Increase the Privilege using a privilege name
         /// </summary>
@@ -267,25 +268,74 @@ namespace MemPlus.Business.RAM
 
             using (WindowsIdentity current = WindowsIdentity.GetCurrent(TokenAccessLevels.Query | TokenAccessLevels.AdjustPrivileges))
             {
-                TokenPrivileges newst;
-                newst.Count = 1;
-                newst.Luid = 0L;
-                newst.Attr = PrivilegeEnabled;
+                TokenPrivileges tokenPrivileges;
+                tokenPrivileges.Count = 1;
+                tokenPrivileges.Luid = 0L;
+                tokenPrivileges.Attr = PrivilegeEnabled;
 
                 _logController.AddLog(new RamLog("Looking up privilege value"));
                 // If we can't look up the privilege value, we can't function properly
-                if (!NativeMethods.LookupPrivilegeValue(null, privilegeName, ref newst.Luid)) throw new Exception("LookupPrivilegeValue: ", new Win32Exception(Marshal.GetLastWin32Error()));
+                if (!NativeMethods.LookupPrivilegeValue(null, privilegeName, ref tokenPrivileges.Luid)) throw new Exception("LookupPrivilegeValue: ", new Win32Exception(Marshal.GetLastWin32Error()));
                 _logController.AddLog(new RamLog("Done looking up privilege value"));
 
 
                 _logController.AddLog(new RamLog("Adjusting token privileges"));
                 // Enables or disables privileges in a specified access token
-                int adjustTokenPrivilegesRet = NativeMethods.AdjustTokenPrivileges(current.Token, false, ref newst, 0, IntPtr.Zero, IntPtr.Zero) ? 1 : 0;
+                int adjustTokenPrivilegesRet = NativeMethods.AdjustTokenPrivileges(current.Token, false, ref tokenPrivileges, 0, IntPtr.Zero, IntPtr.Zero) ? 1 : 0;
                 // Return value of zero indicates an error
                 if (adjustTokenPrivilegesRet == 0) throw new Exception("AdjustTokenPrivileges: ", new Win32Exception(Marshal.GetLastWin32Error()));
                 _logController.AddLog(new RamLog("Done adjusting token privileges"));
                 return adjustTokenPrivilegesRet != 0;
             }
+        }
+
+        /// <summary>
+        /// Fill the available RAM
+        /// </summary>
+        /// <param name="info">The ComputerInfo object that can be used to calculate usage percentages</param>
+        /// <param name="maxRuns">The amount of times the RAM should be filled</param>
+        internal void FillRam(ComputerInfo info, int maxRuns)
+        {
+            _logController.AddLog(new RamLog("Attempting to fill the available RAM"));
+            int runs = 0;
+            while (runs < maxRuns)
+            {
+                List<IntPtr> pointers = new List<IntPtr>();
+                // Don't keep calling the info object because this can cause a Win32Exception
+                double total = Convert.ToDouble(info.TotalPhysicalMemory);
+                double usage = total - Convert.ToDouble(info.AvailablePhysicalMemory);
+                double percentage = usage / total * 100;
+
+                if (double.IsNaN(total) || double.IsInfinity(total)) throw new ArgumentException(nameof(total));
+                if (double.IsNaN(usage) || double.IsInfinity(usage)) throw new ArgumentException(nameof(usage));
+                if (double.IsNaN(percentage) || double.IsInfinity(percentage)) throw new ArgumentException(nameof(percentage));
+
+                // 99 is the threshold for the amount of RAM that should be filled
+                // Windows will do its best to manage the available memory while its filling up
+                while (percentage < 99)
+                {
+                    IntPtr pointer = Marshal.AllocHGlobal(1024);
+                    pointers.Add(pointer);
+
+                    usage += 1024;
+                    percentage = usage / total * 100;
+                }
+
+                foreach (IntPtr clearPtr in pointers)
+                {
+                    try
+                    {
+                        // Clean all previously acquired IntPtr objects pointing to the allocated memory
+                        Marshal.FreeHGlobal(clearPtr);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logController.AddLog(new ErrorLog(ex.Message));
+                    }
+                }
+                runs++;
+            }
+            _logController.AddLog(new RamLog("Done filling available RAM"));
         }
     }
 }

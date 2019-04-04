@@ -13,7 +13,7 @@
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
     Closing="SettingsWindow_OnClosing" Topmost="{bind:SettingsBinder Topmost}"
-    Title="{DynamicResource SettingsWindowTitle}" Height="450" Width="550"
+    Title="{DynamicResource SettingsWindowTitle}" Height="480" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -285,6 +285,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -299,17 +300,26 @@
                             <CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                       Content="{DynamicResource InvokeGarbageCollector}" Margin="3"
                                       IsChecked="{bind:SettingsBinder InvokeGarbageCollector}" />
-                            <CheckBox Grid.Row="3" Grid.Column="0" Content="{DynamicResource ClearWorkingSets}"
+                            <CheckBox Grid.Row="3" Grid.Column="0"
+                                      Content="{DynamicResource FillRam}" IsChecked="{bind:SettingsBinder FillRam}" Margin="3" />
+                            <syncfusion:IntegerTextBox Grid.Row="3" Grid.Column="1" Value="{bind:SettingsBinder FillRamMaxRuns}" Margin="2,0,0,0" MinValue="1" MaxValue="10">
+                                <syncfusion:IntegerTextBox.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock Text="{DynamicResource FillRamMaxRunsHint}" />
+                                    </StackPanel>
+                                </syncfusion:IntegerTextBox.ToolTip>
+                            </syncfusion:IntegerTextBox>
+                            <CheckBox Grid.Row="4" Grid.Column="0" Content="{DynamicResource ClearWorkingSets}"
                                       Margin="3" IsChecked="{bind:SettingsBinder EmptyWorkingSet}" />
-                            <CheckBox Grid.Row="3" Grid.Column="1" Content="{DynamicResource ClearFileSystemCache}"
+                            <CheckBox Grid.Row="4" Grid.Column="1" Content="{DynamicResource ClearFileSystemCache}"
                                       Margin="3" IsChecked="{bind:SettingsBinder FileSystemCache}" />
-                            <CheckBox Grid.Row="4" Grid.Column="0" Content="{DynamicResource ClearStandByCache}"
+                            <CheckBox Grid.Row="5" Grid.Column="0" Content="{DynamicResource ClearStandByCache}"
                                       Margin="3" IsChecked="{bind:SettingsBinder StandByCache}" />
-                            <CheckBox Grid.Row="4" Grid.Column="1" Content="{DynamicResource ClearClipboard}"
+                            <CheckBox Grid.Row="5" Grid.Column="1" Content="{DynamicResource ClearClipboard}"
                                       Margin="3" IsChecked="{bind:SettingsBinder ClearClipboard}" />
-                            <CheckBox Grid.Row="5" Grid.Column="0" Content="{DynamicResource Hotkey}" Margin="3"
+                            <CheckBox Grid.Row="6" Grid.Column="0" Content="{DynamicResource Hotkey}" Margin="3"
                                       IsChecked="{bind:SettingsBinder UseHotKey}" />
-                            <TextBox Grid.Row="5" Grid.Column="1" x:Name="TxtHotKey" Margin="3"
+                            <TextBox Grid.Row="6" Grid.Column="1" x:Name="TxtHotKey" Margin="3"
                                      HorizontalAlignment="Stretch" PreviewKeyDown="TxtHotKey_PreviewKeyDown" />
                         </Grid>
                     </GroupBox>

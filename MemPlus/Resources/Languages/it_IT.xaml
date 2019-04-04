@@ -131,6 +131,8 @@
     <system:String x:Key="EnableRamStatistics">Abilita statistiche RAM</system:String>
     <system:String x:Key="RamStatisticsCount">Numero massimo di statistiche della RAM:</system:String>
     <system:String x:Key="RamStatisticsCountHint">Impostare su zero se le statistiche RAM non dovrebbero mai essere rimosse</system:String>
+    <system:String x:Key="FillRam">Riempi la RAM</system:String>
+    <system:String x:Key="FillRamMaxRunsHint">La quantità di volte che la RAM deve essere riempita</system:String>
 
     <system:String x:Key="LogSettings">Registrazione</system:String>
     <system:String x:Key="LoggingEnabled">Registrazione abilitata</system:String>

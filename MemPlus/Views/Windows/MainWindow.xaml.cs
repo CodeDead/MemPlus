@@ -281,6 +281,8 @@ namespace MemPlus.Views.Windows
                 _ramController.EmptyWorkingSets = Properties.Settings.Default.EmptyWorkingSet;
                 _ramController.ClearFileSystemCache = Properties.Settings.Default.FileSystemCache;
                 _ramController.ClearStandbyCache = Properties.Settings.Default.StandByCache;
+                _ramController.FillRam = Properties.Settings.Default.FillRam;
+                _ramController.FillRamMaxRuns = Properties.Settings.Default.FillRamMaxRuns;
                 _ramController.InvokeGarbageCollector = Properties.Settings.Default.InvokeGarbageCollector;
                 _ramController.SetRamUpdateTimerInterval(Properties.Settings.Default.RamMonitorInterval);
                 _ramController.AutoOptimizeTimed(Properties.Settings.Default.AutoOptimizeTimed, Properties.Settings.Default.AutoOptimizeTimedInterval);
@@ -367,13 +369,13 @@ namespace MemPlus.Views.Windows
                         switch (s)
                         {
                             case "Ctrl":
-                                values = values | (uint)ModifierKeys.Control;
+                                values |= (uint)ModifierKeys.Control;
                                 break;
                             case "Alt":
-                                values = values | (uint)ModifierKeys.Alt;
+                                values |= (uint)ModifierKeys.Alt;
                                 break;
                             case "Shift":
-                                values = values | (uint)ModifierKeys.Shift;
+                                values |= (uint)ModifierKeys.Shift;
                                 break;
                         }
                     }
@@ -1048,7 +1050,7 @@ namespace MemPlus.Views.Windows
         private async void ClearMemory(int index)
         {
             if (_clearingMemory) return;
-            if (!_ramController.EmptyWorkingSets && !_ramController.ClearFileSystemCache && !_ramController.ClearClipboard) return;
+            if (!_ramController.EmptyWorkingSets && !_ramController.ClearFileSystemCache && !_ramController.ClearClipboard && !_ramController.FillRam) return;
 
             _logController.AddLog(new ApplicationLog("Clearing RAM Memory"));
             _clearingMemory = true;

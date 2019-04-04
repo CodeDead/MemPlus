@@ -131,6 +131,8 @@
     <system:String x:Key="EnableRamStatistics">Enable RAM statistics</system:String>
     <system:String x:Key="RamStatisticsCount">RAM statistics count:</system:String>
     <system:String x:Key="RamStatisticsCountHint">Set to zero if RAM statistics should never be removed</system:String>
+    <system:String x:Key="FillRam">Fill RAM</system:String>
+    <system:String x:Key="FillRamMaxRunsHint">The amount of times the RAM needs to be filled</system:String>
 
     <system:String x:Key="LogSettings">Logging</system:String>
     <system:String x:Key="LoggingEnabled">Logging enabled</system:String>

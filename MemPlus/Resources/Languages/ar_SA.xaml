@@ -130,6 +130,8 @@
     <system:String x:Key="EnableRamStatistics">RAM تمكين إحصائيات</system:String>
     <system:String x:Key="RamStatisticsCount">إحصائيات RAM الحد الأقصى لعدد</system:String>
     <system:String x:Key="RamStatisticsCountHint">RAM اضبط على الصفر في حالة عدم إزالة إحصائيات</system:String>
+    <system:String x:Key="FillRam">RAM ملء</system:String>
+    <system:String x:Key="FillRamMaxRunsHint">مقدار المرات التي يجب فيها ملء ذاكرة الوصول العشوائي</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">تسجيل</system:String>

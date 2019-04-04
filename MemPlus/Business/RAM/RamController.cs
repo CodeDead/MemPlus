@@ -94,6 +94,14 @@ namespace MemPlus.Business.RAM
         /// Property displaying whether the .NET garbage collector should be invoked or not
         /// </summary>
         internal bool InvokeGarbageCollector { private get; set; }
+        /// <summary>
+        /// Property displaying whether RAM memory should be completely filled or not
+        /// </summary>
+        internal bool FillRam { get; set; }
+        /// <summary>
+        /// The amount of times the FillRam method should run
+        /// </summary>
+        internal int FillRamMaxRuns { private get; set; }
         #endregion
 
         #region Delegates
@@ -235,7 +243,14 @@ namespace MemPlus.Business.RAM
             _ramTimer.Enabled = true;
             RamMonitorEnabled = true;
 
-            UpdateRamUsage();
+            try
+            {
+                UpdateRamUsage();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ErrorLog(ex.Message));
+            }
 
             _logController.AddLog(new ApplicationLog("The RAM monitor has been enabled"));
         }
@@ -260,7 +275,14 @@ namespace MemPlus.Business.RAM
         {
             _logController.AddLog(new ApplicationLog("RAM monitor timer has been called"));
 
-            UpdateRamUsage();
+            try
+            {
+                UpdateRamUsage();
+            }
+            catch (Exception ex)
+            {
+                _logController.AddLog(new ErrorLog(ex.Message));
+            }
 
             _logController.AddLog(new ApplicationLog("Finished RAM monitor timer"));
         }
@@ -276,32 +298,44 @@ namespace MemPlus.Business.RAM
 
             await Task.Run(async () =>
             {
-                UpdateRamUsage();
-
-                double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
-
-                if (EmptyWorkingSets)
+                try
                 {
-                    _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
-                    await Task.Delay(10000);
-                }
+                    UpdateRamUsage();
 
-                if (ClearFileSystemCache)
+                    double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+
+                    if (FillRam)
+                    {
+                        _ramOptimizer.FillRam(_info, FillRamMaxRuns);
+                    }
+
+                    if (EmptyWorkingSets)
+                    {
+                        _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
+                        await Task.Delay(10000);
+                    }
+
+                    if (ClearFileSystemCache)
+                    {
+                        _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
+                    }
+
+                    if (InvokeGarbageCollector)
+                    {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                    }
+
+                    UpdateRamUsage();
+
+                    double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+
+                    RamSavings = oldUsage - newUsage;
+                }
+                catch (Exception ex)
                 {
-                    _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
+                    _logController.AddLog(new ErrorLog(ex.Message));
                 }
-
-                if (InvokeGarbageCollector)
-                {
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
-                }
-
-                UpdateRamUsage();
-
-                double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
-
-                RamSavings = oldUsage - newUsage;
             });
 
             if (ClearClipboard)
@@ -324,19 +358,26 @@ namespace MemPlus.Business.RAM
 
             await Task.Run(async () =>
             {
-                UpdateRamUsage();
+                try
+                {
+                    UpdateRamUsage();
 
-                double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+                    double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
-                _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
+                    _ramOptimizer.EmptyWorkingSetFunction(_processExceptionList);
 
-                await Task.Delay(10000);
+                    await Task.Delay(10000);
 
-                UpdateRamUsage();
+                    UpdateRamUsage();
 
-                double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+                    double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
-                RamSavings = oldUsage - newUsage;
+                    RamSavings = oldUsage - newUsage;
+                }
+                catch (Exception ex)
+                {
+                    _logController.AddLog(new ErrorLog(ex.Message));
+                }
             });
 
             RamClearingCompletedEvent?.Invoke();
@@ -354,17 +395,24 @@ namespace MemPlus.Business.RAM
 
             await Task.Run(() =>
             {
-                UpdateRamUsage();
+                try
+                {
+                    UpdateRamUsage();
 
-                double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+                    double oldUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
-                _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
+                    _ramOptimizer.ClearFileSystemCache(ClearStandbyCache);
 
-                UpdateRamUsage();
+                    UpdateRamUsage();
 
-                double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
+                    double newUsage = _ramUsageHistory[_ramUsageHistory.Count - 1].TotalUsed;
 
-                RamSavings = oldUsage - newUsage;
+                    RamSavings = oldUsage - newUsage;
+                }
+                catch (Exception ex)
+                {
+                    _logController.AddLog(new ErrorLog(ex.Message));
+                }
             });
 
             RamClearingCompletedEvent?.Invoke();
@@ -382,6 +430,10 @@ namespace MemPlus.Business.RAM
             double total = Convert.ToDouble(_info.TotalPhysicalMemory);
             double usage = total - Convert.ToDouble(_info.AvailablePhysicalMemory);
             double percentage = usage / total * 100;
+
+            if (double.IsNaN(total) || double.IsInfinity(total)) throw new ArgumentException(nameof(total));
+            if (double.IsNaN(usage) || double.IsInfinity(usage)) throw new ArgumentException(nameof(usage));
+            if (double.IsNaN(percentage) || double.IsInfinity(percentage)) throw new ArgumentException(nameof(percentage));
 
             RamUsage newUsage = new RamUsage(usage, total, percentage);
             if (EnableRamStatistics)

@@ -1,3 +1,5 @@
+using System;
+
 namespace MemPlus.Business.LOG
 {
     internal sealed class ErrorLog : Log
@@ -11,6 +13,7 @@ namespace MemPlus.Business.LOG
         {
             LogType = LogType.Error;
             Data = data;
+            Time = DateTime.Now;
         }
     }
 }
