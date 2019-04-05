@@ -226,7 +226,6 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <syncfusion:SfCircularGauge Visibility="Visible" Grid.Row="0" x:Name="CgRamUsage"
-                                        GaugeHeader="RAM usage (%)"
                                         FontSize="14" HeaderAlignment="Bottom" FontWeight="Bold"
                                         Margin="5" MaxHeight="350" MaxWidth="350"
                                         MouseDoubleClick="RamStatisticsMenuitem_OnClick">

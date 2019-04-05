@@ -13,7 +13,7 @@
     UseNativeChrome="True"
     WindowStartupLocation="CenterScreen"
     Closing="SettingsWindow_OnClosing" Topmost="{bind:SettingsBinder Topmost}"
-    Title="{DynamicResource SettingsWindowTitle}" Height="480" Width="550"
+    Title="{DynamicResource SettingsWindowTitle}" Height="460" Width="550"
     Icon="/MemPlus;component/Resources/Images/ram.png">
     <Grid>
         <Grid.RowDefinitions>
@@ -329,7 +329,7 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <ListView x:Name="LsvExclusions" Margin="3" Height="80" HorizontalAlignment="Stretch"
+                            <ListView x:Name="LsvExclusions" Margin="3" Height="60" HorizontalAlignment="Stretch"
                                       AllowDrop="True" Drop="LsvExclusions_OnDrop">
                                 <ListView.ContextMenu>
                                     <ContextMenu>

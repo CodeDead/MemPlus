@@ -210,6 +210,9 @@ namespace MemPlus.Views.Windows
                 LblTotalPhysicalMemory.Content = ramTotal;
                 LblAvailablePhysicalMemory.Content = ramAvailable;
 
+                LblAvailablePhysicalMemory.Foreground = ramUsage.UsagePercentage >= Properties.Settings.Default.WarningLevel ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
+
+
                 if (!Properties.Settings.Default.NotifyIconStatistics) return;
                 string tooltipText = "MemPlus";
                 tooltipText += Environment.NewLine;
