@@ -48,6 +48,10 @@ namespace MemPlus.Views.Windows
         /// The HotKeyController that can be used to register a hotkey for fast memory cleaning
         /// </summary>
         private HotKeyController _hotKeyController;
+        /// <summary>
+        /// The SolidColorBrush that can be used to color the RAM usage label
+        /// </summary>
+        private readonly SolidColorBrush _warningBrush;
         #endregion
 
         /// <inheritdoc />
@@ -56,6 +60,7 @@ namespace MemPlus.Views.Windows
         /// </summary>
         public MainWindow()
         {
+            _warningBrush = new SolidColorBrush();
             try
             {
                 if (Properties.Settings.Default.SaveLogsToFile)
@@ -90,6 +95,7 @@ namespace MemPlus.Views.Windows
             InitializeComponent();
             ChangeVisualStyle();
 
+            LblAvailablePhysicalMemory.Foreground = _warningBrush;
             _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", LoadUpdateManagerStrings());
 
             try
@@ -210,8 +216,7 @@ namespace MemPlus.Views.Windows
                 LblTotalPhysicalMemory.Content = ramTotal;
                 LblAvailablePhysicalMemory.Content = ramAvailable;
 
-                LblAvailablePhysicalMemory.Foreground = ramUsage.UsagePercentage >= Properties.Settings.Default.WarningLevel ? new SolidColorBrush(Colors.Red) : new SolidColorBrush(Colors.Green);
-
+                _warningBrush.Color = ramUsage.UsagePercentage >= Properties.Settings.Default.WarningLevel ? Colors.Red : Colors.Green;
 
                 if (!Properties.Settings.Default.NotifyIconStatistics) return;
                 string tooltipText = "MemPlus";
