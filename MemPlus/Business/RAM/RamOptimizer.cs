@@ -314,11 +314,19 @@ namespace MemPlus.Business.RAM
                 // Windows will do its best to manage the available memory while its filling up
                 while (percentage < 99)
                 {
-                    IntPtr pointer = Marshal.AllocHGlobal(1024);
-                    pointers.Add(pointer);
+                    try
+                    {
+                        IntPtr pointer = Marshal.AllocHGlobal(1024);
+                        pointers.Add(pointer);
 
-                    usage += 1024;
-                    percentage = usage / total * 100;
+                        usage += 1024;
+                        percentage = usage / total * 100;
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        _logController.AddLog(new ErrorLog(ex.Message));
+                        break;
+                    }
                 }
 
                 foreach (IntPtr clearPtr in pointers)
