@@ -92,9 +92,9 @@
     <system:String x:Key="HideInsteadOfClose">Verberg MemPlus na het sluiten</system:String>
     <system:String x:Key="AutoRunAsAdministrator">Automatisch als administrator uitvoeren</system:String>
     <system:String x:Key="Topmost">Topmost</system:String>
-    <system:String x:Key="DisplayNotifyIcon">Toon notifyicon</system:String>
+    <system:String x:Key="DisplayNotifyIcon">Toon meld icoon</system:String>
     <system:String x:Key="DisplayAdminWarning">Toon administratieve waarschuwing</system:String>
-    <system:String x:Key="DisplayRamStatisticsNotifyIcon">Toon RAM statistieken in de notifyicon</system:String>
+    <system:String x:Key="DisplayRamStatisticsNotifyIcon">Toon RAM statistieken in het meld icoon</system:String>
     <system:String x:Key="DisplayRamStatisticsWindow">Toon RAM statistieken in het venster</system:String>
     <system:String x:Key="Language">Taal</system:String>
     <system:String x:Key="LanguageSetting">Taal:</system:String>
