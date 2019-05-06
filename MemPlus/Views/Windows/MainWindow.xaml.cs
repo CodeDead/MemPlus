@@ -8,13 +8,13 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using CodeDead.UpdateManager.Classes;
 using Hardcodet.Wpf.TaskbarNotification;
 using MemPlus.Business.GUI;
 using MemPlus.Business.LOG;
 using MemPlus.Business.RAM;
 using MemPlus.Business.UTILS;
 using Syncfusion.UI.Xaml.Gauges;
-using UpdateManager.Classes;
 using Application = System.Windows.Application;
 using DataFormats = System.Windows.DataFormats;
 using MessageBox = System.Windows.MessageBox;
@@ -31,7 +31,7 @@ namespace MemPlus.Views.Windows
         /// <summary>
         /// The UpdateManager object that checks for application updates
         /// </summary>
-        private readonly UpdateManager.Classes.UpdateManager _updateManager;
+        private readonly UpdateManager _updateManager;
         /// <summary>
         /// The RamController object that can be used to clear the memory and view memory statistics
         /// </summary>
@@ -96,7 +96,7 @@ namespace MemPlus.Views.Windows
             ChangeVisualStyle();
 
             LblAvailablePhysicalMemory.Foreground = _warningBrush;
-            _updateManager = new UpdateManager.Classes.UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", LoadUpdateManagerStrings());
+            _updateManager = new UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", LoadUpdateManagerStrings());
 
             try
             {
