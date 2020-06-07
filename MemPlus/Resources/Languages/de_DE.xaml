@@ -123,8 +123,6 @@
     <system:String x:Key="WarningLevel">Warnungslevel:</system:String>
     <system:String x:Key="Reset">Zurücksetzen</system:String>
     <system:String x:Key="Save">Sichern</system:String>
-    <system:String x:Key="SavedAllSettings">Alle Einstellungen wurden gesichert!</system:String>
-    <system:String x:Key="ResetAllSettings">All Einstellungen wurden zurückgesetzt!</system:String>
     <system:String x:Key="FileDoesNotExist">Die ausgewählte Datei existiert nicht!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Diese Option funktioniert nur wenn der RAM Überwacher aktiviert ist!</system:String>
     <system:String x:Key="InvokeGarbageCollector">.NET-Garbage-Collector aufrufen</system:String>
@@ -139,6 +137,8 @@
     <system:String x:Key="AutoClearLogs">Protokolle automatisch aus dem Speicher löschen jede</system:String>
     <system:String x:Key="LogFile">Protokolle automatisch in Datei speichern</system:String>
     <system:String x:Key="LogFilePath">Protokolldateipfad:</system:String>
+
+    <system:String x:Key="ConfirmReset">Möchten Sie wirklich alle Einstellungen zurücksetzen?</system:String>
 
     <!-- RamStatistics Window -->
     <system:String x:Key="RamStatisticsWindowTitle">MemPlus - RAM-Statistiken</system:String>

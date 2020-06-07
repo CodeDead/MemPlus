@@ -123,8 +123,6 @@
     <system:String x:Key="WarningLevel">Waarschuwingsniveau:</system:String>
     <system:String x:Key="Reset">Reset</system:String>
     <system:String x:Key="Save">Opslaan</system:String>
-    <system:String x:Key="SavedAllSettings">Alle instellingen zijn opgeslagen!</system:String>
-    <system:String x:Key="ResetAllSettings">Alle instellingen zijn gereset!</system:String>
     <system:String x:Key="FileDoesNotExist">Het geselecteerde bestand bestaat niet!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Deze optie werkt alleen als de RAM Monitor is ingeschakeld!</system:String>
     <system:String x:Key="InvokeGarbageCollector">Roep de .NET garbage collector aan</system:String>
@@ -139,6 +137,8 @@
     <system:String x:Key="AutoClearLogs">Automatisch logs uit het geheugen wissen elke</system:String>
     <system:String x:Key="LogFile">Automatisch logs in een bestand opslaan</system:String>
     <system:String x:Key="LogFilePath">Logbestand pad:</system:String>
+
+    <system:String x:Key="ConfirmReset">Weet je zeker dat je alle instellingen wilt resetten?</system:String>
 
     <!-- RamStatistics Window -->
     <system:String x:Key="RamStatisticsWindowTitle">MemPlus - RAM Statistieken</system:String>

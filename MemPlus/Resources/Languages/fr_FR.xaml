@@ -123,8 +123,6 @@
     <system:String x:Key="WarningLevel">Niveau d'alerte :</system:String>
     <system:String x:Key="Reset">Réinitialiser</system:String>
     <system:String x:Key="Save">Sauvegarder</system:String>
-    <system:String x:Key="SavedAllSettings">Tous les paramètres ont été sauvegardés !</system:String>
-    <system:String x:Key="ResetAllSettings">Tous les paramètres ont été réinitialisés !</system:String>
     <system:String x:Key="FileDoesNotExist">Le fichier sélectionné n'existe pas !</system:String>
     <system:String x:Key="AutoOptimizeWarning">Cette option ne fonctionnera que si le moniteur RAM est activé !</system:String>
     <system:String x:Key="InvokeGarbageCollector">Appelez le ramasse-miettes .NET</system:String>
@@ -133,6 +131,8 @@
     <system:String x:Key="RamStatisticsCountHint">Mis à zéro si les statistiques RAM ne doivent jamais être supprimées</system:String>
     <system:String x:Key="FillRam">Cycles de remplissage de RAM</system:String>
     <system:String x:Key="FillRamMaxRunsHint">Le nombre de fois que la RAM doit être remplie</system:String>
+
+    <system:String x:Key="ConfirmReset">Voulez-vous vraiment réinitialiser tous les paramètres?</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Enregistrement</system:String>

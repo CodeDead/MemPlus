@@ -123,8 +123,6 @@
     <system:String x:Key="WarningLevel">Livello avviso:</system:String>
     <system:String x:Key="Reset">Ripristina</system:String>
     <system:String x:Key="Save">Salva</system:String>
-    <system:String x:Key="SavedAllSettings">Tutte le impostazioni sono state salvate!</system:String>
-    <system:String x:Key="ResetAllSettings">Tutte le impostazioni sono state ripristinate!</system:String>
     <system:String x:Key="FileDoesNotExist">Il file selezionato non esiste!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Questa opzione funziona solo se il monitor RAM è abilitato!</system:String>
     <system:String x:Key="InvokeGarbageCollector">Richiama .NET garbage collector</system:String>
@@ -139,6 +137,8 @@
     <system:String x:Key="AutoClearLogs">Cancella automaticamente i log dalla memoria ogni</system:String>
     <system:String x:Key="LogFile">Salva automaticamente i registri nel file</system:String>
     <system:String x:Key="LogFilePath">Percorso del file di registro:</system:String>
+
+    <system:String x:Key="ConfirmReset">Sei sicuro di voler ripristinare tutte le impostazioni?</system:String>
 
     <!-- RamStatistics Window -->
     <system:String x:Key="RamStatisticsWindowTitle">MemPlus - Statistiche RAM</system:String>

@@ -308,8 +308,6 @@ namespace MemPlus.Views.Windows
                 LoadProperties();
 
                 _logController.AddLog(new ApplicationLog("Properties have been saved"));
-
-                MessageBox.Show((string)Application.Current.FindResource("SavedAllSettings"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -323,6 +321,9 @@ namespace MemPlus.Views.Windows
         /// </summary>
         private void ResetSettings()
         {
+            MessageBoxResult result = MessageBox.Show((string)Application.Current.FindResource("ConfirmReset"), "MemPlus", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes) return;
+
             _logController.AddLog(new ApplicationLog("Resetting properties"));
 
             try
@@ -351,8 +352,6 @@ namespace MemPlus.Views.Windows
                 LoadProperties();
 
                 _logController.AddLog(new ApplicationLog("Properties have been reset"));
-
-                MessageBox.Show((string)Application.Current.FindResource("ResetAllSettings"), "MemPlus", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

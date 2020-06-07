@@ -123,8 +123,6 @@
     <system:String x:Key="WarningLevel">Nivel de advertencia:</system:String>
     <system:String x:Key="Reset">Restaurar</system:String>
     <system:String x:Key="Save">Guardar</system:String>
-    <system:String x:Key="SavedAllSettings">¡Se han guardado todas las opciones!</system:String>
-    <system:String x:Key="ResetAllSettings">¡Se han restaurado todas las opciones!</system:String>
     <system:String x:Key="FileDoesNotExist">¡El fichero seleccionado no existe!</system:String>
     <system:String x:Key="AutoOptimizeWarning">¡Esta opción solo funciona si el Monitor de RAM está activado!</system:String>
     <system:String x:Key="InvokeGarbageCollector">Invocar recolector de basura .NET</system:String>
@@ -133,6 +131,8 @@
     <system:String x:Key="RamStatisticsCountHint">Se establece en cero si las estadísticas de RAM nunca deben eliminarse</system:String>
     <system:String x:Key="FillRam">Llenar ciclos de RAM</system:String>
     <system:String x:Key="FillRamMaxRunsHint">La cantidad de veces que se debe llenar la RAM</system:String>
+
+    <system:String x:Key="ConfirmReset">¿Estás seguro de que quieres restablecer todos los ajustes?</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">El registro</system:String>

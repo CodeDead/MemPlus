@@ -123,8 +123,6 @@
     <system:String x:Key="WarningLevel">Waarschuwingsniveau:</system:String>
     <system:String x:Key="Reset">Reset</system:String>
     <system:String x:Key="Save">Opslaan</system:String>
-    <system:String x:Key="SavedAllSettings">Alle instellingen zijn opgeslagen!</system:String>
-    <system:String x:Key="ResetAllSettings">Alle instellingen zijn gereset!</system:String>
     <system:String x:Key="FileDoesNotExist">Het geselecteerde bestand bestaat niet!</system:String>
     <system:String x:Key="AutoOptimizeWarning">Deze optie werkt alleen als de RAM Monitor is ingeschakeld!</system:String>
     <system:String x:Key="InvokeGarbageCollector">Roep de .NET garbage collector aan</system:String>
@@ -133,6 +131,8 @@
     <system:String x:Key="RamStatisticsCountHint">Stel in op nul als RAM-statistieken nooit mogen worden verwijderd</system:String>
     <system:String x:Key="FillRam">Aantal keer RAM opvullen</system:String>
     <system:String x:Key="FillRamMaxRunsHint">Het aantal keer dat het RAM opgevuld moet worden</system:String>
+
+    <system:String x:Key="ConfirmReset">Weet je zeker dat je alle instellingen wilt resetten?</system:String>
 
     <!-- Automatic translation - Needs translation -->
     <system:String x:Key="LogSettings">Logging</system:String>
