@@ -131,7 +131,7 @@
     <system:String x:Key="EnableRamStatistics">RAM statistieken bijhouden</system:String>
     <system:String x:Key="RamStatisticsCount">Maximaal aantal RAM statistieken:</system:String>
     <system:String x:Key="RamStatisticsCountHint">Stel in op nul als RAM-statistieken nooit mogen worden verwijderd</system:String>
-    <system:String x:Key="FillRam">RAM opvullen</system:String>
+    <system:String x:Key="FillRam">Aantal keer RAM opvullen</system:String>
     <system:String x:Key="FillRamMaxRunsHint">Het aantal keer dat het RAM opgevuld moet worden</system:String>
 
     <system:String x:Key="LogSettings">Logging</system:String>
