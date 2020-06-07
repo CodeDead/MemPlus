@@ -46,9 +46,9 @@ namespace MemPlus.Views.Windows
         private void RefreshRamData()
         {
             _logController.AddLog(new RamLog("Refreshing RAM data"));
+            TrvRam.Items.Clear();
             try
             {
-                TrvRam.Items.Clear();
                 List<RamStick> ramSticks = Utils.GetRamSticks();
 
                 if (ramSticks == null || ramSticks.Count == 0)

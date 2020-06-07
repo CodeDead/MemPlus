@@ -4,7 +4,7 @@
     /// Internal class that represents the presentable details of a Process object
     /// </summary>
     // ReSharper disable once InconsistentNaming
-    internal class ProcessDetail
+    internal sealed class ProcessDetail
     {
         /// <summary>
         /// The ID of the Process

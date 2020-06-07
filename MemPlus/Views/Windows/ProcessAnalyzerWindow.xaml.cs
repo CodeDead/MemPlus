@@ -172,6 +172,7 @@ namespace MemPlus.Views.Windows
                 NativeMethods.EmptyWorkingSet(Process.GetProcessById(detail.ProcessId).Handle);
 
                 _logController.AddLog(new RamLog("Successfully emptied working set for process " + detail.ProcessName));
+                RefreshProcessDetails();
             }
             catch (Exception ex)
             {
@@ -195,6 +196,7 @@ namespace MemPlus.Views.Windows
                 _logController.AddLog(new ApplicationLog("Killing " + detail.ProcessName + " (" + detail.ProcessId + ")"));
                 Process.GetProcessById(detail.ProcessId).Kill();
                 _logController.AddLog(new ApplicationLog("Done killing " + detail.ProcessName + " (" + detail.ProcessId + ")"));
+                RefreshProcessDetails();
             }
             catch (Exception ex)
             {
