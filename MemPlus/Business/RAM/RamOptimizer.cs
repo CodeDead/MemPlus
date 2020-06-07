@@ -119,7 +119,7 @@ namespace MemPlus.Business.RAM
             {
                 try
                 {
-                    if (processExceptions == null || processExceptions.Count == 0 || !processExceptions.Contains(process.MainModule.FileName.ToLower()))
+                    if (process.MainModule != null && (processExceptions == null || processExceptions.Count == 0 || !processExceptions.Contains(process.MainModule.FileName.ToLower())))
                     {
                         _logController.AddLog(new RamLog("Emptying working set for process: " + process.ProcessName));
                         NativeMethods.EmptyWorkingSet(process.Handle);
@@ -285,7 +285,7 @@ namespace MemPlus.Business.RAM
                 // Return value of zero indicates an error
                 if (adjustTokenPrivilegesRet == 0) throw new Exception("AdjustTokenPrivileges: ", new Win32Exception(Marshal.GetLastWin32Error()));
                 _logController.AddLog(new RamLog("Done adjusting token privileges"));
-                return adjustTokenPrivilegesRet != 0;
+                return true;
             }
         }
 

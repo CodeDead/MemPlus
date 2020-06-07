@@ -75,6 +75,7 @@ namespace MemPlus.Business.UTILS
 
             ConnectionOptions connection = new ConnectionOptions { Impersonation = ImpersonationLevel.Impersonate };
 
+            // ReSharper disable once StringLiteralTypo
             ManagementScope scope = new ManagementScope("\\root\\CIMV2", connection);
             scope.Connect();
 
@@ -297,6 +298,7 @@ namespace MemPlus.Business.UTILS
                 {
                     try
                     {
+                        if (p.MainModule == null) continue;
                         ProcessDetail pd = new ProcessDetail
                         {
                             ProcessId = p.Id,
@@ -339,7 +341,7 @@ namespace MemPlus.Business.UTILS
             {
                 try
                 {
-                    if (p.MainModule.FileName == file) processes.Add(p);
+                    if (p.MainModule != null && p.MainModule.FileName == file) processes.Add(p);
                 }
                 catch (Exception)
                 {
