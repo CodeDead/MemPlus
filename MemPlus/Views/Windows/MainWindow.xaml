@@ -227,7 +227,7 @@
             </Grid.ColumnDefinitions>
             <syncfusion:SfCircularGauge Visibility="Visible" Grid.Row="0" x:Name="CgRamUsage"
                                         FontSize="14" HeaderAlignment="Bottom" FontWeight="Bold"
-                                        Margin="5" MaxHeight="350" MaxWidth="350"
+                                        Margin="5" MaxHeight="350" MaxWidth="300"
                                         MouseDoubleClick="RamStatisticsMenuitem_OnClick">
                 <syncfusion:SfCircularGauge.Scales>
                     <syncfusion:CircularScale MinorTicksPerInterval="4">

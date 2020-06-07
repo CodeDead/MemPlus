@@ -96,7 +96,8 @@ namespace MemPlus.Views.Windows
             ChangeVisualStyle();
 
             LblAvailablePhysicalMemory.Foreground = _warningBrush;
-            _updateManager = new UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.xml", LoadUpdateManagerStrings());
+            _updateManager = new UpdateManager(Assembly.GetExecutingAssembly().GetName().Version, "https://codedead.com/Software/MemPlus/update.json", DataType.Json);
+            _updateManager.SetStringVariables(LoadUpdateManagerStrings());
 
             try
             {

@@ -58,7 +58,7 @@
     <!--AboutWindow-->
     <system:String x:Key="AboutWindowTitle">MemPlus - Sobre el programa</system:String>
     <system:String x:Key="Close">Cerrar</system:String>
-    <system:String x:Key="AboutInfo">MemPlus ha sido creado por DeadLine.\n\nImágenes: small-n-flat por paomedia\nTema: Syncfusion\nVersión: %\n\nCopyright © CodeDead 2019</system:String>
+    <system:String x:Key="AboutInfo">MemPlus ha sido creado por DeadLine.\n\nImágenes: small-n-flat por paomedia\nTema: Syncfusion\nVersión: %\n\nCopyright © 2020 CodeDead</system:String>
 
     <!--LogWindow-->
     <system:String x:Key="LogWindowTitle">MemPlus - Registros</system:String>

@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CodeDead")]
 [assembly: AssemblyProduct("MemPlus")]
-[assembly: AssemblyCopyright("Copyright © 2019 CodeDead")]
+[assembly: AssemblyCopyright("Copyright © 2020 CodeDead")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
